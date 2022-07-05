@@ -51,6 +51,7 @@ def login(request):
         serializer = UserSerializer(user,many=False)
         return Response(serializer.data)
 
+#standard user options
 @api_view(['POST'])
 def addPaper(request):
     pass
@@ -70,3 +71,39 @@ def viewInfo(request):
 @api_view(['POST'])
 def viewFeedback(request):
     pass
+
+#admin options
+
+@api_view(['POST'])
+def promoteToJudge(request):
+    pass
+
+@api_view(['POST'])
+def viewPapers(request):
+    pass
+
+@api_view(['POST'])
+def viewJudgeAssigned(request):
+    pass
+
+@api_view(['POST'])
+def assignJudge(request):
+    pass
+
+@api_view(['POST'])
+def publish(request):
+    pass
+
+@api_view(['POST'])
+def feedbackToUser(request):
+    pass
+
+#judge options
+@api_view(['POST'])
+def gradePaper(request):
+    pass
+
+@api_view(['POST'])
+def sendFeedbackToAdmin(request):
+    pass
+
