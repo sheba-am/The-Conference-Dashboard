@@ -50,3 +50,23 @@ def login(request):
     else:
         serializer = UserSerializer(user,many=False)
         return Response(serializer.data)
+
+@api_view(['POST'])
+def addPaper(request):
+    pass
+
+@api_view(['POST'])
+def editPaper(request):
+    pass
+
+@api_view(['POST'])
+def deletePaper(request):
+    pass
+
+@api_view(['POST'])
+def viewInfo(request):
+    pass
+
+@api_view(['POST'])
+def viewFeedback(request):
+    pass
