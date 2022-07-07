@@ -1,21 +1,23 @@
 import os
+from django.http import HttpResponse
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
 from rest_framework import generics, permissions
-from .serializers import UserSerializer
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.response import Response
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.hashers import make_password
+from wsgiref.util import FileWrapper
 import requests
 from rest_framework import status
 import json
 from django.db import IntegrityError
 from django.db.models import Q
-from .models import BaseUser
+from .models import BaseUser, Paper, FeedBack
+from .serializers import UserSerializer, PaperSerializer, FeedBackSerializer
 
 
 @api_view(['POST'])
@@ -54,56 +56,131 @@ def login(request):
 #standard user options
 @api_view(['POST'])
 def addPaper(request):
-    pass
+    data = request.data
+    paper = Paper.objects.create(
+        authors=data['authors'].lower(),
+        language=data['language'].lower(),
+        NOM=data['NOM'].lower(),
+        field=data['field'].lower(),
+        title=data['title'].lower(),
+        summary=data['summary'].lower(),
+        paperFile=data['paperFile'],
+        MOP=data['MOP'].lower(),
+    )
+    serializer = PaperSerializer(paper,many=False)
+    return Response(serializer.data)
+
+
+def getPaperFile(request):
+    # data = request.data
+    paper = Paper.objects.get(title='music generation')
+
+    # paperFile = open(paper.paperFile)
+    response = HttpResponse(FileWrapper(paper.paperFile), content_type='application/force-download')
+    response['Content-Disposition'] = 'attachment; filename="%s"' % str(paper.paperFile)
+    return response
 
 @api_view(['POST'])
 def editPaper(request):
-    pass
+    data = request.data
+    paper = Paper.objects.get(title=data['title'])
+    result = setattr(paper, data['key'], data['value'].lower())
+    paper.save()
+    serializer = PaperSerializer(paper,many=False)
+    return Response(serializer.data)
 
 @api_view(['POST'])
 def deletePaper(request):
-    pass
+    data = request.data
+    paper = Paper.objects.get(title=data['title'])
+    paper.delete()
+    return Response("paper successfully deleted.")
 
 @api_view(['POST'])
 def viewInfo(request):
-    pass
+        data = request.data
+        paper = Paper.objects.get(title=data['title'])
+        serializer = PaperSerializer(paper,many=False)
+        return Response(serializer.data)
 
+#returns all feedbacks for a paper
+@api_view(['POST'])
+def viewAllFeedback(request):
+    data = request.data
+    paper = Paper.objects.get(title=data['title'].lower())
+    feedback = FeedBack.objects.filter(paper=paper)
+    serializer = FeedBackSerializer(feedback,many=True)
+    return Response(serializer.data)
+
+#return feedback of a paper made by a specific judge       
 @api_view(['POST'])
 def viewFeedback(request):
-    pass
+    data = request.data
+    paper = Paper.objects.get(title=data['title'].lower())
+    judge = BaseUser.objects.get(username=data['username'].lower())
+    feedback = FeedBack.objects.get(Q(paper=paper) & Q(judge=judge))
+    serializer = FeedBackSerializer(feedback,many=False)
+    return Response(serializer.data)
+        
 
 #admin options
 
 @api_view(['POST'])
 def promoteToJudge(request):
-    pass
+    data = request.data
+    user = BaseUser.objects.get(username=data['username'].lower())
+    user.status = 'judge'
+    user.save()
+    serializer = UserSerializer(user,many=False)
+    return Response(serializer.data)
+
 
 @api_view(['POST'])
 def viewPapers(request):
-    pass
+    papers = Paper.objects.all()
+    serializer = PaperSerializer(papers,many=True)
+    return Response(serializer.data)
 
 @api_view(['POST'])
-def viewJudgeAssigned(request):
-    pass
+def viewAssignedJudge(request):
+    data = request.data
+    paper = Paper.objects.get(title=data['title'].lower())
+    return Response(paper.judges)
 
 @api_view(['POST'])
 def assignJudge(request):
-    pass
+    data = request.data
+    paper = Paper.objects.get(title=data['title'].lower())
+    judge = BaseUser.objects.get(username=data['username'].lower())
+    paper.judges = (paper.judges +"," + str(judge) )
+    paper.save()
+    serializer = PaperSerializer(paper,many=False)
+    return Response(serializer.data)
 
 @api_view(['POST'])
 def publish(request):
-    pass
+    data = request.data
+    paper = Paper.objects.get(title=data['title'].lower())
+    paper.published = True
+    paper.save()
+    serializer = PaperSerializer(paper,many=False)
+    return Response(serializer.data)
 
-@api_view(['POST'])
-def feedbackToUser(request):
-    pass
+    
+
 
 #judge options
 @api_view(['POST'])
-def gradePaper(request):
-    pass
-
-@api_view(['POST'])
-def sendFeedbackToAdmin(request):
-    pass
+def sendFeedback(request):
+    data = request.data
+    feedback = FeedBack.objects.create(
+        paper = Paper.objects.get(title=data['title'].lower()),
+        judge = BaseUser.objects.get(username=data['username'].lower()),
+        score = data['score'],
+        status = data['status'].lower(),
+        description = data['description'],
+    )
+    
+    serializer = FeedBackSerializer(feedback,many=False)
+    return Response(serializer.data)
 

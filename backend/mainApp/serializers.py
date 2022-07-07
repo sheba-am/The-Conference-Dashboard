@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import BaseUser
+from .models import BaseUser, Paper, FeedBack
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -9,3 +9,13 @@ class UserSerializer(serializers.ModelSerializer):
         'major', 'degree', 'university', 'country',
         'city', 'status'
         ]
+
+class PaperSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Paper
+        fields = '__all__'
+
+class FeedBackSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = FeedBack
+        fields = '__all__'
