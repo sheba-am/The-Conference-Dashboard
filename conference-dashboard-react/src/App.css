@@ -32,7 +32,7 @@
   right: 0;
   height: 100%;
   transition: right 0.3s ease-in-out;
-  background-color: lightblue;
+  background-color: lightsalmon;
 }
 
 .sidebar.open {
@@ -40,6 +40,8 @@
 }
 .content.open {
   right: 15vw;
+  background-color: lightsalmon;
+
 }
 .nav-link {
 	font-size: 1.25em
