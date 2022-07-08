@@ -6,6 +6,8 @@ import Sidebar from './Sidebar';
 import DashboradMainPage from "../pages/DashboardMainPage";
 import EditInfo from "../pages/EditInfo";
 import Papers from "../pages/Papers"
+import PaperDetails from "../pages/PaperDetails";
+import NewPaper from "../pages/NewPaper";
 export default function StandardUserDashboard(){
   // this const is for toggle of sidebar
     const [sidebarOpen, setSideBarOpen] = useState(false);
@@ -17,16 +19,16 @@ export default function StandardUserDashboard(){
         {/* <Header onClick={handleViewSidebar} /> */}
         <div class="container">
           <div class="row">
-            <div class="col-3">
-            </div>
-            <div class="col-12">
+            <div class="col">
             <Router>
             <Sidebar isOpen={sidebarOpen} toggleSidebar={handleViewSidebar} />
 
               <Routes>
                 <Route path='/' element={<DashboradMainPage isOpen={sidebarOpen}/>} />
-                <Route path='/editinfo' element={<EditInfo/>} />
-                <Route path='/papers' element={<Papers/>} />
+                <Route path='/editinfo' element={<EditInfo isOpen={sidebarOpen}/>} />
+                <Route path='/papers' element={<Papers isOpen={sidebarOpen}/>} />
+                <Route path='/paper-details' element={<PaperDetails isOpen={sidebarOpen}/>} />
+                <Route path='/new-paper' element={<NewPaper isOpen={sidebarOpen}/>} />
               </Routes>
             </Router>              
             </div>      
