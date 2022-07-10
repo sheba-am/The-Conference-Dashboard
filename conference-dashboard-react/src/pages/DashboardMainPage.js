@@ -1,31 +1,38 @@
 import React from "react"
+import { SidebarData } from "../components/SidebarData";
+import { Link } from "react-router-dom";
 const DashboradMainPage = props => {
+    //dashboard will be a little smaller when sidebar is open
     const DashboardMainPage = props.isOpen ? "content open" : "content";
+    let SidebarData_subset = SidebarData.slice(1, 3)
+
   return (
     <div className={DashboardMainPage}>
         <div class="container">
-            <div class="row">
-                <div class="col-sm-6">
-                    <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Special title treatment</h5>
-                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
-                    </div>
-                </div>
-                <div class="col-sm-6">
-                    <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Special title treatment</h5>
-                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                        <a href="#" class="btn btn-primary">Go </a>
-                    </div>
-                    </div>
-                </div>
+            <div class="row">  
+                        {
+                            SidebarData_subset.map((item, index) => {
+                                return (
+                                <div class="col-sm-6">
+                                    <div class="card">
+                                    <div class="card-body">
+                                            <div key={index}  >                                          
+                                                {//item.icon
+                                                }
+                                                <h5 class="card-title">{item.title}</h5>
+                                                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                                                <Link to={item.path}  class="btn btn-primary">
+                                                    go
+                                                </Link> 
+                                            </div>
+                                    </div>
+                                    </div>
+                                </div>
+                                );
+                            })
+                        }                        
             </div>
         </div>
-        <p>hello</p>
     </div>
   );
 };

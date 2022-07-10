@@ -9,7 +9,7 @@
 .sidebar {
   position: absolute;
   top: 0;
-  right: -15vw;
+  right: 0;
   height: 100%;
   width: 15vw;
   transition: right 0.3s ease-in-out;
@@ -19,10 +19,10 @@
 /* button for sidebar toggle */
 .sidebar-toggle {
   position: absolute;
-  top: 20vh;
-  left: -60px;
-  height: 60px;
-  width: 60px;
+  top: 2vh;
+  right: 1vw;
+  height: 5vh;
+  width: 5vw;
   z-index: 1;
 }
 .content {
@@ -34,20 +34,87 @@
   transition: right 0.3s ease-in-out;
   background-color: lightsalmon;
 }
-
-.sidebar.open {
+.edit-info-content {
+  position: absolute;
+  top: 0;
+  left: 0;
   right: 0;
+  height: 100%;
+  transition: right 0.3s ease-in-out;
+  background-color: lightgreen;
 }
+.papers-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  transition: right 0.3s ease-in-out;
+  background-color: lightpink;
+}
+.paper-details-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  transition: right 0.3s ease-in-out;
+  background-color: lightgoldenrodyellow;
+}
+.new-paper-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  transition: right 0.3s ease-in-out;
+  background-color: lightgoldenrodyellow;
+}
+
+.papers-table {
+  
+  
+  background-color: lightskyblue;
+}
+
+.edit-info-form {
+  margin-right:7vw ;
+  margin-left: 1vw; 
+}
+.details-of-paper {
+  background-color: lightblue;
+}
+
+/* .sidebar.open {
+  right: 0;
+} */
 .content.open {
   right: 15vw;
-  background-color: lightsalmon;
+
+}
+.edit-info-content.open {
+  right: 15vw;
+
+}
+.papers-content.open {
+  right: 15vw;
+
+}
+.paper-details-content.open {
+  right: 15vw;
+
+}
+.new-paper-content.open {
+  right: 15vw;
 
 }
 .nav-link {
-	font-size: 1.25em
+	font-size: 1.2em;
+  text-decoration: none;
+
 }
 .nav-link:active,
 .nav-link:focus,
 .nav-link:hover {
-	background-color: #ffffff26
+	background-color: #ffffff26;
 }
