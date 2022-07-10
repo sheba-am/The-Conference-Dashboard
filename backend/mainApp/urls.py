@@ -5,7 +5,7 @@ urlpatterns = [
     path('getPaperFile', views.getPaperFile),
     path('editPaper',  views.editPaper),
     path('deletePaper',  views.deletePaper),
-    path('viewInfo',  views.viewInfo),
+    path('editInfo',  views.EditInfo),
     path('sendFeedback',  views.sendFeedback),
     path('viewAllFeedback',  views.viewAllFeedback),
     path('viewFeedback',  views.viewFeedback),

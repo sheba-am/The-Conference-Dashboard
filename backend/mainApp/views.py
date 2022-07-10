@@ -45,6 +45,8 @@ def signup(request):
             return Response("username already registered")
 @api_view(['POST'])
 def login(request):
+    print(request.data['username'].lower())
+    print(request.data['password'])
     user = authenticate(request, username=request.data['username'].lower(), password=request.data['password'])
     print(user)
     if user is None:
@@ -84,8 +86,15 @@ def getPaperFile(request):
 def editPaper(request):
     data = request.data
     paper = Paper.objects.get(title=data['title'])
-    result = setattr(paper, data['key'], data['value'].lower())
-    paper.save()
+    paper.authors=data['authors'].lower()
+    paper.language=data['language'].lower()
+    paper.NOM=data['NOM'].lower()
+    paper.field=data['field'].lower()
+    paper.title=data['title'].lower()
+    paper.summary=data['summary'].lower()
+    paper.paperFile=data['paperFile']
+    paper.MOP=data['MOP'].lower()
+    paper.save(update_fields=['authors','judges','NOM','field','title','summary','paperFile','MOP'])
     serializer = PaperSerializer(paper,many=False)
     return Response(serializer.data)
 
@@ -97,11 +106,26 @@ def deletePaper(request):
     return Response("paper successfully deleted.")
 
 @api_view(['POST'])
-def viewInfo(request):
-        data = request.data
-        paper = Paper.objects.get(title=data['title'])
-        serializer = PaperSerializer(paper,many=False)
-        return Response(serializer.data)
+def EditInfo(request):
+    data = request.data
+    user = BaseUser.objects.get(username=data['username'])
+    
+    user.email=data['email'].lower()
+    user.password=make_password(data['password'])
+    user.first_name = data['first_name'].lower()
+    user.last_name = data['last_name'].lower()
+    user.gender = data['gender'].lower()
+    user.SNN = data['SNN'].lower()
+    user.major = data['major'].lower()
+    user.degree = data['degree'].lower()
+    user.university = data['university'].lower()
+    user.country = data['country'].lower()
+    user.city = data['city'].lower()
+    user.field = data['field'].lower()
+    user.save(update_fields=['email','password','first_name','last_name',
+    'gender','SNN','major','degree','university','country','city','field'])
+    serializer = UserSerializer(user,many=False)
+    return Response(serializer.data)
 
 #returns all feedbacks for a paper
 @api_view(['POST'])
