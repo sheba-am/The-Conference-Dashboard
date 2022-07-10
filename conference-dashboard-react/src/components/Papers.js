@@ -1,9 +1,19 @@
-import React from 'react'
-import { PapersData } from '../components/PapersData';
+import React , {useContext}from 'react'
+import { PapersData } from './PapersData';
 import { Link } from 'react-router-dom';
+import { PaperContext } from '../contexts/PaperContext';
 //import ReactTable from "react-table";
-const Papers = props => {
+
+function Papers(props) {
+  const {selectedPaper,setSelectedPaper} =useContext(PaperContext)
+  const showDetails = (a) => {
+    
+    // alert(a.id);
+    setSelectedPaper(a)
+  }
+  //csss changes when sidebar is open
   const Papers = props.isOpen ? "papers-content open" : "papers-content";
+  
   return (
     <div className={Papers}>
       {/* ==== Add new paper ==== */}
@@ -53,7 +63,7 @@ const Papers = props => {
                                 {item.avg_score}
                               </td>
                               <td>
-                                <Link to='/paper-details' class="btn btn-primary">
+                                <Link to='/paper-details' class="btn btn-primary" onClick={() => showDetails(item)}>
                                     details
                                 </Link> 
                               </td>
@@ -70,6 +80,4 @@ const Papers = props => {
     </div>
   )
 }
-
-
 export default Papers;

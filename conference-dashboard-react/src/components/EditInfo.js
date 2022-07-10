@@ -1,5 +1,8 @@
 import React from 'react'
-const EditInfo = props => {
+
+
+
+function EditInfo(props){
   const EditInfo = props.isOpen ? "edit-info-content open" : "edit-info-content";
   return (
     <div className={EditInfo}>

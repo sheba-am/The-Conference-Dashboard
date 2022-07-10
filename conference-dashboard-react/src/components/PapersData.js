@@ -25,7 +25,7 @@ export const PapersData = [
     id:'1002',
     title:'ba project is the project we should finish',
     authors: ['auther one','auther two'],
-    judges: ['judge 1','judge 2'],
+    judges: ['judge 3','judge 4'],
     language: 'en',
     field: 'computer science',
     summery: 'this is a test case',

@@ -1,8 +1,12 @@
-import React from 'react'
-import { PapersData } from '../components/PapersData';
-const PaperDetails = props => {
+import React, {useContext} from 'react'
+import { PapersData } from './PapersData';
+import { Link } from "react-router-dom";
+import { PaperContext } from '../contexts/PaperContext';
+
+function PaperDetails(props) {
   const PaperDetails = props.isOpen ? "paper-details-content open" : "paper-details-content";
-  var focusedPaper = PapersData[0];
+  //var selectedPaper = PapersData[0];
+  const {selectedPaper,setSelectedPaper} =useContext(PaperContext)
   return (
     <div className={PaperDetails}>
         {/* ==== The Paper Details ==== */}
@@ -15,30 +19,35 @@ const PaperDetails = props => {
                 </button>
               </div>
               <div class='col-1'>
+                <Link to='/edit-paper' class="btn btn-primary">
+                    edit
+                </Link> 
+              </div>
+              <div class='col-1'>
                 <button class="btn btn-primary">
-                  edit
+                  delete
                 </button>
               </div>
               <div class='col-9'>
-                id:{focusedPaper.id}
+                id:{selectedPaper.id}
               </div>              
             </div>
           </div>
 
           <div>
-            Paper Title: {focusedPaper.title}
+            Paper Title: {selectedPaper.title}
           </div>
           <div>
-            Paper Title: {focusedPaper.authors}
+            Paper Title: {selectedPaper.authors}
           </div>
           <div>
-            Sent Date: {focusedPaper.send_date}
+            Sent Date: {selectedPaper.send_date}
           </div>   
           <div>
             Paper File:
           </div>   
           <div>
-            Abstract: {focusedPaper.abstract}
+            Abstract: {selectedPaper.abstract}
           </div>             
         </div>
         {/*==== Judges Table ==== */}
@@ -57,15 +66,15 @@ const PaperDetails = props => {
           <tbody>
             
               {
-                  focusedPaper.judges.map((item, index) => {
+                  selectedPaper.judges.map((item, index) => {
                       return (
                         
                             <tr key={index}  >
                               <th scope="row">{index+1}</th>
                               <td>{item}</td>
-                              <td> {focusedPaper.state[index]}</td>
-                              <td> {focusedPaper.scores[index]}</td>
-                              <td> {focusedPaper.judge_feedback[index]}</td>
+                              <td> {selectedPaper.state[index]}</td>
+                              <td> {selectedPaper.scores[index]}</td>
+                              <td> {selectedPaper.judge_feedback[index]}</td>
                             </tr>
                         
                       );
