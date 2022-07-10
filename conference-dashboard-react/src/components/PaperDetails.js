@@ -38,17 +38,21 @@ function PaperDetails(props) {
             Paper Title: {selectedPaper.title}
           </div>
           <div>
-            Paper Title: {selectedPaper.authors}
+            Paper Title: {selectedPaper.authors[0]["authorName"]}
           </div>
           <div>
             Sent Date: {selectedPaper.send_date}
           </div>   
           <div>
             Paper File:
-          </div>   
+          </div>
+          <div>
+            number of pages: {selectedPaper.number_of_pages}
+          </div>             
           <div>
             Abstract: {selectedPaper.abstract}
-          </div>             
+          </div> 
+                    
         </div>
         {/*==== Judges Table ==== */}
         <div>

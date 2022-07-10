@@ -5,7 +5,7 @@ export const PapersData = [
   {
     id:'1001',
     title:'ba project',
-    authors: ['auther one','auther two'],
+    authors: [{ authorName: 'author one' },{ authorName: 'author two' }],
     judges: ['judge 1','judge 2'],
     language: 'en',
     field: 'computer science',
@@ -24,7 +24,7 @@ export const PapersData = [
   {
     id:'1002',
     title:'ba project is the project we should finish',
-    authors: ['auther one','auther two'],
+    authors: [{ authorName: 'author 3' },{ authorName: 'author 4' }],
     judges: ['judge 3','judge 4'],
     language: 'en',
     field: 'computer science',

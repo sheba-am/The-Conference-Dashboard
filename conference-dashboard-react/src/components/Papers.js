@@ -57,7 +57,7 @@ function Papers(props) {
                                 {item.title}
                               </td>
                               <td>
-                                {item.authors}
+                                {item.authors[0]["authorName"]}
                               </td>
                               <td>
                                 {item.avg_score}

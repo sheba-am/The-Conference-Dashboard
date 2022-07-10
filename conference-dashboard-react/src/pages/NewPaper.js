@@ -1,10 +1,18 @@
-import React,{ useState } from 'react'
+import React,{ useState,useRef } from 'react'
 import { PapersData } from '../components/PapersData';
 import { Link } from 'react-router-dom';
 //import ReactTable from "react-table";
 function NewPaper(props) {
   const Papers = props.isOpen ? "new-paper-content open" : "new-paper-content";
-  
+  const [inputTitle, setInputTitle] = useState();
+  const [field, setField] = useState();
+  const [methodOfPresentation, setMOP] = useState();
+  const [language, setLanguage] = useState();
+  const [uploadedFile, setUploadedFile] = useState();
+  const [abstract, setAbstract] = useState();
+  const [numberOfPages, setNumberOfPages] = useState();
+  console.log(uploadedFile)
+  //=========Author input ===========
   const [authorList, setAuthorList] = useState([{ authorName: "" }]);
 
   const handleAuthorChange = (e, index) => {
@@ -23,16 +31,27 @@ function NewPaper(props) {
   const handleAuthorAdd = () => {
     setAuthorList([...authorList, { authorName: "" }]);
   };
+  
+  //===========handle Submit=============
 
-  //console.log(authorList)
+  const handleSubmit = (evt) => {
+      evt.preventDefault();
+      alert(`Submitting  ${inputTitle} ${authorList[0]["authorName"]} ${field} ${methodOfPresentation}
+      ${language} ${abstract} ${numberOfPages} `)
+  }
+  
+
+  
   return (
     <div className={Papers}>
         <h3>Add new paper</h3>
-        <form>
+        <form onSubmit={handleSubmit}>
             <div class="row mb-3">
                 <label for="inputTitle" class=" col-2 col-form-label">Title</label>
                 <div class="col-8" >
-                  <input type="textarea" class="form-control" id="inputTitle"/>
+                  <input type="textarea" class="form-control" value={inputTitle}
+                  onChange={e => setInputTitle(e.target.value)}
+                  />
                 </div>
             </div>
 
@@ -78,9 +97,11 @@ function NewPaper(props) {
             </div>          
 
             <div class="row mb-3">
-            <label for="inputTitle" class="col-sm-2 col-form-label">field</label>
+            <label for="inputTitle" class="col-sm-2 col-form-label" >field</label>
               <div class="col-sm-10">
-                <select class="form-select" aria-label="Default select example">
+                <select class="form-select" aria-label="Default select example" 
+                value={field} onChange={(e) => setField(e.target.value)}
+                >
                   <option selected>Open this select menu</option>
                   <option value="1">One</option>
                   <option value="2">Two</option>
@@ -90,9 +111,11 @@ function NewPaper(props) {
             </div>
 
             <div class="row mb-3">
-            <label for="inputTitle" class="col-sm-2 col-form-label">method of presentation</label>
+            <label for="inputTitle" class="col-sm-2 col-form-label" >method of presentation</label>
               <div class="col-sm-10">
-                <select class="form-select" aria-label="Default select example">
+                <select class="form-select" aria-label="Default select example" 
+                value={methodOfPresentation} onChange={(e) => setMOP(e.target.value)}
+                >
                   <option selected>Open this select menu</option>
                   <option value="1">One</option>
                   <option value="2">Two</option>
@@ -104,7 +127,9 @@ function NewPaper(props) {
             <div class="row mb-3">
             <label for="inputTitle" class="col-sm-2 col-form-label">language</label>
               <div class="col-sm-10">
-                <select class="form-select" aria-label="Default select example">
+              <select class="form-select" aria-label="Default select example" 
+                value={language} onChange={(e) => setLanguage(e.target.value)}
+                >
                   <option selected>Open this select menu</option>
                   <option value="1">One</option>
                   <option value="2">Two</option>
@@ -115,24 +140,30 @@ function NewPaper(props) {
 
             <div class="row mb-3">
               <label for="formFile" class="col-sm-2 col-form-label">paper file</label>
-              <div class="col-sm-10"><input class="form-control" type="file" id="formFile" /></div>
+              <div class="col-sm-10"><input class="form-control" type="file" 
+              onChange={e => setUploadedFile(e.target.files[0])}
+              /></div>
             </div>
 
             <div class="row mb-3">
             <label for="inputTitle" class="col-sm-2 col-form-label">Abstract</label>
               <div class="col-sm-10">
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                <textarea class="form-control"  rows="3" 
+                onChange={e => setAbstract(e.target.value)}
+                ></textarea>
               </div>
             </div>
 
             <div class="row mb-3">
             <label for="inputTitle" class="col-sm-2 col-form-label">number of pages</label>
               <div class="col-sm-10 form-outline">
-                <input type="number" id="typeNumber" class="form-control" />
+                <input type="number" id="typeNumber" class="form-control" 
+                onChange={e => setNumberOfPages(e.target.value)}
+                />
               </div>
             </div>
 
-            <button type="submit" class="btn btn-primary">Sign in</button>
+            <button class="btn btn-primary" type="submit">Add paper</button>
         </form>
     </div>
   )
