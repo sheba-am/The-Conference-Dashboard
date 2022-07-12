@@ -2,6 +2,7 @@ import React from "react";
 import { SidebarData } from "./SidebarData";
 import { Link } from 'react-router-dom';
 const Sidebar = props => {
+  // the css changes when sidebar is open
     const sidebarClass = props.isOpen ? "sidebar open" : "sidebar";
     return (
       <div className={sidebarClass}>
