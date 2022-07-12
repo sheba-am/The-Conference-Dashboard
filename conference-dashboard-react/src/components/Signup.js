@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react'
 import { Container, Form, Button, Alert } from 'react-bootstrap'
-// import { useNavigate } from "react-router-dom";
+import { useNavigate, Navigate } from "react-router-dom";
 import axios from 'axios'
 export default function Signup() {
     const username =  useRef()
@@ -19,7 +19,8 @@ export default function Signup() {
     const logUser = useRef()
     const logPass = useRef()
     const [error, setError] = useState("")
-    // let navigate = useNavigate(); 
+    const user = localStorage.getItem("user")
+    let navigate = useNavigate(); 
     function handleRegister(e) {
         e.preventDefault()
         const config = {
@@ -54,7 +55,7 @@ export default function Signup() {
             setError(response.data)
           }else{
             localStorage.setItem("user", JSON.stringify(response.data))
-            // navigate('/dashboard')
+            navigate('/')
           }
         })
       }
@@ -80,13 +81,15 @@ export default function Signup() {
             setError(response.data)
           }else{
             localStorage.setItem("user", JSON.stringify(response.data))
+            navigate('/')
           }
           
         })
         
       }
 
-    return (
+    //redirect if the user is not authenticated
+  return ((user)? <Navigate to="/"/> :
         <Container className="align-itms-center d-flex" style={{ height: 'auto' }}>
           <Form onSubmit={handleLogin} className="w-100 shadow p-3 mb-5 bg-white rounded">
             <Form.Group >

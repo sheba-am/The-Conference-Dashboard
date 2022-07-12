@@ -1,12 +1,14 @@
 import React from "react"
 import { SidebarData } from "../components/SidebarData";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 const DashboradMainPage = props => {
     //dashboard will be a little smaller when sidebar is open
     const DashboardMainPage = props.isOpen ? "content open" : "content";
     let SidebarData_subset = SidebarData.slice(1, 3)
+    const user = localStorage.getItem("user")
 
-  return (
+    //redirect if the user is not authenticated
+  return ((!user)? <Navigate to="/signup"/> :
     <div className={DashboardMainPage}>
         <div class="container">
             <div class="row">  

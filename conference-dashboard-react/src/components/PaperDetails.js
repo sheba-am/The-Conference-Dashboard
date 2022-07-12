@@ -1,13 +1,38 @@
-import React, {useContext} from 'react'
+import React, {useContext, useEffect, useState} from 'react'
 import { PapersData } from './PapersData';
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { PaperContext } from '../contexts/PaperContext';
+import axios from 'axios'
+  // let feedbacks = []
+const config = {
+  headers: {
+    'Content-Type': 'multipart/form-data',
+      
+  }
+}
 
 function PaperDetails(props) {
+  const [feedbacks, setFeedbacks] = useState([]);
   const PaperDetails = props.isOpen ? "paper-details-content open" : "paper-details-content";
   //var selectedPaper = PapersData[0];
   const {selectedPaper,setSelectedPaper} =useContext(PaperContext)
-  return (
+  const user = localStorage.getItem("user")
+  useEffect(() => {
+    console.log("run")
+    const result = axios.post(
+      'http://127.0.0.1:8000/viewAllFeedback',
+      {
+        'title':selectedPaper.title
+      }
+      , config
+    ).then((response) => response)
+    .then((response) => {
+      setFeedbacks(response.data)
+    })
+  }, []);
+
+  //redirect if the user is not authenticated
+  return ((!user)? <Navigate to="/signup"/> :
     <div className={PaperDetails}>
         {/* ==== The Paper Details ==== */}
         <div className='details-of-paper'>
@@ -28,6 +53,12 @@ function PaperDetails(props) {
                   delete
                 </button>
               </div>
+              {/* TODO: assign judge only if admin*/}
+              <div class='col-1'>
+                <Link to='/assign-judge' class="btn btn-primary">
+                    Assign Judge
+                </Link> 
+              </div>
               <div class='col-9'>
                 id:{selectedPaper.id}
               </div>              
@@ -38,25 +69,25 @@ function PaperDetails(props) {
             Paper Title: {selectedPaper.title}
           </div>
           <div>
-            Paper Title: {selectedPaper.authors[0]["authorName"]}
+            Paper Title: {selectedPaper.authors}
           </div>
           <div>
-            Sent Date: {selectedPaper.send_date}
+            {/* Sent Date: {selectedPaper.send_date} */}
           </div>   
           <div>
             Paper File:
           </div>
           <div>
-            number of pages: {selectedPaper.number_of_pages}
+            number of pages: {selectedPaper.NOM}
           </div>             
           <div>
-            Abstract: {selectedPaper.abstract}
+            Abstract: {selectedPaper.summary}
           </div> 
                     
         </div>
         {/*==== Judges Table ==== */}
         <div>
-          <div>Judges</div>
+          <div>Judges: {selectedPaper.judges}</div>
           <table class="table papers-table justify-content-center table table-hover align-middle">
           <thead>
             <tr class="float-right">
@@ -70,15 +101,15 @@ function PaperDetails(props) {
           <tbody>
             
               {
-                  selectedPaper.judges.map((item, index) => {
+                  feedbacks.map((item) => {
                       return (
                         
-                            <tr key={index}  >
-                              <th scope="row">{index+1}</th>
-                              <td>{item}</td>
-                              <td> {selectedPaper.state[index]}</td>
-                              <td> {selectedPaper.scores[index]}</td>
-                              <td> {selectedPaper.judge_feedback[index]}</td>
+                            <tr key={item.id}  >
+                              <th scope="row">{item.id + 1}</th>
+                              <td>{item.judge}</td>
+                              <td> {item.status}</td>
+                              <td> {item.score}</td>
+                              <td> {item.description}</td>
                             </tr>
                         
                       );

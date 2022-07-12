@@ -1,8 +1,32 @@
 import React , {useContext}from 'react'
-import { PapersData } from './PapersData';
-import { Link } from 'react-router-dom';
+// import { PapersData } from './PapersData';
+import { Link, Navigate } from 'react-router-dom';
 import { PaperContext } from '../contexts/PaperContext';
+import axios from 'axios'
 //import ReactTable from "react-table";
+let PapersData = [];
+const user = JSON.parse(localStorage.getItem("user"))
+//get papers
+
+const config = {
+  headers: {
+    'Content-Type': 'multipart/form-data',
+      
+  }
+}
+if(user){
+  console.log(user)
+  const result = axios.post(
+    'http://127.0.0.1:8000/viewPapers',
+    {'authors': user.username}
+    , config
+  ).then((response) => response)
+  .then((response) => {
+    PapersData = response.data
+    localStorage.setItem("papers", JSON.stringify(PapersData))
+  })
+}
+
 
 function Papers(props) {
   const {selectedPaper,setSelectedPaper} =useContext(PaperContext)
@@ -13,8 +37,8 @@ function Papers(props) {
   }
   //csss changes when sidebar is open
   const Papers = props.isOpen ? "papers-content open" : "papers-content";
-  
-  return (
+  //redirect if the user is not authenticated
+  return ((!user)? <Navigate to="/signup"/> :
     <div className={Papers}>
       {/* ==== Add new paper ==== */}
       {/* <div class='container'>
@@ -57,7 +81,7 @@ function Papers(props) {
                                 {item.title}
                               </td>
                               <td>
-                                {item.authors[0]["authorName"]}
+                                {item.authors}
                               </td>
                               <td>
                                 {item.avg_score}

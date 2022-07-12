@@ -10,6 +10,8 @@ import PaperDetails from "./PaperDetails";
 import NewPaper from "../pages/NewPaper";
 import EditPaper from "./EditPaper";
 import { PaperContext } from "../contexts/PaperContext";
+import AssignJudge from './AssignJudge'
+import Signup from './Signup'
 export default function StandardUserDashboard(){
   // this const is for toggle of sidebar
     const [sidebarOpen, setSideBarOpen] = useState(false);
@@ -34,6 +36,8 @@ export default function StandardUserDashboard(){
                   <Route path='/paper-details' element={<PaperDetails isOpen={sidebarOpen}/>} />
                   <Route path='/new-paper' element={<NewPaper isOpen={sidebarOpen}/>} />
                   <Route path='edit-paper' element={<EditPaper isOpen={sidebarOpen} />} />
+                  {/* <Route path='assign-judge' element={<AssignJudge isOpen={sidebarOpen} />} /> */}
+                  <Route path='Signup' element={<Signup isOpen={sidebarOpen} />} />
                 </Routes>
               </PaperContext.Provider>
             </Router>              

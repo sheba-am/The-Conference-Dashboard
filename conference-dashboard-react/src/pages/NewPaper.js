@@ -1,8 +1,11 @@
 import React,{ useState,useRef } from 'react'
 import { PapersData } from '../components/PapersData';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
+import {Alert} from 'react-bootstrap'
+import axios from 'axios'
 //import ReactTable from "react-table";
 function NewPaper(props) {
+  const user = localStorage.getItem("user")
   const Papers = props.isOpen ? "new-paper-content open" : "new-paper-content";
   const [inputTitle, setInputTitle] = useState();
   const [field, setField] = useState();
@@ -11,6 +14,7 @@ function NewPaper(props) {
   const [uploadedFile, setUploadedFile] = useState();
   const [abstract, setAbstract] = useState();
   const [numberOfPages, setNumberOfPages] = useState();
+  const [error, setError] = useState("");
   console.log(uploadedFile)
   //=========Author input ===========
   const [authorList, setAuthorList] = useState([{ authorName: "" }]);
@@ -36,15 +40,55 @@ function NewPaper(props) {
 
   const handleSubmit = (evt) => {
       evt.preventDefault();
-      alert(`Submitting  ${inputTitle} ${authorList[0]["authorName"]} ${field} ${methodOfPresentation}
+      let authors = authorList[0]["authorName"]
+      for (let i = 1; i < authorList.length; i++) {
+        authors += "," + authorList[i]["authorName"]
+      }
+      alert(`Submitting  ${inputTitle} ${authors} ${field} ${methodOfPresentation}
       ${language} ${abstract} ${numberOfPages} `)
+
+      const config = {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+            
+        }
+      }
+      const result = axios.post(
+        'http://127.0.0.1:8000/addPaper',
+        {
+          'authors': authors,
+          'language': language,
+          'NOM': numberOfPages,
+          'field': field,
+          'title':inputTitle,
+          'summary':abstract,
+          'paperFile':uploadedFile,
+          'MOP':methodOfPresentation,
+
+         }
+        , config
+      ).then((response) => response)
+      .then((response) => {
+        if(response.data === 'This title has already been registered.'){
+            setError(response.data)
+        }else{
+          setError("Your paper has been submited.")
+        }
+      })
   }
   
 
   
-  return (
+  //redirect if the user is not authenticated
+  return ((!user)? <Navigate to="/signup"/> :
     <div className={Papers}>
         <h3>Add new paper</h3>
+        {error==='This title has already been registered.' && 
+                 <Alert variant='danger'>{error}</Alert>
+                }
+        {error==="Your paper has been submited." && 
+                 <Alert variant='success'>{error}</Alert>
+                }
         <form onSubmit={handleSubmit}>
             <div class="row mb-3">
                 <label for="inputTitle" class=" col-2 col-form-label">Title</label>
