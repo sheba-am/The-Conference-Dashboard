@@ -58,6 +58,12 @@ def login(request):
 #standard user options
 
 @api_view(['POST'])
+def getUsers(request):
+    users = BaseUser.objects.all()
+    serializer = UserSerializer(users,many=True)
+    return Response(serializer.data)
+
+@api_view(['POST'])
 def viewPapers(request):
     data = request.data
     user = BaseUser.objects.get(username=data['authors'])
@@ -80,6 +86,9 @@ def addPaper(request):
             paperFile=data['paperFile'],
             MOP=data['MOP'].lower(),
         )
+        allAuthors = data['authors'].split(",")
+        for item in allAuthors:
+            BaseUser.objects.get(username=item).papers.add(paper)
         serializer = PaperSerializer(paper,many=False)
         return Response(serializer.data)
     except IntegrityError as e:

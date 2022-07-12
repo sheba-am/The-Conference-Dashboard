@@ -1,6 +1,7 @@
 from django.urls import path
 from . import views
 urlpatterns = [
+    path('getUsers',  views.getUsers),
     path('addPaper',  views.addPaper),
     path('getPaperFile', views.getPaperFile),
     path('editPaper',  views.editPaper),
