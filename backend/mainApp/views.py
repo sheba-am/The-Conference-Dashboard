@@ -56,22 +56,34 @@ def login(request):
         return Response(serializer.data)
 
 #standard user options
+
+@api_view(['POST'])
+def viewPapers(request):
+    data = request.data
+    user = BaseUser.objects.get(username=data['authors'])
+    papers = Paper.objects.filter(authors__contains=user)
+    serializer = PaperSerializer(papers,many=True)
+    return Response(serializer.data)
+
 @api_view(['POST'])
 def addPaper(request):
     data = request.data
-    paper = Paper.objects.create(
-        authors=data['authors'].lower(),
-        language=data['language'].lower(),
-        NOM=data['NOM'].lower(),
-        field=data['field'].lower(),
-        title=data['title'].lower(),
-        summary=data['summary'].lower(),
-        paperFile=data['paperFile'],
-        MOP=data['MOP'].lower(),
-    )
-    serializer = PaperSerializer(paper,many=False)
-    return Response(serializer.data)
-
+    print(data)
+    try:
+        paper = Paper.objects.create(
+            authors=data['authors'].lower(),
+            language=data['language'].lower(),
+            NOM=data['NOM'].lower(),
+            field=data['field'].lower(),
+            title=data['title'].lower(),
+            summary=data['summary'].lower(),
+            paperFile=data['paperFile'],
+            MOP=data['MOP'].lower(),
+        )
+        serializer = PaperSerializer(paper,many=False)
+        return Response(serializer.data)
+    except IntegrityError as e:
+        return Response("This title has already been registered.")
 
 def getPaperFile(request):
     # data = request.data
@@ -150,6 +162,12 @@ def viewFeedback(request):
 #admin options
 
 @api_view(['POST'])
+def viewJudges(request):
+    data = request.data
+    judges = BaseUser.objects.filter(Q(field=data['field']) & Q(status='judge'))
+    serializer = UserSerializer(judges,many=True)
+    return Response(serializer.data)
+@api_view(['POST'])
 def promoteToJudge(request):
     data = request.data
     user = BaseUser.objects.get(username=data['username'].lower())
@@ -160,7 +178,7 @@ def promoteToJudge(request):
 
 
 @api_view(['POST'])
-def viewPapers(request):
+def viewAllPapers(request):
     papers = Paper.objects.all()
     serializer = PaperSerializer(papers,many=True)
     return Response(serializer.data)
@@ -175,8 +193,7 @@ def viewAssignedJudge(request):
 def assignJudge(request):
     data = request.data
     paper = Paper.objects.get(title=data['title'].lower())
-    judge = BaseUser.objects.get(username=data['username'].lower())
-    paper.judges = (paper.judges +"," + str(judge) )
+    paper.judges = (paper.judges +"," + data['judges'] )
     paper.save()
     serializer = PaperSerializer(paper,many=False)
     return Response(serializer.data)
