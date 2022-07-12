@@ -1,11 +1,10 @@
-import React , {useContext}from 'react'
+import React , {useContext, useState, useEffect}from 'react'
 // import { PapersData } from './PapersData';
 import { Link, Navigate } from 'react-router-dom';
 import { PaperContext } from '../contexts/PaperContext';
 import axios from 'axios'
 //import ReactTable from "react-table";
-let PapersData = [];
-const user = JSON.parse(localStorage.getItem("user"))
+
 //get papers
 
 const config = {
@@ -14,22 +13,11 @@ const config = {
       
   }
 }
-if(user){
-  console.log(user)
-  const result = axios.post(
-    'http://127.0.0.1:8000/viewPapers',
-    {'authors': user.username}
-    , config
-  ).then((response) => response)
-  .then((response) => {
-    PapersData = response.data
-    localStorage.setItem("papers", JSON.stringify(PapersData))
-  })
-}
-
 
 function Papers(props) {
   const {selectedPaper,setSelectedPaper} =useContext(PaperContext)
+  const user = JSON.parse(localStorage.getItem("user"))
+  const [papersData, setPapersData] = useState()
   const showDetails = (a) => {
     
     // alert(a.id);
@@ -37,6 +25,22 @@ function Papers(props) {
   }
   //csss changes when sidebar is open
   const Papers = props.isOpen ? "papers-content open" : "papers-content";
+
+  useEffect(() => {
+    if(user){
+      console.log(user)
+      const result = axios.post(
+        'http://127.0.0.1:8000/viewPapers',
+        {'authors': user.username}
+        , config
+      ).then((response) => response)
+      .then((response) => {
+        setPapersData(response.data)
+        console.log(papersData)
+        localStorage.setItem("papers", JSON.stringify(papersData))
+      })
+    } 
+  }, [])
   //redirect if the user is not authenticated
   return ((!user)? <Navigate to="/signup"/> :
     <div className={Papers}>
@@ -49,7 +53,7 @@ function Papers(props) {
       </div> */}
       <div> Add new paper</div>
       <div>
-        <Link to='/new-paper'  class="btn btn-primary">
+        <Link to='/dashboard/new-paper'  class="btn btn-primary">
         +new
         </Link>         
       </div>
@@ -69,7 +73,7 @@ function Papers(props) {
           <tbody>
             
               {
-                  PapersData.map((item, index) => {
+                  papersData?papersData.map((item, index) => {
                       return (
                         
                             <tr key={index}  >
@@ -87,14 +91,14 @@ function Papers(props) {
                                 {item.avg_score}
                               </td>
                               <td>
-                                <Link to='/paper-details' class="btn btn-primary" onClick={() => showDetails(item)}>
+                                <Link to='/dashboard/paper-details' class="btn btn-primary" onClick={() => showDetails(item)}>
                                     details
                                 </Link> 
                               </td>
                             </tr>
                         
                       );
-                  })
+                  }):<h2>Loading...</h2>
               }                
             
 

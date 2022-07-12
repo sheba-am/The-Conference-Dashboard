@@ -44,8 +44,8 @@ function NewPaper(props) {
       for (let i = 1; i < authorList.length; i++) {
         authors += "," + authorList[i]["authorName"]
       }
-      alert(`Submitting  ${inputTitle} ${authors} ${field} ${methodOfPresentation}
-      ${language} ${abstract} ${numberOfPages} `)
+      // alert(`Submitting  ${inputTitle} ${authors} ${field} ${methodOfPresentation}
+      // ${language} ${abstract} ${numberOfPages} `)
 
       const config = {
         headers: {

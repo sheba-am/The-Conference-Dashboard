@@ -44,7 +44,7 @@ function PaperDetails(props) {
                 </button>
               </div>
               <div class='col-1'>
-                <Link to='/edit-paper' class="btn btn-primary">
+                <Link to='/dashboard/edit-paper' class="btn btn-primary">
                     edit
                 </Link> 
               </div>
@@ -55,9 +55,9 @@ function PaperDetails(props) {
               </div>
               {/* TODO: assign judge only if admin*/}
               <div class='col-1'>
-                <Link to='/assign-judge' class="btn btn-primary">
-                    Assign Judge
-                </Link> 
+                  {/* <Link to='/assign-judge' class="btn btn-primary">
+                      Assign Judge
+                  </Link>  */}
               </div>
               <div class='col-9'>
                 id:{selectedPaper.id}
