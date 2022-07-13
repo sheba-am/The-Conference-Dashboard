@@ -15,14 +15,14 @@ function NewPaper(props) {
   const [abstract, setAbstract] = useState();
   const [numberOfPages, setNumberOfPages] = useState();
   const [error, setError] = useState("");
-  console.log(uploadedFile)
+  //console.log(uploadedFile)
   //=========Author input ===========
-  const [authorList, setAuthorList] = useState([{ authorName: "" }]);
-
+  const [authorList, setAuthorList] = useState([""]);
+  console.log(authorList)
   const handleAuthorChange = (e, index) => {
     const { name, value } = e.target;
     const list = [...authorList];
-    list[index][name] = value;
+    list[index] = value;
     setAuthorList(list);
   };
 
@@ -33,16 +33,16 @@ function NewPaper(props) {
   };
 
   const handleAuthorAdd = () => {
-    setAuthorList([...authorList, { authorName: "" }]);
+    setAuthorList([...authorList, ""]);
   };
   
   //===========handle Submit=============
 
   const handleSubmit = (evt) => {
       evt.preventDefault();
-      let authors = authorList[0]["authorName"]
+      let authors = authorList[0]
       for (let i = 1; i < authorList.length; i++) {
-        authors += "," + authorList[i]["authorName"]
+        authors += "," + authorList[i]
       }
       // alert(`Submitting  ${inputTitle} ${authors} ${field} ${methodOfPresentation}
       // ${language} ${abstract} ${numberOfPages} `)
@@ -103,14 +103,14 @@ function NewPaper(props) {
               <label for="inputTitle" class="col-sm-2 col-form-label">Author</label>
               <div class="col-sm-10">
                 
-                {authorList.map((singleService, index) => (
+                {authorList.map((singleAuthor, index) => (
                   <div class="col-sm-10" key={index} >
                     <div class="input-group mb-3">
                       <input class="form-control"
                         name="authorName"
                         type="text"
                         id="authorName"
-                        value={singleService.authorName}
+                        value={singleAuthor.authorName}
                         onChange={(e) => handleAuthorChange(e, index)}
                         required
                       />

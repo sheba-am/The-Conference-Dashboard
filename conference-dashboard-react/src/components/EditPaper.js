@@ -6,24 +6,25 @@ import { PaperContext } from '../contexts/PaperContext';
 import axios from 'axios'
 function NewPaper(props) {
   const {selectedPaper,setSelectedPaper} =useContext(PaperContext)
-  const user = localStorage.getItem("user")
+  var paper = JSON.parse(localStorage.getItem("selectedPaper")); //retrieve the object
+  const user = JSON.parse(localStorage.getItem("user"))
   const Papers = props.isOpen ? "new-paper-content open" : "new-paper-content";
-  const [inputTitle, setInputTitle] = useState(selectedPaper.title);
-  const [field, setField] = useState(selectedPaper.field);
-  const [methodOfPresentation, setMOP] = useState(selectedPaper.method_of_presentation);
-  const [language, setLanguage] = useState(selectedPaper.language);
+  const [inputTitle, setInputTitle] = useState(paper.title);
+  const [field, setField] = useState(paper.field);
+  const [methodOfPresentation, setMOP] = useState(paper.method_of_presentation);
+  const [language, setLanguage] = useState(paper.language);
   const [uploadedFile, setUploadedFile] = useState();
-  const [abstract, setAbstract] = useState(selectedPaper.abstract);
-  const [numberOfPages, setNumberOfPages] = useState(selectedPaper.number_of_pages);
+  const [abstract, setAbstract] = useState(paper.abstract);
+  const [numberOfPages, setNumberOfPages] = useState(paper.number_of_pages);
   const [error, setError] = useState("");
-  console.log(uploadedFile)
+  // console.log(uploadedFile)
   //=========Author input ===========
-  const [authorList, setAuthorList] = useState(selectedPaper.authors.split(","));
-  console.log(authorList)
+  const [authorList, setAuthorList] = useState(paper.authors.split(","));
+  // console.log(authorList)
   const handleAuthorChange = (e, index) => {
     const { name, value } = e.target;
     const list = [...authorList];
-    list[index][name] = value;
+    list[index] = value;
     setAuthorList(list);
   };
 
@@ -34,20 +35,21 @@ function NewPaper(props) {
   };
 
   const handleAuthorAdd = () => {
-    setAuthorList([...authorList, { authorName: "" }]);
+    setAuthorList([...authorList, ""]);
   };
   
   //===========handle Submit=============
 
   const handleSubmit = (evt) => {
       evt.preventDefault();
-      let authors = authorList[0]["authorName"]
+      let authors = authorList[0]
       for (let i = 1; i < authorList.length; i++) {
-        authors += "," + authorList[i]["authorName"]
+        authors += "," + authorList[i]
       }
+      
 
-      alert(`Submitting  ${inputTitle} ${authorList[0]["authorName"]} ${field} ${methodOfPresentation}
-      ${language} ${abstract} ${numberOfPages} `)
+      // alert(`Submitting  ${inputTitle} ${authorList[0]} ${field} ${methodOfPresentation}
+      // ${language} ${abstract} ${numberOfPages} `)
 
       const config = {
         headers: {
@@ -56,8 +58,9 @@ function NewPaper(props) {
         }
       }
       const result = axios.post(
-        'http://127.0.0.1:8000/EditPaper',
+        'http://127.0.0.1:8000/editPaper',
         {
+          'username':user.username,
           'authors': authors,
           'language': language,
           'NOM': numberOfPages,
@@ -75,8 +78,20 @@ function NewPaper(props) {
             setError(response.data)
         }else{
           setError("Your paper has been submited.")
+          const newPapers = JSON.stringify(response.data)
+          const prevSelected = JSON.parse(localStorage.getItem("selectedPaper"))
+          for (let i = 0; i < response.data.length; i++) {
+            console.log(response.data[i].id)
+            console.log(prevSelected.id)
+            if(response.data[i].id === prevSelected.id){
+              console.log("yes")
+              localStorage.setItem("selectedPaper", JSON.stringify(response.data[i]))
+            }
+          }
+          localStorage.setItem("papers", newPapers)
         }
       })
+      
   }
 
   
@@ -85,7 +100,7 @@ function NewPaper(props) {
   //redirect if the user is not authenticated
   return ((!user)? <Navigate to="/signup"/> :
     <div className={Papers}>
-        <h3>Add new paper</h3>
+        <h3>Edit paper</h3>
         <form onSubmit={handleSubmit}>
             <div class="row mb-3">
                 <label for="inputTitle" class=" col-2 col-form-label">Title</label>
@@ -107,7 +122,7 @@ function NewPaper(props) {
                         name="authorName"
                         type="text"
                         id="authorName"
-                        value={singleService.authorName}
+                        value={singleService}
                         onChange={(e) => handleAuthorChange(e, index)}
                         required
                       />
@@ -204,7 +219,7 @@ function NewPaper(props) {
               </div>
             </div>
 
-            <button class="btn btn-primary" type="submit">Add paper</button>
+            <button class="btn btn-primary" type="submit">Edit paper</button>
         </form>
     </div>
   )

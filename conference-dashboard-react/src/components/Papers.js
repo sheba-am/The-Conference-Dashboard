@@ -18,10 +18,11 @@ function Papers(props) {
   const {selectedPaper,setSelectedPaper} =useContext(PaperContext)
   const user = JSON.parse(localStorage.getItem("user"))
   const [papersData, setPapersData] = useState()
-  const showDetails = (a) => {
-    
+  const showDetails = (selected) => {
+    localStorage.setItem("selectedPaper", JSON.stringify(selected))
     // alert(a.id);
-    setSelectedPaper(a)
+    console.log(selected)
+    setSelectedPaper(selected)
   }
   //csss changes when sidebar is open
   const Papers = props.isOpen ? "papers-content open" : "papers-content";
