@@ -31,7 +31,7 @@ class BaseUser(AbstractUser):
     country = models.CharField(max_length=64)
     city = models.CharField(max_length=64)
     email = models.CharField(max_length=64)
-    password = models.CharField(max_length=64)
+    password = models.CharField(max_length=2048)
     status = models.CharField(max_length=64)
     papers = models.ManyToManyField(to=Paper, blank=True)
     field = models.CharField(max_length=64, null=True)

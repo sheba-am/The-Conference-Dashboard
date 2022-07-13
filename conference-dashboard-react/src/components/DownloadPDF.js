@@ -1,5 +1,6 @@
-import axios from 'axios'
-import {Button} from 'react-bootstrap'
+import axios from 'axios';
+import React from "react";
+//import {Button} from 'react-bootstrap'
 export default function DownloadPDF() {
 
     function handleClick(e) {
@@ -20,6 +21,6 @@ export default function DownloadPDF() {
     })
     }
     return(
-        <Button onClick={handleClick}>Submit</Button>
+        <button onClick={handleClick}>Submit</button>
     )
 }

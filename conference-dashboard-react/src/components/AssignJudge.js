@@ -54,7 +54,7 @@ export default function AssignJudge() {
            <h3>Title:{selectedPaper.title}</h3>
            <form onSubmit={handleSubmit}>
            {
-            judges.map((item) => {
+            judges? judges.map((item) => {
                 return(
                     <div>
                         <input type="checkbox" id={item.username} name={item.username} value={item.username}/>
@@ -63,7 +63,7 @@ export default function AssignJudge() {
                 )
             }
 
-            )
+            ):<div></div>
            }
                 <button class="btn btn-primary" type="submit">Assign Judges</button>
             </form>

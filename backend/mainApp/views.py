@@ -66,9 +66,8 @@ def getUsers(request):
 @api_view(['POST'])
 def viewPapers(request):
     data = request.data
-    user = BaseUser.objects.get(username=data['authors'])
-    papers = Paper.objects.filter(authors__contains=user)
-    serializer = PaperSerializer(papers,many=True)
+    user = BaseUser.objects.get(username=data['username'])
+    serializer = PaperSerializer(user.papers,many=True)
     return Response(serializer.data)
 
 @api_view(['POST'])
@@ -94,9 +93,11 @@ def addPaper(request):
     except IntegrityError as e:
         return Response("This title has already been registered.")
 
+@api_view(['POST'])
 def getPaperFile(request):
-    # data = request.data
-    paper = Paper.objects.get(title='music generation')
+    data = request.data
+    print(data)
+    paper = Paper.objects.get(title=data['title'])
 
     # paperFile = open(paper.paperFile)
     response = HttpResponse(FileWrapper(paper.paperFile), content_type='application/force-download')
@@ -106,6 +107,7 @@ def getPaperFile(request):
 @api_view(['POST'])
 def editPaper(request):
     data = request.data
+    print(data)
     paper = Paper.objects.get(title=data['title'])
     paper.authors=data['authors'].lower()
     paper.language=data['language'].lower()
@@ -116,7 +118,10 @@ def editPaper(request):
     paper.paperFile=data['paperFile']
     paper.MOP=data['MOP'].lower()
     paper.save(update_fields=['authors','judges','NOM','field','title','summary','paperFile','MOP'])
-    serializer = PaperSerializer(paper,many=False)
+
+    user = BaseUser.objects.get(username=data['username'])
+    papers = Paper.objects.filter(authors__contains=user)
+    serializer = PaperSerializer(papers,many=True)
     return Response(serializer.data)
 
 @api_view(['POST'])
@@ -170,6 +175,8 @@ def viewFeedback(request):
 
 #admin options
 
+
+#view judges suitable for the article
 @api_view(['POST'])
 def viewJudges(request):
     data = request.data
@@ -182,7 +189,7 @@ def promoteToJudge(request):
     user = BaseUser.objects.get(username=data['username'].lower())
     user.status = 'judge'
     user.save()
-    serializer = UserSerializer(user,many=False)
+    serializer = UserSerializer(BaseUser.objects.all(),many=True)
     return Response(serializer.data)
 
 
@@ -204,6 +211,15 @@ def assignJudge(request):
     paper = Paper.objects.get(title=data['title'].lower())
     paper.judges = (paper.judges +"," + data['judges'] )
     paper.save()
+    print(data['judges'].split(','))
+    for item in data['judges'].split(','):
+        print(item=='')
+        if item != ',' and item != '':
+            print("item")
+            print(item)
+            user = BaseUser.objects.get(username=item)
+            user.papers.add(paper)
+            user.save()
     serializer = PaperSerializer(paper,many=False)
     return Response(serializer.data)
 
