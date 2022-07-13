@@ -55,7 +55,7 @@ export default function Signup() {
             setError(response.data)
           }else{
             localStorage.setItem("user", JSON.stringify(response.data))
-            navigate('/dashboard-main-page')
+            navigate('/dashboard')
           }
         })
       }
@@ -81,7 +81,7 @@ export default function Signup() {
             setError(response.data)
           }else{
             localStorage.setItem("user", JSON.stringify(response.data))
-            navigate('/')
+            navigate('/dashboard')
           }
           
         })
