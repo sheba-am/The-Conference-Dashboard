@@ -2,25 +2,55 @@ import React from 'react';
 //import * as FaIcons from 'react-icons/fa';
 import * as AiIcons from 'react-icons/ai';
 import * as IoIcons from 'react-icons/io';
-
+import { IoPeopleSharp } from "react-icons/io5";
 export const SidebarData = [
   {
     title: 'Home',
     path: '/dashboard',
     icon: <AiIcons.AiFillHome />,
-    cName: 'nav-text'
+    cName: 'standard-user-home'
   },
   {
     title: 'Edit Info',
     path: '/dashboard/editinfo',
     icon: <AiIcons.AiFillEdit />,
-    cName: 'nav-text'
+    cName: 'standard-user-editinfo'
   },
   {
     title: 'Papers',
     path: '/dashboard/papers',
     icon: <IoIcons.IoIosPaper />,
-    cName: 'nav-text'
+    cName: 'standard-user-papers'
   },
-
+  {
+    title: 'Home',
+    path: '/dashboard',
+    icon: <AiIcons.AiFillHome />,
+    cName: 'admin-home'
+  },
+  {
+    title: 'Edit Info',
+    path: '/dashboard/editinfo',
+    icon: <AiIcons.AiFillEdit />,
+    cName: 'admin-editinfo'
+  },
+  {
+    title: 'Papers',
+    path: '/dashboard/papers',
+    icon: <IoIcons.IoIosPaper />,
+    cName: 'admin-papers'
+  },
+  {
+    title: 'Manage Standard User',
+    path: '/dashboard/manage-standard-user',
+    icon: <IoPeopleSharp/>,
+    cName: 'admin-manage-standard-user'
+  },
+  {
+    title: 'Manage Judges',
+    path: '/dashboard/manage-judges',
+    icon: <IoPeopleSharp />,
+    cName: 'admin-manage-judges'
+  },  
+  
 ];
