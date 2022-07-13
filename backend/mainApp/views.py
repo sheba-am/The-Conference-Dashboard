@@ -94,9 +94,11 @@ def addPaper(request):
     except IntegrityError as e:
         return Response("This title has already been registered.")
 
+@api_view(['POST'])
 def getPaperFile(request):
-    # data = request.data
-    paper = Paper.objects.get(title='music generation')
+    data = request.data
+    print(data)
+    paper = Paper.objects.get(title=data['title'])
 
     # paperFile = open(paper.paperFile)
     response = HttpResponse(FileWrapper(paper.paperFile), content_type='application/force-download')

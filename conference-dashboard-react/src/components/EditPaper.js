@@ -11,13 +11,13 @@ function NewPaper(props) {
   const Papers = props.isOpen ? "new-paper-content open" : "new-paper-content";
   const [inputTitle, setInputTitle] = useState(paper.title);
   const [field, setField] = useState(paper.field);
-  const [methodOfPresentation, setMOP] = useState(paper.method_of_presentation);
+  const [methodOfPresentation, setMOP] = useState(paper.MOP);
   const [language, setLanguage] = useState(paper.language);
-  const [uploadedFile, setUploadedFile] = useState();
-  const [abstract, setAbstract] = useState(paper.abstract);
-  const [numberOfPages, setNumberOfPages] = useState(paper.number_of_pages);
+  const [uploadedFile, setUploadedFile] = useState(paper.paperFile);
+  const [abstract, setAbstract] = useState(paper.summary);
+  const [numberOfPages, setNumberOfPages] = useState(paper.NOM);
   const [error, setError] = useState("");
-  // console.log(uploadedFile)
+  console.log("hey",uploadedFile)
   //=========Author input ===========
   const [authorList, setAuthorList] = useState(paper.authors.split(","));
   // console.log(authorList)

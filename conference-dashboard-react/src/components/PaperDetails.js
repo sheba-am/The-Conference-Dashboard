@@ -36,6 +36,27 @@ function PaperDetails(props) {
     })
   }, []);
 
+function handleClick(e) {
+    e.preventDefault()
+    const config = {
+      headers: {
+          'Content-type': 'application/json',
+          
+      }
+    }
+  console.log(paper.title)
+  const result = axios.post(
+      'http://127.0.0.1:8000/getPaperFile',
+      {
+        'title':paper.title
+      },
+      config
+    ).then((response) => response)
+    .then((response) => {
+        console.log(response)
+  })
+  }
+
   //redirect if the user is not authenticated
   return ((!user)? <Navigate to="/signup"/> :
     <div className={PaperDetails}>
@@ -80,7 +101,7 @@ function PaperDetails(props) {
             {/* Sent Date: {paper.send_date} */}
           </div>   
           <div>
-            Paper File:
+            Paper File: <button onClick={handleClick}>get file</button>
           </div>
           <div>
             number of pages: {paper.NOM}
