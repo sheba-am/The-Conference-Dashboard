@@ -21,7 +21,7 @@ function Papers(props) {
   const showDetails = (selected) => {
     localStorage.setItem("selectedPaper", JSON.stringify(selected))
     // alert(a.id);
-    console.log(selected)
+    console.log("context",selected)
     setSelectedPaper(selected)
   }
   //csss changes when sidebar is open

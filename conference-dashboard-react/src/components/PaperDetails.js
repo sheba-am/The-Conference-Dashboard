@@ -3,6 +3,9 @@ import { Link, Navigate } from "react-router-dom";
 import { PaperContext } from '../contexts/PaperContext';
 import axios from 'axios'
 import DeleteModal from './DeleteModal';
+import JudgesTable from './JudgesTable';
+import {JudgeTable} from '../data/PapersData'
+import AssignJudge from './AssignJudge';
   // let feedbacks = []
 const config = {
   headers: {
@@ -14,14 +17,17 @@ const config = {
 function PaperDetails(props) {
   const [feedbacks, setFeedbacks] = useState([]);
   const PaperDetails = props.isOpen ? "paper-details-content open" : "paper-details-content";
-  //var selectedPaper = PapersData[0];
   const {selectedPaper,setSelectedPaper} =useContext(PaperContext)
-  //var paper;
-  // this const is for toggle of delteModal
+  // ========== Delete Modal Toggle ==========
   const [deleteOpen, setDeleteOpen] = useState(false);
   const handleViewDelete = () => {
     setDeleteOpen(!deleteOpen);
   };
+  //========= Edit Judges =============
+  const [editJudgesOpen, setEditJudgesOpen] = useState(false);
+  const handleViewEditJudges = () => {
+    setEditJudgesOpen(!editJudgesOpen);
+  };  
   var paper = JSON.parse(localStorage.getItem("selectedPaper")); //retrieve the object
  
 
@@ -105,7 +111,7 @@ function handleClick(e) {
             {/* Sent Date: {paper.send_date} */}
           </div>   
           <div>
-            Paper File: <button onClick={handleClick}>get file</button>
+            Paper File: <button class="btn btn-primary" onClick={handleClick}>get file</button>
           </div>
           <div>
             number of pages: {paper.NOM}
@@ -116,42 +122,13 @@ function handleClick(e) {
                     
         </div>
         {/*==== Judges Table ==== */}
-        <div>
-          <div>Judges: {paper.judges}</div>
-          <table class="table papers-table justify-content-center table table-hover align-middle">
-          <thead>
-            <tr class="float-right">
-              <th scope="col">#</th>
-              <th scope="col">Judge name</th>
-              <th scope="col">state</th>
-              <th scope="col">score</th>
-              <th scope="col">feedback</th>             
-            </tr>
-          </thead>
-          <tbody>
-            
-              {
-                  feedbacks.map((item) => {
-                      return (
-                        
-                            <tr key={item.id}  >
-                              <th scope="row">{item.id + 1}</th>
-                              <td>{item.judge}</td>
-                              <td> {item.status}</td>
-                              <td> {item.score}</td>
-                              <td> {item.description}</td>
-                            </tr>
-                        
-                      );
-                  })
-              }                
-            
-
-          </tbody>
-        </table>          
-        </div>
-
-
+      <button class="btn btn-primary" onClick={handleViewEditJudges}>Edit Judges</button>
+      {
+        editJudgesOpen && <AssignJudge JudgeData={JudgeTable} toggleEditJudges={handleViewEditJudges} />
+      }
+      {
+        !editJudgesOpen && <JudgesTable JudgeData={JudgeTable} />
+      }
         
     </div>
   )
