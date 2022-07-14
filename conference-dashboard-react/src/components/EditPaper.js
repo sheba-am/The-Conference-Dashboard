@@ -1,6 +1,6 @@
 import React,{ useState,useRef,useContext} from 'react'
-import { PapersData } from '../components/PapersData';
-import { Link, Navigate } from 'react-router-dom';
+import {fieldData, methodOfPresentationData, languageData, authorData} from '../data/FormData'
+import { Link, Navigate ,useNavigate} from 'react-router-dom';
 //import ReactTable from "react-table";
 import { PaperContext } from '../contexts/PaperContext';
 import axios from 'axios'
@@ -39,7 +39,7 @@ function NewPaper(props) {
   };
   
   //===========handle Submit=============
-
+  let navigate = useNavigate(); 
   const handleSubmit = (evt) => {
       evt.preventDefault();
       let authors = authorList[0]
@@ -48,8 +48,7 @@ function NewPaper(props) {
       }
       
 
-      // alert(`Submitting  ${inputTitle} ${authorList[0]} ${field} ${methodOfPresentation}
-      // ${language} ${abstract} ${numberOfPages} `)
+
 
       const config = {
         headers: {
@@ -89,14 +88,12 @@ function NewPaper(props) {
             }
           }
           localStorage.setItem("papers", newPapers)
+          navigate('/dashboard/papers')
         }
       })
       
   }
 
-  
-
-  
   //redirect if the user is not authenticated
   return ((!user)? <Navigate to="/signup"/> :
     <div className={Papers}>
@@ -115,17 +112,20 @@ function NewPaper(props) {
               <label for="inputTitle" class="col-sm-2 col-form-label">Author</label>
               <div class="col-sm-10">
                 
-                {authorList.map((singleService, index) => (
+                {authorList.map((singleAuthor, index) => (
                   <div class="col-sm-10" key={index} >
                     <div class="input-group mb-3">
-                      <input class="form-control"
-                        name="authorName"
-                        type="text"
-                        id="authorName"
-                        value={singleService}
-                        onChange={(e) => handleAuthorChange(e, index)}
-                        required
-                      />
+                      <select class="form-select"
+                          value={singleAuthor}
+                          onChange={(e) => handleAuthorChange(e, index)}
+                          required
+                        >
+                          <option value="" selected disabled hidden>Choose author...</option>
+                          {authorData.map(( item ) => (
+                            <option value={item}> {item} </option>
+                            )
+                          )}
+                        </select> 
                       {authorList.length !== 1 && (
                         <button class="btn btn-outline-secondary" type="button" id="button-remove" 
                           onClick={() => handleAuthorRemove(index)}
@@ -158,10 +158,11 @@ function NewPaper(props) {
                 <select class="form-select" aria-label="Default select example" 
                 value={field} onChange={(e) => setField(e.target.value)}
                 >
-                  <option selected>{field}</option>
-                  <option value="1">One</option>
-                  <option value="2">Two</option>
-                  <option value="3">Three</option>
+                  <option defaultValue={field} disabled hidden></option>
+                  {fieldData.map(( item ) => (
+                    <option value={item.value}> {item.title} </option>
+                    )
+                  )}
                 </select>
               </div>
             </div>
@@ -172,10 +173,11 @@ function NewPaper(props) {
                 <select class="form-select" aria-label="Default select example" 
                 value={methodOfPresentation} onChange={(e) => setMOP(e.target.value)}
                 >
-                  <option selected>{methodOfPresentation}</option>
-                  <option value="1">One</option>
-                  <option value="2">Two</option>
-                  <option value="3">Three</option>
+                  <option defaultValue={methodOfPresentation} disabled hidden></option>
+                  {methodOfPresentationData.map(( item ) => (
+                    <option value={item.value}> {item.title} </option>
+                    )
+                  )}
                 </select>
               </div>
             </div>
@@ -186,10 +188,11 @@ function NewPaper(props) {
               <select class="form-select" aria-label="Default select example" 
                 value={language} onChange={(e) => setLanguage(e.target.value)}
                 >
-                  <option selected>{language}</option>
-                  <option value="1">One</option>
-                  <option value="2">Two</option>
-                  <option value="3">Three</option>
+                  <option defaultValue={language} disabled hidden ></option>
+                  {languageData.map(( item ) => (
+                    <option value={item.value}> {item.title} </option>
+                    )
+                  )}
                 </select>
               </div>
             </div>

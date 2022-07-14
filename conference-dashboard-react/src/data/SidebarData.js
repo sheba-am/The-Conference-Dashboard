@@ -42,7 +42,7 @@ export const SidebarData = [
   },
   {
     title: 'Manage Standard User',
-    path: '/dashboard/manage-standard-user',
+    path: '/dashboard/manage-standard-users',
     icon: <IoPeopleSharp/>,
     cName: 'admin-manage-standard-user'
   },

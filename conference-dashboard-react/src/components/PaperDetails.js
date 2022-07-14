@@ -1,8 +1,8 @@
 import React, {useContext, useEffect, useState} from 'react'
-import { PapersData } from './PapersData';
 import { Link, Navigate } from "react-router-dom";
 import { PaperContext } from '../contexts/PaperContext';
 import axios from 'axios'
+import DeleteModal from './DeleteModal';
   // let feedbacks = []
 const config = {
   headers: {
@@ -17,7 +17,11 @@ function PaperDetails(props) {
   //var selectedPaper = PapersData[0];
   const {selectedPaper,setSelectedPaper} =useContext(PaperContext)
   //var paper;
-  
+  // this const is for toggle of delteModal
+  const [deleteOpen, setDeleteOpen] = useState(false);
+  const handleViewDelete = () => {
+    setDeleteOpen(!deleteOpen);
+  };
   var paper = JSON.parse(localStorage.getItem("selectedPaper")); //retrieve the object
  
 
@@ -75,7 +79,7 @@ function handleClick(e) {
                 </Link> 
               </div>
               <div class='col-1'>
-                <button class="btn btn-primary">
+                <button class="btn btn-primary" onClick={handleViewDelete}>
                   delete
                 </button>
               </div>
@@ -90,7 +94,7 @@ function handleClick(e) {
               </div>              
             </div>
           </div>
-
+          <div><DeleteModal isOpen={deleteOpen} toggleDelete={handleViewDelete} /></div> 
           <div>
             Paper Title: {paper.title}
           </div>

@@ -1,5 +1,5 @@
 import React , {useContext, useState, useEffect}from 'react'
-// import { PapersData } from './PapersData';
+
 import { Link, Navigate } from 'react-router-dom';
 import { PaperContext } from '../contexts/PaperContext';
 import axios from 'axios'
@@ -93,7 +93,7 @@ function Papers(props) {
                               </td>
                               <td>
                                 {/* should be changed back to standard. admin is set only for testing */}
-                                {user.status==="admin"?<Link to='/dashboard/paper-details' class="btn btn-primary" onClick={() => showDetails(item)}>
+                                {user.status==="standard"?<Link to='/dashboard/paper-details' class="btn btn-primary" onClick={() => showDetails(item)}>
                                     details
                                 </Link>:user.status==="judge"?<Link to='/dashboard/send-feedback' class="btn btn-primary" onClick={() => showDetails(item)}>
                                     Send Feedback

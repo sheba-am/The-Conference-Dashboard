@@ -1,9 +1,18 @@
 import React from "react";
-import { SidebarData } from "./SidebarData";
+import { SidebarData} from '../data/SidebarData';
 import { Link } from 'react-router-dom';
 const Sidebar = props => {
   // the css changes when sidebar is open
     const sidebarClass = props.isOpen ? "sidebar open" : "sidebar";
+    const user = JSON.parse(localStorage.getItem("user")); //retrieve the object
+    let SidebarData_subset = SidebarData.slice(0, 3);
+    if(user){
+      if (user.status==="admin"){
+        SidebarData_subset = SidebarData.slice(3, 8)
+      } else {
+        SidebarData_subset = SidebarData.slice(0, 3)
+      }
+    }
     return (
       <div className={sidebarClass}>
         <nav class=" navbar-expand d-flex flex-column align-item-start">
@@ -12,7 +21,7 @@ const Sidebar = props => {
           </dov>
           <ul class="navbar-nav  d-flex flex-column mt-5 w-100">
             {
-                SidebarData.map((item, index) => {
+                SidebarData_subset.map((item, index) => {
                     return (
                       <li class="w-100">
                           <div key={index} class="nav-link text-light pl-4" >
