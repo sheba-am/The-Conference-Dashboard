@@ -134,7 +134,6 @@ def deletePaper(request):
 def EditInfo(request):
     data = request.data
     user = BaseUser.objects.get(username=data['username'])
-    
     user.email=data['email'].lower()
     user.password=make_password(data['password'])
     user.first_name = data['first_name'].lower()

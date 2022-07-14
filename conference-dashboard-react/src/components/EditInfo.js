@@ -1,6 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react'
 import { Container, Form, Button, Alert } from 'react-bootstrap'
 import axios from 'axios'
+import Select from 'react-select';
 export default function EditInfo(props) {
     const EditInfo = props.isOpen ? "new-paper-content open" : "new-paper-content";
     const user = JSON.parse(localStorage.getItem('user'))
@@ -18,6 +19,44 @@ export default function EditInfo(props) {
     const email =  useRef()
     const password =  useRef()
     const [error, setError] = useState("")
+
+    const genders = [
+      {value: 'female', label: 'female'},
+      {value: 'male', label: 'male'},
+    ]
+    const majors = [
+      {value: 'computer science', label: 'computer science'},
+      {value: 'medicine', label: 'medicine'},
+      {value: 'chemistry', label: 'chemistry'},
+      {value: 'architecture', label: 'architecture'},
+      {value: 'art', label: 'art'},
+    ]
+    const degrees = [
+      {value: 'BS', label: 'BS'},
+      {value: 'BA', label: 'BA'},
+      {value: 'MS', label: 'MS'},
+      {value: 'MA', label: 'MA'},
+      {value: 'PHD', label: 'PHD'},
+    ]
+    const universities = [
+      {value: 'University of Guilan', label: 'University of Guilan'},
+      {value: 'University of Isfahan', label: 'University of Isfahan'},
+      {value: 'University of Tehran', label: 'University of Tehran'},
+      {value: 'Sharif University of Technology', label: 'Sharif University of Technology'},
+      {value: 'Shahid Beheshti University', label: 'Shahid Beheshti University'},
+    ]
+    const countries = [
+      {value: "iran", label: "iran"}
+    ]
+    const cities = [
+      {value: "rasht", label: "rasht"},
+      {value: "tehran", label: "tehran"},
+      {value: "isfahan", label: "isfahan"},
+    ]
+    const fields = [
+      {value: "Computer Science", label: "Computer Science"},
+      {value: "Medicine", label: "Medicine"},
+    ]
     //initialize form fields
     useEffect(() => {
         username.current.value = user['username']
@@ -32,6 +71,7 @@ export default function EditInfo(props) {
         country.current.value = user['country']
         city.current.value = user['city']
         email.current.value = user['email']
+        field.current.value = user['field']
 
       });
 
@@ -43,7 +83,7 @@ export default function EditInfo(props) {
               
           }
         }
-
+        console.log(major.current.props.value.value)
         const result = axios.post(
             'http://127.0.0.1:8000/editInfo',
             {"username":username.current.value,
@@ -51,14 +91,14 @@ export default function EditInfo(props) {
               "email":email.current.value,
                "first_name":firstName.current.value,
                "last_name":lastName.current.value,
-               "gender":gender.current.value,
+               "gender":gender.current.props.value.value,
                "SNN":SNN.current.value,
-               "major":major.current.value,
-               "degree":degree.current.value,
-               "university":university.current.value,
-               "country":country.current.value,
-               "city":city.current.value,
-               "field":field.current.value,
+               "major":major.current.props.value.value,
+               "degree":degree.current.props.value.value,
+               "university":university.current.props.value.value,
+               "country":country.current.props.value.value,
+               "city":city.current.props.value.value,
+               "field":field.current.props.value.value,
               }
             , config
           ).then((response) => response)
@@ -77,7 +117,7 @@ export default function EditInfo(props) {
                     <Alert variant='success'>{error}</Alert>
                     }
                   <Form.Label>Username:</Form.Label>
-                  <Form.Control type="text" ref={username} required />
+                  <Form.Control type="text" ref={username} readOnly="readonly" required />
                   <Form.Label>Password:</Form.Label>
                   <Form.Control type="password" ref={password} required />
                   <Form.Label>First Name:</Form.Label>
@@ -85,21 +125,49 @@ export default function EditInfo(props) {
                   <Form.Label>Last Name:</Form.Label>
                   <Form.Control type="text" ref={lastName} required />
                   <Form.Label>Gender:</Form.Label>
-                  <Form.Control type="text" ref={gender} required />
+                  <Select ref={gender}
+                  value={genders.value}
+                  options={genders}
+                  defaultValue={{value: user['gender'], label: user['gender']}}
+                  />
                   <Form.Label>SNN:</Form.Label>
                   <Form.Control type="text" ref={SNN} required />
                   <Form.Label>Major:</Form.Label>
-                  <Form.Control type="text" ref={major} required />
+                  <Select id="major" ref={major}
+                  value={majors.value}
+                  options={majors}
+                  defaultValue={{value: user['major'], label: user['major']}}
+                  />
                   <Form.Label>Degree:</Form.Label>
-                  <Form.Control type="text" ref={degree} required />
+                  <Select ref={degree}
+                  value={degrees.value}
+                  options={degrees}
+                  defaultValue={{value: user['degree'], label: user['degree']}}
+                  />
                   <Form.Label>University:</Form.Label>
-                  <Form.Control type="text" ref={university} required />
+                  <Select ref={university}
+                  value={universities.value}
+                  options={universities}
+                  defaultValue={{value: user['university'], label: user['university']}}
+                  />
                   <Form.Label>Country:</Form.Label>
-                  <Form.Control type="text" ref={country} required />
+                  <Select ref={country}
+                  value={countries.value}
+                  options={countries}
+                  defaultValue={{value: "iran", label: "iran"}}
+                  />
                   <Form.Label>City:</Form.Label>
-                  <Form.Control type="text" ref={city} required />
+                  <Select ref={city}
+                  value={cities.value}
+                  options={cities}
+                  defaultValue={{value: user['city'], label: user['city']}}
+                  />
                   <Form.Label>Field:</Form.Label>
-                  <Form.Control type="text" ref={field} required />
+                  <Select ref={field}
+                  value={fields.value}
+                  options={fields}
+                  defaultValue={{value: user['field'], label: user['field']}}
+                  />
                   <Form.Label>Email:</Form.Label>
                   <Form.Control type="email" ref={email} required />
                 </Form.Group>
