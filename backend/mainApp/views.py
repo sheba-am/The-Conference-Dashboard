@@ -107,7 +107,6 @@ def getPaperFile(request):
 @api_view(['POST'])
 def editPaper(request):
     data = request.data
-    print(data)
     paper = Paper.objects.get(title=data['title'])
     paper.authors=data['authors'].lower()
     paper.language=data['language'].lower()
