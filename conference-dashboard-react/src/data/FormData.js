@@ -2,7 +2,7 @@
 import React from 'react';
 //===== Test array for author menu =====
 const user = JSON.parse(localStorage.getItem("user"))
-export const authorData =['janedoe',user.username,'markphilips','elleyoung']
+export const authorData =['janedoe','markphilips','elleyoung']
 
 export const fieldData =[
 {

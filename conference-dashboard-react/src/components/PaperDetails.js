@@ -109,11 +109,11 @@ function handleClick(e) {
                   delete
                 </button>
               </div>
-              {/* TODO: assign judge only if admin*/}
+              {/* assign judge only if admin*/}
               <div class='col-1'>
-                  <Link to='/dashboard/assign-judge' class="btn btn-primary">
+                  {user.status=='admin'?<Link to='/dashboard/assign-judge' class="btn btn-primary">
                       Assign Judge
-                  </Link> 
+                  </Link>:<div></div>}
               </div>
               
               {user.status=='admin' && paper.published == false?<div class='col-1'><button class="btn btn-primary" onClick={handlePublish}>
@@ -149,7 +149,7 @@ function handleClick(e) {
                     
         </div>
         {/*==== Judges Table ==== */}
-      <button class="btn btn-primary" onClick={handleViewEditJudges}>Edit Judges</button>
+      {user.status=='admin'?<button class="btn btn-primary" onClick={handleViewEditJudges}>Edit Judges</button>:<div></div>}
       {
         editJudgesOpen && <AssignJudge JudgeData={JudgeTable} toggleEditJudges={handleViewEditJudges} />
       }

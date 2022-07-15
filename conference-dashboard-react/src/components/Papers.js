@@ -29,9 +29,15 @@ function Papers(props) {
 
   useEffect(() => {
     if(user){
-      console.log(user)
+      //get all the papers for admin and assigned papers for judge and standard user
+      var request = ''
+      if(user.status){
+        request = "viewAllPapers"
+      }else{
+        request = "viewPapers"
+      }
       const result = axios.post(
-        'http://127.0.0.1:8000/viewPapers',
+        'http://127.0.0.1:8000/' + request,
         {'username': user.username}
         , config
       ).then((response) => response)
@@ -54,9 +60,9 @@ function Papers(props) {
       </div> */}
       <div> Add new paper</div>
       <div>
-        <Link to='/dashboard/new-paper'  class="btn btn-primary">
+        {user.status=='standard'?<Link to='/dashboard/new-paper'  class="btn btn-primary">
         +new
-        </Link>         
+        </Link>:<div></div>}         
       </div>
       {/* ========The Table======= */}
       <div class="table-responsive-md">
@@ -67,7 +73,7 @@ function Papers(props) {
               <th scope="col">Id</th>
               <th scope="col">Title</th>
               <th scope="col">Authors</th>
-              <th scope="col">Score</th>
+              {/* <th scope="col">Score</th> */}
               <th scope="col">More</th>
             </tr>
           </thead>
@@ -88,12 +94,12 @@ function Papers(props) {
                               <td>
                                 {item.authors}
                               </td>
-                              <td>
+                              {/* <td>
                                 {item.avg_score}
-                              </td>
+                              </td> */}
                               <td>
-                                {/* should be changed back to standard. admin is set only for testing */}
-                                {user.status==="standard"?<Link to='/dashboard/paper-details' class="btn btn-primary" onClick={() => showDetails(item)}>
+                                
+                                {user.status==="standard" || user.status==='admin'?<Link to='/dashboard/paper-details' class="btn btn-primary" onClick={() => showDetails(item)}>
                                     details
                                 </Link>:user.status==="judge"?<Link to='/dashboard/send-feedback' class="btn btn-primary" onClick={() => showDetails(item)}>
                                     Send Feedback

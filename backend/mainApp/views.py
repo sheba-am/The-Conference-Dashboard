@@ -125,11 +125,10 @@ def editPaper(request):
     paper.MOP=data['MOP'].lower()
     paper.save(update_fields=['authors','judges','NOM','field','title','summary','paperFile','MOP'])
     allAuthors = data['authors'].split(",")
-    for item in allAuthors:
+    for item in allAuthors[1:]:
         BaseUser.objects.get(username=item).papers.add(paper)
-    user = BaseUser.objects.get(username=data['username'])
-    papers = Paper.objects.filter(authors__contains=user)
-    serializer = PaperSerializer(papers,many=True)
+    user = BaseUser.objects.get(username=allAuthors[1])
+    serializer = PaperSerializer(user.papers,many=True)
     return Response("")
 
 @api_view(['POST'])
@@ -166,6 +165,9 @@ def viewAllFeedback(request):
     data = request.data
     paper = Paper.objects.get(title=data['title'].lower())
     feedback = FeedBack.objects.filter(paper=paper)
+    
+    for item in feedback:
+        print(item.judge)
     serializer = FeedBackSerializer(feedback,many=True)
     return Response(serializer.data)
 
@@ -210,7 +212,9 @@ def viewAllPapers(request):
 def viewAssignedJudge(request):
     data = request.data
     paper = Paper.objects.get(title=data['title'].lower())
-    return Response(paper.judges)
+    judges = BaseUser.objects.filter(Q(papers=paper) & Q(status="judge"))
+    serializer = UserSerializer(judges,many=True)
+    return Response(serializer.data)
 
 @api_view(['POST'])
 def assignJudge(request):

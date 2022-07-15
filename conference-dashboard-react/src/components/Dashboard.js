@@ -1,6 +1,6 @@
 
 import React, { useState, useMemo } from "react";
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Sidebar from './Sidebar';
 // import Header from './Header'
 import DashboradMainPage from "../pages/DashboardMainPage";
@@ -25,9 +25,12 @@ export default function StandardUserDashboard(){
     };    
     const [selectedPaper, setSelectedPaper] = useState(null);
     const providerValue = useMemo(() => ({selectedPaper, setSelectedPaper}),[selectedPaper, setSelectedPaper]);
+    const user = JSON.parse(localStorage.getItem("user"))
     return(
+      (!user)? <Navigate to="/signup"/> :
         <span>
         {/* <Header onClick={handleViewSidebar} /> */}
+
         <div class="container">
           <div class="row">
             <div class="col">

@@ -39,7 +39,9 @@ function NewPaper(props) {
             users.push(response.data[i].username + "(" + response.data[i].first_name + " " + response.data[i].last_name + ")")
             
         }
-        setAuthorData(users)
+        if(authorData.length === 0){
+          setAuthorData(users)
+        }
       })
   },[])
   //=========Author input ===========

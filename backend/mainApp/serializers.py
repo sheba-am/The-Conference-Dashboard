@@ -16,6 +16,8 @@ class PaperSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class FeedBackSerializer(serializers.ModelSerializer):
+    judge = serializers.CharField(source='judge.username')
+    paper = serializers.CharField(source='paper.title')
     class Meta:
         model = FeedBack
         fields = '__all__'
