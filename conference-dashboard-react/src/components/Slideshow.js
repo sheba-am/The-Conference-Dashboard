@@ -4,7 +4,7 @@ import Carousel from 'react-bootstrap/Carousel';
   
 export default function Slideshow() {
   return (
-    <div style={{ display: 'block', width: 700, padding: 30 }}>
+    <div style={{ display: 'block', width: "120%" }}>
       <Carousel>
         <Carousel.Item interval={1500}>
           <img

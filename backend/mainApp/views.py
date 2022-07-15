@@ -165,9 +165,6 @@ def viewAllFeedback(request):
     data = request.data
     paper = Paper.objects.get(title=data['title'].lower())
     feedback = FeedBack.objects.filter(paper=paper)
-    
-    for item in feedback:
-        print(item.judge)
     serializer = FeedBackSerializer(feedback,many=True)
     return Response(serializer.data)
 
@@ -231,6 +228,13 @@ def assignJudge(request):
             user = BaseUser.objects.get(username=item)
             user.papers.add(paper)
             user.save()
+            FeedBack.objects.create(
+                paper=paper,
+                judge=user,
+                score="N/A",
+                status="N/A",
+                description="N/A"
+            )
     serializer = PaperSerializer(paper,many=False)
     return Response(serializer.data)
 
@@ -250,14 +254,13 @@ def publish(request):
 @api_view(['POST'])
 def sendFeedback(request):
     data = request.data
-    feedback = FeedBack.objects.create(
-        paper = Paper.objects.get(title=data['title'].lower()),
-        judge = BaseUser.objects.get(username=data['username'].lower()),
-        score = data['score'],
-        status = data['status'].lower(),
-        description = data['description'],
-    )
-    
+    paper = Paper.objects.get(title=data['title'].lower()),
+    judge = BaseUser.objects.get(username=data['username'].lower()),
+    feedback = FeedBack.objects.filter(Q(papers=paper) & Q(judge=judge))
+    feedback.score = data['score'],
+    feedback.status = data['status'].lower(),
+    feedback.description = data['description'],
+    feedback.save()
     serializer = FeedBackSerializer(feedback,many=False)
     return Response(serializer.data)
 
