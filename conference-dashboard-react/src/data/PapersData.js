@@ -1,5 +1,31 @@
 //import React from 'react';
 
+export const JudgeTable = [
+  {
+    id:'1',
+    judge:'janedoe',
+    status:'n/a',
+    score:'16',
+    description:'this is a test',
+
+  },
+  {
+    id:'10',
+    judge:'markphilips',
+    status:'pased',
+    score:'18',
+    description:'this is a test',
+
+  },
+  {
+    id:'100',
+    judge:'elleyoung',
+    status:'failed',
+    score:'7',
+    description:'this is a test',
+
+  },
+]
 
 export const PapersData = [
   {
