@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useState} from 'react'
-import { PapersData } from './PapersData';
+// import { PapersData } from './PapersData';
 import { Link, Navigate, resolvePath } from "react-router-dom";
 import { PaperContext } from '../contexts/PaperContext';
 import axios from 'axios'
@@ -56,6 +56,7 @@ function handleClick(e) {
       config
     ).then((response) => response)
     .then((response) => {
+      console.log(response)
   })
   }
   function handlePublish(e) {

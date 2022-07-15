@@ -107,6 +107,7 @@ def getPaperFile(request):
 @api_view(['POST'])
 def editPaper(request):
     data = request.data
+    print(data)
     paper = Paper.objects.get(title=data['title'])
     paper.authors=data['authors'].lower()
     paper.language=data['language'].lower()
@@ -117,11 +118,13 @@ def editPaper(request):
     paper.paperFile=data['paperFile']
     paper.MOP=data['MOP'].lower()
     paper.save(update_fields=['authors','judges','NOM','field','title','summary','paperFile','MOP'])
-
+    allAuthors = data['authors'].split(",")
+    for item in allAuthors:
+        BaseUser.objects.get(username=item).papers.add(paper)
     user = BaseUser.objects.get(username=data['username'])
     papers = Paper.objects.filter(authors__contains=user)
     serializer = PaperSerializer(papers,many=True)
-    return Response(serializer.data)
+    return Response("")
 
 @api_view(['POST'])
 def deletePaper(request):

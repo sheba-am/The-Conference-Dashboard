@@ -1,6 +1,6 @@
-import React,{ useState,useRef,useContext} from 'react'
-import { PapersData } from '../components/PapersData';
-import { Link, Navigate } from 'react-router-dom';
+import React,{ useState,useRef,useContext, useEffect} from 'react'
+import {fieldData, methodOfPresentationData, languageData} from '../data/FormData'
+import { Link, Navigate ,useNavigate} from 'react-router-dom';
 //import ReactTable from "react-table";
 import { PaperContext } from '../contexts/PaperContext';
 import axios from 'axios'
@@ -17,7 +17,31 @@ function NewPaper(props) {
   const [abstract, setAbstract] = useState(paper.summary);
   const [numberOfPages, setNumberOfPages] = useState(paper.NOM);
   const [error, setError] = useState("");
-  console.log("hey",uploadedFile)
+
+  const users = []
+  const [authorData, setAuthorData] = useState([])
+  // const [names, setNames] = useState([])
+  // const [usernames, setUsernames] = useState([])
+  useEffect(() => {
+  const config = {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+            
+        }
+      }
+    axios.post(
+        'http://127.0.0.1:8000/getUsers'
+        , config
+      ).then((response) => response)
+      .then((response) => {
+        console.log(response.data)
+        for (let i = 0; i < response.data.length; i++) {
+            users.push(response.data[i].username + "(" + response.data[i].first_name + " " + response.data[i].last_name + ")")
+            
+        }
+        setAuthorData(users)
+      })
+  },[])
   //=========Author input ===========
   const [authorList, setAuthorList] = useState(paper.authors.split(","));
   // console.log(authorList)
@@ -39,17 +63,16 @@ function NewPaper(props) {
   };
   
   //===========handle Submit=============
-
+  let navigate = useNavigate(); 
   const handleSubmit = (evt) => {
       evt.preventDefault();
-      let authors = authorList[0]
-      for (let i = 1; i < authorList.length; i++) {
-        authors += "," + authorList[i]
+      let authors = ""
+      for (let i = 0; i < authorList.length; i++) {
+        authors += "," + authorList[i].split("(")[0]
       }
       
 
-      // alert(`Submitting  ${inputTitle} ${authorList[0]} ${field} ${methodOfPresentation}
-      // ${language} ${abstract} ${numberOfPages} `)
+
 
       const config = {
         headers: {
@@ -60,7 +83,7 @@ function NewPaper(props) {
       const result = axios.post(
         'http://127.0.0.1:8000/editPaper',
         {
-          'username':user.username,
+          'username':authors,
           'authors': authors,
           'language': language,
           'NOM': numberOfPages,
@@ -84,19 +107,16 @@ function NewPaper(props) {
             console.log(response.data[i].id)
             console.log(prevSelected.id)
             if(response.data[i].id === prevSelected.id){
-              console.log("yes")
               localStorage.setItem("selectedPaper", JSON.stringify(response.data[i]))
             }
           }
           localStorage.setItem("papers", newPapers)
+          navigate('/dashboard/papers')
         }
       })
       
   }
 
-  
-
-  
   //redirect if the user is not authenticated
   return ((!user)? <Navigate to="/signup"/> :
     <div className={Papers}>
@@ -115,17 +135,20 @@ function NewPaper(props) {
               <label for="inputTitle" class="col-sm-2 col-form-label">Author</label>
               <div class="col-sm-10">
                 
-                {authorList.map((singleService, index) => (
+                {authorList.map((singleAuthor, index) => (
                   <div class="col-sm-10" key={index} >
                     <div class="input-group mb-3">
-                      <input class="form-control"
-                        name="authorName"
-                        type="text"
-                        id="authorName"
-                        value={singleService}
-                        onChange={(e) => handleAuthorChange(e, index)}
-                        required
-                      />
+                      <select class="form-select"
+                          value={singleAuthor}
+                          onChange={(e) => handleAuthorChange(e, index)}
+                          required
+                        >
+                          <option value="" selected disabled hidden>Choose author...</option>
+                          {authorData.map(( item ) => (
+                            <option value={item}> {item} </option>
+                            )
+                          )}
+                        </select> 
                       {authorList.length !== 1 && (
                         <button class="btn btn-outline-secondary" type="button" id="button-remove" 
                           onClick={() => handleAuthorRemove(index)}
@@ -158,10 +181,11 @@ function NewPaper(props) {
                 <select class="form-select" aria-label="Default select example" 
                 value={field} onChange={(e) => setField(e.target.value)}
                 >
-                  <option selected>{field}</option>
-                  <option value="1">One</option>
-                  <option value="2">Two</option>
-                  <option value="3">Three</option>
+                  <option defaultValue={field} disabled hidden></option>
+                  {fieldData.map(( item ) => (
+                    <option value={item.value}> {item.title} </option>
+                    )
+                  )}
                 </select>
               </div>
             </div>
@@ -172,10 +196,11 @@ function NewPaper(props) {
                 <select class="form-select" aria-label="Default select example" 
                 value={methodOfPresentation} onChange={(e) => setMOP(e.target.value)}
                 >
-                  <option selected>{methodOfPresentation}</option>
-                  <option value="1">One</option>
-                  <option value="2">Two</option>
-                  <option value="3">Three</option>
+                  <option defaultValue={methodOfPresentation} disabled hidden></option>
+                  {methodOfPresentationData.map(( item ) => (
+                    <option value={item.value}> {item.title} </option>
+                    )
+                  )}
                 </select>
               </div>
             </div>
@@ -186,10 +211,11 @@ function NewPaper(props) {
               <select class="form-select" aria-label="Default select example" 
                 value={language} onChange={(e) => setLanguage(e.target.value)}
                 >
-                  <option selected>{language}</option>
-                  <option value="1">One</option>
-                  <option value="2">Two</option>
-                  <option value="3">Three</option>
+                  <option defaultValue={language} disabled hidden ></option>
+                  {languageData.map(( item ) => (
+                    <option value={item.value}> {item.title} </option>
+                    )
+                  )}
                 </select>
               </div>
             </div>
