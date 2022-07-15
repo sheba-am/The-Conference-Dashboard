@@ -13,6 +13,7 @@ urlpatterns = [
     path('promoteToJudge',  views.promoteToJudge),
     path('viewJudges',  views.viewJudges),
     path('viewPapers',  views.viewPapers),
+    path('viewpublished',  views.viewPublished),
     path('viewAllPapers',  views.viewAllPapers),
     path('viewAssignedJudge',  views.viewAssignedJudge),
     path('assignJudge',  views.assignJudge),

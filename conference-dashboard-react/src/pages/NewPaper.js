@@ -38,7 +38,11 @@ function NewPaper(props) {
             users.push(response.data[i].username + "(" + response.data[i].first_name + " " + response.data[i].last_name + ")")
             
         }
-        setAuthorData(users)
+        console.log(authorData.length)
+        if(authorData.length === 0){
+          setAuthorData(users)
+        }
+        
       })
   },[])
 
@@ -218,7 +222,7 @@ function NewPaper(props) {
             <div class="row mb-3">
               <label for="formFile" class="col-sm-2 col-form-label">paper file</label>
               <div class="col-sm-10"><input class="form-control" type="file" 
-              onChange={e => setUploadedFile(e.target.files[0])}
+              onChange={e => setUploadedFile(e.target.files[0])} required
               /></div>
             </div>
 

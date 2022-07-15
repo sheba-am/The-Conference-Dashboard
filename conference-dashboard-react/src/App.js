@@ -8,6 +8,7 @@ import EditInfo from './components/EditInfo';
 import DownloadPDF from './components/DownloadPDF';
 import AssignJudge from './components/AssignJudge';
 import FirstPage from './components/FirstPage';
+import HomePage from "./components/HomePage";
 export default function App() {
 
   return (
@@ -17,6 +18,7 @@ export default function App() {
           <Route path='/' element={<FirstPage />} />
           <Route path='/signup' element={<Signup />} />
           <Route path='/dashboard/*' element={<Dashboard />} />
+          <Route path='/home' element={<HomePage />} />
         </Routes>
       </Router>
       {/* <Signup/> */}

@@ -64,6 +64,12 @@ def getUsers(request):
     return Response(serializer.data)
 
 @api_view(['POST'])
+def viewPublished(request):
+    papers = Paper.objects.filter(published=True)
+    serializer = PaperSerializer(papers,many=True)
+    return Response(serializer.data)
+
+@api_view(['POST'])
 def viewPapers(request):
     data = request.data
     user = BaseUser.objects.get(username=data['username'])
