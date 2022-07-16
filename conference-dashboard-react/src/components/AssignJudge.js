@@ -28,22 +28,23 @@ export default function AssignJudge(props) {
         assignedJudgeNames=[""]
     }
 console.log(assignedJudgeNames)
-  const [judgeList, setjudgeList] = useState(assignedJudgeNames);
+  const [newJudgeList, setnewJudgeList] = useState(assignedJudgeNames);
   const handleJudgeChange = (e, index) => {
     const { name, value } = e.target;
-    const list = [...judgeList];
+    const list = [...newJudgeList];
     list[index] = value;
-    setjudgeList(list);
+    setnewJudgeList(list);
   };
 
   const handleJudgeRemove = (index) => {
-    const list = [...judgeList];
+    console.log('deleted',newJudgeList[index])
+    const list = [...newJudgeList];
     list.splice(index, 1);
-    setjudgeList(list);
+    setnewJudgeList(list);
   };
 
   const handleJudgeAdd = () => {
-    setjudgeList([...judgeList, ""]);
+    setnewJudgeList([...newJudgeList, ""]);
   };
     useEffect(() => {
         const config = {
@@ -66,33 +67,50 @@ console.log(assignedJudgeNames)
       },[]);
  // ========== Submit ===========
       const handleSubmit = (evt) => {
-        let selectedJudges = ""
         evt.preventDefault();
-        // for (let i = 0; i < judges.length; i++) {
-        //     var checkbox = document.getElementById(judges[i].username);
-        //     if(checkbox.checked){
-        //         selectedJudges += checkbox.value + "," 
-        //     }
-        //   }
-        for (let i = 0; i < judgeList.length; i++) {
-            selectedJudges+=judgeList[i]+",";
+        //we need to compare new judges and the prev one to see which judge was removed/added
+        var removedJudges = assignedJudgeNames.filter(x => !newJudgeList.includes(x))
+        var addedJudges = newJudgeList.filter(x => !assignedJudgeNames.includes(x))
+        console.log( 'removedJudges', removedJudges );
+        console.log( 'addedJudges', addedJudges );
+        let strAddedJudges = ""        
+        for (let i = 0; i < addedJudges.length; i++) {
+            strAddedJudges+=addedJudges[i]+",";
 
         } 
-        console.log("newjudge",selectedJudges,selectedPaper.title)
+        console.log("newjudge",strAddedJudges,selectedPaper.title)
+        
+        let strRemovedJudges = ""        
+        for (let i = 0; i < removedJudges.length; i++) {
+            strRemovedJudges+=removedJudges[i]+",";
+
+        } 
+        console.log("deljudge",strRemovedJudges,selectedPaper.title)        
           const config = {
             headers: {
                 'Content-type': 'application/json',
                 
             }
           }
-          const result = axios.post(
+          const addresult = axios.post(
               'http://127.0.0.1:8000/assignJudge',
-              {'judges': selectedJudges, 'title':selectedPaper.title}
+              {'judges': strAddedJudges, 'title':selectedPaper.title}
               ,config
             ).then((response) => response)
             .then((response) => {
                 console.log("assign response",response)
           })
+          // change the judges here!!!!!
+          const removeresult = axios.post(
+            'http://127.0.0.1:8000/deleteJudge',
+            {'title':selectedPaper.title, 'judge':strRemovedJudges}
+            ,config
+          ).then((response) => response)
+          .then((response) => {
+              console.log("remove response",response)
+        } )
+
+          
       } 
 
       return (
@@ -103,7 +121,7 @@ console.log(assignedJudgeNames)
                     <label for="inputTitle" class="col-sm-2 col-form-label">Author</label>
                     <div clsass="col-sm-10">
                         
-                        {judgeList.map((singleAuthor, index) => (
+                        {newJudgeList.map((singleAuthor, index) => (
                         <div class="col-sm-10" key={index} >
                             <div class="input-group mb-3">
                             <select class="form-select"
@@ -117,7 +135,7 @@ console.log(assignedJudgeNames)
                                 )
                                 )}
                             </select> 
-                            {judgeList.length !== 1 && (
+                            {newJudgeList.length !== 1 && (
                                 <button class="btn btn-outline-secondary" type="button" id="button-remove" 
                                 onClick={() => handleJudgeRemove(index)}
                                 
@@ -128,7 +146,7 @@ console.log(assignedJudgeNames)
                             </div>
                             <div>
                             {/*  maximum number of authers is 4 */}
-                            {judgeList.length - 1 === index && judgeList.length < 4 && (
+                            {newJudgeList.length - 1 === index && newJudgeList.length < 4 && (
                                 <button
                                 class="btn btn-outline-secondary" type="button" id="button-addon2" 
                                     onClick={handleJudgeAdd}                            

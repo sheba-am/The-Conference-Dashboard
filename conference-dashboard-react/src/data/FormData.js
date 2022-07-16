@@ -16,6 +16,10 @@ export const fieldData =[
 {
     title: 'Biology',
     value: 'biology',
+}, 
+{
+    title: 'DP',
+    value: 'dp',
 },         
 ];
 

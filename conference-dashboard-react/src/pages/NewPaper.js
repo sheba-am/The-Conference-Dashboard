@@ -71,8 +71,8 @@ function NewPaper(props) {
 
   const handleSubmit = (evt) => {
       evt.preventDefault();
-      let authors = ""
-      for (let i = 0; i < authorList.length; i++) {
+      let authors = authorList[0].split("(")[0]
+      for (let i = 1; i < authorList.length; i++) {
         authors += "," + authorList[i].split("(")[0]
       }
 
