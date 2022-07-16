@@ -244,12 +244,15 @@ def assignJudge(request):
 def deleteJudge(request):
     data = request.data
     paper = Paper.objects.get(title=data['title'].lower())
-    user = BaseUser.objects.get(username=data['judge'])
-    user.papers.remove(paper)
-    user.save()
-    feedback = FeedBack.objects.filter(Q(paper=paper) & Q(judge=user))
-    feedback.delete()
-    serializer = UserSerializer(user,many=False)
+    for item in data['judge'].split(','):
+        if item != ',' and item != '':
+            user = BaseUser.objects.get(username=item)
+            user.papers.remove(paper)
+            user.save()
+            feedback = FeedBack.objects.filter(Q(paper=paper) & Q(judge=user))
+            feedback.delete()
+    feedback = FeedBack.objects.filter(paper=paper)
+    serializer = FeedBackSerializer(feedback,many=True)
     return Response(serializer.data)
 
 @api_view(['POST'])

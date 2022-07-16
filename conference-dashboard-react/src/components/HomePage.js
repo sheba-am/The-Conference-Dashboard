@@ -1,6 +1,9 @@
 import React, {useEffect, useState} from "react";
 import { Button, Container } from "react-bootstrap";
 import Slideshow from "./Slideshow";
+import Nav from 'react-bootstrap/Nav';
+import Navbar from './NavbarComp';
+import NavDropdown from 'react-bootstrap/NavDropdown';
 import axios from 'axios'
 import 'bootstrap/dist/css/bootstrap.css';
 import Carousel from 'react-bootstrap/Carousel';
@@ -40,7 +43,8 @@ export default function HomePage() {
       }
     return(
         
-            <Container>
+            <Container style={{width:'100%'}}>
+              {/* <Navbar></Navbar> */}
               <Carousel style={{paddingTop:'20px'}}>
                 <Carousel.Item interval={1500}>
                   <img

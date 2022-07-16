@@ -9,16 +9,19 @@ import DownloadPDF from './components/DownloadPDF';
 import AssignJudge from './components/AssignJudge';
 import FirstPage from './components/FirstPage';
 import HomePage from "./components/HomePage";
+import NavbarComp from './components/NavbarComp';
 export default function App() {
 
   return (
     <div>
+      <NavbarComp></NavbarComp>
       <Router>
         <Routes>
-          <Route path='/' element={<FirstPage />} />
+          <Route path='/' element={<HomePage />} />
+          {/* <Route path='/' element={<FirstPage />} /> */}
           <Route path='/signup' element={<Signup />} />
           <Route path='/dashboard/*' element={<Dashboard />} />
-          <Route path='/home' element={<HomePage />} />
+
         </Routes>
       </Router>
       {/* <Signup/> */}

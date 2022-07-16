@@ -127,7 +127,7 @@ export default function Signup() {
       }
 
     //redirect if the user is not authenticated
-  return ((user)? <Navigate to="/"/> :
+  return ((user)? <Navigate to="/dashboard"/> :
         <Container className="align-itms-center d-flex" style={{ height: 'auto' }}>
           <Form onSubmit={handleLogin} className="w-100 shadow p-3 mb-5 bg-white rounded">
             <Form.Group >
