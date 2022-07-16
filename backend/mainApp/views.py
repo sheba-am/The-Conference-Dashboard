@@ -186,8 +186,10 @@ def viewFeedback(request):
 @api_view(['POST'])
 def viewJudges(request):
     data = request.data
+    print(data['field'])
     judges = BaseUser.objects.filter(Q(field=data['field']) & Q(status='judge'))
     serializer = UserSerializer(judges,many=True)
+    print(judges)
     return Response(serializer.data)
 @api_view(['POST'])
 def promoteToJudge(request):
@@ -217,8 +219,8 @@ def viewAssignedJudge(request):
 def assignJudge(request):
     data = request.data
     paper = Paper.objects.get(title=data['title'].lower())
-    paper.judges = (paper.judges +"," + data['judges'] )
-    paper.save()
+    # paper.judges = (paper.judges +"," + data['judges'] )
+    # paper.save()
     print(data['judges'].split(','))
     for item in data['judges'].split(','):
         print(item=='')
@@ -236,6 +238,18 @@ def assignJudge(request):
                 description="N/A"
             )
     serializer = PaperSerializer(paper,many=False)
+    return Response(serializer.data)
+
+@api_view(['POST'])
+def deleteJudge(request):
+    data = request.data
+    paper = Paper.objects.get(title=data['title'].lower())
+    user = BaseUser.objects.get(username=data['judge'])
+    user.papers.remove(paper)
+    user.save()
+    feedback = FeedBack.objects.filter(Q(paper=paper) & Q(judge=user))
+    feedback.delete()
+    serializer = UserSerializer(user,many=False)
     return Response(serializer.data)
 
 @api_view(['POST'])

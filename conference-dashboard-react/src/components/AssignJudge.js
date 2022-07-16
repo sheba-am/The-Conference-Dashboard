@@ -27,6 +27,7 @@ export default function AssignJudge(props) {
     } else {
         assignedJudgeNames=[""]
     }
+console.log(assignedJudgeNames)
   const [judgeList, setjudgeList] = useState(assignedJudgeNames);
   const handleJudgeChange = (e, index) => {
     const { name, value } = e.target;
@@ -57,6 +58,8 @@ export default function AssignJudge(props) {
               ,config
             ).then((response) => response)
             .then((response) => {
+                console.log("viewJudges response")
+                console.log(response.data)
                 setJudges(response.data)
           })
 

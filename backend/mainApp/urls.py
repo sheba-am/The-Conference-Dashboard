@@ -17,6 +17,7 @@ urlpatterns = [
     path('viewAllPapers',  views.viewAllPapers),
     path('viewAssignedJudge',  views.viewAssignedJudge),
     path('assignJudge',  views.assignJudge),
+    path('deleteJudge',  views.deleteJudge),
     path('publish',  views.publish),
 
     #Auth

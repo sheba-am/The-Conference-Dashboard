@@ -41,16 +41,16 @@ export const SidebarData = [
     cName: 'admin-papers'
   },
   {
-    title: 'Manage Standard User',
-    path: '/dashboard/manage-standard-users',
+    title: 'Manage Users',
+    path: '/dashboard/allusers',
     icon: <IoPeopleSharp/>,
     cName: 'admin-manage-standard-user'
   },
-  {
-    title: 'Manage Judges',
-    path: '/dashboard/manage-judges',
-    icon: <IoPeopleSharp />,
-    cName: 'admin-manage-judges'
-  },  
+  // {
+  //   title: 'Manage Judges',
+  //   path: '/dashboard/manage-judges',
+  //   icon: <IoPeopleSharp />,
+  //   cName: 'admin-manage-judges'
+  // },  
   
 ];
