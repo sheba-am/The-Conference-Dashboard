@@ -152,9 +152,8 @@ function handleClick(e) {
         {/*==== Judges Table ==== */}
         {/* this is for testing status needs to be admin!!! */}
       {user.status=='admin'?<button class="btn btn-primary" onClick={handleViewEditJudges}>Edit Judges</button>:<div></div>}
-      <button class="btn btn-primary" onClick={handleViewEditJudges}>Edit Judges</button>
       {
-        editJudgesOpen && <AssignJudge assignedJudgeData={feedbacks} toggleEditJudges={handleViewEditJudges} />
+        editJudgesOpen && <AssignJudge assignedJudgeData={feedbacks}  />
       }
       {
         !editJudgesOpen && <JudgesTable assignedJudgeData={feedbacks} />

@@ -67,25 +67,21 @@ console.log(assignedJudgeNames)
       },[]);
  // ========== Submit ===========
       const handleSubmit = (evt) => {
-        evt.preventDefault();
+        //evt.preventDefault();
         //we need to compare new judges and the prev one to see which judge was removed/added
         var removedJudges = assignedJudgeNames.filter(x => !newJudgeList.includes(x))
         var addedJudges = newJudgeList.filter(x => !assignedJudgeNames.includes(x))
-        console.log( 'removedJudges', removedJudges );
-        console.log( 'addedJudges', addedJudges );
         let strAddedJudges = ""        
         for (let i = 0; i < addedJudges.length; i++) {
             strAddedJudges+=addedJudges[i]+",";
 
         } 
-        console.log("newjudge",strAddedJudges,selectedPaper.title)
         
         let strRemovedJudges = ""        
         for (let i = 0; i < removedJudges.length; i++) {
             strRemovedJudges+=removedJudges[i]+",";
 
         } 
-        console.log("deljudge",strRemovedJudges,selectedPaper.title)        
           const config = {
             headers: {
                 'Content-type': 'application/json',
@@ -100,7 +96,6 @@ console.log(assignedJudgeNames)
             .then((response) => {
                 console.log("assign response",response)
           })
-          // change the judges here!!!!!
           const removeresult = axios.post(
             'http://127.0.0.1:8000/deleteJudge',
             {'title':selectedPaper.title, 'judge':strRemovedJudges}
@@ -163,7 +158,6 @@ console.log(assignedJudgeNames)
                     </div> 
                 <button class="btn btn-primary" type="submit">SaveChanges</button>
                 {/* this is a test button to switch to judges table */}
-                <button class="btn btn-primary" onClick={props.toggleEditJudges}>close edit</button>
             </form>
            
         </div>
