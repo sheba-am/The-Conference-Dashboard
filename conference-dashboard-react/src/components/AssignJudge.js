@@ -7,14 +7,27 @@ export default function AssignJudge(props) {
     //const {selectedPaper,setSelectedPaper} =useContext(PaperContext)
     var selectedPaper = JSON.parse(localStorage.getItem("selectedPaper")); //retrieve the object
     const user = JSON.parse(localStorage.getItem("user"))
+    // we get list of all relevant judges from server to show in select box
     const [judges,setJudges] = useState()
+    var judgeNameData =[]
+    if (judges && judges.length>0  ){
+        for (let i = 0; i <judges.length; i++) {
+            judgeNameData.push(judges[i]["username"])
+        }
+    }    
+
   //=========Judges input ===========
     //we extract judge names from the data
-    var judgeNames=[]  ;
-    for (let i = 0; i < props.JudgeData.length; i++) {
-        judgeNames.push(props.JudgeData[i]["judge"])
+    var assignedJudgeNames=[]  ;
+    // if the judges already exist we need to load them
+    if (props.assignedJudgeData && props.assignedJudgeData.length>0  ){
+        for (let i = 0; i < props.assignedJudgeData.length; i++) {
+            assignedJudgeNames.push(props.assignedJudgeData[i]["judge"])
+        }
+    } else {
+        assignedJudgeNames=[""]
     }
-  const [judgeList, setjudgeList] = useState(judgeNames);
+  const [judgeList, setjudgeList] = useState(assignedJudgeNames);
   const handleJudgeChange = (e, index) => {
     const { name, value } = e.target;
     const list = [...judgeList];
@@ -62,7 +75,7 @@ export default function AssignJudge(props) {
             selectedJudges+=judgeList[i]+",";
 
         } 
-        console.log("newjudge",selectedJudges)
+        console.log("newjudge",selectedJudges,selectedPaper.title)
           const config = {
             headers: {
                 'Content-type': 'application/json',
@@ -96,7 +109,7 @@ export default function AssignJudge(props) {
                                 required
                             >
                                 <option value="" selected disabled hidden>Choose judge...</option>
-                                {authorData.map(( item ) => (
+                                {judgeNameData.map(( item ) => (
                                 <option value={item}> {item} </option>
                                 )
                                 )}

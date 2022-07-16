@@ -19,7 +19,7 @@ function JudgesTable(props) {
         <tbody>
         
             {
-                props.JudgeData.map((item,index) => {
+                props.assignedJudgeData && props.assignedJudgeData.map((item,index) => {
                     return (
                     
                         <tr key={index}  >

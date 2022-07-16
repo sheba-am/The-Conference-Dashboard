@@ -17,6 +17,7 @@ const config = {
 
 function PaperDetails(props) {
   const [feedbacks, setFeedbacks] = useState([]);
+  {console.log('all feedbacks',feedbacks)}
   const PaperDetails = props.isOpen ? "paper-details-content open" : "paper-details-content";
   const {selectedPaper,setSelectedPaper} =useContext(PaperContext)
   // ========== Delete Modal Toggle ==========
@@ -149,12 +150,14 @@ function handleClick(e) {
                     
         </div>
         {/*==== Judges Table ==== */}
+        {/* this is for testing status needs to be admin!!! */}
       {user.status=='admin'?<button class="btn btn-primary" onClick={handleViewEditJudges}>Edit Judges</button>:<div></div>}
+      <button class="btn btn-primary" onClick={handleViewEditJudges}>Edit Judges</button>
       {
-        editJudgesOpen && <AssignJudge JudgeData={JudgeTable} toggleEditJudges={handleViewEditJudges} />
+        editJudgesOpen && <AssignJudge assignedJudgeData={feedbacks} toggleEditJudges={handleViewEditJudges} />
       }
       {
-        !editJudgesOpen && <JudgesTable JudgeData={JudgeTable} />
+        !editJudgesOpen && <JudgesTable assignedJudgeData={feedbacks} />
       }
         
     </div>

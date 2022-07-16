@@ -48,8 +48,8 @@ function NewPaper(props) {
 
   //console.log(uploadedFile)
   //=========Author input ===========
-  const [authorList, setAuthorList] = useState([user.username]);
-  //console.log(authorList)
+  const [authorList, setAuthorList] = useState([user.username+"("+user.first_name+" "+user.last_name+")"]);
+  console.log(authorList)
   const handleAuthorChange = (e, index) => {
     const { name, value } = e.target;
     const list = [...authorList];
