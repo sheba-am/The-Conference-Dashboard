@@ -2,7 +2,8 @@ import React, { useRef, useState, useEffect} from 'react'
 import { Container, Form, Button, Alert } from 'react-bootstrap'
 import { useNavigate, Navigate } from "react-router-dom";
 import axios from 'axios'
-export default function AllUsers() {
+export default function AllUsers(props) {
+    const AllUsersCss = props.isOpen ? "papers-content open" : "papers-content";
     const [users, setUsers] = useState();
     const config = {
         headers: {
@@ -33,35 +34,37 @@ export default function AllUsers() {
           })
       }
     return(
-        <Container>
-            {users?
-            <table class="table papers-table justify-content-center table table-hover align-middle">
-            <thead>
-              <tr class="float-right">
-                {/* <th scope="col">#</th> */}
-                <th scope="col">username</th>
-                <th scope="col">status</th>
-                <th scope="col">field</th>            
-              </tr>
-            </thead>
-            <tbody>
-                {
-                    users.map((user) => {
-                        return(
-                            <tr key={user.username}  >
-                                <td>{user.username}</td>
-                                <td>{user.status}</td>
-                                <td>{user.field}</td>
-                                {user.status !== 'judge'? <Button id={user.username} onClick={handleClick}>Promote to judge</Button>: <div></div>}
-                            </tr>
-                        )
-                    }
-                    )
-                }
-            </tbody>
-          </table>:
-            <h1>Loading...</h1>}
-        </Container>
+        <div className={AllUsersCss}>
+          <Container>
+              {users?
+              <table class="table papers-table justify-content-center table table-hover align-middle">
+              <thead>
+                <tr class="float-right">
+                  {/* <th scope="col">#</th> */}
+                  <th scope="col">username</th>
+                  <th scope="col">status</th>
+                  <th scope="col">field</th>
+                </tr>
+              </thead>
+              <tbody>
+                  {
+                      users.map((user) => {
+                          return(
+                              <tr key={user.username}  >
+                                  <td>{user.username}</td>
+                                  <td>{user.status}</td>
+                                  <td>{user.field}</td>
+                                  {user.status !== 'judge'? <Button id={user.username} onClick={handleClick}>Promote to judge</Button>: <div></div>}
+                              </tr>
+                          )
+                      }
+                      )
+                  }
+              </tbody>
+            </table>:
+              <h1>Loading...</h1>}
+          </Container>
+        </div>
     )
 
 }

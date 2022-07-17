@@ -4,8 +4,8 @@ import { Link, Navigate } from "react-router-dom";
 import { PaperContext } from '../contexts/PaperContext';
 import axios from 'axios'
 import { Container, Form, Button, Alert } from 'react-bootstrap'
-export default function SendFeedback () {
-
+export default function SendFeedback (props) {
+  const SendFeedbackCss = props.isOpen ? "papers-content open" : "papers-content";
     var paper = JSON.parse(localStorage.getItem("selectedPaper")); //retrieve the object
     var user = JSON.parse(localStorage.getItem("user"));
     const score =  useRef()
@@ -38,37 +38,39 @@ export default function SendFeedback () {
           })
     }
     return(
-        <Container>
+        <div className={SendFeedbackCss}>
+          <Container>
+              <div>
+              Paper Title: {paper.title}
+            </div>
             <div>
-            Paper Title: {paper.title}
-          </div>
-          <div>
-            Paper Authors: {paper.authors}
-          </div>  
-          <div>
-            Paper File: <button onClick={handleClick}>get file</button>
-          </div>
-          <div>
-            number of pages: {paper.NOM}
-          </div>             
-          <div>
-            Abstract: {paper.summary}
-          </div> 
-            <Form onSubmit={handleClick} className="w-100 shadow p-3 mb-5 bg-white rounded">
-            <Form.Group >
-              <h2>Send Feedback</h2>
-              {error==="Your feedback has been submitted." && 
-                 <Alert variant='success'>{error}</Alert>
-                }
-              <Form.Label>Score: </Form.Label>
-              <Form.Control type="text" ref={score} required />
-              <Form.Label>Status:</Form.Label>
-              <Form.Control type="text" ref={status} required />
-              <Form.Label>Description</Form.Label>
-              <Form.Control as="textarea" ref={description} rows={3} />
-            </Form.Group>   
-            <Button type="submit" className="mr-2">Send Feedback</Button>
-          </Form>
-        </Container>
+              Paper Authors: {paper.authors}
+            </div>
+            <div>
+              Paper File: <button onClick={handleClick}>get file</button>
+            </div>
+            <div>
+              number of pages: {paper.NOM}
+            </div>
+            <div>
+              Abstract: {paper.summary}
+            </div>
+              <Form onSubmit={handleClick} className="w-100 shadow p-3 mb-5 bg-white rounded">
+              <Form.Group >
+                <h2>Send Feedback</h2>
+                {error==="Your feedback has been submitted." &&
+                   <Alert variant='success'>{error}</Alert>
+                  }
+                <Form.Label>Score: </Form.Label>
+                <Form.Control type="text" ref={score} required />
+                <Form.Label>Status:</Form.Label>
+                <Form.Control type="text" ref={status} required />
+                <Form.Label>Description</Form.Label>
+                <Form.Control as="textarea" ref={description} rows={3} />
+              </Form.Group>
+              <Button type="submit" className="mr-2">Send Feedback</Button>
+            </Form>
+          </Container>
+        </div>
     )
 }

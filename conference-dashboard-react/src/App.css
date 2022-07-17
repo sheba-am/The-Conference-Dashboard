@@ -6,58 +6,59 @@
   height: 60px;
   background-color: lightcoral;
 } */
+.dashboard {
+  background-color: yellow;
+}
+
+.navbar-nav {
+  list-style-type: none;
+  }
 .sidebar {
-  position: absolute;
+  position: fixed;
   top: 0;
   right: 0;
   height: 100%;
   width: 15vw;
   transition: right 0.3s ease-in-out;
-  background-color: lightgray;
+  background: #0B1F2D;
+  border-radius: 12px 0px 0px 12px;
 }
 
 /* button for sidebar toggle */
-.sidebar-toggle {
-  position: absolute;
+#App #dashboard .row .col #sidebar .sidebar-toggle{
+  position: fixed;
   top: 2vh;
   right: 1vw;
-  height: 5vh;
-  width: 5vw;
   z-index: 1;
+  background-color: #2C4F66;
+  color: white ;
+  border-color: #2C4F66;
 }
 .content {
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
-  height: 100%;
+  min-height: 100%;
   transition: right 0.3s ease-in-out;
-  background-color: lightsalmon;
+  background-color: #D9D9D9;
 }
-.edit-info-content {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 100%;
-  transition: right 0.3s ease-in-out;
-  background-color: lightgreen;
-}
+
 .papers-content {
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
-  height: 100%;
+  min-height: 100%;
   transition: right 0.3s ease-in-out;
-  background-color: lightpink;
+  background-color: #D9D9D9;
 }
 .paper-details-content {
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
-  height: 100%;
+  min-height: 100%;
   transition: right 0.3s ease-in-out;
   background-color: lightgoldenrodyellow;
 }
@@ -66,15 +67,16 @@
   top: 0;
   left: 0;
   right: 0;
-  height: 100%;
+  min-height: 100%;
   transition: right 0.3s ease-in-out;
-  background-color: lightgoldenrodyellow;
+  background-color: #D9D9D9;
 }
 
 .papers-table {
   
-  
-  background-color: lightskyblue;
+  border-radius: 20px;
+  width: 50vw;
+  background-color: #F6FBF4;
 }
 
 .edit-info-form {
@@ -85,9 +87,9 @@
   background-color: lightblue;
 }
 
-/* .sidebar.open {
+.sidebar.open {
   right: 0;
-} */
+}
 .content.open {
   right: 15vw;
 
@@ -109,12 +111,32 @@
 
 }
 .nav-link {
-	font-size: 1.2em;
-  text-decoration: none;
+	font-size: 1.4em;
+  height: 8vh;
 
+}
+.link-of-nav {
+  text-decoration: none ;
+  list-style-type: none;
+  color:white;
+}
+.link-of-nav:hover {
+  color:white;
 }
 .nav-link:active,
 .nav-link:focus,
 .nav-link:hover {
-	background-color: #ffffff26;
+	background-color: #2C4F66;
+  border-radius: 12px ;
+}
+
+
+body #root #App #dashboard .row .col .container  .add-paper-btn {
+  background-color:#F66B0E  ;
+  border-radius: 12px;
+  margin-bottom: 1vh;
+}
+body #root #App #dashboard .row .col .container  .add-paper-btn:hover {
+  background-color:#dd6210  ;
+
 }

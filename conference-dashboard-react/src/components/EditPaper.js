@@ -17,7 +17,7 @@ function NewPaper(props) {
   const [abstract, setAbstract] = useState(paper.summary);
   const [numberOfPages, setNumberOfPages] = useState(paper.NOM);
   const [error, setError] = useState("");
-
+// ========== Get all users from server===============
   const users = []
   const [authorData, setAuthorData] = useState([])
   // const [names, setNames] = useState([])
@@ -45,8 +45,8 @@ function NewPaper(props) {
       })
   },[])
   //=========Author input ===========
+
   const [authorList, setAuthorList] = useState(paper.authors.split(","));
-  // console.log(authorList)
   const handleAuthorChange = (e, index) => {
     const { name, value } = e.target;
     const list = [...authorList];
@@ -141,11 +141,14 @@ function NewPaper(props) {
                   <div class="col-sm-10" key={index} >
                     <div class="input-group mb-3">
                       <select class="form-select"
-                          value={singleAuthor}
+                          // value={singleAuthor}
                           onChange={(e) => handleAuthorChange(e, index)}
                           required
                         >
-                          <option value="" selected disabled hidden>Choose author...</option>
+
+                          <option value={singleAuthor} selected disabled hidden>
+                        {   authorData[authorData.findIndex(element => element.includes(singleAuthor))]}
+                            </option>
                           {authorData.map(( item ) => (
                             <option value={item}> {item} </option>
                             )

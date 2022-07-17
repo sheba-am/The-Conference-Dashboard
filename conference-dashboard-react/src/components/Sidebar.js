@@ -1,5 +1,6 @@
 import React from "react";
 import { SidebarData} from '../data/SidebarData';
+import { GiHamburgerMenu } from "react-icons/gi";
 import { Link } from 'react-router-dom';
 const Sidebar = props => {
   // the css changes when sidebar is open
@@ -14,30 +15,35 @@ const Sidebar = props => {
       }
     }
     return (
-      <div className={sidebarClass}>
-        <nav class=" navbar-expand d-flex flex-column align-item-start">
-          <dov class="navbar-brand text-light mt-5" > 
-            <div class="display-5 font-weight-bold"> LOGO </div>
-          </dov>
-          <ul class="navbar-nav  d-flex flex-column mt-5 w-100">
-            {
-                SidebarData_subset.map((item, index) => {
-                    return (
-                      <li class="w-100">
-                          <div key={index} class="nav-link text-light pl-4" >
-                          <Link to={item.path}>
-                              {item.icon}
-                              <span>{item.title}</span>
-                          </Link>
-                          </div>
-                      </li>
-                    );
-                })
-            }           
-          </ul>
-        </nav>
-        <button onClick={props.toggleSidebar} className="sidebar-toggle">
-          Toggle 
+      <div id='sidebar'>
+        <div className={sidebarClass}>
+          {/* <nav class=" navbar-expand d-flex flex-column align-item-start"> */}
+          <nav>
+            <div class="navbar-brand text-light mt-5" >
+              <div class="display-5 font-weight-bold"> LOGO </div>
+            </div>
+
+            <ul class="navbar-nav  d-flex flex-column mt-5 w-100">
+              {
+                  SidebarData_subset.map((item, index) => {
+                      return (
+                        <li class="nav-item " >
+                            <div key={index} class="nav-link text-light pl-4" >
+                            <Link class="link-of-nav" to={item.path}>
+                                {item.icon}
+                                <span>{item.title}</span>
+                            </Link>
+                            </div>
+                        </li>
+                      );
+                  })
+              }
+            </ul>
+          </nav>
+        </div>
+        {/* <i class="bi bi-list"></i> */}
+        <button class="btn btn-primary sidebar-toggle" onClick={props.toggleSidebar} >
+          <GiHamburgerMenu />
         </button>
 
       </div>

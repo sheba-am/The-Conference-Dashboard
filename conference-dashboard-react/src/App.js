@@ -13,8 +13,8 @@ import NavbarComp from './components/NavbarComp';
 export default function App() {
 
   return (
-    <div>
-      <NavbarComp></NavbarComp>
+    <div id='App'>
+      
       <Router>
         <Routes>
           <Route path='/' element={<HomePage />} />

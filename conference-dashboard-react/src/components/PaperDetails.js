@@ -110,12 +110,6 @@ function handleClick(e) {
                   delete
                 </button>
               </div>
-              {/* assign judge only if admin*/}
-              <div class='col-1'>
-                  {user.status=='admin'?<Link to='/dashboard/assign-judge' class="btn btn-primary">
-                      Assign Judge
-                  </Link>:<div></div>}
-              </div>
               
               {user.status=='admin' && paper.published == false?<div class='col-1'><button class="btn btn-primary" onClick={handlePublish}>
                   publish

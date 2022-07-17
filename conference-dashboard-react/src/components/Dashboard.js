@@ -28,10 +28,8 @@ export default function StandardUserDashboard(){
     const user = JSON.parse(localStorage.getItem("user"))
     return(
       (!user)? <Navigate to="/signup"/> :
-        <span>
-        {/* <Header onClick={handleViewSidebar} /> */}
 
-        <div class="container">
+        <div id="dashboard">
           <div class="row">
             <div class="col">
             
@@ -61,6 +59,6 @@ export default function StandardUserDashboard(){
   
         </div>
         
-      </span>
+      
     )
 }

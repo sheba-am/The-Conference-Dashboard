@@ -3,6 +3,7 @@ import { Container, Form, Button, Alert } from 'react-bootstrap'
 import { useNavigate, Navigate } from "react-router-dom";
 import axios from 'axios'
 import Select from 'react-select';
+import NavbarComp from './NavbarComp';
 export default function Signup() {
     const username =  useRef()
     const firstName =  useRef()
@@ -128,77 +129,80 @@ export default function Signup() {
 
     //redirect if the user is not authenticated
   return ((user)? <Navigate to="/dashboard"/> :
-        <Container className="align-itms-center d-flex" style={{ height: 'auto' }}>
-          <Form onSubmit={handleLogin} className="w-100 shadow p-3 mb-5 bg-white rounded">
-            <Form.Group >
-              <h2>Login</h2>
-              {error==="username and password don't match" && 
-                 <Alert variant='danger'>{error}</Alert>
-                }
-              <Form.Label>Username: </Form.Label>
-              <Form.Control type="text" ref={logUser} required />
-              <Form.Label>Password:</Form.Label>
-              <Form.Control type="password" ref={logPass} required />
-            </Form.Group>   
-            <Button type="submit" className="mr-2">Login</Button>
-          </Form>
-          <Form onSubmit={handleRegister} className="w-100 shadow p-3 mb-5 bg-white rounded">
-                <Form.Group >
-                  <h2>Sign up</h2>
-                  {error==="Info Updated successfully" &&
-                    <Alert variant='success'>{error}</Alert>
-                    }
-                  <Form.Label>Username:</Form.Label>
-                  <Form.Control type="text" ref={username} required />
-                  <Form.Label>Password:</Form.Label>
-                  <Form.Control type="password" ref={password} required />
-                  <Form.Label>First Name:</Form.Label>
-                  <Form.Control type="text" ref={firstName} required />
-                  <Form.Label>Last Name:</Form.Label>
-                  <Form.Control type="text" ref={lastName} required />
-                  <Form.Label>Gender:</Form.Label>
-                  <Select ref={gender}
-                  value={genders.value}
-                  options={genders}
-                  />
-                  <Form.Label>SNN:</Form.Label>
-                  <Form.Control type="text" ref={SNN} required />
-                  <Form.Label>Major:</Form.Label>
-                  <Select ref={major}
-                  value={majors.value}
-                  options={majors}
-                  />
-                  <Form.Label>Degree:</Form.Label>
-                  <Select ref={degree}
-                  value={degrees.value}
-                  options={degrees}
-                  />
-                  <Form.Label>University:</Form.Label>
-                  <Select ref={university}
-                  value={universities.value}
-                  options={universities}
-                  />
-                  <Form.Label>Country:</Form.Label>
-                  <Select ref={country}
-                  value={countries.value}
-                  options={countries}
-                  />
-                  <Form.Label>City:</Form.Label>
-                  <Select ref={city}
-                  value={cities.value}
-                  options={cities}
-                  />
-                  <Form.Label>Field:</Form.Label>
-                  <Select ref={field}
-                  value={fields.value}
-                  options={fields}
-                  />
-                  <Form.Label>Email:</Form.Label>
-                  <Form.Control type="email" ref={email} required />
-                </Form.Group>
-                <Button type="submit" className="mr-2">Submit</Button>
-              </Form>
-        </Container>
+        <div id='Signup'>
+          <NavbarComp></NavbarComp>
+          <Container className="align-itms-center d-flex" style={{ height: 'auto' }}>
+            <Form onSubmit={handleLogin} className="w-100 shadow p-3 mb-5 bg-white rounded">
+              <Form.Group >
+                <h2>Login</h2>
+                {error==="username and password don't match" &&
+                   <Alert variant='danger'>{error}</Alert>
+                  }
+                <Form.Label>Username: </Form.Label>
+                <Form.Control type="text" ref={logUser} required />
+                <Form.Label>Password:</Form.Label>
+                <Form.Control type="password" ref={logPass} required />
+              </Form.Group>
+              <Button type="submit" className="mr-2">Login</Button>
+            </Form>
+            <Form onSubmit={handleRegister} className="w-100 shadow p-3 mb-5 bg-white rounded">
+                  <Form.Group >
+                    <h2>Sign up</h2>
+                    {error==="Info Updated successfully" &&
+                      <Alert variant='success'>{error}</Alert>
+                      }
+                    <Form.Label>Username:</Form.Label>
+                    <Form.Control type="text" ref={username} required />
+                    <Form.Label>Password:</Form.Label>
+                    <Form.Control type="password" ref={password} required />
+                    <Form.Label>First Name:</Form.Label>
+                    <Form.Control type="text" ref={firstName} required />
+                    <Form.Label>Last Name:</Form.Label>
+                    <Form.Control type="text" ref={lastName} required />
+                    <Form.Label>Gender:</Form.Label>
+                    <Select ref={gender}
+                    value={genders.value}
+                    options={genders}
+                    />
+                    <Form.Label>SNN:</Form.Label>
+                    <Form.Control type="text" ref={SNN} required />
+                    <Form.Label>Major:</Form.Label>
+                    <Select ref={major}
+                    value={majors.value}
+                    options={majors}
+                    />
+                    <Form.Label>Degree:</Form.Label>
+                    <Select ref={degree}
+                    value={degrees.value}
+                    options={degrees}
+                    />
+                    <Form.Label>University:</Form.Label>
+                    <Select ref={university}
+                    value={universities.value}
+                    options={universities}
+                    />
+                    <Form.Label>Country:</Form.Label>
+                    <Select ref={country}
+                    value={countries.value}
+                    options={countries}
+                    />
+                    <Form.Label>City:</Form.Label>
+                    <Select ref={city}
+                    value={cities.value}
+                    options={cities}
+                    />
+                    <Form.Label>Field:</Form.Label>
+                    <Select ref={field}
+                    value={fields.value}
+                    options={fields}
+                    />
+                    <Form.Label>Email:</Form.Label>
+                    <Form.Control type="email" ref={email} required />
+                  </Form.Group>
+                  <Button type="submit" className="mr-2">Submit</Button>
+                </Form>
+          </Container>
+        </div>
       )
 }  
 

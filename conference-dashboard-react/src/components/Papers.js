@@ -3,6 +3,7 @@ import React , {useContext, useState, useEffect}from 'react'
 import { Link, Navigate } from 'react-router-dom';
 import { PaperContext } from '../contexts/PaperContext';
 import axios from 'axios'
+import { Container } from 'react-bootstrap';
 //import ReactTable from "react-table";
 
 //get papers
@@ -25,7 +26,7 @@ function Papers(props) {
     setSelectedPaper(selected)
   }
   //csss changes when sidebar is open
-  const Papers = props.isOpen ? "papers-content open" : "papers-content";
+  const PapersCss = props.isOpen ? "papers-content open" : "papers-content";
 
   useEffect(() => {
     if(user){
@@ -50,71 +51,66 @@ function Papers(props) {
   }, [])
   //redirect if the user is not authenticated
   return ((!user)? <Navigate to="/signup"/> :
-    <div className={Papers}>
-      {/* ==== Add new paper ==== */}
-      {/* <div class='container'>
-        <div class='row'>
-          <div class="col-3"> Add new paper:</div>
-          <div class="col"><button class="btn btn-primary">+new</button></div>
+    <div  className={PapersCss}>
+      <Container>
+        <h3> Papers </h3>
+        <div> Add new paper</div>
+        
+          {user.status=='standard'?<Link to='/dashboard/new-paper'  class="btn add-paper-btn" >
+          +new
+          </Link>:<div></div>}
+      
+        {/* ========The Table======= */}
+        <div class="table-responsive-md">
+          <table class="table papers-table justify-content-center table table-hover align-middle">
+            <thead>
+              <tr class="float-right">
+                <th scope="col">#</th>
+                <th scope="col">Id</th>
+                <th scope="col">Title</th>
+                <th scope="col">Authors</th>
+                {/* <th scope="col">Score</th> */}
+                <th scope="col">More</th>
+              </tr>
+            </thead>
+            <tbody>
+      
+                {
+                    papersData?papersData.map((item, index) => {
+                        return (
+      
+                              <tr key={index}  >
+                                 <th scope="row">{index+1}</th>
+                                <td>
+                                  {item.id}
+                                </td>
+                                <td>
+                                  {item.title}
+                                </td>
+                                <td>
+                                  {item.authors}
+                                </td>
+                                {/* <td>
+                                  {item.avg_score}
+                                </td> */}
+                                <td>
+      
+                                  {user.status==="standard" || user.status==='admin'?<Link to='/dashboard/paper-details' class="btn btn-primary" onClick={() => showDetails(item)}>
+                                      details
+                                  </Link>:user.status==="judge"?<Link to='/dashboard/send-feedback' class="btn btn-primary" onClick={() => showDetails(item)}>
+                                      Send Feedback
+                                  </Link>:<div></div>}
+                                </td>
+                              </tr>
+      
+                        );
+                    }):<h2>Loading...</h2>
+                }
+      
+            </tbody>
+          </table>
         </div>
-      </div> */}
-      <div> Add new paper</div>
-      <div>
-        {user.status=='standard'?<Link to='/dashboard/new-paper'  class="btn btn-primary">
-        +new
-        </Link>:<div></div>}         
-      </div>
-      {/* ========The Table======= */}
-      <div class="table-responsive-md">
-        <table class="table papers-table justify-content-center table table-hover align-middle">
-          <thead>
-            <tr class="float-right">
-              <th scope="col">#</th>
-              <th scope="col">Id</th>
-              <th scope="col">Title</th>
-              <th scope="col">Authors</th>
-              {/* <th scope="col">Score</th> */}
-              <th scope="col">More</th>
-            </tr>
-          </thead>
-          <tbody>
-            
-              {
-                  papersData?papersData.map((item, index) => {
-                      return (
-                        
-                            <tr key={index}  >
-                               <th scope="row">{index+1}</th>
-                              <td>
-                                {item.id}
-                              </td> 
-                              <td>
-                                {item.title}
-                              </td>
-                              <td>
-                                {item.authors}
-                              </td>
-                              {/* <td>
-                                {item.avg_score}
-                              </td> */}
-                              <td>
-                                
-                                {user.status==="standard" || user.status==='admin'?<Link to='/dashboard/paper-details' class="btn btn-primary" onClick={() => showDetails(item)}>
-                                    details
-                                </Link>:user.status==="judge"?<Link to='/dashboard/send-feedback' class="btn btn-primary" onClick={() => showDetails(item)}>
-                                    Send Feedback
-                                </Link>:<div></div>} 
-                              </td>
-                            </tr>
-                        
-                      );
-                  }):<h2>Loading...</h2>
-              }                
-            
-
-          </tbody>
-        </table>
-      </div>
+      </Container>
     </div>
   )
 }
