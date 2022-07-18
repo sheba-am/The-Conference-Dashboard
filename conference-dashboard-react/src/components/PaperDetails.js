@@ -7,6 +7,8 @@ import DeleteModal from './DeleteModal';
 import JudgesTable from './JudgesTable';
 import {JudgeTable} from '../data/PapersData'
 import AssignJudge from './AssignJudge';
+import { MdArrowBackIosNew } from "react-icons/md";
+import { Container } from 'react-bootstrap';
   // let feedbacks = []
 const config = {
   headers: {
@@ -17,7 +19,6 @@ const config = {
 
 function PaperDetails(props) {
   const [feedbacks, setFeedbacks] = useState([]);
-  {console.log('all feedbacks',feedbacks)}
   const PaperDetails = props.isOpen ? "paper-details-content open" : "paper-details-content";
   const {selectedPaper,setSelectedPaper} =useContext(PaperContext)
   // ========== Delete Modal Toggle ==========
@@ -91,68 +92,85 @@ function handleClick(e) {
   //redirect if the user is not authenticated
   return ((!user)? <Navigate to="/signup"/> :
     <div className={PaperDetails}>
-        {/* ==== The Paper Details ==== */}
-        <div className='details-of-paper'>
-          <div class='container'>
-            <div class='row'>
-              <div class='col-1'>
-                <button class="btn btn-primary">
-                  history
-                </button>
+      <div class="container" >
+          {/* ==== The Paper Details ==== */}
+          <div class=' container details-of-paper'>
+      
+              <div class='row'>
+                <div class='col-lg-1 col-md-1 col-sm-2 '>
+                  <Link to='/dashboard/papers' class="btn btn-primary">
+                      <MdArrowBackIosNew />
+                  </Link>
+                </div>
+                <div class='col-lg-1 col-md-2 col-sm-2 '>
+                  <Link to='/dashboard/edit-paper' class="btn btn-primary">
+                      edit
+                  </Link>
+                </div>
+                <div class='col-lg-2 col-md-2 col-sm-3'>
+                  <button class="btn btn-primary" onClick={handleViewDelete}>
+                    delete
+                  </button>
+                </div>
+      
+                {user.status=='admin' && paper.published == false?<div class='col-lg-2 col-md-2 col-sm-3'><button class="btn btn-primary" onClick={handlePublish}>
+                    publish
+                  </button></div>:<div></div>}
+                <div class='col-9'>
+                  id:{paper.id}
+                </div>
               </div>
-              <div class='col-1'>
-                <Link to='/dashboard/edit-paper' class="btn btn-primary">
-                    edit
-                </Link> 
-              </div>
-              <div class='col-1'>
-                <button class="btn btn-primary" onClick={handleViewDelete}>
-                  delete
-                </button>
-              </div>
-              
-              {user.status=='admin' && paper.published == false?<div class='col-1'><button class="btn btn-primary" onClick={handlePublish}>
-                  publish
-                </button></div>:<div></div>}
-              <div class='col-9'>
-                id:{paper.id}
-              </div>         
+      
+            <div><DeleteModal isOpen={deleteOpen} toggleDelete={handleViewDelete} /></div>
+            <div>
+              Paper Title: {paper.title}
+            </div>
+            <div>
+              Paper Authors: {paper.authors}
+            </div>
+            <div>
+              {/* Sent Date: {paper.send_date} */}
+            </div>
+            <div>
+              Paper File: <button class="btn btn-primary" onClick={handleClick}>get file</button>
+            </div>
+            <div>
+              number of pages: {paper.NOM}
+            </div>
+            <div>
+              Abstract: {paper.summary}
+            </div>
+            <div>
+              Published: {paper.published?"Yes":"No"}
+            </div>
+      
+          </div>
+          {/*==== Judges Table ==== */}
+        <div>
+          <div class='row paper-details-judge-header'>
+            <div class='col-md-2 col-sm-3 '>
+              <h3>Judges: </h3>
+            </div>
+            <div class='col-md-5 col-sm-5 '>
+              {user.status=='admin' &&
+              <div>
+                <input type="checkbox" class="btn-check" id="btn-check-outlined" autocomplete="off" onClick={handleViewEditJudges}/>
+                <label class="btn edit-judges-checked" for="btn-check-outlined">Edit Judges</label><br></br>
+              </div>              
+
+               }
             </div>
           </div>
-          <div><DeleteModal isOpen={deleteOpen} toggleDelete={handleViewDelete} /></div> 
-          <div>
-            Paper Title: {paper.title}
-          </div>
-          <div>
-            Paper Authors: {paper.authors}
-          </div>
-          <div>
-            {/* Sent Date: {paper.send_date} */}
-          </div>   
-          <div>
-            Paper File: <button class="btn btn-primary" onClick={handleClick}>get file</button>
-          </div>
-          <div>
-            number of pages: {paper.NOM}
-          </div>             
-          <div>
-            Abstract: {paper.summary}
-          </div> 
-          <div>
-            Published: {paper.published?"Yes":"No"}
-          </div> 
-                    
+          {
+            editJudgesOpen && <AssignJudge assignedJudgeData={feedbacks}  />
+      
+          }
+          {
+            !editJudgesOpen && <JudgesTable assignedJudgeData={feedbacks} />
+          }
         </div>
-        {/*==== Judges Table ==== */}
-        {/* this is for testing status needs to be admin!!! */}
-      {user.status=='admin'?<button class="btn btn-primary" onClick={handleViewEditJudges}>Edit Judges</button>:<div></div>}
-      {
-        editJudgesOpen && <AssignJudge assignedJudgeData={feedbacks}  />
-      }
-      {
-        !editJudgesOpen && <JudgesTable assignedJudgeData={feedbacks} />
-      }
-        
+      
+      </div>
     </div>
   )
 }

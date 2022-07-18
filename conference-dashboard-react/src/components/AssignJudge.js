@@ -109,17 +109,15 @@ console.log(assignedJudgeNames)
       } 
 
       return (
-        <div>
-           <h3>Judges</h3>
+        <div id='assign-judge'>
            <form onSubmit={handleSubmit}>
                 <div class="row mb-3">
-                    <label for="inputTitle" class="col-sm-2 col-form-label">Author</label>
                     <div clsass="col-sm-10">
                         
                         {newJudgeList.map((singleAuthor, index) => (
-                        <div class="col-sm-10" key={index} >
-                            <div class="input-group mb-3">
-                            <select class="form-select"
+                        <div  key={index} >
+                            <div class="input-group mb-3 ">
+                            <select class="form-select judges-select"
                                 value={singleAuthor}
                                 onChange={(e) => handleJudgeChange(e, index)}
                                 required
@@ -156,7 +154,7 @@ console.log(assignedJudgeNames)
                         ))}
                     </div>
                     </div> 
-                <button class="btn btn-primary" type="submit">SaveChanges</button>
+                <button class="btn btn-primary add-paper-btn" type="submit">Save Changes</button>
                 {/* this is a test button to switch to judges table */}
             </form>
            

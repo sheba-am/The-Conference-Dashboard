@@ -35,8 +35,8 @@ function DeleteModal(props) {
             <Modal.Body>this is permenant</Modal.Body>
             <Modal.Footer>
                {/* passing in the toggle function so that clicking the OK button closes the modal */}
-              <Button variant="primary" onClick={props.toggleDelete}>Cancel</Button>
-              <Button variant="danger" onClick={handleDelete}>Delete</Button>
+              <Button variant="primary" id='button-cancel' onClick={props.toggleDelete}>Cancel</Button>
+              <Button variant="danger" id='button-delete' onClick={handleDelete}>Delete</Button>
             </Modal.Footer>
           </Modal>
         </div>

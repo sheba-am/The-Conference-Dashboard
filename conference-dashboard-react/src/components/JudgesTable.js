@@ -4,8 +4,8 @@ function JudgesTable(props) {
     var paper = JSON.parse(localStorage.getItem("selectedPaper")); //retrieve the object
     const [feedbacks, setFeedbacks] = useState([]);
   return (
-    <div>
-        <div>Judges: </div>
+    <div class="table-responsive-md">
+        
         <table class="table papers-table justify-content-center table table-hover align-middle">
         <thead>
         <tr class="float-right">
