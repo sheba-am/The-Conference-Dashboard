@@ -131,7 +131,7 @@
 }
 
 
-body #root #App #dashboard .row .col .container  .add-paper-btn {
+/* body #root #App #dashboard .row .col .container  .add-paper-btn {
   background-color:#F66B0E  ;
   border-radius: 12px;
   margin-bottom: 1vh;
@@ -139,4 +139,108 @@ body #root #App #dashboard .row .col .container  .add-paper-btn {
 body #root #App #dashboard .row .col .container  .add-paper-btn:hover {
   background-color:#dd6210  ;
 
+} */
+body #root #App #dashboard .row .col .container  .add-paper-btn {
+  /* width: 130px; */
+  height: 40px;
+  /* font-family: 'Roboto', sans-serif; */
+  display: inline-block;
+  font-size: 1.1em;
+  letter-spacing: 2.5px;
+  font-weight: 500;
+  color: #000;
+  background-color: #fff;
+  border: none;
+  border-radius: 30px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+  margin-bottom: 2vh;
+}
+body #root #App #dashboard .row .col .container  .add-paper-btn:hover {
+  /* background-color: #2EE59D; */
+  background-color: #F66B0E ;
+  /* box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4); */
+  box-shadow: 0px 15px 20px #e0641173;
+
+  color: #fff;
+  transform: translateY(-5px);
+
+}
+
+
+body #App #dashboard .row .col .papers-content .container #papers-table .table .papers-table-header{
+  color: #9D9D9D;
+  justify-content: center; /* center the content horizontally */
+  align-items: center; /* center the content vertically */
+  height: 10vh;
+  
+}
+body #App #dashboard .row .col .papers-content .container #papers-table .table .papers-table-header .papers-table-header-item {
+  padding: 5px 8px 18px 8px;
+
+  
+}
+body #App #dashboard .row .col .papers-content .container #papers-table .table .papers-table-body {
+  color: #2C2C2C;
+  
+}
+body #App #dashboard .row .col .papers-content .container #papers-table .table .papers-table-body .details-btn {
+    /* width: 130px; */
+    height: 40px;
+    /* font-family: 'Roboto', sans-serif; */
+    display: inline-block;
+    font-size: 1.1em;
+    letter-spacing: 2.5px;
+    font-weight: 500;
+    color: #000;
+    background-color: #fff;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    outline: none;
+    margin-bottom: 2vh;
+    padding: 0.4vh 2vh 2vh 2vh;
+  
+}
+body #App #dashboard .row .col .papers-content .container #papers-table .table .papers-table-body .details-btn:hover {
+  background-color: #F66B0E ;
+  box-shadow: 0px 15px 20px #e0641173;
+  color: #fff;
+  transform: translateY(-2px);
+
+}
+body #App #dashboard .row .col .papers-content .container #papers-table .table .papers-table-body .send-feedback-btn {
+  display: inline-block;
+  font-size: 1em;
+  min-height: 40px;
+
+  letter-spacing: 2.5px;
+  font-weight: 500;
+  color: #000;
+  background-color: #fff;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+  /* margin-bottom: 2vh; */
+  /* padding: 0.4vh 2vh 2vh 2vh; */
+
+}
+body #App #dashboard .row .col .papers-content .container #papers-table .table .papers-table-body .send-feedback-btn:hover {
+  background-color: #F66B0E ;
+  box-shadow: 0px 15px 20px #e0641173;
+  color: #fff;
+  transform: translateY(-2px);
+
+}
+body #App #dashboard .row .col .papers-content .container #papers-table .table .papers-table-body .table-index {
+  color: #9D9D9D;
+
+  
 }

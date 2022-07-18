@@ -54,33 +54,32 @@ function Papers(props) {
     <div  className={PapersCss}>
       <Container>
         <h3> Papers </h3>
-        <div> Add new paper</div>
         
           {user.status=='standard'?<Link to='/dashboard/new-paper'  class="btn add-paper-btn" >
-          +new
+          +New Paper
           </Link>:<div></div>}
       
         {/* ========The Table======= */}
-        <div class="table-responsive-md">
+        <div id='papers-table'class="table-responsive-md">
           <table class="table papers-table justify-content-center table table-hover align-middle">
-            <thead>
-              <tr class="float-right">
-                <th scope="col">#</th>
-                <th scope="col">Id</th>
-                <th scope="col">Title</th>
-                <th scope="col">Authors</th>
+            <thead class='papers-table-header'>
+              <tr class="float-right ">
+                <th scope="col-1" class='papers-table-header-item'>#</th>
+                <th scope="col-1"  class='papers-table-header-item'>Id</th>
+                <th scope="col-7"  class='papers-table-header-item'>Title</th>
+                <th scope="col-2"  class='papers-table-header-item'>Authors</th>
                 {/* <th scope="col">Score</th> */}
-                <th scope="col">More</th>
+                <th scope="col-1"  class='papers-table-header-item'>More</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody class="papers-table-body">
       
                 {
                     papersData?papersData.map((item, index) => {
                         return (
       
                               <tr key={index}  >
-                                 <th scope="row">{index+1}</th>
+                                 <th scope="row" class='table-index'>{index+1}</th>
                                 <td>
                                   {item.id}
                                 </td>
@@ -95,9 +94,9 @@ function Papers(props) {
                                 </td> */}
                                 <td>
       
-                                  {user.status==="standard" || user.status==='admin'?<Link to='/dashboard/paper-details' class="btn btn-primary" onClick={() => showDetails(item)}>
-                                      details
-                                  </Link>:user.status==="judge"?<Link to='/dashboard/send-feedback' class="btn btn-primary" onClick={() => showDetails(item)}>
+                                  {user.status==="standard" || user.status==='admin'?<Link to='/dashboard/paper-details' class="btn btn-primary details-btn" onClick={() => showDetails(item)}>
+                                      ...
+                                  </Link>:user.status==="judge"?<Link to='/dashboard/send-feedback' class="btn btn-primary  send-feedback-btn" onClick={() => showDetails(item)}>
                                       Send Feedback
                                   </Link>:<div></div>}
                                 </td>
