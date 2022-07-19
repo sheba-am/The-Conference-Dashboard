@@ -202,7 +202,7 @@ body #root #App #dashboard .row .col .container  .add-paper-btn:hover {
     letter-spacing: 2.5px;
     font-weight: 500;
     color: #000;
-    background-color: #fff;
+    background-color: #D9D9D9;
     border: none;
     border-radius: 15px;
     box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
@@ -366,7 +366,18 @@ input[type=checkbox]:checked + label{
 
  #button-remove {
   border-radius: 0 15px 15px 0;
-  background-color: #fff;
+  display: inline-block;
+  font-size: 1em;
+  letter-spacing: 2.5px;
+  font-weight: 500;
+  color: #000;
+  background-color: #D9D9D9;
+  border: none;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+  padding: 0.5vh 2vh 1vh 2vh;
  }
 
  #button-remove:hover {
@@ -375,13 +386,12 @@ input[type=checkbox]:checked + label{
   box-shadow: 0px 15px 20px #bd020246;
  }
 #button-addon2 {
-  height: 40px;
   display: inline-block;
   font-size: 1.1em;
   letter-spacing: 2.5px;
   font-weight: 500;
   color: #000;
-  background-color: #fff;
+  background-color: #D9D9D9;
   border: none;
   border-radius: 15px;
   box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
@@ -459,7 +469,7 @@ transform: translateY(-2px);
 #edit-paper #one-author-select { 
   border-radius: 15px !important ;
 }
-#edit-paper .edit-paper-btn {
+#edit-paper .edit-paper-submit {
   /* width: 130px; */
   height: 40px;
   /* font-family: 'Roboto', sans-serif; */
@@ -468,16 +478,16 @@ transform: translateY(-2px);
   letter-spacing: 2.5px;
   font-weight: 500;
   color: #000;
-  background-color: #fff;
+  background-color: #D9D9D9;
   border: none;
-  border-radius: 30px;
+  border-radius: 15px;
   box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease 0s;
   cursor: pointer;
   outline: none;
   margin-bottom: 2vh;
 }
-#edit-paper  .edit-paper-btn:hover {
+#edit-paper  .edit-paper-submit:hover {
   /* background-color: #2EE59D; */
   background-color: #F66B0E ;
   /* box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4); */
@@ -487,7 +497,7 @@ transform: translateY(-2px);
   transform: translateY(-5px);
 
 }
-#edit-paper .btn {
+#edit-paper .edit-paper-button {
   height: 40px;
   display: inline-block;
   font-size: 1.1em;
@@ -504,7 +514,7 @@ transform: translateY(-2px);
   margin-bottom: 2vh;
   padding: 0.4vh 2vh 2vh 2vh;
 }
-#edit-paper .btn:hover {
+#edit-paper .edit-paper-button:hover {
 color: #fff;
 background-color: #F66B0E ;
 box-shadow: 0px 15px 20px #e0641173;
@@ -522,4 +532,64 @@ transform: translateY(-2px);
 }
 #edit-info input {
   border-radius: 15px;
+}
+#edit-info .btn-submit {
+  /* width: 130px; */
+  height: 40px;
+  /* font-family: 'Roboto', sans-serif; */
+  display: inline-block;
+  font-size: 1.1em;
+  letter-spacing: 2.5px;
+  font-weight: 500;
+  color: #000;
+  background-color: #D9D9D9;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+  margin: 2vh 0 2vh 0;
+}
+#edit-info  .btn-submit:hover {
+  background-color: #F66B0E ;
+  box-shadow: 0px 15px 20px #e0641173;
+  color: #fff;
+  transform: translateY(-5px);
+
+}
+/*  ================== DashboardMainPage ================== */
+#main-page .row .main-page-card{
+  border-radius: 15px;
+  margin: 2vh 1.5vw 2vh 1.5vw;
+  min-height: 30vh;
+}
+
+#main-page .row .main-page-card .main-page-card-btn {
+  min-width: 8vw;
+  min-height: 8vh;
+  /* font-family: 'Roboto', sans-serif; */
+  display: inline-block;
+  font-size: 1.1em;
+  letter-spacing: 2.5px;
+  font-weight: 500;
+  color: #000;
+  background-color: #D9D9D9;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+  margin: 2vh 0 1vh 0;
+}
+#main-page .row .main-page-card .main-page-card-btn:hover {
+  background-color: #F66B0E ;
+  box-shadow: 0px 15px 20px #e0641173;
+  color: #fff;
+  transform: translateY(-5px);
+
+}
+#main-page .row .main-page-header {
+  padding: 2vh 0 0 3vw;
 }

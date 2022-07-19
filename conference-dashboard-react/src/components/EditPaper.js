@@ -127,7 +127,7 @@ function NewPaper(props) {
       <div id='edit-paper' class='container "w-100 shadow p-3 mb-5 bg-white rounded"'>
           <div class='row'>
             <div class='col-lg-1 col-md-1 col-sm-2 '>
-              <Link to='/dashboard/paper-details' class="btn btn-primary">
+              <Link to='/dashboard/paper-details' class="btn edit-paper-button">
                   <MdArrowBackIosNew />
               </Link>
             </div>
@@ -165,7 +165,7 @@ function NewPaper(props) {
                             )}
                           </select>
                         {authorList.length !== 1 && (
-                          <button class="btn btn-outline-secondary" type="button" id="button-remove"
+                          <button id="button-remove" class="btn btn-outline-secondary" type="button" 
                             onClick={() => handleAuthorRemove(index)}
       
                           >
@@ -176,7 +176,7 @@ function NewPaper(props) {
                       <div>
                         {authorList.length - 1 === index && authorList.length < 4 && (
                             <button
-                            class="btn btn-outline-secondary" type="button" id="button-addon2"
+                            class="btn " type="button" id="button-addon2"
                               onClick={handleAuthorAdd}
                             >
                               Add
@@ -251,7 +251,7 @@ function NewPaper(props) {
                   />
                 </div>
               </div>
-              <button class="btn btn-primary edit-paper-btn" type="submit">Edit paper</button>
+              <button class="btn btn-primary edit-paper-submit" type="submit">Edit paper</button>
           </form>
       </div>
     </div>

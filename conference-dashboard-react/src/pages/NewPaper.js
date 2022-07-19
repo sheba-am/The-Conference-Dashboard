@@ -117,7 +117,7 @@ function NewPaper(props) {
       <div id='edit-paper' class='container w-100 shadow p-3 mb-5 bg-white rounded'>
         <div class='row'>
               <div class='col-lg-1 col-md-1 col-sm-2 '>
-                <Link to='/dashboard/papers' class="btn btn-primary">
+                <Link to='/dashboard/papers' class="btn edit-paper-button">
                     <MdArrowBackIosNew />
                 </Link>
               </div>
@@ -247,7 +247,7 @@ function NewPaper(props) {
                   />
                 </div>
               </div>
-              <button class="btn btn-primary edit-paper-btn" type="submit">Add paper</button>
+              <button class="btn btn-primary edit-paper-submit" type="submit">Add paper</button>
           </form>
       </div>
     </div>

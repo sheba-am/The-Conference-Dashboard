@@ -117,7 +117,7 @@ export default function EditInfo(props) {
                     <Alert variant='success'>{error}</Alert>
                     }
                   <Form.Label>Username:</Form.Label>
-                  <Form.Control type="text" ref={username} readOnly="readonly" required />
+                  <Form.Control type="text" ref={username} disabled required />
                   <Form.Label>Password:</Form.Label>
                   <Form.Control type="password" ref={password} required />
                   <Form.Label>First Name:</Form.Label>
@@ -194,7 +194,7 @@ export default function EditInfo(props) {
                   <Form.Label>Email:</Form.Label>
                   <Form.Control type="email" ref={email} required />
                 </Form.Group>
-                <Button type="submit" className="mr-2">Submit</Button>
+                <button type="submit" class="btn btn-submit">Submit</button>
               </Form>
             </Container>
           </div>
