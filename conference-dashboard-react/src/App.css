@@ -25,7 +25,7 @@
 }
 
 /* button for sidebar toggle */
-#App #dashboard .row .col #sidebar .sidebar-toggle{
+#sidebar .sidebar-toggle{
   position: fixed;
   top: 2vh;
   right: 1vw;
@@ -33,7 +33,14 @@
   background-color: #2C4F66;
   color: white ;
   border-color: #2C4F66;
+  border-radius: 12px;
 }
+#sidebar .sidebar-toggle:focus{
+  outline: none;
+  box-shadow:none !important;
+  border:none !important;
+
+ }
 .content {
   position: absolute;
   top: 0;
@@ -142,7 +149,7 @@ body #root #App #dashboard .row .col .container  .add-paper-btn:hover {
   background-color:#dd6210  ;
 
 } */
-body #root #App #dashboard .row .col .container  .add-paper-btn {
+#dashboard .row .col .container  .add-paper-btn {
   /* width: 130px; */
   height: 40px;
   /* font-family: 'Roboto', sans-serif; */
@@ -160,7 +167,7 @@ body #root #App #dashboard .row .col .container  .add-paper-btn {
   outline: none;
   margin-bottom: 2vh;
 }
-body #root #App #dashboard .row .col .container  .add-paper-btn:hover {
+#dashboard .row .col .container  .add-paper-btn:hover {
   /* background-color: #2EE59D; */
   background-color: #F66B0E ;
   /* box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4); */
@@ -172,21 +179,21 @@ body #root #App #dashboard .row .col .container  .add-paper-btn:hover {
 }
 
 
-body #App #dashboard .row .col .papers-content .container #papers-table .table .papers-table-header{
+#papers-table .table .papers-table-header{
   color: #9D9D9D;
   height: 10vh;
   
 }
-body #App #dashboard .row .col .papers-content .container #papers-table .table .papers-table-header .papers-table-header-item {
+ #papers-table .table .papers-table-header .papers-table-header-item {
   padding: 5px 8px 18px 8px;
 
   
 }
-body #App #dashboard .row .col .papers-content .container #papers-table .table .papers-table-body {
+#papers-table .table .papers-table-body {
   color: #2C2C2C;
   
 }
-body #App #dashboard .row .col .papers-content .container #papers-table .table .papers-table-body .details-btn {
+#papers-table .table .papers-table-body .details-btn {
     /* width: 130px; */
     height: 40px;
     /* font-family: 'Roboto', sans-serif; */
@@ -206,14 +213,14 @@ body #App #dashboard .row .col .papers-content .container #papers-table .table .
     padding: 0.4vh 2vh 2vh 2vh;
   
 }
-body #App #dashboard .row .col .papers-content .container #papers-table .table .papers-table-body .details-btn:hover {
+#papers-table .table .papers-table-body .details-btn:hover {
   background-color: #F66B0E ;
   box-shadow: 0px 15px 20px #e0641173;
   color: #fff;
   transform: translateY(-2px);
 
 }
-body #App #dashboard .row .col .papers-content .container #papers-table .table .papers-table-body .send-feedback-btn {
+#papers-table .table .papers-table-body .send-feedback-btn {
   display: inline-block;
   font-size: 1em;
   min-height: 40px;
@@ -232,14 +239,14 @@ body #App #dashboard .row .col .papers-content .container #papers-table .table .
   /* padding: 0.4vh 2vh 2vh 2vh; */
 
 }
-body #App #dashboard .row .col .papers-content .container #papers-table .table .papers-table-body .send-feedback-btn:hover {
+#papers-table .table .papers-table-body .send-feedback-btn:hover {
   background-color: #F66B0E ;
   box-shadow: 0px 15px 20px #e0641173;
   color: #fff;
   transform: translateY(-2px);
 
 }
-body #App #dashboard .row .col .papers-content .container #papers-table .table .papers-table-body .table-index {
+#papers-table .table .papers-table-body .table-index {
   color: #9D9D9D;
 
   
@@ -350,8 +357,11 @@ input[type=checkbox]:checked + label{
     padding: 0.4vh 2vh 2vh 2vh;  
  }
 
- #assign-judge .judges-select { 
+ #assign-judge #judge-select { 
   border-radius: 15px 0 0 15px ;
+ }
+ #assign-judge #one-judge-select { 
+  border-radius: 15px ;
  }
 
  #button-remove {
@@ -433,4 +443,83 @@ transform: translateY(-2px);
   box-shadow: 0px 15px 20px #e0641173;
   color: #fff;
   transform: translateY(-2px);
+}
+
+/* ================== EDIT PAPER ==================*/
+#edit-paper input {
+  border-radius: 15px;
+}
+
+#edit-paper .edit-paper-select {
+  border-radius: 15px;
+}
+#edit-paper #author-select { 
+  border-radius: 15px 0 0 15px ;
+}
+#edit-paper #one-author-select { 
+  border-radius: 15px !important ;
+}
+#edit-paper .edit-paper-btn {
+  /* width: 130px; */
+  height: 40px;
+  /* font-family: 'Roboto', sans-serif; */
+  display: inline-block;
+  font-size: 1.1em;
+  letter-spacing: 2.5px;
+  font-weight: 500;
+  color: #000;
+  background-color: #fff;
+  border: none;
+  border-radius: 30px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+  margin-bottom: 2vh;
+}
+#edit-paper  .edit-paper-btn:hover {
+  /* background-color: #2EE59D; */
+  background-color: #F66B0E ;
+  /* box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4); */
+  box-shadow: 0px 15px 20px #e0641173;
+
+  color: #fff;
+  transform: translateY(-5px);
+
+}
+#edit-paper .btn {
+  height: 40px;
+  display: inline-block;
+  font-size: 1.1em;
+  letter-spacing: 2.5px;
+  font-weight: 500;
+  color: #000;
+  background-color: #D9D9D9;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+  margin-bottom: 2vh;
+  padding: 0.4vh 2vh 2vh 2vh;
+}
+#edit-paper .btn:hover {
+color: #fff;
+background-color: #F66B0E ;
+box-shadow: 0px 15px 20px #e0641173;
+transform: translateY(-2px);
+}
+
+/*  ================== EDIT INFO ================== */
+#edit-info .css-1s2u09g-control {
+  border-radius: 15px;
+}
+#edit-info .css-1s2u09g-control:focus{
+  outline: none;
+  box-shadow:none !important;
+  border:none !important;
+}
+#edit-info input {
+  border-radius: 15px;
 }

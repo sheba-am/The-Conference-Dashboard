@@ -29,6 +29,7 @@ export default function AssignJudge(props) {
     }
 console.log(assignedJudgeNames)
   const [newJudgeList, setnewJudgeList] = useState(assignedJudgeNames);
+  const dynamicJudge = newJudgeList.length == 1 ? "one-judge-select": "judge-select";
   const handleJudgeChange = (e, index) => {
     const { name, value } = e.target;
     const list = [...newJudgeList];
@@ -117,7 +118,8 @@ console.log(assignedJudgeNames)
                         {newJudgeList.map((singleAuthor, index) => (
                         <div  key={index} >
                             <div class="input-group mb-3 ">
-                            <select class="form-select judges-select"
+                            <select class="form-select "
+                                id={dynamicJudge}
                                 value={singleAuthor}
                                 onChange={(e) => handleJudgeChange(e, index)}
                                 required

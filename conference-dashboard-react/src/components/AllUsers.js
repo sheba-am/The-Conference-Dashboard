@@ -36,32 +36,37 @@ export default function AllUsers(props) {
     return(
         <div className={AllUsersCss}>
           <Container>
+              <h3>Manage Users</h3>
               {users?
-              <table class="table papers-table justify-content-center table table-hover align-middle">
-              <thead>
-                <tr class="float-right">
-                  {/* <th scope="col">#</th> */}
-                  <th scope="col">username</th>
-                  <th scope="col">status</th>
-                  <th scope="col">field</th>
-                </tr>
-              </thead>
-              <tbody>
-                  {
-                      users.map((user) => {
-                          return(
-                              <tr key={user.username}  >
-                                  <td>{user.username}</td>
-                                  <td>{user.status}</td>
-                                  <td>{user.field}</td>
-                                  {user.status !== 'judge'? <Button id={user.username} onClick={handleClick}>Promote to judge</Button>: <div></div>}
-                              </tr>
-                          )
-                      }
-                      )
-                  }
-              </tbody>
-            </table>:
+              <div id='papers-table'class="table-responsive-md">
+                <table  class="table papers-table justify-content-center table table-hover align-middle">
+                <thead class='papers-table-header'>
+                  <tr class="float-right">
+                    <th scope="col" class='papers-table-header-item'>#</th>
+                    <th scope="col" class='papers-table-header-item'>username</th>
+                    <th scope="col" class='papers-table-header-item'>status</th>
+                    <th scope="col" class='papers-table-header-item'>field</th>
+                    <th scope="col" class='papers-table-header-item'>promote</th>
+                  </tr>
+                </thead>
+                <tbody class="papers-table-body">
+                    {
+                        users.map((user,index) => {
+                            return(
+                                <tr key={user.username}  >
+                                    <th scope="row" class='table-index'>{index+1}</th>
+                                    <td>{user.username}</td>
+                                    <td>{user.status}</td>
+                                    <td>{user.field}</td>
+                                    <td>{user.status !== 'judge' && <button class='btn send-feedback-btn' id={user.username} onClick={handleClick}>Promote to judge</button>}</td>
+                                </tr>
+                            )
+                        }
+                        )
+                    }
+                </tbody>
+                            </table>
+              </div>:
               <h1>Loading...</h1>}
           </Container>
         </div>

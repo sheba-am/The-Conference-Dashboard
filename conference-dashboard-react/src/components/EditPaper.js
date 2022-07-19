@@ -3,6 +3,7 @@ import {fieldData, methodOfPresentationData, languageData} from '../data/FormDat
 import { Link, Navigate ,useNavigate} from 'react-router-dom';
 //import ReactTable from "react-table";
 import { PaperContext } from '../contexts/PaperContext';
+import { MdArrowBackIosNew } from "react-icons/md";
 import axios from 'axios'
 function NewPaper(props) {
   const {selectedPaper,setSelectedPaper} =useContext(PaperContext)
@@ -47,6 +48,7 @@ function NewPaper(props) {
   //=========Author input ===========
 
   const [authorList, setAuthorList] = useState(paper.authors.split(","));
+  const dynamicAuthor = authorList.length == 1 ? "one-author-select": "author-select";
   const handleAuthorChange = (e, index) => {
     const { name, value } = e.target;
     const list = [...authorList];
@@ -122,136 +124,136 @@ function NewPaper(props) {
   //redirect if the user is not authenticated
   return ((!user)? <Navigate to="/signup"/> :
     <div className={Papers}>
-        <h3>Edit paper</h3>
-        <form onSubmit={handleSubmit}>
-            <div class="row mb-3">
-                <label for="inputTitle" class=" col-2 col-form-label">Title</label>
-                <div class="col-8" >
-                  <input type="textarea" class="form-control"  value={inputTitle}
-                  onChange={e => setInputTitle(e.target.value)}
+      <div id='edit-paper' class='container "w-100 shadow p-3 mb-5 bg-white rounded"'>
+          <div class='row'>
+            <div class='col-lg-1 col-md-1 col-sm-2 '>
+              <Link to='/dashboard/paper-details' class="btn btn-primary">
+                  <MdArrowBackIosNew />
+              </Link>
+            </div>
+            <div class='col'>
+              <h3>Edit paper</h3>
+            </div>
+          </div>
+          <form onSubmit={handleSubmit}>
+              <div class="row mb-3">
+                  <label for="inputTitle" class=" col-2 col-form-label">Title</label>
+                  <div class="col-sm-10" >
+                    <input type="textarea" class="form-control"  value={inputTitle}
+                    onChange={e => setInputTitle(e.target.value)}
+                    />
+                  </div>
+              </div>
+              <div class="row mb-3">
+                <label for="inputTitle" class="col-sm-2 col-form-label">Author</label>
+                <div class="col-sm-10">
+      
+                  {authorList.map((singleAuthor, index) => (
+                    <div  key={index} >
+                      <div class="input-group mb-3">
+                        <select class="form-select "
+                            id={dynamicAuthor}
+                            onChange={(e) => handleAuthorChange(e, index)}
+                            required
+                          >
+                            <option value={singleAuthor} selected disabled hidden>
+                          {   authorData[authorData.findIndex(element => element.includes(singleAuthor))]}
+                              </option>
+                            {authorData.map(( item ) => (
+                              <option value={item}> {item} </option>
+                              )
+                            )}
+                          </select>
+                        {authorList.length !== 1 && (
+                          <button class="btn btn-outline-secondary" type="button" id="button-remove"
+                            onClick={() => handleAuthorRemove(index)}
+      
+                          >
+                            Remove
+                          </button>
+                        )}
+                      </div>
+                      <div>
+                        {authorList.length - 1 === index && authorList.length < 4 && (
+                            <button
+                            class="btn btn-outline-secondary" type="button" id="button-addon2"
+                              onClick={handleAuthorAdd}
+                            >
+                              Add
+                            </button>
+                        )}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div class="row mb-3">
+              <label for="inputTitle" class="col-sm-2 col-form-label" >field</label>
+                <div class="col-sm-10">
+                  <select class="form-select edit-paper-select" aria-label="Default select example"
+                  value={field} onChange={(e) => setField(e.target.value)}
+                  >
+                    <option defaultValue={field} disabled hidden></option>
+                    {fieldData.map(( item ) => (
+                      <option value={item.value}> {item.title} </option>
+                      )
+                    )}
+                  </select>
+                </div>
+              </div>
+              <div class="row mb-3">
+              <label for="inputTitle" class="col-sm-2 col-form-label" >method of presentation</label>
+                <div class="col-sm-10">
+                  <select class="form-select edit-paper-select" aria-label="Default select example"
+                  value={methodOfPresentation} onChange={(e) => setMOP(e.target.value)}
+                  >
+                    <option defaultValue={methodOfPresentation} disabled hidden></option>
+                    {methodOfPresentationData.map(( item ) => (
+                      <option value={item.value}> {item.title} </option>
+                      )
+                    )}
+                  </select>
+                </div>
+              </div>
+              <div class="row mb-3">
+              <label for="inputTitle" class="col-sm-2 col-form-label">language</label>
+                <div class="col-sm-10">
+                <select class="form-select edit-paper-select" aria-label="Default select example"
+                  value={language} onChange={(e) => setLanguage(e.target.value)}
+                  >
+                    <option defaultValue={language} disabled hidden ></option>
+                    {languageData.map(( item ) => (
+                      <option value={item.value}> {item.title} </option>
+                      )
+                    )}
+                  </select>
+                </div>
+              </div>
+              <div class="row mb-3">
+                <label for="formFile" class="col-sm-2 col-form-label">paper file</label>
+                <div class="col-sm-10"><input class="form-control" type="file"
+                onChange={e => setUploadedFile(e.target.files[0])}
+                /></div>
+              </div>
+              <div class="row mb-3">
+              <label for="inputTitle" class="col-sm-2 col-form-label">Abstract</label>
+                <div class="col-sm-10">
+                  <textarea class="form-control edit-paper-select"  rows="3" value={abstract}
+                  onChange={e => setAbstract(e.target.value)}
+                  >{abstract}</textarea>
+                </div>
+              </div>
+              <div class="row mb-3">
+              <label for="inputTitle" class="col-sm-2 col-form-label">number of pages</label>
+                <div class="col-sm-10 form-outline">
+                  <input type="number" id="typeNumber" class="form-control" value={numberOfPages}
+                  onChange={e => setNumberOfPages(e.target.value)}
                   />
                 </div>
-            </div>
-
-            <div class="row mb-3">
-              <label for="inputTitle" class="col-sm-2 col-form-label">Author</label>
-              <div class="col-sm-10">
-                
-                {authorList.map((singleAuthor, index) => (
-                  <div class="col-sm-10" key={index} >
-                    <div class="input-group mb-3">
-                      <select class="form-select"
-                          // value={singleAuthor}
-                          onChange={(e) => handleAuthorChange(e, index)}
-                          required
-                        >
-
-                          <option value={singleAuthor} selected disabled hidden>
-                        {   authorData[authorData.findIndex(element => element.includes(singleAuthor))]}
-                            </option>
-                          {authorData.map(( item ) => (
-                            <option value={item}> {item} </option>
-                            )
-                          )}
-                        </select> 
-                      {authorList.length !== 1 && (
-                        <button class="btn btn-outline-secondary" type="button" id="button-remove" 
-                          onClick={() => handleAuthorRemove(index)}
-                          
-                        >
-                          Remove
-                        </button>
-                      )}
-                    </div>
-                    <div>
-                      {authorList.length - 1 === index && authorList.length < 4 && (
-                          <button
-                          class="btn btn-outline-secondary" type="button" id="button-addon2" 
-                            onClick={handleAuthorAdd}                            
-                          >
-                            Add
-                          </button>
-                      )}
-
-                    </div>
-
-                  </div>
-                ))}
               </div>
-            </div>          
-
-            <div class="row mb-3">
-            <label for="inputTitle" class="col-sm-2 col-form-label" >field</label>
-              <div class="col-sm-10">
-                <select class="form-select" aria-label="Default select example" 
-                value={field} onChange={(e) => setField(e.target.value)}
-                >
-                  <option defaultValue={field} disabled hidden></option>
-                  {fieldData.map(( item ) => (
-                    <option value={item.value}> {item.title} </option>
-                    )
-                  )}
-                </select>
-              </div>
-            </div>
-
-            <div class="row mb-3">
-            <label for="inputTitle" class="col-sm-2 col-form-label" >method of presentation</label>
-              <div class="col-sm-10">
-                <select class="form-select" aria-label="Default select example" 
-                value={methodOfPresentation} onChange={(e) => setMOP(e.target.value)}
-                >
-                  <option defaultValue={methodOfPresentation} disabled hidden></option>
-                  {methodOfPresentationData.map(( item ) => (
-                    <option value={item.value}> {item.title} </option>
-                    )
-                  )}
-                </select>
-              </div>
-            </div>
-
-            <div class="row mb-3">
-            <label for="inputTitle" class="col-sm-2 col-form-label">language</label>
-              <div class="col-sm-10">
-              <select class="form-select" aria-label="Default select example" 
-                value={language} onChange={(e) => setLanguage(e.target.value)}
-                >
-                  <option defaultValue={language} disabled hidden ></option>
-                  {languageData.map(( item ) => (
-                    <option value={item.value}> {item.title} </option>
-                    )
-                  )}
-                </select>
-              </div>
-            </div>
-
-            <div class="row mb-3">
-              <label for="formFile" class="col-sm-2 col-form-label">paper file</label>
-              <div class="col-sm-10"><input class="form-control" type="file" 
-              onChange={e => setUploadedFile(e.target.files[0])}
-              /></div>
-            </div>
-
-            <div class="row mb-3">
-            <label for="inputTitle" class="col-sm-2 col-form-label">Abstract</label>
-              <div class="col-sm-10">
-                <textarea class="form-control"  rows="3" value={abstract}
-                onChange={e => setAbstract(e.target.value)}
-                >{abstract}</textarea>
-              </div>
-            </div>
-
-            <div class="row mb-3">
-            <label for="inputTitle" class="col-sm-2 col-form-label">number of pages</label>
-              <div class="col-sm-10 form-outline">
-                <input type="number" id="typeNumber" class="form-control" value={numberOfPages}
-                onChange={e => setNumberOfPages(e.target.value)}
-                />
-              </div>
-            </div>
-
-            <button class="btn btn-primary" type="submit">Edit paper</button>
-        </form>
+              <button class="btn btn-primary edit-paper-btn" type="submit">Edit paper</button>
+          </form>
+      </div>
     </div>
   )
 }

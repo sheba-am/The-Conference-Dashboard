@@ -83,7 +83,7 @@ export default function EditInfo(props) {
               
           }
         }
-        console.log(major.current.props.value.value)
+        // console.log(major.current.props.value.value)
         const result = axios.post(
             'http://127.0.0.1:8000/editInfo',
             {"username":username.current.value,
@@ -109,8 +109,8 @@ export default function EditInfo(props) {
     }
     return(
           <div className={EditInfo}>
-            <Container>
-            <Form onSubmit={handleClick} className="w-100 shadow p-3 mb-5 bg-white rounded">
+            <Container id='edit-info'>
+              <Form onSubmit={handleClick} id='edit-info-form' className="w-100 shadow p-3 mb-5 bg-white rounded ">
                 <Form.Group >
                   <h2>Edit Info</h2>
                   {error==="Info Updated successfully" &&
@@ -125,11 +125,23 @@ export default function EditInfo(props) {
                   <Form.Label>Last Name:</Form.Label>
                   <Form.Control type="text" ref={lastName} required />
                   <Form.Label>Gender:</Form.Label>
-                  <Select ref={gender}
+                  <Select ref={gender} id='gender'
                   value={genders.value}
                   options={genders}
                   defaultValue={{value: user['gender'], label: user['gender']}}
                   />
+                  
+                  {/* <select class="form-select edit-paper-select" 
+                  ref={gender}  
+                  >
+                    <option defaultValue={user['gender']} disabled hidden></option>
+                   
+                    {genders.map(( item ) => (
+                      <option value={item.value}> {item.label} </option>
+                      )
+                    )}                      
+                    
+                  </select>                   */}
                   <Form.Label>SNN:</Form.Label>
                   <Form.Control type="text" ref={SNN} required />
                   <Form.Label>Major:</Form.Label>
@@ -138,6 +150,17 @@ export default function EditInfo(props) {
                   options={majors}
                   defaultValue={{value: user['major'], label: user['major']}}
                   />
+                  {/* <select class="form-select edit-paper-select" id="major"
+                  value={majors.value} ref={major}  
+                  >
+                    <option defaultValue={user['major']} disabled hidden></option>
+                   
+                    {majors.map(( item ) => (
+                      <option value={item.value}> {item.label} </option>
+                      )
+                    )}                      
+                    
+                  </select>                    */}
                   <Form.Label>Degree:</Form.Label>
                   <Select ref={degree}
                   value={degrees.value}
