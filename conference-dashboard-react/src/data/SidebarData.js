@@ -3,6 +3,7 @@ import React from 'react';
 import * as AiIcons from 'react-icons/ai';
 import * as IoIcons from 'react-icons/io';
 import { IoPeopleSharp } from "react-icons/io5";
+import { FaNewspaper } from "react-icons/fa";
 export const SidebarData = [
   {
     title: 'Home',
@@ -57,10 +58,11 @@ export const SidebarData = [
 
 export const DashboadMainPageData = [
   {
-    title: 'Home Page',
+    title: 'Published Papers',
     path: '/',
     description:'You can view published papers',
-    icon: <AiIcons.AiFillHome />,
+    icon: <FaNewspaper />,
+    
     cName: 'standard-user-home-page'
   },
   {
@@ -78,10 +80,10 @@ export const DashboadMainPageData = [
     cName: 'standard-user-papers'
   },
   {
-    title: 'Home Page',
+    title: 'Published Papers',
     path: '/',
     description:'You can view published papers',
-    icon: <AiIcons.AiFillHome />,
+    icon: <FaNewspaper />,
     cName: 'admin-home-page'
   },
   {

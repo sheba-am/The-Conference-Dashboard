@@ -18,9 +18,17 @@ const DashboradMainPage = props => {
     <div className={DashboardMainPage}>
         <div id='main-page' class="container">
             <div class="row">
-              <h3 class='main-page-header'>
-                Welcome {user.first_name} {user.last_name}
-              </h3>
+            <div class='col-lg-1 col-md-2'>
+                <button class='btn logout-btn'>
+                  Logout
+                </button>
+              </div>              
+              <div class="col">
+                <h3 class='main-page-header'>
+                  Welcome {user.first_name} {user.last_name}
+                </h3>
+              </div>
+
             </div>
             <div class="row">  
                         {
@@ -30,9 +38,7 @@ const DashboradMainPage = props => {
                                     <div class="card main-page-card">
                                       <div class="card-body ">
                                               <div key={index}  >                                          
-                                                  {//item.icon
-                                                  }
-                                                  <h5 class="card-title">{item.title}</h5>
+                                                  <h5 class="card-title">{item.icon} {item.title}</h5>
                                                   <p class="card-text"> {item.description} </p>
                                                   <Link to={item.path}  class="btn main-page-card-btn">
                                                       go

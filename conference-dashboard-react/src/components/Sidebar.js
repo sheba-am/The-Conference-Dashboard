@@ -20,18 +20,17 @@ const Sidebar = props => {
           {/* <nav class=" navbar-expand d-flex flex-column align-item-start"> */}
           <nav>
             <div class="navbar-brand text-light mt-5" >
-              <div class="display-5 font-weight-bold"> LOGO </div>
+              {/* <div class="display-5 font-weight-bold sidebar-item"> LOGO </div> */}
             </div>
 
-            <ul class="navbar-nav  d-flex flex-column mt-5 w-100">
+            <ul class="navbar-nav  d-flex flex-column  w-100">
               {
                   SidebarData_subset.map((item, index) => {
                       return (
                         <li class="nav-item " >
-                            <div key={index} class="nav-link text-light pl-4" >
+                            <div key={index} class="nav-link sidebar-item" >
                             <Link class="link-of-nav" to={item.path}>
-                                {item.icon}
-                                <span>{item.title}</span>
+                                {item.icon}  {item.title}
                             </Link>
                             </div>
                         </li>

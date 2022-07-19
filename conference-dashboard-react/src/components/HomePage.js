@@ -46,7 +46,7 @@ export default function HomePage() {
         
             <div id='Homepage'>
               <NavbarComp></NavbarComp>
-              <Container style={{width:'100%'}}>
+              <Container >
                 {/* <Navbar></Navbar> */}
                 <Carousel style={{paddingTop:'20px'}}>
                   <Carousel.Item interval={1500}>
@@ -56,8 +56,8 @@ export default function HomePage() {
                       alt="Image One"
                     />
                     <Carousel.Caption>
-                      <h3>Label for first slide</h3>
-                      <p>Sample Text for Image One</p>
+                      {/* <h3>Label for first slide</h3>
+                      <p>Sample Text for Image One</p> */}
                     </Carousel.Caption>
                   </Carousel.Item>
                   <Carousel.Item interval={500}>
@@ -67,40 +67,42 @@ export default function HomePage() {
                       alt="Image Two"
                     />
                     <Carousel.Caption>
-                      <h3>Label for second slide</h3>
-                      <p>Sample Text for Image Two</p>
+                      {/* <h3>Label for second slide</h3>
+                      <p>Sample Text for Image Two</p> */}
                     </Carousel.Caption>
                   </Carousel.Item>
                 </Carousel>
               
-              <h2>Published Articles</h2>
-              <div class="table-responsive-md">
+              <h2 style={{paddingTop:'20px'}}>Published Articles</h2>
+              <div id='papers-table' class="table-responsive-md">
                       <table style={{padding:'50px'}}class="table papers-table justify-content-center table table-hover align-middle">
-                        <thead>
-              <tr class="float-right">
-                <th scope="col">#</th>
-                <th scope="col">Title</th>
-                <th scope="col">Authors</th>
-                <th scope="col">File</th>
-              </tr>
+                        <thead class='papers-table-header'>
+                          <tr class="float-right">
+                            <th scope="col" class='papers-table-header-item'>#</th>
+                            <th scope="col" class='papers-table-header-item'>Title</th>
+                            <th scope="col" class='papers-table-header-item'>Authors</th>
+                            <th scope="col" class='papers-table-header-item'>File</th>
+                          </tr>
                         </thead>
-                        <tbody>
-              {papers?papers.map((item, index) => {
-                        return (
-                          <tr key={index}  >
-                                 <th scope="row">{index+1}</th>
-                                <td>
-                                  {item.title}
-                                </td>
-                                <td>
-                                  {item.authors}
-                                </td>
-                                <td>
-                                <Button id={item.title} onClick={handleClick}>get file</Button>
-                                </td>
-                              </tr>
-                        );
-                      }):<h2>Loading...</h2>}
+                        <tbody class="papers-table-body">
+                          {papers?papers.map((item, index) => {
+                                    return (
+                                      <tr key={index}  >
+                                            <th scope="row"  class='table-index'>{index+1}</th>
+                                            <td>
+                                              {item.title}
+                                            </td>
+                                            <td>
+                                              {item.authors}
+                                            </td>
+                                            <td>
+                                              <button class='btn send-feedback-btn' id={item.title} onClick={handleClick}>
+                                                get file
+                                              </button>
+                                            </td>
+                                          </tr>
+                                    );
+                                  }):<h2>Loading...</h2>}
                       </tbody>
                       </table>
                     </div>

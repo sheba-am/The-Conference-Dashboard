@@ -69,7 +69,8 @@ function Papers(props) {
                 <th scope="col-7"  class='papers-table-header-item'>Title</th>
                 <th scope="col-2"  class='papers-table-header-item'>Authors</th>
                 {/* <th scope="col">Score</th> */}
-                <th scope="col-1"  class='papers-table-header-item'>More</th>
+                { user.status==="admin" || user.status==="standard" &&<th scope="col-1"  class='papers-table-header-item'>More</th>}
+                {user.status==="judge" && <th scope="col-1"  class='papers-table-header-item'>Feedback</th>}
               </tr>
             </thead>
             <tbody class="papers-table-body">
@@ -92,14 +93,25 @@ function Papers(props) {
                                 {/* <td>
                                   {item.avg_score}
                                 </td> */}
-                                <td>
-      
-                                  {user.status==="standard" || user.status==='admin'?<Link to='/dashboard/paper-details' class="btn btn-primary details-btn" onClick={() => showDetails(item)}>
-                                      ...
-                                  </Link>:user.status==="judge"?<Link to='/dashboard/send-feedback' class="btn btn-primary  send-feedback-btn" onClick={() => showDetails(item)}>
-                                      Send Feedback
-                                  </Link>:<div></div>}
-                                </td>
+                                
+                                  {  user.status==="admin" || user.status==="standard" &&
+                                  <td>
+                                  <Link to='/dashboard/paper-details' class="btn btn-primary details-btn" onClick={() => showDetails(item)}>
+                                        ...
+                                    </Link>
+                                  </td>
+                                  }
+                                
+                                
+                                  {
+                                    user.status==="judge"&&
+                                    <td>
+                                    <Link to='/dashboard/send-feedback' class="btn btn-primary  send-feedback-btn" onClick={() => showDetails(item)}>
+                                        Send Feedback
+                                    </Link>
+                                    </td>
+                                  }
+                                
                               </tr>
       
                         );

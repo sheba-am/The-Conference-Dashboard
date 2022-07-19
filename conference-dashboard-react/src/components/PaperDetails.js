@@ -102,6 +102,7 @@ function handleClick(e) {
                       <MdArrowBackIosNew />
                   </Link>
                 </div>
+                
                 <div class='col-lg-1 col-md-2 col-sm-2 '>
                   <Link to='/dashboard/edit-paper' class="btn btn-primary">
                       edit
