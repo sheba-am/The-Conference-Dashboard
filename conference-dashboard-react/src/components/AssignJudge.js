@@ -110,7 +110,7 @@ console.log(assignedJudgeNames)
       } 
 
       return (
-        <div id='assign-judge'>
+        <div id='assign-judge'  >
            <form onSubmit={handleSubmit}>
                 <div class="row mb-3">
                     <div clsass="col-sm-10">
@@ -156,7 +156,7 @@ console.log(assignedJudgeNames)
                         ))}
                     </div>
                     </div> 
-                <button class="btn btn-primary add-paper-btn" type="submit">Save Changes</button>
+                <button id="button-addon2" class="btn btn-primary" type="submit">Save Changes</button>
                 {/* this is a test button to switch to judges table */}
             </form>
            

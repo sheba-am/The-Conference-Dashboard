@@ -69,7 +69,8 @@ function Papers(props) {
                 <th scope="col-7"  class='papers-table-header-item'>Title</th>
                 <th scope="col-2"  class='papers-table-header-item'>Authors</th>
                 {/* <th scope="col">Score</th> */}
-                { user.status==="admin" || user.status==="standard" &&<th scope="col-1"  class='papers-table-header-item'>More</th>}
+                { user.status==="admin" &&<th scope="col-1"  class='papers-table-header-item'>More</th>}
+                { user.status==="standard" &&<th scope="col-1"  class='papers-table-header-item'>More</th>}
                 {user.status==="judge" && <th scope="col-1"  class='papers-table-header-item'>Feedback</th>}
               </tr>
             </thead>
@@ -94,14 +95,20 @@ function Papers(props) {
                                   {item.avg_score}
                                 </td> */}
                                 
-                                  {  user.status==="admin" || user.status==="standard" &&
+                                  {  user.status==="admin" &&
                                   <td>
                                   <Link to='/dashboard/paper-details' class="btn btn-primary details-btn" onClick={() => showDetails(item)}>
                                         ...
                                     </Link>
                                   </td>
                                   }
-                                
+                                  { user.status==="standard" &&
+                                  <td>
+                                  <Link to='/dashboard/paper-details' class="btn btn-primary details-btn" onClick={() => showDetails(item)}>
+                                        ...
+                                    </Link>
+                                  </td>
+                                  }                                
                                 
                                   {
                                     user.status==="judge"&&

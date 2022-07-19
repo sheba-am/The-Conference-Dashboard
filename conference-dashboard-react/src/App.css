@@ -371,7 +371,11 @@ input[type=checkbox]:checked + label{
  #assign-judge #one-judge-select { 
   border-radius: 15px ;
  }
-
+ #assign-judge {
+  padding: 4vh 2vw 4vh 2vw;
+  border-radius: 20px;
+  background-color: #F6FBF4;
+}
  #button-remove {
   border-radius: 0 15px 15px 0;
   display: inline-block;
