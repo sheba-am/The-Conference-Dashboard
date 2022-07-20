@@ -32,7 +32,7 @@ function Papers(props) {
     if(user){
       //get all the papers for admin and assigned papers for judge and standard user
       var request = ''
-      if(user.status){
+      if(user.status=='admin'){
         request = "viewAllPapers"
       }else{
         request = "viewPapers"

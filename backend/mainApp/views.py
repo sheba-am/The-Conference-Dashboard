@@ -38,6 +38,7 @@ def signup(request):
             country = data['country'].lower(),
             city = data['city'].lower(),
             status = data['status'].lower(),
+            field= data['field'].lower()
         )
         serializer = UserSerializer(user,many=False)
         return Response(serializer.data)
@@ -125,9 +126,10 @@ def editPaper(request):
     paper.MOP=data['MOP'].lower()
     paper.save(update_fields=['authors','judges','NOM','field','title','summary','paperFile','MOP'])
     allAuthors = data['authors'].split(",")
-    for item in allAuthors[1:]:
+    print(allAuthors)
+    for item in allAuthors:
         BaseUser.objects.get(username=item).papers.add(paper)
-    user = BaseUser.objects.get(username=allAuthors[1])
+    user = BaseUser.objects.get(username=allAuthors[0])
     serializer = PaperSerializer(user.papers,many=True)
     return Response("")
 
@@ -271,12 +273,12 @@ def publish(request):
 @api_view(['POST'])
 def sendFeedback(request):
     data = request.data
-    paper = Paper.objects.get(title=data['title'].lower()),
-    judge = BaseUser.objects.get(username=data['username'].lower()),
-    feedback = FeedBack.objects.filter(Q(papers=paper) & Q(judge=judge))
-    feedback.score = data['score'],
-    feedback.status = data['status'].lower(),
-    feedback.description = data['description'],
+    paper = Paper.objects.get(title=data['title'].lower())
+    judge = BaseUser.objects.get(username=data['username'].lower())
+    feedback = FeedBack.objects.filter(Q(paper=paper) & Q(judge=judge))[0]
+    feedback.score = data['score']
+    feedback.status = data['status'].lower()
+    feedback.description = data['description']
     feedback.save()
     serializer = FeedBackSerializer(feedback,many=False)
     return Response(serializer.data)

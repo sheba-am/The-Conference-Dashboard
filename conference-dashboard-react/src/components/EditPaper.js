@@ -139,7 +139,7 @@ function NewPaper(props) {
               <div class="row mb-3">
                   <label for="inputTitle" class=" col-2 col-form-label">Title</label>
                   <div class="col-sm-10" >
-                    <input type="textarea" class="form-control"  value={inputTitle}
+                    <input type="textarea" class="form-control"  readonly='readonly' value={inputTitle}
                     onChange={e => setInputTitle(e.target.value)}
                     />
                   </div>

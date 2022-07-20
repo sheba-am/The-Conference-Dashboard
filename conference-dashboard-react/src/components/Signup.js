@@ -167,6 +167,7 @@ export default function Signup() {
                           <Select ref={gender}
                           value={genders.value}
                           options={genders}
+                          defaultValue={{value: 'female', label: 'female'}}
                           />
                           <Form.Label>SNN:</Form.Label>
                           <Form.Control type="text" ref={SNN} required />
@@ -174,31 +175,40 @@ export default function Signup() {
                           <Select ref={major}
                           value={majors.value}
                           options={majors}
+                          defaultValue={{value: 'computer science', label: 'computer science'}}
                           />
                           <Form.Label>Degree:</Form.Label>
                           <Select ref={degree}
+                          required
                           value={degrees.value}
                           options={degrees}
+                          defaultValue={{value: 'BS', label: 'BS'}}
                           />
                           <Form.Label>University:</Form.Label>
                           <Select ref={university}
                           value={universities.value}
                           options={universities}
+                          defaultValue={{value: 'University of Guilan', label: 'University of Guilan'}}
                           />
                           <Form.Label>Country:</Form.Label>
                           <Select ref={country}
                           value={countries.value}
                           options={countries}
+                          defaultValue={{value: "iran", label: "iran"}}
                           />
                           <Form.Label>City:</Form.Label>
                           <Select ref={city}
+                          required
                           value={cities.value}
                           options={cities}
+                          defaultValue={{value: "rasht", label: "rasht"}}
                           />
                           <Form.Label>Field:</Form.Label>
                           <Select ref={field}
+                          required = 'required'
                           value={fields.value}
                           options={fields}
+                          defaultValue={{value: "Computer Science", label: "Computer Science"}}
                           />
                           <Form.Label>Email:</Form.Label>
                           <Form.Control type="email" ref={email} required />

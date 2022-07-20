@@ -7,7 +7,7 @@ export const authorData =['admin1','admin2','admin3']
 export const fieldData =[
 {
     title: 'Computer Science',
-    value: 'computerScience',
+    value: 'computer science',
 },
 {
     title: 'Math',
@@ -25,30 +25,22 @@ export const fieldData =[
 
 export const methodOfPresentationData =[
 {
-    title: 'Computer Science',
-    value: 'computerScience',
+    title: 'Online',
+    value: 'online',
 },
 {
-    title: 'Math',
-    value: 'math',
-},   
-{
-    title: 'Biology',
-    value: 'biology',
-},         
+    title: 'Offline',
+    value: 'offline',
+},           
 ];
 
 export const languageData =[
 {
-    title: 'Computer Science',
-    value: 'computerScience',
+    title: 'Farsi',
+    value: 'farsi',
 },
 {
-    title: 'Math',
-    value: 'math',
-},   
-{
-    title: 'Biology',
-    value: 'biology',
-},         
+    title: 'English',
+    value: 'english',
+},    
 ];
