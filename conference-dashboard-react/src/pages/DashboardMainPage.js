@@ -1,4 +1,4 @@
-import React from "react"
+import React, {useState, useEffect} from "react"
 import { DashboadMainPageData} from '../data/SidebarData';
 import { Link, Navigate } from "react-router-dom";
 const DashboradMainPage = props => {
@@ -6,6 +6,8 @@ const DashboradMainPage = props => {
     const DashboardMainPage = props.isOpen ? "content open" : "content";
     let DashboadMainPageData_subset = DashboadMainPageData.slice(0, 3)
     const user = JSON.parse(localStorage.getItem("user"))
+    const [userState, setUserState] = useState()
+
     if(user){
         if (user.status==="admin"){
           DashboadMainPageData_subset = DashboadMainPageData.slice(3, 8)
@@ -13,13 +15,24 @@ const DashboradMainPage = props => {
           DashboadMainPageData_subset = DashboadMainPageData.slice(0, 3)
         }
       }
+
+      function handleLogout(e) {
+        e.preventDefault()
+        localStorage.removeItem('user')
+        setUserState(undefined)
+        // navigate('/')
+        window.location.reload()
+      }
+      useEffect(() => {
+
+      },[userState]);
     //redirect if the user is not authenticated
   return ((!user)? <Navigate to="/signup"/> :
     <div className={DashboardMainPage}>
         <div id='main-page' class="container">
             <div class="row">
             <div class='col-lg-1 col-md-2'>
-                <button class='btn logout-btn'>
+                <button class='btn logout-btn' onClick={handleLogout}>
                   Logout
                 </button>
               </div>              

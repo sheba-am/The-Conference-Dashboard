@@ -13,6 +13,7 @@ export default function NavbarComp() {
       localStorage.removeItem('user')
       setUserState(undefined)
       // navigate('/')
+      window.location.reload()
     }
     useEffect(() => {
 
