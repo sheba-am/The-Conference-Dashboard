@@ -82,14 +82,14 @@ function Papers(props) {
                         return (
       
                               <tr key={index}  >
-                                 <th scope="row" class='table-index'>{index+1}</th>
-                                <td>
+                                 <th scope="row" class='col-1 table-index'>{index+1}</th>
+                                <td class='col-1'>
                                   {item.id}
                                 </td>
-                                <td>
+                                <td class='col-7'>
                                   {item.title}
                                 </td>
-                                <td>
+                                <td class='col-2'>
                                   {item.authors}
                                 </td>
                                 {/* <td>
@@ -97,14 +97,14 @@ function Papers(props) {
                                 </td> */}
                                 
                                   {  user.status==="admin" &&
-                                  <td>
+                                  <td class='col-1'>
                                   <Link to='/dashboard/paper-details' class="btn btn-primary details-btn" onClick={() => showDetails(item)}>
                                         ...
                                     </Link>
                                   </td>
                                   }
                                   { user.status==="standard" &&
-                                  <td>
+                                  <td class='col-1'>
                                   <Link to='/dashboard/paper-details' class="btn btn-primary details-btn" onClick={() => showDetails(item)}>
                                         ...
                                     </Link>
@@ -113,7 +113,7 @@ function Papers(props) {
                                 
                                   {
                                     user.status==="judge"&&
-                                    <td>
+                                    <td class='col-1'>
                                     <Link to='/dashboard/send-feedback' class="btn btn-primary  send-feedback-btn" onClick={() => showDetails(item)}>
                                         Send Feedback
                                     </Link>
