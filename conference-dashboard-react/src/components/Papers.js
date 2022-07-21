@@ -49,6 +49,7 @@ function Papers(props) {
       })
     } 
   }, [])
+  const isTableEmpty = papersData && papersData.length >0 ? "table papers-table justify-content-center  table-hover align-middle" : "table papers-table-empty justify-content-center  table-hover align-middle";
   //redirect if the user is not authenticated
   return ((!user)? <Navigate to="/signup"/> :
     <div  className={PapersCss}>
@@ -60,8 +61,8 @@ function Papers(props) {
           </Link>:<div></div>}
       
         {/* ========The Table======= */}
-        <div id='papers-table'class="table-responsive-md">
-          <table class="table papers-table justify-content-center table table-hover align-middle">
+        <div id='papers-table' class="table-responsive-md">
+          <table class={isTableEmpty}>
             <thead class='papers-table-header'>
               <tr class="float-right ">
                 <th scope="col-1" class='papers-table-header-item'>#</th>

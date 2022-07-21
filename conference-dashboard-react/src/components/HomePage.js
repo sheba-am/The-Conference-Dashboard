@@ -9,7 +9,6 @@ import 'bootstrap/dist/css/bootstrap.css';
 import Carousel from 'react-bootstrap/Carousel';
 import NavbarComp from "./NavbarComp";
 export default function HomePage() {
-
     const [papers, setPapers] = useState([]);
     const config = {
         headers: {
@@ -42,6 +41,7 @@ export default function HomePage() {
         })
         
       }
+      const isTableEmpty =papers ? "table papers-table justify-content-center table table-hover align-middle" : "table papers-table-empty justify-content-center table table-hover align-middle";      
     return(
         
             <div id='Homepage'>
@@ -75,7 +75,7 @@ export default function HomePage() {
               
               <h2 style={{paddingTop:'20px'}}>Published Articles</h2>
               <div id='papers-table' class="table-responsive-md">
-                      <table style={{padding:'50px'}}class="table papers-table justify-content-center table table-hover align-middle">
+                      <table style={{padding:'50px'}} class={isTableEmpty}>
                         <thead class='papers-table-header'>
                           <tr class="float-right">
                             <th scope="col" class='papers-table-header-item'>#</th>

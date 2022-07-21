@@ -46,7 +46,7 @@ export default function StandardUserDashboard(){
                     <Route path='/new-paper' element={<NewPaper isOpen={sidebarOpen}/>} />
                     <Route path='edit-paper' element={<EditPaper isOpen={sidebarOpen} />} />
                     <Route path='allusers' element={<AllUsers isOpen={sidebarOpen} />} />
-                    <Route path='allPapers' element={<AllPapers isOpen={sidebarOpen} />} />
+                    {/* <Route path='allPapers' element={<AllPapers isOpen={sidebarOpen} />} /> */}
                     <Route path='assign-judge' element={<AssignJudge isOpen={sidebarOpen} />} />
                     <Route path='/send-feedback' element={<SendFeedback isOpen={sidebarOpen}/>} />
                     {/* <Route path='/edit-paper' element={<EditPaper isOpen={sidebarOpen} />} /> */}
