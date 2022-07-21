@@ -38,6 +38,26 @@ export default function SendFeedback (props) {
                 
           })
     }
+
+    function handleDownload(e) {
+      e.preventDefault()
+      const config = {
+        headers: {
+            'Content-type': 'application/json',
+            
+        }
+      }
+    const result = axios.post(
+        'http://127.0.0.1:8000/getPaperFile',
+        {
+          'title':paper.title
+        },
+        config
+      ).then((response) => response)
+      .then((response) => {
+        console.log(response)
+    })
+    }
     return(
         <div className={SendFeedbackCss}>
             <div class='container details-of-paper'>
@@ -55,7 +75,7 @@ export default function SendFeedback (props) {
                 Paper Authors: {paper.authors}
               </div>
               <div>
-                Paper File: <button  class="btn btn-primary" onClick={handleClick}>get file</button>
+                Paper File: <button  class="btn btn-primary" onClick={handleDownload}>get file</button>
               </div>
               <div>
                 number of pages: {paper.NOM}

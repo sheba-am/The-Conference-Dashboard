@@ -274,6 +274,7 @@ def publish(request):
 def sendFeedback(request):
     data = request.data
     paper = Paper.objects.get(title=data['title'].lower())
+    print(paper.paperFile)
     judge = BaseUser.objects.get(username=data['username'].lower())
     feedback = FeedBack.objects.filter(Q(paper=paper) & Q(judge=judge))[0]
     feedback.score = data['score']

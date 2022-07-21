@@ -102,17 +102,20 @@ function handleClick(e) {
                       <MdArrowBackIosNew />
                   </Link>
                 </div>
-                
+                {user.status=='standard' &&
                 <div class='col-lg-1 col-md-2 col-sm-2 '>
                   <Link to='/dashboard/edit-paper' class="btn btn-primary">
                       edit
                   </Link>
                 </div>
+                }
+                {user.status=='standard' &&
                 <div class='col-lg-2 col-md-2 col-sm-3'>
                   <button class="btn btn-primary" onClick={handleViewDelete}>
                     delete
                   </button>
                 </div>
+                }
       
                 {user.status=='admin' && paper.published == false?<div class='col-lg-2 col-md-2 col-sm-3'><button class="btn btn-primary" onClick={handlePublish}>
                     publish
