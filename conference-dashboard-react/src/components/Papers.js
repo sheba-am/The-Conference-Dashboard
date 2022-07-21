@@ -26,7 +26,7 @@ function Papers(props) {
     setSelectedPaper(selected)
   }
   //csss changes when sidebar is open
-  const PapersCss = props.isOpen ? "papers-content open" : "papers-content";
+  const PapersCss = props.isOpen ? "content open" : "content";
 
   useEffect(() => {
     if(user){

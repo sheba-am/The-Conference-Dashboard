@@ -3,12 +3,12 @@ import React,{ useState,useRef, useEffect } from 'react'
 import { Link, Navigate } from 'react-router-dom';
 import {Alert} from 'react-bootstrap'
 import axios from 'axios'
-import {fieldData, methodOfPresentationData, languageData} from '../data/FormData'
+import {fields, methodOfPresentationData, languageData} from '../data/FormData'
 import { MdArrowBackIosNew } from "react-icons/md";
 //import ReactTable from "react-table";
 function NewPaper(props) {
   const user = JSON.parse(localStorage.getItem("user"))
-  const PapersCss = props.isOpen ? "new-paper-content open" : "new-paper-content";
+  const PapersCss = props.isOpen ? "content open" : "content";
   
   const [inputTitle, setInputTitle] = useState();
   const [field, setField] = useState();
@@ -190,8 +190,8 @@ function NewPaper(props) {
                   value={field} onChange={(e) => setField(e.target.value)}
                   >
                     <option value="" selected disabled hidden>Choose field...</option>
-                    {fieldData.map(( item ) => (
-                      <option value={item.value}> {item.title} </option>
+                    {fields.map(( item ) => (
+                      <option value={item.value}> {item.label} </option>
                       )
                     )}
                   </select>
@@ -205,7 +205,7 @@ function NewPaper(props) {
                   >
                     <option value="" selected disabled hidden>Choose method...</option>
                     {methodOfPresentationData.map(( item ) => (
-                      <option value={item.value}> {item.title} </option>
+                      <option value={item.value}> {item.label} </option>
                       )
                     )}
                   </select>
@@ -219,7 +219,7 @@ function NewPaper(props) {
                   >
                     <option value="" selected disabled hidden>Choose language...</option>
                     {languageData.map(( item ) => (
-                      <option value={item.value}> {item.title} </option>
+                      <option value={item.value}> {item.label} </option>
                       )
                     )}
                   </select>

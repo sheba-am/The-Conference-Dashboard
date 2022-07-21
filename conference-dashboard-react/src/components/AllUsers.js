@@ -3,7 +3,7 @@ import { Container, Form, Button, Alert } from 'react-bootstrap'
 import { useNavigate, Navigate } from "react-router-dom";
 import axios from 'axios'
 export default function AllUsers(props) {
-    const AllUsersCss = props.isOpen ? "papers-content open" : "papers-content";
+    const AllUsersCss = props.isOpen ? "content open" : "content";
     const [users, setUsers] = useState();
     const config = {
         headers: {

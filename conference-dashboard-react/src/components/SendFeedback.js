@@ -6,7 +6,7 @@ import axios from 'axios'
 import { Container, Form, Button, Alert } from 'react-bootstrap'
 import { MdArrowBackIosNew } from "react-icons/md";
 export default function SendFeedback (props) {
-  const SendFeedbackCss = props.isOpen ? "papers-content open" : "papers-content";
+  const SendFeedbackCss = props.isOpen ? "content open" : "content";
     var paper = JSON.parse(localStorage.getItem("selectedPaper")); //retrieve the object
     var user = JSON.parse(localStorage.getItem("user"));
     const score =  useRef()

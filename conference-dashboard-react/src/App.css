@@ -79,7 +79,7 @@
   background-color: #D9D9D9;
 }
 
-.papers-content {
+/* .papers-content {
   position: absolute;
   top: 0;
   left: 0;
@@ -87,8 +87,8 @@
   min-height: 100%;
   transition: right 0.3s ease-in-out;
   background-color: #D9D9D9;
-}
-.paper-details-content {
+} */
+/* .paper-details-content {
   position: absolute;
   top: 0;
   left: 0;
@@ -96,8 +96,8 @@
   min-height: 100%;
   transition: right 0.3s ease-in-out;
   background-color: #D9D9D9;
-}
-.new-paper-content {
+} */
+/* .new-paper-content {
   position: absolute;
   top: 0;
   left: 0;
@@ -105,7 +105,7 @@
   min-height: 100%;
   transition: right 0.3s ease-in-out;
   background-color: #D9D9D9;
-}
+} */
 
 .papers-table {
   
@@ -128,22 +128,22 @@
   right: 15vw;
 
 }
-.edit-info-content.open {
+/* .edit-info-content.open {
   right: 15vw;
 
-}
-.papers-content.open {
+} */
+/* .papers-content.open {
   right: 15vw;
 
-}
-.paper-details-content.open {
+} */
+/* .paper-details-content.open {
   right: 15vw;
 
-}
-.new-paper-content.open {
+} */
+/* .new-paper-content.open {
   right: 15vw;
 
-}
+} */
 
 
 /* =========== PAPERS =========== */

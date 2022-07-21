@@ -19,7 +19,7 @@ const config = {
 
 function PaperDetails(props) {
   const [feedbacks, setFeedbacks] = useState([]);
-  const PaperDetails = props.isOpen ? "paper-details-content open" : "paper-details-content";
+  const PaperDetails = props.isOpen ? "content open" : "content";
   const {selectedPaper,setSelectedPaper} =useContext(PaperContext)
   // ========== Delete Modal Toggle ==========
   const [deleteOpen, setDeleteOpen] = useState(false);
