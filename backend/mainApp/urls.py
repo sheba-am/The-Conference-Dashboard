@@ -10,6 +10,7 @@ urlpatterns = [
     path('sendFeedback',  views.sendFeedback),
     path('viewAllFeedback',  views.viewAllFeedback),
     path('viewFeedback',  views.viewFeedback),
+    path('viewJudgeFeedback',  views.viewJudgeFeedback),
     path('promoteToJudge',  views.promoteToJudge),
     path('viewJudges',  views.viewJudges),
     path('viewPapers',  views.viewPapers),

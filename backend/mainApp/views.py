@@ -284,3 +284,11 @@ def sendFeedback(request):
     serializer = FeedBackSerializer(feedback,many=False)
     return Response(serializer.data)
 
+@api_view(['POST'])
+def viewJudgeFeedback(request):
+    data = request.data
+    judge = BaseUser.objects.get(username=data['username'].lower())
+    feedback = FeedBack.objects.get(judge=judge)
+    serializer = FeedBackSerializer(feedback,many=False)
+    return Response(serializer.data)
+        
