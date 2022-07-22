@@ -127,6 +127,9 @@
 }
 
 /* =========== PAPERS =========== */
+#searchInput {
+  border-radius: 15px;
+}
 
 /* body #root #App #dashboard .row .col .container  .add-paper-btn {
   background-color:#F66B0E  ;

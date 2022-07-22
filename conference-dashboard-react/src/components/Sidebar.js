@@ -27,8 +27,8 @@ const Sidebar = props => {
               {
                   SidebarData_subset.map((item, index) => {
                       return (
-                        <li class="nav-item " >
-                            <div key={index} class="nav-link sidebar-item" >
+                        <li  key={index} class="nav-item " >
+                            <div class="nav-link sidebar-item" >
                             <Link class="link-of-nav" onClick={props.toggleSidebar} to={item.path}>
                                 {item.icon}  {item.title}
                             </Link>
