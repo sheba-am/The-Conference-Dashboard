@@ -10,9 +10,27 @@
  /* =================== SIDEBAR ===================*/
 
 #sidebar .sidebar-item {
-	font-size: 1.7vmax;
+	font-size: 1.4em;
   max-height: 8vh;  
   padding: 0.5vh 1vw 0.5vh 1vw;
+}
+@media only screen and (max-width: 768px) {
+  #sidebar .sidebar {
+    right: -25vw;
+    width: 25vw;
+  }
+  #sidebar .sidebar.open {
+    right: 0;
+  }
+}
+@media only screen and (max-width: 520px) {
+  #sidebar .sidebar {
+    right: -30vw;
+    width: 30vw;
+  }
+  #sidebar .sidebar.open {
+    right: 0;
+  }
 }
 .sidebar {
   position: fixed;
@@ -79,40 +97,19 @@
   background-color: #D9D9D9;
 }
 
-.papers-content {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  min-height: 100%;
-  transition: right 0.3s ease-in-out;
-  background-color: #D9D9D9;
-}
-.paper-details-content {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  min-height: 100%;
-  transition: right 0.3s ease-in-out;
-  background-color: #D9D9D9;
-}
-.new-paper-content {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  min-height: 100%;
-  transition: right 0.3s ease-in-out;
-  background-color: #D9D9D9;
-}
 
+
+.papers-table-empty {
+  border-radius: 15px 15px 0 0 ;
+  width: 50vw;
+  background-color: #F6FBF4;
+}
 .papers-table {
-  
   border-radius: 20px;
   width: 50vw;
   background-color: #F6FBF4;
 }
+
 
 .edit-info-form {
   margin-right:7vw ;
@@ -128,23 +125,6 @@
   right: 15vw;
 
 }
-.edit-info-content.open {
-  right: 15vw;
-
-}
-.papers-content.open {
-  right: 15vw;
-
-}
-.paper-details-content.open {
-  right: 15vw;
-
-}
-.new-paper-content.open {
-  right: 15vw;
-
-}
-
 
 /* =========== PAPERS =========== */
 
@@ -185,7 +165,11 @@ body #root #App #dashboard .row .col .container  .add-paper-btn:hover {
   transform: translateY(-5px);
 
 }
-
+#papers-table .table .papers-table-empty .papers-table-header{
+  color: #9D9D9D;
+  height: 10vh;
+  
+}
 
 #papers-table .table .papers-table-header{
   color: #9D9D9D;
@@ -729,6 +713,11 @@ transform: translateY(-2px);
 }
 /*  ================== Homepage ================== */
 #Homepage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  min-height: 100%;
   background-color: #D9D9D9;
 }
 #Homepage .carousel-inner {

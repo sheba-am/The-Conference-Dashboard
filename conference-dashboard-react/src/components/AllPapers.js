@@ -5,6 +5,7 @@ import { PaperContext } from '../contexts/PaperContext';
 import axios from 'axios'
 export default function AllPapers() {
     const [papers, setPapers] = useState();
+    const isTableEmpty = papers ? "table papers-table justify-content-center table table-hover align-middle" : "table papers-table-empty justify-content-center table table-hover align-middle";
     const {selectedPaper,setSelectedPaper} =useContext(PaperContext)
     const config = {
         headers: {
@@ -32,7 +33,7 @@ export default function AllPapers() {
     return(
         <Container>
             {papers?
-            <table class="table papers-table justify-content-center table table-hover align-middle">
+            <table class={isTableEmpty}>
             <thead>
               <tr class="float-right">
                 {/* <th scope="col">#</th> */}

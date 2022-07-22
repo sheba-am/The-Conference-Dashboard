@@ -4,6 +4,7 @@ import { useNavigate, Navigate } from "react-router-dom";
 import axios from 'axios'
 import Select from 'react-select';
 import NavbarComp from './NavbarComp';
+import {fields, cities,countries, universities, degrees, majors, genders} from '../data/FormData'
 export default function Signup() {
     const username =  useRef()
     const firstName =  useRef()
@@ -23,43 +24,7 @@ export default function Signup() {
     const [error, setError] = useState("")
     const user = localStorage.getItem("user")
     let navigate = useNavigate(); 
-    const genders = [
-      {value: 'female', label: 'female'},
-      {value: 'male', label: 'male'},
-    ]
-    const majors = [
-      {value: 'computer science', label: 'computer science'},
-      {value: 'medicine', label: 'medicine'},
-      {value: 'chemistry', label: 'chemistry'},
-      {value: 'architecture', label: 'architecture'},
-      {value: 'art', label: 'art'},
-    ]
-    const degrees = [
-      {value: 'BS', label: 'BS'},
-      {value: 'BA', label: 'BA'},
-      {value: 'MS', label: 'MS'},
-      {value: 'MA', label: 'MA'},
-      {value: 'PHD', label: 'PHD'},
-    ]
-    const universities = [
-      {value: 'University of Guilan', label: 'University of Guilan'},
-      {value: 'University of Isfahan', label: 'University of Isfahan'},
-      {value: 'University of Tehran', label: 'University of Tehran'},
-      {value: 'Sharif University of Technology', label: 'Sharif University of Technology'},
-      {value: 'Shahid Beheshti University', label: 'Shahid Beheshti University'},
-    ]
-    const countries = [
-      {value: "iran", label: "iran"}
-    ]
-    const cities = [
-      {value: "rasht", label: "rasht"},
-      {value: "tehran", label: "tehran"},
-      {value: "isfahan", label: "isfahan"},
-    ]
-    const fields = [
-      {value: "Computer Science", label: "Computer Science"},
-      {value: "Medicine", label: "Medicine"},
-    ]
+
     function handleRegister(e) {
         e.preventDefault()
         const config = {

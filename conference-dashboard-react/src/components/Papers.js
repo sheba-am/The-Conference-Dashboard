@@ -26,7 +26,7 @@ function Papers(props) {
     setSelectedPaper(selected)
   }
   //csss changes when sidebar is open
-  const PapersCss = props.isOpen ? "papers-content open" : "papers-content";
+  const PapersCss = props.isOpen ? "content open" : "content";
 
   useEffect(() => {
     if(user){
@@ -49,6 +49,7 @@ function Papers(props) {
       })
     } 
   }, [])
+  const isTableEmpty = papersData && papersData.length >0 ? "table papers-table justify-content-center  table-hover align-middle" : "table papers-table-empty justify-content-center  table-hover align-middle";
   //redirect if the user is not authenticated
   return ((!user)? <Navigate to="/signup"/> :
     <div  className={PapersCss}>
@@ -60,8 +61,8 @@ function Papers(props) {
           </Link>:<div></div>}
       
         {/* ========The Table======= */}
-        <div id='papers-table'class="table-responsive-md">
-          <table class="table papers-table justify-content-center table table-hover align-middle">
+        <div id='papers-table' class="table-responsive-md">
+          <table class={isTableEmpty}>
             <thead class='papers-table-header'>
               <tr class="float-right ">
                 <th scope="col-1" class='papers-table-header-item'>#</th>
@@ -81,14 +82,14 @@ function Papers(props) {
                         return (
       
                               <tr key={index}  >
-                                 <th scope="row" class='table-index'>{index+1}</th>
-                                <td>
+                                 <th scope="row" class='col-1 table-index'>{index+1}</th>
+                                <td class='col-1'>
                                   {item.id}
                                 </td>
-                                <td>
+                                <td class='col-7'>
                                   {item.title}
                                 </td>
-                                <td>
+                                <td class='col-2'>
                                   {item.authors}
                                 </td>
                                 {/* <td>
@@ -96,14 +97,14 @@ function Papers(props) {
                                 </td> */}
                                 
                                   {  user.status==="admin" &&
-                                  <td>
+                                  <td class='col-1'>
                                   <Link to='/dashboard/paper-details' class="btn btn-primary details-btn" onClick={() => showDetails(item)}>
                                         ...
                                     </Link>
                                   </td>
                                   }
                                   { user.status==="standard" &&
-                                  <td>
+                                  <td class='col-1'>
                                   <Link to='/dashboard/paper-details' class="btn btn-primary details-btn" onClick={() => showDetails(item)}>
                                         ...
                                     </Link>
@@ -112,7 +113,7 @@ function Papers(props) {
                                 
                                   {
                                     user.status==="judge"&&
-                                    <td>
+                                    <td class='col-1'>
                                     <Link to='/dashboard/send-feedback' class="btn btn-primary  send-feedback-btn" onClick={() => showDetails(item)}>
                                         Send Feedback
                                     </Link>

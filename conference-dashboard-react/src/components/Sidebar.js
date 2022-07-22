@@ -29,7 +29,7 @@ const Sidebar = props => {
                       return (
                         <li class="nav-item " >
                             <div key={index} class="nav-link sidebar-item" >
-                            <Link class="link-of-nav" to={item.path}>
+                            <Link class="link-of-nav" onClick={props.toggleSidebar} to={item.path}>
                                 {item.icon}  {item.title}
                             </Link>
                             </div>

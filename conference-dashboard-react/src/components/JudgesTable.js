@@ -2,11 +2,12 @@ import React, {useState}  from 'react'
 
 function JudgesTable(props) {
     var paper = JSON.parse(localStorage.getItem("selectedPaper")); //retrieve the object
+    const isTableEmpty = props.assignedJudgeData && props.assignedJudgeData.length>0  ? "table papers-table justify-content-center table table-hover align-middle" : "table papers-table-empty justify-content-center table table-hover align-middle";
     const [feedbacks, setFeedbacks] = useState([]);
   return (
     <div id='papers-table' class="table-responsive-md">
         
-        <table class="table papers-table justify-content-center table table-hover align-middle">
+        <table class={isTableEmpty}>
         <thead class='papers-table-header'>
         <tr class="float-right">
             <th scope="col" class='papers-table-header-item'>#</th>

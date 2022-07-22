@@ -2,8 +2,9 @@ import React, { useRef, useState, useEffect } from 'react'
 import { Container, Form, Button, Alert } from 'react-bootstrap'
 import axios from 'axios'
 import Select from 'react-select';
+import {fields, cities,countries, universities, degrees, majors, genders} from '../data/FormData'
 export default function EditInfo(props) {
-    const EditInfo = props.isOpen ? "new-paper-content open" : "new-paper-content";
+    const EditInfo = props.isOpen ? "content open" : "content";
     const user = JSON.parse(localStorage.getItem('user'))
     const username =  useRef()
     const firstName =  useRef()
@@ -20,43 +21,7 @@ export default function EditInfo(props) {
     const password =  useRef()
     const [error, setError] = useState("")
 
-    const genders = [
-      {value: 'female', label: 'female'},
-      {value: 'male', label: 'male'},
-    ]
-    const majors = [
-      {value: 'computer science', label: 'computer science'},
-      {value: 'medicine', label: 'medicine'},
-      {value: 'chemistry', label: 'chemistry'},
-      {value: 'architecture', label: 'architecture'},
-      {value: 'art', label: 'art'},
-    ]
-    const degrees = [
-      {value: 'BS', label: 'BS'},
-      {value: 'BA', label: 'BA'},
-      {value: 'MS', label: 'MS'},
-      {value: 'MA', label: 'MA'},
-      {value: 'PHD', label: 'PHD'},
-    ]
-    const universities = [
-      {value: 'University of Guilan', label: 'University of Guilan'},
-      {value: 'University of Isfahan', label: 'University of Isfahan'},
-      {value: 'University of Tehran', label: 'University of Tehran'},
-      {value: 'Sharif University of Technology', label: 'Sharif University of Technology'},
-      {value: 'Shahid Beheshti University', label: 'Shahid Beheshti University'},
-    ]
-    const countries = [
-      {value: "iran", label: "iran"}
-    ]
-    const cities = [
-      {value: "rasht", label: "rasht"},
-      {value: "tehran", label: "tehran"},
-      {value: "isfahan", label: "isfahan"},
-    ]
-    const fields = [
-      {value: "Computer Science", label: "Computer Science"},
-      {value: "Medicine", label: "Medicine"},
-    ]
+
     //initialize form fields
     useEffect(() => {
         username.current.value = user['username']

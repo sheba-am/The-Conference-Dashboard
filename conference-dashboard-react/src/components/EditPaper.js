@@ -1,5 +1,5 @@
 import React,{ useState,useRef,useContext, useEffect} from 'react'
-import {fieldData, methodOfPresentationData, languageData} from '../data/FormData'
+import {fields, methodOfPresentationData, languageData} from '../data/FormData'
 import { Link, Navigate ,useNavigate} from 'react-router-dom';
 //import ReactTable from "react-table";
 import { PaperContext } from '../contexts/PaperContext';
@@ -9,7 +9,7 @@ function NewPaper(props) {
   const {selectedPaper,setSelectedPaper} =useContext(PaperContext)
   var paper = JSON.parse(localStorage.getItem("selectedPaper")); //retrieve the object
   const user = JSON.parse(localStorage.getItem("user"))
-  const Papers = props.isOpen ? "new-paper-content open" : "new-paper-content";
+  const Papers = props.isOpen ? "content open" : "content";
   const [inputTitle, setInputTitle] = useState(paper.title);
   const [field, setField] = useState(paper.field);
   const [methodOfPresentation, setMOP] = useState(paper.MOP);
@@ -194,8 +194,8 @@ function NewPaper(props) {
                   value={field} onChange={(e) => setField(e.target.value)}
                   >
                     <option defaultValue={field} disabled hidden></option>
-                    {fieldData.map(( item ) => (
-                      <option value={item.value}> {item.title} </option>
+                    {fields.map(( item ) => (
+                      <option value={item.value}> {item.label} </option>
                       )
                     )}
                   </select>
@@ -209,7 +209,7 @@ function NewPaper(props) {
                   >
                     <option defaultValue={methodOfPresentation} disabled hidden></option>
                     {methodOfPresentationData.map(( item ) => (
-                      <option value={item.value}> {item.title} </option>
+                      <option value={item.value}> {item.label} </option>
                       )
                     )}
                   </select>
@@ -223,7 +223,7 @@ function NewPaper(props) {
                   >
                     <option defaultValue={language} disabled hidden ></option>
                     {languageData.map(( item ) => (
-                      <option value={item.value}> {item.title} </option>
+                      <option value={item.value}> {item.label} </option>
                       )
                     )}
                   </select>

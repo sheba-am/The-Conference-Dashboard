@@ -19,7 +19,7 @@ const config = {
 
 function PaperDetails(props) {
   const [feedbacks, setFeedbacks] = useState([]);
-  const PaperDetails = props.isOpen ? "paper-details-content open" : "paper-details-content";
+  const PaperDetails = props.isOpen ? "content open" : "content";
   const {selectedPaper,setSelectedPaper} =useContext(PaperContext)
   // ========== Delete Modal Toggle ==========
   const [deleteOpen, setDeleteOpen] = useState(false);
@@ -96,35 +96,35 @@ function handleClick(e) {
           {/* ==== The Paper Details ==== */}
           <div class=' container details-of-paper'>
       
-              <div class='row'>
-                <div class='col-lg-1 col-md-1 col-sm-2 '>
-                  <Link to='/dashboard/papers' class="btn btn-primary">
-                      <MdArrowBackIosNew />
-                  </Link>
-                </div>
-                {user.status=='standard' &&
-                <div class='col-lg-1 col-md-2 col-sm-2 '>
-                  <Link to='/dashboard/edit-paper' class="btn btn-primary">
-                      edit
-                  </Link>
-                </div>
-                }
-                {user.status=='standard' &&
-                <div class='col-lg-2 col-md-2 col-sm-3'>
-                  <button class="btn btn-primary" onClick={handleViewDelete}>
-                    delete
-                  </button>
-                </div>
-                }
-      
-                {user.status=='admin' && paper.published == false?<div class='col-lg-2 col-md-2 col-sm-3'><button class="btn btn-primary" onClick={handlePublish}>
-                    publish
-                  </button></div>:<div></div>}
-                <div class='col-9'>
-                  id:{paper.id}
-                </div>
+            <div class='row'>
+              <div class='col-lg-1 col-md-1 col-sm-2 '>
+                <Link to='/dashboard/papers' class="btn btn-primary">
+                    <MdArrowBackIosNew />
+                </Link>
               </div>
-      
+              {user.status=='standard' &&
+              <div class='col-lg-1 col-md-2 col-sm-2 '>
+                <Link to='/dashboard/edit-paper' class="btn btn-primary">
+                    edit
+                </Link>
+              </div>
+              }
+              {user.status=='standard' &&
+              <div class='col-lg-2 col-md-2 col-sm-3'>
+                <button class="btn btn-primary" onClick={handleViewDelete}>
+                  delete
+                </button>
+              </div>
+              }
+    
+              {user.status=='admin' && paper.published == false?<div class='col-lg-2 col-md-2 col-sm-3'><button class="btn btn-primary" onClick={handlePublish}>
+                  publish
+                </button></div>:<div></div>}
+            
+            </div>
+            <div>
+                id:{paper.id}
+            </div>      
             <div><DeleteModal isOpen={deleteOpen} toggleDelete={handleViewDelete} /></div>
             <div>
               Paper Title: {paper.title}
