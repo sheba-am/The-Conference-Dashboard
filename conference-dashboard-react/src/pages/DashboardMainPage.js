@@ -47,10 +47,10 @@ const DashboradMainPage = props => {
                         {
                             DashboadMainPageData_subset.map((item, index) => {
                                 return (
-                                <div class="col-sm-6">
+                                <div key={index} class="col-sm-6">
                                     <div class="card main-page-card">
                                       <div class="card-body ">
-                                              <div key={index}  >                                          
+                                              <div   >                                          
                                                   <h5 class="card-title">{item.icon} {item.title}</h5>
                                                   <p class="card-text"> {item.description} </p>
                                                   <Link to={item.path}  class="btn main-page-card-btn">

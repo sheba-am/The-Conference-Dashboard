@@ -4,10 +4,99 @@ import { Link, Navigate } from 'react-router-dom';
 import { PaperContext } from '../contexts/PaperContext';
 import axios from 'axios'
 import { Container } from 'react-bootstrap';
-//import ReactTable from "react-table";
-
+import {useTable, useGlobalFilter} from 'react-table';
+import {columnsData} from '../data/columns';
+import { GlobalFilter } from './GlobalFilter';
 //get papers
 
+
+  //csss changes when sidebar is open
+function Table({ columns, data }) {
+  const user = JSON.parse(localStorage.getItem("user"))
+
+  const showDetails = (selected) => {
+    localStorage.setItem("selectedPaper", JSON.stringify(selected))
+    // alert(a.id);
+    console.log("context",selected)
+    // setSelectedPaper(selected)
+  }
+  // Use the state and functions returned from useTable to build your UI
+  const {
+    getTableProps,
+    getTableBodyProps,
+    headerGroups,
+    rows,
+    prepareRow,
+    state, 
+    setGlobalFilter
+  } = useTable({
+    columns,
+    data,
+  },useGlobalFilter)
+
+  const {globalFilter} = state
+  // Render the UI for your table
+  return (
+    <>
+    <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter} />
+    <table {...getTableProps()}>
+      <thead>
+        {headerGroups.map(headerGroup => (
+          <tr {...headerGroup.getHeaderGroupProps()}>
+            <th>#</th>
+            {headerGroup.headers.map(column => (
+              <th {...column.getHeaderProps()}>{column.render('Header')}</th>
+            ))}
+              {/* <th scope="col">Score</th> */}
+              { user.status==="admin" &&<th scope="col-1"  class='papers-table-header-item'>More</th>}
+              { user.status==="standard" &&<th scope="col-1"  class='papers-table-header-item'>More</th>}
+              {user.status==="judge" && <th scope="col-1"  class='papers-table-header-item'>Feedback</th>}
+          </tr>
+        ))}
+      </thead>
+      <tbody {...getTableBodyProps()}>
+        {rows.map((row, i) => {
+          prepareRow(row)
+          return (
+            <tr {...row.getRowProps()}>
+              <td>{i+1}</td>
+              {row.cells.map(cell => {
+                return (
+                    <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
+                )
+              })}
+              {  user.status==="admin" &&
+                <td class='col-1'>
+                <Link to='/dashboard/paper-details' class="btn btn-primary details-btn" onClick={() => showDetails(row.original)}>
+                      ...
+                  </Link>
+                </td>
+                // console.log(row.original)//this is replacement of item 
+              }
+              { user.status==="standard" &&
+                <td class='col-1'>
+                <Link to='/dashboard/paper-details' class="btn btn-primary details-btn" onClick={() => showDetails(row.original)}>
+                      ...
+                  </Link>
+                </td>
+              }                                
+            
+              {
+                user.status==="judge"&&
+                <td class='col-1'>
+                <Link to='/dashboard/send-feedback' class="btn btn-primary  send-feedback-btn" onClick={() => showDetails(row.original)}>
+                    Send Feedback
+                </Link>
+                </td>
+              }
+            </tr>
+          )
+        })}
+      </tbody>
+    </table>
+    </>
+  )
+}
 const config = {
   headers: {
     'Content-Type': 'multipart/form-data',
@@ -16,17 +105,10 @@ const config = {
 }
 
 function Papers(props) {
-  const {selectedPaper,setSelectedPaper} =useContext(PaperContext)
   const user = JSON.parse(localStorage.getItem("user"))
-  const [papersData, setPapersData] = useState()
-  const showDetails = (selected) => {
-    localStorage.setItem("selectedPaper", JSON.stringify(selected))
-    // alert(a.id);
-    console.log("context",selected)
-    setSelectedPaper(selected)
-  }
-  //csss changes when sidebar is open
   const PapersCss = props.isOpen ? "content open" : "content";
+  const {selectedPaper,setSelectedPaper} =useContext(PaperContext)
+  const [papersData, setPapersData] = useState()
 
   useEffect(() => {
     if(user){
@@ -50,86 +132,26 @@ function Papers(props) {
     } 
   }, [])
   const isTableEmpty = papersData && papersData.length >0 ? "table papers-table justify-content-center  table-hover align-middle" : "table papers-table-empty justify-content-center  table-hover align-middle";
+  
+  const columns = React.useMemo(
+    () => columnsData,[]
+  )
+
   //redirect if the user is not authenticated
   return ((!user)? <Navigate to="/signup"/> :
     <div  className={PapersCss}>
       <Container>
         <h3> Papers </h3>
         
-          {user.status=='standard'?<Link to='/dashboard/new-paper'  class="btn add-paper-btn" >
+          {user.status==='standard'?<Link to='/dashboard/new-paper'  class="btn add-paper-btn" >
           +New Paper
           </Link>:<div></div>}
       
         {/* ========The Table======= */}
-        <div id='papers-table' class="table-responsive-md">
-          <table class={isTableEmpty}>
-            <thead class='papers-table-header'>
-              <tr class="float-right ">
-                <th scope="col-1" class='papers-table-header-item'>#</th>
-                <th scope="col-1"  class='papers-table-header-item'>Id</th>
-                <th scope="col-7"  class='papers-table-header-item'>Title</th>
-                <th scope="col-2"  class='papers-table-header-item'>Authors</th>
-                {/* <th scope="col">Score</th> */}
-                { user.status==="admin" &&<th scope="col-1"  class='papers-table-header-item'>More</th>}
-                { user.status==="standard" &&<th scope="col-1"  class='papers-table-header-item'>More</th>}
-                {user.status==="judge" && <th scope="col-1"  class='papers-table-header-item'>Feedback</th>}
-              </tr>
-            </thead>
-            <tbody class="papers-table-body">
-      
-                {
-                    papersData?papersData.map((item, index) => {
-                        return (
-      
-                              <tr key={index}  >
-                                 <th scope="row" class='col-1 table-index'>{index+1}</th>
-                                <td class='col-1'>
-                                  {item.id}
-                                </td>
-                                <td class='col-7'>
-                                  {item.title}
-                                </td>
-                                <td class='col-2'>
-                                  {item.authors}
-                                </td>
-                                {/* <td>
-                                  {item.avg_score}
-                                </td> */}
-                                
-                                  {  user.status==="admin" &&
-                                  <td class='col-1'>
-                                  <Link to='/dashboard/paper-details' class="btn btn-primary details-btn" onClick={() => showDetails(item)}>
-                                        ...
-                                    </Link>
-                                  </td>
-                                  }
-                                  { user.status==="standard" &&
-                                  <td class='col-1'>
-                                  <Link to='/dashboard/paper-details' class="btn btn-primary details-btn" onClick={() => showDetails(item)}>
-                                        ...
-                                    </Link>
-                                  </td>
-                                  }                                
-                                
-                                  {
-                                    user.status==="judge"&&
-                                    <td class='col-1'>
-                                    <Link to='/dashboard/send-feedback' class="btn btn-primary  send-feedback-btn" onClick={() => showDetails(item)}>
-                                        Send Feedback
-                                    </Link>
-                                    </td>
-                                  }
-                                
-                              </tr>
-      
-                        );
-                    }):<h2>Loading...</h2>
-                }
-      
-            </tbody>
-          </table>
-        </div>
+        {papersData ? <Table columns={columns} data={papersData} />:<h2>Loading...</h2>}
+
       </Container>
+
     </div>
   )
 }
