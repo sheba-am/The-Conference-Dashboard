@@ -288,7 +288,7 @@ def sendFeedback(request):
 def viewJudgeFeedback(request):
     data = request.data
     judge = BaseUser.objects.get(username=data['username'].lower())
-    feedback = FeedBack.objects.get(judge=judge)
-    serializer = FeedBackSerializer(feedback,many=False)
+    feedback = FeedBack.objects.filter(judge=judge)
+    serializer = FeedBackSerializer(feedback,many=True)
     return Response(serializer.data)
         

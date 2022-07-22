@@ -290,6 +290,11 @@ body #root #App #dashboard .row .col .container  .add-paper-btn:hover {
 
 
 /* when toggle in checked */
+input[type=checkbox] + label{ 
+  background-color: #F6FBF4;
+  border-radius: 15px ;
+  margin-bottom: 1vh;
+ }
 input[type=checkbox]:checked + label{ 
   background-color: #F66B0E;
  }

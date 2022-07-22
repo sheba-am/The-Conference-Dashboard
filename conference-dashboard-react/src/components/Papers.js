@@ -4,7 +4,7 @@ import { Link, Navigate } from 'react-router-dom';
 import { PaperContext } from '../contexts/PaperContext';
 import axios from 'axios'
 import { Container } from 'react-bootstrap';
-import {useTable, useGlobalFilter} from 'react-table';
+import {useTable, useGlobalFilter,Row, Tabs,Tab} from 'react-table';
 import {columnsData} from '../data/columns';
 import { GlobalFilter } from './GlobalFilter';
 //get papers
@@ -40,6 +40,7 @@ function Table({ columns, data }) {
   return (
     <>
     <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter} />
+
     <div id='papers-table' class="table-responsive-md">
       <table class={isTableEmpty} {...getTableProps()}>
         <thead class='papers-table-header'>
@@ -112,7 +113,13 @@ function Papers(props) {
   const PapersCss = props.isOpen ? "content open" : "content";
   const {selectedPaper,setSelectedPaper} =useContext(PaperContext)
   const [papersData, setPapersData] = useState()
+  const [judgeFeedbackData, setJudgeFeedbackData] = useState()
 
+    //========= Edit Judges =============
+    const [editJudgesOpen, setEditJudgesOpen] = useState(false);
+    const handleViewEditJudges = () => {
+      setEditJudgesOpen(!editJudgesOpen);
+    };  
   useEffect(() => {
     if(user){
       //get all the papers for admin and assigned papers for judge and standard user
@@ -129,17 +136,60 @@ function Papers(props) {
       ).then((response) => response)
       .then((response) => {
         setPapersData(response.data)
-        console.log(papersData)
         localStorage.setItem("papers", JSON.stringify(papersData))
       })
+      if (user.status=='judge'){
+        const judgefeedback = axios.post(
+          'http://127.0.0.1:8000/viewJudgeFeedback',
+          {'username': user.username}
+          , config
+        ).then((response) => response)
+        .then((response) => {
+          setJudgeFeedbackData(response.data)
+          // console.log('judgeview',response.data)
+        })
+
+      }
+
     } 
   }, [])
-  // const isTableEmpty = papersData && papersData.length >0 ? "table papers-table justify-content-center  table-hover align-middle" : "table papers-table-empty justify-content-center  table-hover align-middle";
   
   const columns = React.useMemo(
     () => columnsData,[]
   )
+  var noFeedbackTitle=[];
+  //var sentFeedbackTitle=[];
+  var noFeedbackPaper=[];
+  var sentFeedbackPaper=[];
+  if (user.status==='judge'&& judgeFeedbackData) {
+    //split all feedbacks between sent feedbacks and not sent feedbacks
+    for (let i=0 ; i<judgeFeedbackData.length ; i++){
+      if (judgeFeedbackData[i].score ==="N/A") {
+        noFeedbackTitle.push(judgeFeedbackData[i].paper)
+      } 
+    }
 
+
+    if(papersData){
+      for (let i=0 ; i<papersData.length ; i++){
+          if (noFeedbackTitle.includes(papersData[i].title)){
+            noFeedbackPaper.push(papersData[i])
+          } else {
+            sentFeedbackPaper.push(papersData[i])
+          }
+      }
+    }
+  // console.log("no paper",noFeedbackPaper)
+  // console.log("sent paper",sentFeedbackPaper)
+  // console.log("no feedback",noFeedbackTitle)
+  // console.log("sent feedback", sentFeedbackTitle)
+  } 
+  // if ( noFeedbackPaper.length>0) {
+  //   setTableData(noFeedbackPaper)
+  // } else {
+  //   setTableData(papersData)
+  // }
+  // console.log("table",tableData)
   //redirect if the user is not authenticated
   return ((!user)? <Navigate to="/signup"/> :
     <div  className={PapersCss}>
@@ -149,9 +199,36 @@ function Papers(props) {
           {user.status==='standard'?<Link to='/dashboard/new-paper'  class="btn add-paper-btn" >
           +New Paper
           </Link>:<div></div>}
-      
         {/* ========The Table======= */}
-        {papersData ? <Table columns={columns} data={papersData} />:<h2>Loading...</h2>}
+        {user.status==='judge' &&
+              <div>
+                <input type="checkbox" class="btn-check" id="btn-check-outlined" autocomplete="off" onClick={handleViewEditJudges}/>
+                <label class="btn edit-judges-checked" for="btn-check-outlined">Sent Feedbacks</label><br></br>
+              </div>              
+
+        }
+        { user.status==='judge' &&
+          <div>
+            {
+              !editJudgesOpen && <div>{noFeedbackPaper.length>0 && <Table columns={columns} data={noFeedbackPaper} />} </div>
+        
+            }
+            {
+              editJudgesOpen && <div>{sentFeedbackPaper.length>0 && <Table columns={columns} data={sentFeedbackPaper} />} </div> 
+            }            
+          </div>
+
+        }
+      {user.status==='admin' &&
+        <div>
+          {papersData ? <Table columns={columns} data={papersData} />:<h2>Loading...</h2>}
+        </div>
+      }
+      {user.status==='standard' &&
+        <div>
+          {papersData ? <Table columns={columns} data={papersData} />:<h2>Loading...</h2>}
+        </div>
+      }      
 
       </Container>
 

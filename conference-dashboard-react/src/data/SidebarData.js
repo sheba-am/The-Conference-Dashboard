@@ -4,7 +4,7 @@ import * as AiIcons from 'react-icons/ai';
 import * as IoIcons from 'react-icons/io';
 import { IoPeopleSharp } from "react-icons/io5";
 import { FaNewspaper } from "react-icons/fa";
-export const SidebarData = [
+export const StandardSidebarData = [
   {
     title: 'Home',
     path: '/dashboard',
@@ -22,7 +22,10 @@ export const SidebarData = [
     path: '/dashboard/papers',
     icon: <IoIcons.IoIosPaper />,
     cName: 'standard-user-papers'
-  },
+  }, 
+];
+
+export const AdminSidebarData = [
   {
     title: 'Home',
     path: '/dashboard',
@@ -47,15 +50,28 @@ export const SidebarData = [
     icon: <IoPeopleSharp/>,
     cName: 'admin-manage-standard-user'
   },
-  // {
-  //   title: 'Manage Judges',
-  //   path: '/dashboard/manage-judges',
-  //   icon: <IoPeopleSharp />,
-  //   cName: 'admin-manage-judges'
-  // },  
-  
 ];
 
+export const JudgeSidebarData = [
+  {
+    title: 'Home',
+    path: '/dashboard',
+    icon: <AiIcons.AiFillHome />,
+    cName: 'judge-home'
+  },
+  {
+    title: 'Edit Info',
+    path: '/dashboard/editinfo',
+    icon: <AiIcons.AiFillEdit />,
+    cName: 'judge-editinfo'
+  },
+  {
+    title: 'Papers',
+    path: '/dashboard/papers',
+    icon: <IoIcons.IoIosPaper />,
+    cName: 'judge-papers'
+  },  
+];
 export const DashboadMainPageData = [
   {
     title: 'Published Papers',
