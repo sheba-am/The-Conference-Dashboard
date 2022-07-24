@@ -4,6 +4,7 @@ import * as AiIcons from 'react-icons/ai';
 import * as IoIcons from 'react-icons/io';
 import { IoPeopleSharp } from "react-icons/io5";
 import { FaNewspaper } from "react-icons/fa";
+import * as RiIcons from 'react-icons/ri';
 export const StandardSidebarData = [
   {
     title: 'Home',
@@ -36,7 +37,21 @@ export const AdminSidebarData = [
     title: 'Edit Info',
     path: '/dashboard/editinfo',
     icon: <AiIcons.AiFillEdit />,
-    cName: 'admin-editinfo'
+    cName: 'admin-editinfo',
+    iconClosed: <RiIcons.RiArrowDownSFill />,
+    iconOpened: <RiIcons.RiArrowUpSFill />,
+    subNav: [
+      {
+        title: 'Users',
+        path: '/overview/users',
+        icon: <IoIcons.IoIosPaper />
+      },
+      {
+        title: 'Revenue',
+        path: '/overview/revenue',
+        icon: <IoIcons.IoIosPaper />
+      }
+    ]    
   },
   {
     title: 'Papers',

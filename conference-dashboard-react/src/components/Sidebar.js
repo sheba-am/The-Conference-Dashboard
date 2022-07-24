@@ -2,6 +2,7 @@ import React from "react";
 import { StandardSidebarData, AdminSidebarData, JudgeSidebarData} from '../data/SidebarData';
 import { GiHamburgerMenu } from "react-icons/gi";
 import { Link } from 'react-router-dom';
+import SubMenu from "./SubMenu";
 const Sidebar = props => {
   // the css changes when sidebar is open
     const sidebarClass = props.isOpen ? "sidebar open" : "sidebar";
@@ -24,7 +25,7 @@ const Sidebar = props => {
             </div>
 
             <ul class="navbar-nav  d-flex flex-column  w-100">
-              {
+              {/* {
                   SidebarData.map((item, index) => {
                       return (
                           <li  key={index} class="nav-item " >
@@ -36,7 +37,10 @@ const Sidebar = props => {
                           </li>
                       );
                   })
-              }
+              } */}
+            {SidebarData.map((item, index) => {
+              return <SubMenu item={item} key={index} />;
+            })}              
             </ul>
           </nav>
         </div>
