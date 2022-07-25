@@ -1,7 +1,7 @@
 import React, { useState, useEffect} from 'react'
 import { Container } from 'react-bootstrap'
 import axios from 'axios'
-import {userStatusData} from '../data/FormData'
+import {userStatusData, fields} from '../data/FormData'
 export default function AllUsers(props) {
     const AllUsersCss = props.isOpen ? "content open" : "content";
     const [users, setUsers] = useState();
@@ -34,16 +34,16 @@ export default function AllUsers(props) {
           })
       }
       function ChangeRole(username, e) {
-        console.log("e",e)
-        // console.log('id',e.target.id)
-        console.log('username',username)
+        // console.log("e",e)
+        // console.log('username',username)
         // e.preventDefault()
         const result = axios.post(
           'http://127.0.0.1:8000/promote',
-          {'username':e,'status':username}
+          {'username':username,'status':e}
           , config
         ).then((response) => response)
         .then((response) => {
+          setUsers(response.data)
           console.log(response.data)
         })
       }
@@ -67,16 +67,19 @@ export default function AllUsers(props) {
                     {
                         users.map((user,index) => {
                             return(
-                                <tr key={user.username}  >
+                                user.status!=='dabirConference' &&<tr key={user.username}  >
                                     <th scope="row" class='table-index'>{index+1}</th>
                                     <td>{user.username}</td>
                                     
                                       { 
                                       //userStatusData.find(userStatus => userStatus.value === user.status)
-                                      userStatusData.map((statusData)=>(statusData.value===user.status &&<td> {statusData.label} </td>))
+                                      userStatusData.map((statusData,index)=>(statusData.value===user.status &&<td key={index}> {statusData.label} </td>))
                                       }
                                     
-                                    <td>{user.field}</td>
+                                    { 
+                                      //userStatusData.find(userStatus => userStatus.value === user.status)
+                                      fields.map((singelField,index)=>(singelField.value===user.field &&<td key={index}> {singelField.label} </td>))
+                                      }
                                     <td>
                                     <select class="form-select edit-paper-select" 
                                       value={user.status} onChange={(e) => ChangeRole(user.username,e.target.value)}

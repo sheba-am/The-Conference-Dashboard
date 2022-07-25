@@ -117,7 +117,7 @@ function handleClick(e) {
               </div>
               }
     
-              {user.status=='admin' && paper.published == false?<div class='col-lg-2 col-md-2 col-sm-3'><button class="btn btn-primary" onClick={handlePublish}>
+              {user.status=='dabirConference' && paper.published == false?<div class='col-lg-2 col-md-2 col-sm-3'><button class="btn btn-primary" onClick={handlePublish}>
                   publish
                 </button></div>:<div></div>}
             
@@ -156,7 +156,7 @@ function handleClick(e) {
               <h3>Judges: </h3>
             </div>
             <div class='col-md-5 col-sm-5 '>
-              {user.status=='admin' &&
+              {user.status=='dabirConference' &&
               <div>
                 <input type="checkbox" class="btn-check" id="btn-check-outlined" autocomplete="off" onClick={handleViewEditJudges}/>
                 <label class="btn edit-judges-checked" for="btn-check-outlined">Edit Judges</label><br></br>

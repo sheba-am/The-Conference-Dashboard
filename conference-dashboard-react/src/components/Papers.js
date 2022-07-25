@@ -24,11 +24,7 @@ function Papers(props) {
   const [papersData, setPapersData] = useState()
   const [judgeFeedbackData, setJudgeFeedbackData] = useState()
 
-    //========= Edit Judges =============
-    const [editJudgesOpen, setEditJudgesOpen] = useState(false);
-    const handleViewEditJudges = () => {
-      setEditJudgesOpen(!editJudgesOpen);
-    };  
+ 
   useEffect(() => {
     if(user){
       //get all the papers for admin and assigned papers for judge and standard user
