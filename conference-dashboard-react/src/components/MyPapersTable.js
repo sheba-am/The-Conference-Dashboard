@@ -7,7 +7,7 @@ import { Container } from 'react-bootstrap';
 import {useTable, useGlobalFilter,Row, Tabs,Tab} from 'react-table';
 import {columnsData} from '../data/columns';
 import { GlobalFilter } from './GlobalFilter';
-function PapersTable({ columns, data }) {
+function MyPapersTable({ columns, data }) {
     const user = JSON.parse(localStorage.getItem("user"))
   
     const showDetails = (selected) => {
@@ -46,10 +46,11 @@ function PapersTable({ columns, data }) {
                 {headerGroup.headers.map(column => (
                   <th scope="col" class='papers-table-header-item' {...column.getHeaderProps()}>{column.render('Header')}</th>
                 ))}
+                  <th scope="col-1"  class='papers-table-header-item'>More</th>
                   {/* <th scope="col">Score</th> */}
-                  { user.status==="dabirConference" &&<th scope="col-1"  class='papers-table-header-item'>More</th>}
-                  { user.status==="standard" &&<th scope="col-1"  class='papers-table-header-item'>More</th>}
-                  {user.status==="judge" && <th scope="col-1"  class='papers-table-header-item'>Feedback</th>}
+                  {/* { user.status==="dabirConference" &&<th scope="col-1"  class='papers-table-header-item'>More</th>} */}
+                  {/* { user.status==="standard" &&<th scope="col-1"  class='papers-table-header-item'>More</th>} */}
+                  {/* {user.status==="judge" && <th scope="col-1"  class='papers-table-header-item'>Feedback</th>} */}
               </tr>
             ))}
           </thead>
@@ -64,30 +65,22 @@ function PapersTable({ columns, data }) {
                         <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
                     )
                   })}
-                  {  user.status==="dabirConference" &&
-                    <td class='col-1'>
-                    <Link to='/dashboard/paper-details' class="btn btn-primary details-btn" onClick={() => showDetails(row.original)}>
-                          ...
-                      </Link>
-                    </td>
-                    // console.log(row.original)//this is replacement of item
-                  }
-                  { user.status==="standard" &&
-                    <td class='col-1'>
-                    <Link to='/dashboard/paper-details' class="btn btn-primary details-btn" onClick={() => showDetails(row.original)}>
-                          ...
-                      </Link>
-                    </td>
-                  }
+                  
+                  <td class='col-1'>
+                  <Link to='/dashboard/paper-details' class="btn btn-primary details-btn" onClick={() => showDetails(row.original)}>
+                        ...
+                    </Link>
+                  </td>
+                  
         
-                  {
+                  {/* {
                     user.status==="judge"&&
                     <td class='col-1'>
                     <Link to='/dashboard/send-feedback' class="btn btn-primary  send-feedback-btn" onClick={() => showDetails(row.original)}>
                         Send Feedback
                     </Link>
                     </td>
-                  }
+                  } */}
                 </tr>
               )
             })}
@@ -97,4 +90,4 @@ function PapersTable({ columns, data }) {
       </>
     )
   }
-export default PapersTable;
+export default MyPapersTable;

@@ -10,19 +10,16 @@ export const StandardSidebarData = [
     title: 'Home',
     path: '/dashboard',
     icon: <AiIcons.AiFillHome />,
-    cName: 'standard-user-home'
   },
   {
     title: 'Edit Info',
     path: '/dashboard/editinfo',
     icon: <AiIcons.AiFillEdit />,
-    cName: 'standard-user-editinfo'
   },
   {
-    title: 'Papers',
-    path: '/dashboard/papers',
+    title: 'My Papers',
+    path: '/dashboard/my-papers',
     icon: <IoIcons.IoIosPaper />,
-    cName: 'standard-user-papers'
   }, 
 ];
 
@@ -31,13 +28,11 @@ export const DabirConferenceSidebarData = [
     title: 'Home',
     path: '/dashboard',
     icon: <AiIcons.AiFillHome />,
-    cName: 'admin-home'
   },
   {
     title: 'Edit Info',
     path: '/dashboard/editinfo',
     icon: <AiIcons.AiFillEdit />,
-    cName: 'admin-editinfo',
     iconClosed: <RiIcons.RiArrowDownSFill />,
     iconOpened: <RiIcons.RiArrowUpSFill />,
     subNav: [
@@ -54,16 +49,19 @@ export const DabirConferenceSidebarData = [
     ]    
   },
   {
+    title: 'My Papers',
+    path: '/dashboard/my-papers',
+    icon: <IoIcons.IoIosPaper />,
+  },  
+  {
     title: 'Papers',
     path: '/dashboard/papers',
     icon: <IoIcons.IoIosPaper />,
-    cName: 'admin-papers'
   },
   {
     title: 'Manage Users',
     path: '/dashboard/allusers',
     icon: <IoPeopleSharp/>,
-    cName: 'admin-manage-standard-user'
   },
 ];
 
@@ -72,7 +70,6 @@ export const JudgeSidebarData = [
     title: 'Home',
     path: '/dashboard',
     icon: <AiIcons.AiFillHome />,
-    cName: 'judge-home'
   },
   {
     title: 'Edit Info',
@@ -84,7 +81,11 @@ export const JudgeSidebarData = [
     title: 'Papers',
     path: '/dashboard/papers',
     icon: <IoIcons.IoIosPaper />,
-    cName: 'judge-papers'
+  },  
+  {
+    title: 'My Papers',
+    path: '/dashboard/my-papers',
+    icon: <IoIcons.IoIosPaper />,
   },  
 ];
 export const DashboadMainPageData = [

@@ -3,9 +3,8 @@ import { Navigate } from 'react-router-dom';
 import { PaperContext } from '../contexts/PaperContext';
 import axios from 'axios'
 import {columnsData} from '../data/columns';
-import Judge_Papers from '../pages/Judge_Papers';
-import DabirConference_Papers from '../pages/DabirConference_Papers';
-//get papers
+import MyPapersTable from '../components/MyPapersTable'
+import { Link } from 'react-router-dom';
 
 
 
@@ -15,8 +14,7 @@ const config = {
       
   }
 }
-
-function Papers(props) {
+function MyPapers(props) {
   const user = JSON.parse(localStorage.getItem("user"))
   const PapersCss = props.isOpen ? "content open" : "content";
   const {selectedPaper,setSelectedPaper} =useContext(PaperContext)
@@ -26,15 +24,9 @@ function Papers(props) {
  
   useEffect(() => {
     if(user){
-      //get all the papers for admin and assigned papers for judge 
-      var request = ''
-      if(user.status=='dabirConference'){
-        request = "viewAllPapers"
-      }else{
-        request = "viewPapers"
-      }
+      //get all the papers which current user is author of
       const result = axios.post(
-        'http://127.0.0.1:8000/' + request,
+        'http://127.0.0.1:8000/viewPapers',
         {'username': user.username}
         , config
       ).then((response) => response)
@@ -42,18 +34,7 @@ function Papers(props) {
         setPapersData(response.data)
         localStorage.setItem("papers", JSON.stringify(papersData))
       })
-      if (user.status=='judge'){
-        const judgefeedback = axios.post(
-          'http://127.0.0.1:8000/viewJudgeFeedback',
-          {'username': user.username}
-          , config
-        ).then((response) => response)
-        .then((response) => {
-          setJudgeFeedbackData(response.data)
-          // console.log('judgeview',response.data)
-        })
 
-      }
 
     } 
   }, [])
@@ -68,17 +49,21 @@ function Papers(props) {
     <div  className={PapersCss}>
       
       <div class="container mt-3">
-        <h2>Papers</h2>
-        {
-          user.status==='judge' && <Judge_Papers columns={columns} papersData={papersData} judgeFeedbackData={judgeFeedbackData} />
-        }
+        <h2>My Papers</h2>
+        <Link to='/dashboard/new-paper'  class="btn add-paper-btn" >
+          +New Paper
+        </Link>
+        <div>
+          {papersData ? <MyPapersTable columns={columns} data={papersData} />:<h2>Loading...</h2>}
+        </div>
+                
         
-        {
-          user.status==='dabirConference' && <DabirConference_Papers columns={columns} papersData={papersData} />
-        }        
+
+       
       </div>
 
     </div>
   )
 }
-export default Papers;
+
+export default MyPapers

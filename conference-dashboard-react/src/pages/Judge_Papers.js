@@ -1,5 +1,5 @@
 import React from 'react'
-import PapersTable from '../components/PapersTable'
+import MyPapersTable from '../components/MyPapersTable'
 function Judge_Papers({papersData, columns, judgeFeedbackData}) {
     var noFeedbackTitle=[];
     //var sentFeedbackTitle=[];
@@ -43,18 +43,18 @@ function Judge_Papers({papersData, columns, judgeFeedbackData}) {
           <div class="tab-content">
             <div id="home" class="container tab-pane active"><br />
               <h3>All</h3>
-              {papersData ? <PapersTable columns={columns} data={papersData} /> : <h2>Loading...</h2>}
+              {papersData ? <MyPapersTable columns={columns} data={papersData} /> : <h2>Loading...</h2>}
             </div>
             <div id="menu1" class="container tab-pane fade"><br />
               <h3>Not Sent</h3>
               {
-                noFeedbackPaper.length>0 ? <PapersTable columns={columns} data={noFeedbackPaper} /> : <h2>Loading...</h2>
+                noFeedbackPaper.length>0 ? <MyPapersTable columns={columns} data={noFeedbackPaper} /> : <h2>Loading...</h2>
               }
             </div>
             <div id="menu2" class="container tab-pane fade"><br />
               <h3>Sent</h3>
               {
-                sentFeedbackPaper.length>0 ? <PapersTable columns={columns} data={sentFeedbackPaper} /> : <h2>Loading...</h2>
+                sentFeedbackPaper.length>0 ? <MyPapersTable columns={columns} data={sentFeedbackPaper} /> : <h2>Loading...</h2>
               }
             </div>
           </div>
