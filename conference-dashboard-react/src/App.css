@@ -9,11 +9,6 @@
 
  /* =================== SIDEBAR ===================*/
 
-#sidebar .sidebar-item {
-	font-size: 1.4em;
-  max-height: 8vh;  
-  padding: 0.5vh 1vw 0.5vh 1vw;
-}
 @media only screen and (max-width: 768px) {
   #sidebar .sidebar {
     right: -25vw;
@@ -70,7 +65,7 @@
 
 } */
 
-.link-of-nav {
+/* .link-of-nav {
   text-decoration: none ;
   list-style-type: none;
   color:white;
@@ -86,7 +81,13 @@
 #sidebar .nav-link:hover {
 	background-color: #2c4f665d;
   
-}
+#sidebar .sidebar-item {
+	font-size: 1.4em;
+  max-height: 8vh;  
+  padding: 0.5vh 1vw 0.5vh 1vw;
+}  
+  
+} */
 .content {
   position: absolute;
   top: 0;

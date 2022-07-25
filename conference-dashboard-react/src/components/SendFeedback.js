@@ -93,7 +93,7 @@ export default function SendFeedback (props) {
                     <Alert variant='success'>{error}</Alert>
                   }
                 <Form.Label>Score: </Form.Label>
-                <Form.Control type="text" ref={score} required />
+                <Form.Control type="number" ref={score} required />
                 <Form.Label>Status:</Form.Label>
                 <Form.Control type="text" ref={status} required />
                 <Form.Label>Description</Form.Label>
