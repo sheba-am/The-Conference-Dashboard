@@ -62,3 +62,11 @@ export const fields = [
     {value: "Computer Science", label: "Computer Science"},
     {value: "Medicine", label: "Medicine"},
   ]
+
+  export const userStatusData = [
+    {value: "dabirConference", label: "Dabir Conference"},
+    {value: "dabirKhane", label: "Dabir Khane"},
+    {value: "dabirBakhsh", label: "Dabir Bakhsh"},
+    {value: "judge", label: "Judge"},
+    {value: "standard", label: "Standard"},
+  ]

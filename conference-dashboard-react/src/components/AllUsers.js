@@ -1,7 +1,7 @@
-import React, { useRef, useState, useEffect} from 'react'
-import { Container, Form, Button, Alert } from 'react-bootstrap'
-import { useNavigate, Navigate } from "react-router-dom";
+import React, { useState, useEffect} from 'react'
+import { Container } from 'react-bootstrap'
 import axios from 'axios'
+import {userStatusData} from '../data/FormData'
 export default function AllUsers(props) {
     const AllUsersCss = props.isOpen ? "content open" : "content";
     const [users, setUsers] = useState();
@@ -33,6 +33,20 @@ export default function AllUsers(props) {
             setUsers(response.data)
           })
       }
+      function ChangeRole(username, e) {
+        console.log("e",e)
+        // console.log('id',e.target.id)
+        console.log('username',username)
+        // e.preventDefault()
+        const result = axios.post(
+          'http://127.0.0.1:8000/promote',
+          {'username':e,'status':username}
+          , config
+        ).then((response) => response)
+        .then((response) => {
+          console.log(response.data)
+        })
+      }
     return(
         <div className={AllUsersCss}>
           <Container>
@@ -46,7 +60,7 @@ export default function AllUsers(props) {
                     <th scope="col" class='papers-table-header-item'>username</th>
                     <th scope="col" class='papers-table-header-item'>status</th>
                     <th scope="col" class='papers-table-header-item'>field</th>
-                    <th scope="col" class='papers-table-header-item'>promote</th>
+                    <th scope="col" class='papers-table-header-item'>change role</th>
                   </tr>
                 </thead>
                 <tbody class="papers-table-body">
@@ -56,9 +70,24 @@ export default function AllUsers(props) {
                                 <tr key={user.username}  >
                                     <th scope="row" class='table-index'>{index+1}</th>
                                     <td>{user.username}</td>
-                                    <td>{user.status}</td>
+                                    
+                                      { 
+                                      //userStatusData.find(userStatus => userStatus.value === user.status)
+                                      userStatusData.map((statusData)=>(statusData.value===user.status &&<td> {statusData.label} </td>))
+                                      }
+                                    
                                     <td>{user.field}</td>
-                                    <td>{user.status !== 'judge' && <button class='btn send-feedback-btn' id={user.username} onClick={handleClick}>Promote to judge</button>}</td>
+                                    <td>
+                                    <select class="form-select edit-paper-select" 
+                                      value={user.status} onChange={(e) => ChangeRole(user.username,e.target.value)}
+                                      >
+                                        <option defaultValue={user.status} disabled hidden></option>
+                                        {userStatusData.map(( item ) => (
+                                          <option value={item.value}> {item.label} </option>
+                                          )
+                                        )}
+                                    </select>
+                                    </td>
                                 </tr>
                             )
                         }

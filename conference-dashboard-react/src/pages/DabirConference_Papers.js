@@ -1,6 +1,6 @@
 import React from 'react'
 import PapersTable from '../components/PapersTable'
-function Admin_Papers({columns, papersData}) {
+function DabirConference_Papers({columns, papersData}) {
   return (
     <div>
         {papersData ? <PapersTable columns={columns} data={papersData} />:<h2>Loading...</h2>}        
@@ -8,4 +8,4 @@ function Admin_Papers({columns, papersData}) {
   )
 }
 
-export default Admin_Papers
+export default DabirConference_Papers

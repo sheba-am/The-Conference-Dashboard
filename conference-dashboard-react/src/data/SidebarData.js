@@ -26,7 +26,7 @@ export const StandardSidebarData = [
   }, 
 ];
 
-export const AdminSidebarData = [
+export const DabirConferenceSidebarData = [
   {
     title: 'Home',
     path: '/dashboard',

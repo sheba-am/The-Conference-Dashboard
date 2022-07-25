@@ -47,7 +47,7 @@ function PapersTable({ columns, data }) {
                   <th scope="col" class='papers-table-header-item' {...column.getHeaderProps()}>{column.render('Header')}</th>
                 ))}
                   {/* <th scope="col">Score</th> */}
-                  { user.status==="admin" &&<th scope="col-1"  class='papers-table-header-item'>More</th>}
+                  { user.status==="dabirConference" &&<th scope="col-1"  class='papers-table-header-item'>More</th>}
                   { user.status==="standard" &&<th scope="col-1"  class='papers-table-header-item'>More</th>}
                   {user.status==="judge" && <th scope="col-1"  class='papers-table-header-item'>Feedback</th>}
               </tr>
@@ -64,7 +64,7 @@ function PapersTable({ columns, data }) {
                         <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
                     )
                   })}
-                  {  user.status==="admin" &&
+                  {  user.status==="dabirConference" &&
                     <td class='col-1'>
                     <Link to='/dashboard/paper-details' class="btn btn-primary details-btn" onClick={() => showDetails(row.original)}>
                           ...
