@@ -18,7 +18,16 @@ from django.db import IntegrityError
 from django.db.models import Q
 from .models import BaseUser, Paper, FeedBack
 from .serializers import UserSerializer, PaperSerializer, FeedBackSerializer
+from django.core.mail import send_mail
 
+
+# @api_view(['POST'])
+# def sendEmail(request):
+#     users = BaseUser.objects.all()
+#     for item in users[2:]:
+#         item.field = item.field.lower()
+#         item.save()
+#     return Response("email sent")
 
 @api_view(['POST'])
 def signup(request):
@@ -38,7 +47,8 @@ def signup(request):
             country = data['country'].lower(),
             city = data['city'].lower(),
             status = data['status'].lower(),
-            field= data['field'].lower()
+            field= data['field'].lower(),
+            subfields = data['subfields'].lower()
         )
         serializer = UserSerializer(user,many=False)
         return Response(serializer.data)
@@ -87,6 +97,7 @@ def addPaper(request):
             language=data['language'].lower(),
             NOM=data['NOM'].lower(),
             field=data['field'].lower(),
+            subfields =data['subfields'].lower(),
             title=data['title'].lower(),
             summary=data['summary'].lower(),
             paperFile=data['paperFile'],
@@ -119,6 +130,7 @@ def editPaper(request):
     paper.language=data['language'].lower()
     paper.NOM=data['NOM'].lower()
     paper.field=data['field'].lower()
+    paper.subfields=data['subfields'].lower()
     paper.title=data['title'].lower()
     paper.summary=data['summary'].lower()
     paper.paperFile=data['paperFile']
@@ -154,6 +166,7 @@ def EditInfo(request):
     user.country = data['country'].lower()
     user.city = data['city'].lower()
     user.field = data['field'].lower()
+    user.subfields = data['subfields'].lower()
     user.save(update_fields=['email','password','first_name','last_name',
     'gender','SNN','major','degree','university','country','city','field'])
     serializer = UserSerializer(user,many=False)
@@ -177,7 +190,55 @@ def viewFeedback(request):
     feedback = FeedBack.objects.get(Q(paper=paper) & Q(judge=judge))
     serializer = FeedBackSerializer(feedback,many=False)
     return Response(serializer.data)
-        
+
+#judge options
+@api_view(['POST'])
+def sendFeedback(request):
+    data = request.data
+    paper = Paper.objects.get(title=data['title'].lower())
+    judge = BaseUser.objects.get(username=data['username'].lower())
+    feedback = FeedBack.objects.filter(Q(paper=paper) & Q(judge=judge))[0]
+    feedback.q1 = data['q1']
+    feedback.q2 = data['q2']
+    feedback.q3 = data['q3']
+    feedback.q4 = data['q4']
+    feedback.q5 = data['q5']
+    feedback.q6 = data['q6']
+    feedback.q7 = data['q7']
+    feedback.q8 = data['q8']
+    feedback.q9 = data['q9']
+    feedback.q10 = data['q10']
+    feedback.description = data['description']
+    feedback.save()
+    serializer = FeedBackSerializer(feedback,many=False)
+    return Response(serializer.data)
+
+
+
+@api_view(['POST'])
+def viewJudgeFeedback(request):
+    data = request.data
+    judge = BaseUser.objects.get(username=data['username'].lower())
+    feedback = FeedBack.objects.filter(judge=judge)
+    serializer = FeedBackSerializer(feedback,many=True)
+    return Response(serializer.data)
+
+@api_view(['POST'])
+def acceptPaper(request):
+    data = request.data
+    paper = Paper.objects.get(title=data['title'].lower())
+    judge = BaseUser.objects.get(username=data['username'].lower())
+    feedback = FeedBack.objects.get(Q(paper=paper) & Q(judge=judge))
+    if(json.loads(data['approval'].lower())):
+        feedback.accepted = data['approval']
+        feedback.save()
+        serializer = FeedBackSerializer(feedback,many=False)
+        return Response(serializer.data)
+    else:
+        feedback.delete()
+        return Response("feedback deleted.")
+
+
 #dabirkhane options
 @api_view(['POST'])
 def dabirkhaneApproval(request):
@@ -214,7 +275,7 @@ def dabirBakhshApproval(request):
 @api_view(['POST'])
 def fieldPapers(request):
     data = request.data
-    papers = Paper.objects.filter(field=data['field'])
+    papers = Paper.objects.filter(field=data['field'].lower())
     serializer = PaperSerializer(papers,many=True)
     return Response(serializer.data)
 
@@ -222,7 +283,7 @@ def fieldPapers(request):
 @api_view(['POST'])
 def viewJudges(request):
     data = request.data
-    judges = BaseUser.objects.filter(Q(field=data['field']) & Q(status='judge'))
+    judges = BaseUser.objects.filter(Q(field=data['field'].lower()) & Q(status='judge'))
     serializer = UserSerializer(judges,many=True)
     return Response(serializer.data)
 
@@ -299,39 +360,3 @@ def publish(request):
     
     serializer = PaperSerializer(paper,many=False)
     return Response(serializer.data)
-
-    
-
-
-#judge options
-@api_view(['POST'])
-def sendFeedback(request):
-    data = request.data
-    paper = Paper.objects.get(title=data['title'].lower())
-    judge = BaseUser.objects.get(username=data['username'].lower())
-    feedback = FeedBack.objects.filter(Q(paper=paper) & Q(judge=judge))[0]
-    feedback.q1 = data['q1']
-    feedback.q2 = data['q2']
-    feedback.q3 = data['q3']
-    feedback.q4 = data['q4']
-    feedback.q5 = data['q5']
-    feedback.q6 = data['q6']
-    feedback.q7 = data['q7']
-    feedback.q8 = data['q8']
-    feedback.q9 = data['q9']
-    feedback.q10 = data['q10']
-    feedback.description = data['description']
-    feedback.save()
-    serializer = FeedBackSerializer(feedback,many=False)
-    return Response(serializer.data)
-
-
-
-@api_view(['POST'])
-def viewJudgeFeedback(request):
-    data = request.data
-    judge = BaseUser.objects.get(username=data['username'].lower())
-    feedback = FeedBack.objects.filter(judge=judge)
-    serializer = FeedBackSerializer(feedback,many=True)
-    return Response(serializer.data)
-        

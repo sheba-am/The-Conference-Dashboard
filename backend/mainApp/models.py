@@ -50,6 +50,7 @@ class BaseUser(AbstractUser):
 class FeedBack(models.Model):
     paper = models.ForeignKey(Paper, blank=True, on_delete=models.DO_NOTHING, related_name='paper')
     judge = models.ForeignKey(BaseUser, blank=True, on_delete=models.DO_NOTHING, related_name='judge')
+    accepted = models.BooleanField(default=None, null=True)
     # score = models.CharField(max_length=10, null=True, blank=True)
     # status = models.CharField(max_length=20, null=True, blank=True)
     q1 = models.IntegerField(null=True, blank=True)

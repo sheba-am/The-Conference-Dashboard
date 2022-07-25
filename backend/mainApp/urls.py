@@ -15,7 +15,7 @@ urlpatterns = [
     #judge options
     path('sendFeedback',  views.sendFeedback), #title, username(judge), q1, q2, q3, q4, q5, q6, q7, q8, q9, q10, description
     path('viewJudgeFeedback',  views.viewJudgeFeedback), #username
-    
+    path('acceptPaper',  views.acceptPaper),#title, username, approval
     #dabirkhane options
     path('dabirkhaneApproval',  views.dabirkhaneApproval), #title, approval
     path('changeTitle',  views.changeTitle), #title, newTitle
@@ -31,6 +31,7 @@ urlpatterns = [
     path('promote',  views.promote), #username, status
     path('viewAllPapers',  views.viewAllPapers),
     # path('publish',  views.publish),
+    # path('sendEmail',  views.sendEmail),
 
     #Auth
     path('signup',  views.signup),
