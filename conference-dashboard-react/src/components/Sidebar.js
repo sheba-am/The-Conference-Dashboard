@@ -1,5 +1,5 @@
 import React from "react";
-import { StandardSidebarData, DabirConferenceSidebarData, JudgeSidebarData} from '../data/SidebarData';
+import { StandardSidebarData, DabirConferenceSidebarData, JudgeSidebarData, DabirBakhshSidebarData, DabirKhaneSidebarData} from '../data/SidebarData';
 import { GiHamburgerMenu } from "react-icons/gi";
 import { Link } from 'react-router-dom';
 import SubMenu from "./SubMenu";
@@ -11,6 +11,10 @@ const Sidebar = props => {
     if(user){
       if (user.status==="dabirConference"){
         SidebarData = DabirConferenceSidebarData
+      } else if (user.status==='dabirKhane') {
+        SidebarData = DabirKhaneSidebarData
+      } else if (user.status==='dabirBakhsh') {
+        SidebarData = DabirBakhshSidebarData
       } else if (user.status==="judge") {
         SidebarData = JudgeSidebarData
       }

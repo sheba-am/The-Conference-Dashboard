@@ -54,7 +54,7 @@ export const DabirConferenceSidebarData = [
     icon: <IoIcons.IoIosPaper />,
   },  
   {
-    title: 'Papers',
+    title: 'Manage Papers',
     path: '/dashboard/papers',
     icon: <IoIcons.IoIosPaper />,
   },
@@ -62,6 +62,54 @@ export const DabirConferenceSidebarData = [
     title: 'Manage Users',
     path: '/dashboard/allusers',
     icon: <IoPeopleSharp/>,
+  },
+];
+
+export const DabirKhaneSidebarData = [
+  {
+    title: 'Home',
+    path: '/dashboard',
+    icon: <AiIcons.AiFillHome />,
+  },
+  {
+    title: 'Edit Info',
+    path: '/dashboard/editinfo',
+    icon: <AiIcons.AiFillEdit />,
+    cName: 'judge-editinfo'
+  },
+  {
+    title: 'My Papers',
+    path: '/dashboard/my-papers',
+    icon: <IoIcons.IoIosPaper />,
+  }, 
+  {
+    title: 'Manage Papers',
+    path: '/dashboard/papers',
+    icon: <IoIcons.IoIosPaper />,
+  },
+];
+
+export const DabirBakhshSidebarData = [
+  {
+    title: 'Home',
+    path: '/dashboard',
+    icon: <AiIcons.AiFillHome />,
+  },
+  {
+    title: 'Edit Info',
+    path: '/dashboard/editinfo',
+    icon: <AiIcons.AiFillEdit />,
+    cName: 'judge-editinfo'
+  },
+  {
+    title: 'My Papers',
+    path: '/dashboard/my-papers',
+    icon: <IoIcons.IoIosPaper />,
+  }, 
+  {
+    title: 'Manage Papers',
+    path: '/dashboard/papers',
+    icon: <IoIcons.IoIosPaper />,
   },
 ];
 
@@ -78,16 +126,17 @@ export const JudgeSidebarData = [
     cName: 'judge-editinfo'
   },
   {
-    title: 'Papers',
-    path: '/dashboard/papers',
-    icon: <IoIcons.IoIosPaper />,
-  },  
-  {
     title: 'My Papers',
     path: '/dashboard/my-papers',
     icon: <IoIcons.IoIosPaper />,
-  },  
+  }, 
+  {
+    title: 'Manage Papers',
+    path: '/dashboard/papers',
+    icon: <IoIcons.IoIosPaper />,
+  },
 ];
+
 export const DashboadMainPageData = [
   {
     title: 'Published Papers',
@@ -105,9 +154,9 @@ export const DashboadMainPageData = [
     cName: 'standard-user-editinfo'
   },
   {
-    title: 'Papers',
-    path: '/dashboard/papers',
-    description:'You can view papers',
+    title: 'My Papers',
+    path: '/dashboard/my-papers',
+    description:'You can view your papers',
     icon: <IoIcons.IoIosPaper />,
     cName: 'standard-user-papers'
   },

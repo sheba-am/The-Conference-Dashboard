@@ -49,13 +49,54 @@ function MyPapers(props) {
     <div  className={PapersCss}>
       
       <div class="container mt-3">
-        <h2>My Papers</h2>
+        
+        <h2>My Papers</h2>    
         <Link to='/dashboard/new-paper'  class="btn add-paper-btn" >
           +New Paper
         </Link>
-        <div>
-          {papersData ? <MyPapersTable columns={columns} data={papersData} />:<h2>Loading...</h2>}
-        </div>
+
+        <div>         
+          <ul class="nav nav-tabs" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" data-bs-toggle="tab" href="#menu0">All</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-bs-toggle="tab" href="#menu1">Revise</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-bs-toggle="tab" href="#menu2">Pending</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-bs-toggle="tab" href="#menu3">Aprroved</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-bs-toggle="tab" href="#menu4">Rejected</a>
+            </li>
+          </ul>
+
+          <div class="tab-content">
+            <div id="menu0" class="container tab-pane active"><br />
+              <h3>All</h3>
+              {papersData ? <MyPapersTable columns={columns} data={papersData} />:<h2>Loading...</h2>}
+            </div>
+            <div id="menu1" class="container tab-pane fade"><br />
+              <h3>Revise</h3>
+
+            </div>
+            <div id="menu2" class="container tab-pane fade"><br />
+              <h3>Pending</h3>
+
+            </div>
+            <div id="menu3" class="container tab-pane fade"><br />
+              <h3>Aprroved</h3>
+
+            </div>
+            <div id="menu4" class="container tab-pane fade"><br />
+              <h3>Rejected</h3>
+
+            </div>
+          </div>
+        </div>        
                 
         
 

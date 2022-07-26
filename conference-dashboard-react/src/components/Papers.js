@@ -5,6 +5,7 @@ import axios from 'axios'
 import {columnsData} from '../data/columns';
 import Judge_Papers from '../pages/Judge_Papers';
 import DabirConference_Papers from '../pages/DabirConference_Papers';
+import DabirKhane_Papers from '../pages/DabirKhane_Papers';
 //get papers
 
 
@@ -75,7 +76,10 @@ function Papers(props) {
         
         {
           user.status==='dabirConference' && <DabirConference_Papers columns={columns} papersData={papersData} />
-        }        
+        }
+        {
+          user.status==='dabirKhane' && <DabirKhane_Papers />
+        }                 
       </div>
 
     </div>
