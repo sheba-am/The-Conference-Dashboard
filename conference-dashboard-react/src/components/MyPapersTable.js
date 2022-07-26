@@ -48,7 +48,7 @@ function MyPapersTable({ columns, data }) {
                 ))}
                   <th scope="col-1"  class='papers-table-header-item'>More</th>
                   {/* <th scope="col">Score</th> */}
-                  {/* { user.status==="dabirConference" &&<th scope="col-1"  class='papers-table-header-item'>More</th>} */}
+                  {/* { user.status==="dabirconference" &&<th scope="col-1"  class='papers-table-header-item'>More</th>} */}
                   {/* { user.status==="standard" &&<th scope="col-1"  class='papers-table-header-item'>More</th>} */}
                   {/* {user.status==="judge" && <th scope="col-1"  class='papers-table-header-item'>Feedback</th>} */}
               </tr>

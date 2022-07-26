@@ -65,7 +65,7 @@ function PaperDetails(props) {
               <h3>Judges: </h3>
             </div>
             <div class='col-md-5 col-sm-5 '>
-              {user.status=='dabirConference' &&
+              {user.status=='dabirconference' &&
               <div>
                 <input type="checkbox" class="btn-check" id="btn-check-outlined" autocomplete="off" onClick={handleViewEditJudges}/>
                 <label class="btn edit-judges-checked" for="btn-check-outlined">Edit Judges</label><br></br>

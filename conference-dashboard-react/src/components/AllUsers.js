@@ -71,7 +71,7 @@ export default function AllUsers(props) {
                     {
                         users.map((user,index) => {
                             return(
-                                user.status!=='dabirConference' &&<tr key={user.username}  >
+                                user.status!=='dabirconference' &&<tr key={user.username}  >
                                     <th scope="row" class='table-index'>{index+1}</th>
                                     <td>{user.username}</td>
                                     

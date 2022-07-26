@@ -59,9 +59,9 @@ export const fields = [
   ]
 
   export const userStatusData = [
-    {value: "dabirConference", label: "Dabir Conference"},
-    {value: "dabirKhane", label: "Dabir Khane"},
-    {value: "dabirBakhsh", label: "Dabir Bakhsh"},
+    {value: "dabirconference", label: "Dabir Conference"},
+    {value: "dabirkhane", label: "Dabir Khane"},
+    {value: "dabirbakhsh", label: "Dabir Bakhsh"},
     {value: "judge", label: "Judge"},
     {value: "standard", label: "Standard"},
   ]

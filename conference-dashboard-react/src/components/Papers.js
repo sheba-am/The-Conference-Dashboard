@@ -29,7 +29,7 @@ function Papers(props) {
     if(user){
       //get all the papers for admin and assigned papers for judge 
       var request = ''
-      if(user.status=='dabirConference'){
+      if(user.status=='dabirconference'){
         request = "viewAllPapers"
       }else{
         request = "viewPapers"
@@ -75,10 +75,10 @@ function Papers(props) {
         }
         
         {
-          user.status==='dabirConference' && <DabirConference_Papers columns={columns} papersData={papersData} />
+          user.status==='dabirconference' && <DabirConference_Papers columns={columns} papersData={papersData} />
         }
         {
-          user.status==='dabirKhane' && <DabirKhane_Papers />
+          user.status==='dabirkhane' && <DabirKhane_Papers />
         }                 
       </div>
 
