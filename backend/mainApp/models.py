@@ -15,10 +15,10 @@ class Paper(models.Model):
     paperFile = models.FileField(upload_to='papers/', max_length=254)
     #method of presentation
     MOP = models.CharField(max_length=64)
-    published = models.BooleanField(default=None, null=True)
-    dabirKhane = models.BooleanField(default=None, null=True)
-    dabirBakhsh = models.BooleanField(default=None, null=True)
-    dabirConference = models.BooleanField(default=None, null=True)
+    published = models.BooleanField(default=False)
+    dabirKhane = models.CharField(default=None, null=True, max_length=2048)
+    dabirBakhsh = models.CharField(default=None, null=True, max_length=2048)
+    dabirConference = models.CharField(default=None, null=True, max_length=2048)
     def __str__(self):
         return self.title
 
