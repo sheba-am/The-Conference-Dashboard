@@ -2,7 +2,7 @@ import React from 'react'
 import MyPapersTable from '../components/MyPapersTable'
 function Judge_Papers({papersData, columns, judgeFeedbackData}) {
     var noFeedbackTitle=[];
-    //var sentFeedbackTitle=[];
+    var sentFeedbackTitle=[];
     var noFeedbackPaper=[];
     var sentFeedbackPaper=[];
     if (judgeFeedbackData) {
@@ -10,7 +10,9 @@ function Judge_Papers({papersData, columns, judgeFeedbackData}) {
       for (let i=0 ; i<judgeFeedbackData.length ; i++){
         if (judgeFeedbackData[i].score ==="N/A") {
           noFeedbackTitle.push(judgeFeedbackData[i].paper)
-        } 
+        } else {
+          sentFeedbackTitle.push(judgeFeedbackData[i].paper)
+        }
       }
   
   
@@ -18,7 +20,7 @@ function Judge_Papers({papersData, columns, judgeFeedbackData}) {
         for (let i=0 ; i<papersData.length ; i++){
             if (noFeedbackTitle.includes(papersData[i].title)){
               noFeedbackPaper.push(papersData[i])
-            } else {
+            } else  if (sentFeedbackTitle.includes(papersData[i].title)){
               sentFeedbackPaper.push(papersData[i])
             }
         }

@@ -51,6 +51,10 @@ export default function AllUsers(props) {
         <div className={AllUsersCss}>
           <Container>
               <h3>Manage Users</h3>
+             
+              {// this will be used in other instances
+              /* {userStatusData.filter(car => car.value === "standard").map((singelUser,index)=>{return(<div>{singelUser.label}</div> )} ) } */}
+            
               {users?
               <div id='papers-table'class="table-responsive-md">
                 <table  class="table papers-table justify-content-center table table-hover align-middle">

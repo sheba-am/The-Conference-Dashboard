@@ -61,10 +61,10 @@ function MyPapers(props) {
               <a class="nav-link active" data-bs-toggle="tab" href="#menu0">All</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" data-bs-toggle="tab" href="#menu1">Revise</a>
+              <a class="nav-link" data-bs-toggle="tab" href="#menu1">Pending</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" data-bs-toggle="tab" href="#menu2">Pending</a>
+              <a class="nav-link" data-bs-toggle="tab" href="#menu2">Revise</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" data-bs-toggle="tab" href="#menu3">Aprroved</a>
@@ -80,11 +80,11 @@ function MyPapers(props) {
               {papersData ? <MyPapersTable columns={columns} data={papersData} />:<h2>Loading...</h2>}
             </div>
             <div id="menu1" class="container tab-pane fade"><br />
-              <h3>Revise</h3>
+              <h3>Pending</h3>
 
             </div>
             <div id="menu2" class="container tab-pane fade"><br />
-              <h3>Pending</h3>
+              <h3>Revise</h3>
 
             </div>
             <div id="menu3" class="container tab-pane fade"><br />

@@ -69,7 +69,7 @@ function Papers(props) {
     <div  className={PapersCss}>
       
       <div class="container mt-3">
-        <h2>Papers</h2>
+        <h2>Manage Papers</h2>
         {
           user.status==='judge' && <Judge_Papers columns={columns} papersData={papersData} judgeFeedbackData={judgeFeedbackData} />
         }
