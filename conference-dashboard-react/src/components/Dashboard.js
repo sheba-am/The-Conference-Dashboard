@@ -17,6 +17,7 @@ import AllUsers from "./AllUsers";
 import AllPapers from "./AllPapers";
 import SendFeedback from "./SendFeedback";
 import History from "./History";
+import MyPapers from './MyPapers'
 export default function StandardUserDashboard(){
   // this const is for toggle of sidebar
     const [sidebarOpen, setSideBarOpen] = useState(false);
@@ -37,11 +38,11 @@ export default function StandardUserDashboard(){
             </div>
               <div class='col'>
                 <PaperContext.Provider value={providerValue}>
-                  <Routes>
-                
+                  <Routes>                
                     <Route path='/' element={<DashboradMainPage isOpen={sidebarOpen}/>} />
                     <Route path='/editinfo' element={<EditInfo isOpen={sidebarOpen}/>} />
                     <Route path='/papers' element={<Papers isOpen={sidebarOpen}/>} />
+                    <Route path='/my-papers' element={<MyPapers isOpen={sidebarOpen}/>} />
                     <Route path='/paper-details' element={<PaperDetails isOpen={sidebarOpen}/>} />
                     <Route path='/new-paper' element={<NewPaper isOpen={sidebarOpen}/>} />
                     <Route path='edit-paper' element={<EditPaper isOpen={sidebarOpen} />} />
