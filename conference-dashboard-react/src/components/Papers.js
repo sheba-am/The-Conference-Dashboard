@@ -28,14 +28,14 @@ function Papers(props) {
   useEffect(() => {
     if(user){
       //get all the papers for admin and assigned papers for judge 
-      var request = ''
-      if(user.status=='dabirconference'){
-        request = "viewAllPapers"
-      }else{
-        request = "viewPapers"
-      }
+      // var request = ''
+      // if(user.status=='dabirconference'){
+      //   request = "viewAllPapers"
+      // }else{
+      //   request = "viewPapers"
+      // }
       const result = axios.post(
-        'http://127.0.0.1:8000/' + request,
+        'http://127.0.0.1:8000/viewAllPapers' ,
         {'username': user.username}
         , config
       ).then((response) => response)
@@ -78,7 +78,7 @@ function Papers(props) {
           user.status==='dabirconference' && <DabirConference_Papers columns={columns} papersData={papersData} />
         }
         {
-          user.status==='dabirkhane' && <DabirKhane_Papers />
+          user.status==='dabirkhane' && <DabirKhane_Papers columns={columns} papersData={papersData} />
         }                 
       </div>
 

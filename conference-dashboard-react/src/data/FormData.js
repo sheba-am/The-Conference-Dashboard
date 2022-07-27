@@ -65,3 +65,10 @@ export const fields = [
     {value: "judge", label: "Judge"},
     {value: "standard", label: "Standard"},
   ]
+  export const DabirKhaneApproval =[
+    {value:' ', label: "Pending"},
+    {value: "revise", label: "Revise"},
+    {value: "approve", label: "Approve"},
+    {value: "reject", label: "Reject"},
+     
+  ]

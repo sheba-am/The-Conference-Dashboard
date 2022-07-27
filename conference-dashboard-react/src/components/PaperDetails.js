@@ -10,6 +10,7 @@ import AssignJudge from './AssignJudge';
 import { MdArrowBackIosNew } from "react-icons/md";
 import { Container } from 'react-bootstrap';
 import PaperInfo from './PaperInfo';
+import DabirKhane_Approval from '../pages/DabirKhane_Approval';
   // let feedbacks = []
 const config = {
   headers: {
@@ -21,7 +22,7 @@ const config = {
 function PaperDetails(props) {
   const [feedbacks, setFeedbacks] = useState([]);
   const PaperDetails = props.isOpen ? "content open" : "content";
-  const {selectedPaper,setSelectedPaper} =useContext(PaperContext)
+  // const {selectedPaper,setSelectedPaper} =useContext(PaperContext)
   // ========== Delete Modal Toggle ==========
   const [deleteOpen, setDeleteOpen] = useState(false);
   const handleViewDelete = () => {
@@ -58,6 +59,8 @@ function PaperDetails(props) {
       {/* ==== The Paper Details ==== */}
       <div class="container" >
         <PaperInfo />
+        <br />
+        <DabirKhane_Approval paper={paper}/>
           {/*==== Judges Table ==== */}
         <div>
           <div class='row paper-details-judge-header'>
