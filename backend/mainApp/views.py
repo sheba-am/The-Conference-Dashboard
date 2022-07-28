@@ -19,6 +19,7 @@ from django.db.models import Q
 from .models import BaseUser, Paper, FeedBack
 from .serializers import UserSerializer, PaperSerializer, FeedBackSerializer
 from django.core.mail import send_mail
+from datetime import datetime, timedelta
 
 
 @api_view(['POST'])
@@ -217,6 +218,18 @@ def sendFeedback(request):
     # feedback.q10 = data['q10']
     feedback.description = data['description']
     feedback.save()
+    paper = Paper.objects.get(title=data['title'].lower())
+    feedbacks = FeedBack.objects.filter(paper=paper)
+    allJudged = True
+    for item in feedbacks:
+        print(item.description)
+        print(item.description=="N/A")
+        if(item.description=="N/A"):
+            allJudged = False
+    #change status if all the judges have sumbitted feedbacks
+    if(allJudged):
+        paper.dabirBakhsh = 'judged'
+        paper.save()
     serializer = FeedBackSerializer(feedback,many=False)
     return Response(serializer.data)
 
@@ -238,6 +251,7 @@ def acceptPaper(request):
     feedback = FeedBack.objects.get(Q(paper=paper) & Q(judge=judge))
     if(json.loads(data['approval'].lower())):
         feedback.accepted = data['approval']
+        feedback.dateAccepted = datetime.now()
         feedback.save()
         serializer = FeedBackSerializer(feedback,many=False)
         return Response(serializer.data)
@@ -306,26 +320,33 @@ def viewAssignedJudge(request):
 def assignJudge(request):
     data = request.data
     paper = Paper.objects.get(title=data['title'].lower())
+    paper.dabirBakhsh = 'pending judgement'
+    paper.save()
     for item in data['judges'].split(','):
         if item != ',' and item != '':
             user = BaseUser.objects.get(username=item)
-            user.judgePapers.add(paper)
-            user.save()
-            FeedBack.objects.create(
-                paper=paper,
-                judge=user,
-                scores = "N/A",
-                description="N/A"
-            )
+            # feedbackName = (str(paper) + "_" + str(user))
+            feedback = FeedBack.objects.filter(Q(paper=paper) & Q(judge=user))
+            #add only if the judge has not been assigned before
+            print()
+            if(len(feedback)==0):
+                user.judgePapers.add(paper)
+                user.save()
+                FeedBack.objects.create(
+                    paper=paper,
+                    judge=user,
+                    scores = "N/A",
+                    description="N/A"
+                )
 
-            #send email
-            send_mail(
-            subject = 'Paper Assigment',
-            message = item + " paper with the title '" + data['title'] + "' has been assigned to you. Please accept or decline within x days.",
-            from_email = 'conference025@gmail.com',
-            recipient_list = ['masoomehmokhtari693@gmail.com'],
-            fail_silently = False,
-            )
+                #send email
+                send_mail(
+                subject = 'Paper Assigment',
+                message = item + " paper with the title '" + data['title'] + "' has been assigned to you. Please accept or decline within x days.",
+                from_email = 'conference025@gmail.com',
+                recipient_list = ['masoomehmokhtari693@gmail.com'],
+                fail_silently = False,
+                )
     serializer = PaperSerializer(paper,many=False)
     return Response(serializer.data)
 
