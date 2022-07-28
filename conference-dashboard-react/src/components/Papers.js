@@ -3,9 +3,9 @@ import { Navigate } from 'react-router-dom';
 import { PaperContext } from '../contexts/PaperContext';
 import axios from 'axios'
 import {columnsData} from '../data/columns';
-import Standard_Papers from '../pages/Standard_Papers';
 import Judge_Papers from '../pages/Judge_Papers';
-import Admin_Papers from '../pages/Admin_Papers';
+import DabirConference_Papers from '../pages/DabirConference_Papers';
+import DabirKhane_Papers from '../pages/DabirKhane_Papers';
 //get papers
 
 
@@ -24,16 +24,12 @@ function Papers(props) {
   const [papersData, setPapersData] = useState()
   const [judgeFeedbackData, setJudgeFeedbackData] = useState()
 
-    //========= Edit Judges =============
-    const [editJudgesOpen, setEditJudgesOpen] = useState(false);
-    const handleViewEditJudges = () => {
-      setEditJudgesOpen(!editJudgesOpen);
-    };  
+ 
   useEffect(() => {
     if(user){
-      //get all the papers for admin and assigned papers for judge and standard user
+      //get all the papers for admin and assigned papers for judge 
       var request = ''
-      if(user.status=='admin'){
+      if(user.status=='dabirconference'){
         request = "viewAllPapers"
       }else{
         request = "viewPapers"
@@ -73,17 +69,17 @@ function Papers(props) {
     <div  className={PapersCss}>
       
       <div class="container mt-3">
-        <h2>Papers</h2>
+        <h2>Manage Papers</h2>
         {
           user.status==='judge' && <Judge_Papers columns={columns} papersData={papersData} judgeFeedbackData={judgeFeedbackData} />
         }
-        {
-          user.status==='standard' && <Standard_Papers columns={columns} papersData={papersData} />
-        }
         
         {
-          user.status==='admin' && <Admin_Papers columns={columns} papersData={papersData} />
-        }        
+          user.status==='dabirconference' && <DabirConference_Papers columns={columns} papersData={papersData} />
+        }
+        {
+          user.status==='dabirkhane' && <DabirKhane_Papers />
+        }                 
       </div>
 
     </div>

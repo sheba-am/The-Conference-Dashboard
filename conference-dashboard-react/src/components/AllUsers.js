@@ -1,7 +1,7 @@
-import React, { useRef, useState, useEffect} from 'react'
-import { Container, Form, Button, Alert } from 'react-bootstrap'
-import { useNavigate, Navigate } from "react-router-dom";
+import React, { useState, useEffect} from 'react'
+import { Container } from 'react-bootstrap'
 import axios from 'axios'
+import {userStatusData, fields} from '../data/FormData'
 export default function AllUsers(props) {
     const AllUsersCss = props.isOpen ? "content open" : "content";
     const [users, setUsers] = useState();
@@ -33,10 +33,28 @@ export default function AllUsers(props) {
             setUsers(response.data)
           })
       }
+      function ChangeRole(username, e) {
+        // console.log("e",e)
+        // console.log('username',username)
+        // e.preventDefault()
+        const result = axios.post(
+          'http://127.0.0.1:8000/promote',
+          {'username':username,'status':e}
+          , config
+        ).then((response) => response)
+        .then((response) => {
+          setUsers(response.data)
+          console.log(response.data)
+        })
+      }
     return(
         <div className={AllUsersCss}>
           <Container>
               <h3>Manage Users</h3>
+             
+              {// this will be used in other instances
+              /* {userStatusData.filter(car => car.value === "standard").map((singelUser,index)=>{return(<div>{singelUser.label}</div> )} ) } */}
+            
               {users?
               <div id='papers-table'class="table-responsive-md">
                 <table  class="table papers-table justify-content-center table table-hover align-middle">
@@ -46,19 +64,37 @@ export default function AllUsers(props) {
                     <th scope="col" class='papers-table-header-item'>username</th>
                     <th scope="col" class='papers-table-header-item'>status</th>
                     <th scope="col" class='papers-table-header-item'>field</th>
-                    <th scope="col" class='papers-table-header-item'>promote</th>
+                    <th scope="col" class='papers-table-header-item'>change role</th>
                   </tr>
                 </thead>
                 <tbody class="papers-table-body">
                     {
                         users.map((user,index) => {
                             return(
-                                <tr key={user.username}  >
+                                user.status!=='dabirconference' &&<tr key={user.username}  >
                                     <th scope="row" class='table-index'>{index+1}</th>
                                     <td>{user.username}</td>
-                                    <td>{user.status}</td>
-                                    <td>{user.field}</td>
-                                    <td>{user.status !== 'judge' && <button class='btn send-feedback-btn' id={user.username} onClick={handleClick}>Promote to judge</button>}</td>
+                                    
+                                      { 
+                                      //userStatusData.find(userStatus => userStatus.value === user.status)
+                                      userStatusData.map((statusData,index)=>(statusData.value===user.status &&<td key={index}> {statusData.label} </td>))
+                                      }
+                                    
+                                    { 
+                                      //userStatusData.find(userStatus => userStatus.value === user.status)
+                                      fields.map((singelField,index)=>(singelField.value===user.field &&<td key={index}> {singelField.label} </td>))
+                                      }
+                                    <td>
+                                    <select class="form-select edit-paper-select" 
+                                      value={user.status} onChange={(e) => ChangeRole(user.username,e.target.value)}
+                                      >
+                                        <option defaultValue={user.status} disabled hidden></option>
+                                        {userStatusData.map(( item ) => (
+                                          <option value={item.value}> {item.label} </option>
+                                          )
+                                        )}
+                                    </select>
+                                    </td>
                                 </tr>
                             )
                         }

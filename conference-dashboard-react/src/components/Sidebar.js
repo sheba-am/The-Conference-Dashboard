@@ -1,5 +1,5 @@
 import React from "react";
-import { StandardSidebarData, AdminSidebarData, JudgeSidebarData} from '../data/SidebarData';
+import { StandardSidebarData, DabirConferenceSidebarData, JudgeSidebarData, DabirBakhshSidebarData, DabirKhaneSidebarData} from '../data/SidebarData';
 import { GiHamburgerMenu } from "react-icons/gi";
 import { Link } from 'react-router-dom';
 import SubMenu from "./SubMenu";
@@ -9,8 +9,12 @@ const Sidebar = props => {
     const user = JSON.parse(localStorage.getItem("user")); //retrieve the object
     let SidebarData = StandardSidebarData;
     if(user){
-      if (user.status==="admin"){
-        SidebarData = AdminSidebarData
+      if (user.status==="dabirconference"){
+        SidebarData = DabirConferenceSidebarData
+      } else if (user.status==='dabirkhane') {
+        SidebarData = DabirKhaneSidebarData
+      } else if (user.status==='dabirbakhsh') {
+        SidebarData = DabirBakhshSidebarData
       } else if (user.status==="judge") {
         SidebarData = JudgeSidebarData
       }

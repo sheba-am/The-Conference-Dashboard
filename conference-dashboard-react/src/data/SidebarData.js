@@ -10,34 +10,29 @@ export const StandardSidebarData = [
     title: 'Home',
     path: '/dashboard',
     icon: <AiIcons.AiFillHome />,
-    cName: 'standard-user-home'
   },
   {
     title: 'Edit Info',
     path: '/dashboard/editinfo',
     icon: <AiIcons.AiFillEdit />,
-    cName: 'standard-user-editinfo'
   },
   {
-    title: 'Papers',
-    path: '/dashboard/papers',
+    title: 'My Papers',
+    path: '/dashboard/my-papers',
     icon: <IoIcons.IoIosPaper />,
-    cName: 'standard-user-papers'
   }, 
 ];
 
-export const AdminSidebarData = [
+export const DabirConferenceSidebarData = [
   {
     title: 'Home',
     path: '/dashboard',
     icon: <AiIcons.AiFillHome />,
-    cName: 'admin-home'
   },
   {
     title: 'Edit Info',
     path: '/dashboard/editinfo',
     icon: <AiIcons.AiFillEdit />,
-    cName: 'admin-editinfo',
     iconClosed: <RiIcons.RiArrowDownSFill />,
     iconOpened: <RiIcons.RiArrowUpSFill />,
     subNav: [
@@ -54,25 +49,27 @@ export const AdminSidebarData = [
     ]    
   },
   {
-    title: 'Papers',
+    title: 'My Papers',
+    path: '/dashboard/my-papers',
+    icon: <IoIcons.IoIosPaper />,
+  },  
+  {
+    title: 'Manage Papers',
     path: '/dashboard/papers',
     icon: <IoIcons.IoIosPaper />,
-    cName: 'admin-papers'
   },
   {
     title: 'Manage Users',
     path: '/dashboard/allusers',
     icon: <IoPeopleSharp/>,
-    cName: 'admin-manage-standard-user'
   },
 ];
 
-export const JudgeSidebarData = [
+export const DabirKhaneSidebarData = [
   {
     title: 'Home',
     path: '/dashboard',
     icon: <AiIcons.AiFillHome />,
-    cName: 'judge-home'
   },
   {
     title: 'Edit Info',
@@ -81,12 +78,65 @@ export const JudgeSidebarData = [
     cName: 'judge-editinfo'
   },
   {
-    title: 'Papers',
+    title: 'My Papers',
+    path: '/dashboard/my-papers',
+    icon: <IoIcons.IoIosPaper />,
+  }, 
+  {
+    title: 'Manage Papers',
     path: '/dashboard/papers',
     icon: <IoIcons.IoIosPaper />,
-    cName: 'judge-papers'
-  },  
+  },
 ];
+
+export const DabirBakhshSidebarData = [
+  {
+    title: 'Home',
+    path: '/dashboard',
+    icon: <AiIcons.AiFillHome />,
+  },
+  {
+    title: 'Edit Info',
+    path: '/dashboard/editinfo',
+    icon: <AiIcons.AiFillEdit />,
+    cName: 'judge-editinfo'
+  },
+  {
+    title: 'My Papers',
+    path: '/dashboard/my-papers',
+    icon: <IoIcons.IoIosPaper />,
+  }, 
+  {
+    title: 'Manage Papers',
+    path: '/dashboard/papers',
+    icon: <IoIcons.IoIosPaper />,
+  },
+];
+
+export const JudgeSidebarData = [
+  {
+    title: 'Home',
+    path: '/dashboard',
+    icon: <AiIcons.AiFillHome />,
+  },
+  {
+    title: 'Edit Info',
+    path: '/dashboard/editinfo',
+    icon: <AiIcons.AiFillEdit />,
+    cName: 'judge-editinfo'
+  },
+  {
+    title: 'My Papers',
+    path: '/dashboard/my-papers',
+    icon: <IoIcons.IoIosPaper />,
+  }, 
+  {
+    title: 'Manage Papers',
+    path: '/dashboard/papers',
+    icon: <IoIcons.IoIosPaper />,
+  },
+];
+
 export const DashboadMainPageData = [
   {
     title: 'Published Papers',
@@ -104,9 +154,9 @@ export const DashboadMainPageData = [
     cName: 'standard-user-editinfo'
   },
   {
-    title: 'Papers',
-    path: '/dashboard/papers',
-    description:'You can view papers',
+    title: 'My Papers',
+    path: '/dashboard/my-papers',
+    description:'You can view your papers',
     icon: <IoIcons.IoIosPaper />,
     cName: 'standard-user-papers'
   },

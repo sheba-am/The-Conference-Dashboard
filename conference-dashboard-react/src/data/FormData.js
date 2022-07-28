@@ -1,8 +1,3 @@
-//===== Test array for select menus =====
-import React from 'react';
-
-
-
 
 export const methodOfPresentationData =[
 {
@@ -59,6 +54,14 @@ export const cities = [
     {value: "isfahan", label: "isfahan"},
   ]
 export const fields = [
-    {value: "Computer Science", label: "Computer Science"},
-    {value: "Medicine", label: "Medicine"},
+    {value: "computer science", label: "Computer Science"},
+    {value: "medicine", label: "Medicine"},
+  ]
+
+  export const userStatusData = [
+    {value: "dabirconference", label: "Dabir Conference"},
+    {value: "dabirkhane", label: "Dabir Khane"},
+    {value: "dabirbakhsh", label: "Dabir Bakhsh"},
+    {value: "judge", label: "Judge"},
+    {value: "standard", label: "Standard"},
   ]
