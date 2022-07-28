@@ -42,8 +42,25 @@ function MyPapers(props) {
   const columns = React.useMemo(
     () => columnsData,[]
   )
- 
-
+    var pendingPapers = []
+    var revisedPapers = []
+    var approvedPapers = []  
+    var rejectedPapers = []
+    if(papersData) {
+      for(let i=0 ; i<papersData.length ; i++) {
+        if(papersData[i].dabirConference && papersData[i].dabirConference==='approve') {
+          approvedPapers.push(papersData[i])
+        } else if(papersData[i].dabirConference && papersData[i].dabirConference==='reject') {
+          rejectedPapers.push(papersData[i])
+        } else if(papersData[i].dabirKhane && papersData[i].dabirKhane.includes('reject')) {
+          rejectedPapers.push(papersData[i])
+        } else if(papersData[i].dabirKhane && papersData[i].dabirKhane.includes('revise')) {
+          revisedPapers.push(papersData[i])
+        } else {
+          pendingPapers.push(papersData[i])
+        } 
+      }
+    }    
   //redirect if the user is not authenticated
   return ((!user)? <Navigate to="/signup"/> :
     <div  className={PapersCss}>
@@ -77,22 +94,26 @@ function MyPapers(props) {
           <div class="tab-content">
             <div id="menu0" class="container tab-pane active"><br />
               <h3>All</h3>
-              {papersData ? <MyPapersTable columns={columns} data={papersData} />:<h2>Loading...</h2>}
+              {papersData ? <MyPapersTable columns={columns} data={papersData}  myPaper={true} />:<h4>Loading...</h4>}
             </div>
             <div id="menu1" class="container tab-pane fade"><br />
               <h3>Pending</h3>
+              {pendingPapers.length>0 ? <MyPapersTable columns={columns} data={pendingPapers} myPaper={true}/>:<h4>No Results</h4>}
 
             </div>
             <div id="menu2" class="container tab-pane fade"><br />
               <h3>Revise</h3>
+              {revisedPapers.length>0 ? <MyPapersTable columns={columns} data={revisedPapers} myPaper={true} />:<h4>No Results</h4>}
 
             </div>
             <div id="menu3" class="container tab-pane fade"><br />
               <h3>Aprroved</h3>
+              {approvedPapers.length>0 ? <MyPapersTable columns={columns} data={approvedPapers} myPaper={true} />:<h4>No Results</h4>}
 
             </div>
             <div id="menu4" class="container tab-pane fade"><br />
               <h3>Rejected</h3>
+              {rejectedPapers.length>0 ? <MyPapersTable columns={columns} data={rejectedPapers} myPaper={true} />:<h4>No Results</h4>}
 
             </div>
           </div>
