@@ -21,13 +21,19 @@ from .serializers import UserSerializer, PaperSerializer, FeedBackSerializer
 from django.core.mail import send_mail
 
 
-# @api_view(['POST'])
-# def sendEmail(request):
-#     users = BaseUser.objects.all()
-#     for item in users[2:]:
-#         item.field = item.field.lower()
-#         item.save()
-#     return Response("email sent")
+@api_view(['POST'])
+def sendEmail(request):
+    # smtpObj = smtplib.SMTP('smtp server name',port)
+    # smtpObj.starttls() 
+    # smtpObj.login(email, password)
+    send_mail(
+    subject = 'test',
+    message = 'This is a test',
+    from_email = 'conference025@gmail.com',
+    recipient_list = ['masoomehmokhtari693@gmail.com'],
+    fail_silently = False,
+)
+    return Response("email sent")
 
 @api_view(['POST'])
 def signup(request):
@@ -198,16 +204,17 @@ def sendFeedback(request):
     paper = Paper.objects.get(title=data['title'].lower())
     judge = BaseUser.objects.get(username=data['username'].lower())
     feedback = FeedBack.objects.filter(Q(paper=paper) & Q(judge=judge))[0]
-    feedback.q1 = data['q1']
-    feedback.q2 = data['q2']
-    feedback.q3 = data['q3']
-    feedback.q4 = data['q4']
-    feedback.q5 = data['q5']
-    feedback.q6 = data['q6']
-    feedback.q7 = data['q7']
-    feedback.q8 = data['q8']
-    feedback.q9 = data['q9']
-    feedback.q10 = data['q10']
+    feedback.scores = data['scores']
+    # feedback.q1 = data['q1']
+    # feedback.q2 = data['q2']
+    # feedback.q3 = data['q3']
+    # feedback.q4 = data['q4']
+    # feedback.q5 = data['q5']
+    # feedback.q6 = data['q6']
+    # feedback.q7 = data['q7']
+    # feedback.q8 = data['q8']
+    # feedback.q9 = data['q9']
+    # feedback.q10 = data['q10']
     feedback.description = data['description']
     feedback.save()
     serializer = FeedBackSerializer(feedback,many=False)
@@ -307,9 +314,17 @@ def assignJudge(request):
             FeedBack.objects.create(
                 paper=paper,
                 judge=user,
-                score="N/A",
-                status="N/A",
+                scores = "N/A",
                 description="N/A"
+            )
+
+            #send email
+            send_mail(
+            subject = 'Paper Assigment',
+            message = item + " paper with the title '" + data['title'] + "' has been assigned to you. Please accept or decline within x days.",
+            from_email = 'conference025@gmail.com',
+            recipient_list = ['masoomehmokhtari693@gmail.com'],
+            fail_silently = False,
             )
     serializer = PaperSerializer(paper,many=False)
     return Response(serializer.data)
