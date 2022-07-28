@@ -54,10 +54,19 @@ export const cities = [
     {value: "isfahan", label: "isfahan"},
   ]
 export const fields = [
-    {value: "computer science", label: "Computer Science"},
-    {value: "medicine", label: "Medicine"},
+  {value: 'arificial intelligence', label:'arificial intelligence'},
+  {value: 'computer networks and communications', label:'computer networks and communications'},
+  {value: 'hardware and architecture', label:'hardware and architecture'},
+  {value: 'information systems', label:'information systems'},
+   {value: 'computer-human interaction', label:'computer-human interaction'},
+  {value: 'software', label:'software'},
+  {value: 'computer graphics and computer-aided design', label:'computer graphics and computer-aided design'},
+   {value: 'computational theory and mathematics', label:'computational theory and mathematics'},
+   {value: 'computer science (general)', label:'computer science (general)' },
+   {value: 'computer science application', label:'computer science application' },
   ]
 
+  
   export const userStatusData = [
     {value: "dabirconference", label: "Dabir Conference"},
     {value: "dabirkhane", label: "Dabir Khane"},

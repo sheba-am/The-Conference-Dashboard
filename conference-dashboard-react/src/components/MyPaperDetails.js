@@ -19,7 +19,7 @@ const config = {
   }
 }
 
-function PaperDetails(props) {
+function MyPaperDetails(props) {
   const [feedbacks, setFeedbacks] = useState([]);
   const PaperDetails = props.isOpen ? "content open" : "content";
   // const {selectedPaper,setSelectedPaper} =useContext(PaperContext)
@@ -82,7 +82,7 @@ function PaperDetails(props) {
       
           <div class='row'>
             <div class='col-lg-1 col-md-1 col-sm-2 '>
-              <Link to='/dashboard/papers' class="btn btn-primary">
+              <Link to='/dashboard/my-papers' class="btn btn-primary">
                   <MdArrowBackIosNew />
               </Link>
             </div>
@@ -110,7 +110,6 @@ function PaperDetails(props) {
           <PaperInfo />
         </div>
         <br />
-        <DabirKhane_Approval paper={paper} />
           {/*==== Judges Table ==== */}
         <div>
           <div class='row paper-details-judge-header'>
@@ -118,7 +117,7 @@ function PaperDetails(props) {
               <h3>Judges: </h3>
             </div>
             <div class='col-md-5 col-sm-5 '>
-              {user.status=='dabirbakhsh' &&
+              {user.status=='dabirconference' &&
               <div>
                 <input type="checkbox" class="btn-check" id="btn-check-outlined" autocomplete="off" onClick={handleViewEditJudges}/>
                 <label class="btn edit-judges-checked" for="btn-check-outlined">Edit Judges</label><br></br>
@@ -142,4 +141,4 @@ function PaperDetails(props) {
 }
 
 
-export default PaperDetails;
+export default MyPaperDetails;

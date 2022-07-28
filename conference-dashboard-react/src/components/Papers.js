@@ -6,6 +6,7 @@ import {columnsData} from '../data/columns';
 import Judge_Papers from '../pages/Judge_Papers';
 import DabirConference_Papers from '../pages/DabirConference_Papers';
 import DabirKhane_Papers from '../pages/DabirKhane_Papers';
+import DabirBakhsh_Papers from '../pages/DabirBakhsh_Papers';
 //get papers
 
 
@@ -79,7 +80,10 @@ function Papers(props) {
         }
         {
           user.status==='dabirkhane' && <DabirKhane_Papers columns={columns} papersData={papersData} />
-        }                 
+        }   
+        {
+          user.status==='dabirbakhsh' && <DabirBakhsh_Papers columns={columns} papersData={papersData} />
+        }                       
       </div>
 
     </div>

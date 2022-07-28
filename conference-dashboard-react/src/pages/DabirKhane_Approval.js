@@ -6,7 +6,6 @@ function DabirKhane_Approval({paper}) {
     const dabirKhaneArr =paper.dabirKhane? paper.dabirKhane.split(':'):[' ','']
     const [approval, setApproval] = useState(dabirKhaneArr[0]);
     const [approvalMsg, setApprovalMsg] = useState(dabirKhaneArr[1]);
-    console.log('array',dabirKhaneArr)
 
     // ========== Submit ===========
     const handleSubmit = (evt) => {
@@ -44,6 +43,7 @@ function DabirKhane_Approval({paper}) {
     <div class=' container details-of-paper'>
         <br/>
         <form onSubmit={handleSubmit}>
+            <h3>Dabir Khane Approval</h3>
             <div class='row'>
                 <div class='col-2'>
                     status

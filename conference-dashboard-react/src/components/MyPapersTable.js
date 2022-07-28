@@ -7,7 +7,7 @@ import { Container } from 'react-bootstrap';
 import {useTable, useGlobalFilter,Row, Tabs,Tab} from 'react-table';
 import {columnsData} from '../data/columns';
 import { GlobalFilter } from './GlobalFilter';
-function MyPapersTable({ columns, data }) {
+function MyPapersTable({ columns, data , myPaper}) {
     const user = JSON.parse(localStorage.getItem("user"))
   
     const showDetails = (selected) => {
@@ -67,20 +67,25 @@ function MyPapersTable({ columns, data }) {
                   })}
                   
                   <td class='col-1'>
-                  <Link to='/dashboard/paper-details' class="btn btn-primary details-btn" onClick={() => showDetails(row.original)}>
+                    {//when viewing their own paper 
+                    myPaper && <Link to='/dashboard/my-paper-details' class="btn btn-primary details-btn" onClick={() => showDetails(row.original)}>
                         ...
-                    </Link>
+                    </Link>}
+                    { /* when other users are viewing the papers */
+                    (!myPaper &&user.status!=="judge" )&& <Link to='/dashboard/paper-details' class="btn btn-primary details-btn" onClick={() => showDetails(row.original)}>
+                        ...
+                    </Link>}
                   </td>
                   
         
-                  {/* {
-                    user.status==="judge"&&
+                  { //when user is a judge and is veiwing assigned papers to them
+                     (!myPaper &&user.status==="judge" )&&
                     <td class='col-1'>
                     <Link to='/dashboard/send-feedback' class="btn btn-primary  send-feedback-btn" onClick={() => showDetails(row.original)}>
                         Send Feedback
                     </Link>
                     </td>
-                  } */}
+                  }
                 </tr>
               )
             })}
