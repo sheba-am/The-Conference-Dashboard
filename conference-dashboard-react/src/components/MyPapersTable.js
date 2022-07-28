@@ -68,24 +68,26 @@ function MyPapersTable({ columns, data , myPaper}) {
                   
                   <td class='col-1'>
                     {//when viewing their own paper 
-                    myPaper && <Link to='/dashboard/my-paper-details' class="btn btn-primary details-btn" onClick={() => showDetails(row.original)}>
-                        ...
-                    </Link>}
+                      myPaper && <Link to='/dashboard/my-paper-details' class="btn btn-primary details-btn" onClick={() => showDetails(row.original)}>
+                          ...
+                      </Link>
+                    }
                     { /* when other users are viewing the papers */
-                    (!myPaper &&user.status!=="judge" )&& <Link to='/dashboard/paper-details' class="btn btn-primary details-btn" onClick={() => showDetails(row.original)}>
-                        ...
-                    </Link>}
+                      (!myPaper &&user.status!=="judge" )&& <Link to='/dashboard/paper-details' class="btn btn-primary details-btn" onClick={() => showDetails(row.original)}>
+                          ...
+                      </Link>
+                    }
+
+                    { //when user is a judge and is veiwing assigned papers to them
+                      (!myPaper &&user.status==="judge" ) &&
+                      <Link to='/dashboard/send-feedback' class="btn btn-primary  send-feedback-btn" onClick={() => showDetails(row.original)}>
+                          Send Feedback
+                      </Link>
+                    }                    
                   </td>
                   
         
-                  { //when user is a judge and is veiwing assigned papers to them
-                     (!myPaper &&user.status==="judge" )&&
-                    <td class='col-1'>
-                    <Link to='/dashboard/send-feedback' class="btn btn-primary  send-feedback-btn" onClick={() => showDetails(row.original)}>
-                        Send Feedback
-                    </Link>
-                    </td>
-                  }
+
                 </tr>
               )
             })}

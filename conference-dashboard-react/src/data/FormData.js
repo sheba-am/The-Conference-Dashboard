@@ -81,3 +81,17 @@ export const fields = [
     {value: "reject", label: "Reject"},
      
   ]
+
+export const FeedbackQuestions = [
+  {value:'q1', label:'Q1: Is this test question?'},
+  {value:'q2', label:'Q2: Is this test question?'},
+  {value:'q3', label:'Q3: Is this test question?'},
+  {value:'q4', label:'Q4: Is this test question?'},
+  {value:'q5', label:'Q5: Is this test question?'},
+  {value:'q6', label:'Q6: Is this test question?'},
+  {value:'q7', label:'Q7: Is this test question?'},
+  {value:'q8', label:'Q8: Is this test question?'},
+  {value:'q9', label:'Q9: Is this test question?'},
+  {value:'q10', label:'Q10: Is this test question?'},
+
+]
