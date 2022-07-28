@@ -6,6 +6,7 @@ import {columnsData} from '../data/columns';
 import Judge_Papers from '../pages/Judge_Papers';
 import DabirConference_Papers from '../pages/DabirConference_Papers';
 import DabirKhane_Papers from '../pages/DabirKhane_Papers';
+import DabirBakhsh_Papers from '../pages/DabirBakhsh_Papers';
 //get papers
 
 
@@ -28,14 +29,14 @@ function Papers(props) {
   useEffect(() => {
     if(user){
       //get all the papers for admin and assigned papers for judge 
-      var request = ''
-      if(user.status=='dabirconference'){
-        request = "viewAllPapers"
-      }else{
-        request = "viewPapers"
-      }
+      // var request = ''
+      // if(user.status=='dabirconference'){
+      //   request = "viewAllPapers"
+      // }else{
+      //   request = "viewPapers"
+      // }
       const result = axios.post(
-        'http://127.0.0.1:8000/' + request,
+        'http://127.0.0.1:8000/viewAllPapers' ,
         {'username': user.username}
         , config
       ).then((response) => response)
@@ -78,8 +79,11 @@ function Papers(props) {
           user.status==='dabirconference' && <DabirConference_Papers columns={columns} papersData={papersData} />
         }
         {
-          user.status==='dabirkhane' && <DabirKhane_Papers />
-        }                 
+          user.status==='dabirkhane' && <DabirKhane_Papers columns={columns} papersData={papersData} />
+        }   
+        {
+          user.status==='dabirbakhsh' && <DabirBakhsh_Papers columns={columns} papersData={papersData} />
+        }                       
       </div>
 
     </div>

@@ -5,16 +5,32 @@ import { PaperContext } from '../contexts/PaperContext';
 import axios from 'axios'
 import { Container, Form, Button, Alert } from 'react-bootstrap'
 import { MdArrowBackIosNew } from "react-icons/md";
+import PaperInfo from './PaperInfo';
+import { FeedbackQuestions } from '../data/FormData';
 export default function SendFeedback (props) {
   const SendFeedbackCss = props.isOpen ? "content open" : "content";
     var paper = JSON.parse(localStorage.getItem("selectedPaper")); //retrieve the object
     var user = JSON.parse(localStorage.getItem("user"));
-    const score =  useRef()
-    const status =  useRef()
-    const description =  useRef()
+    // const score =  useRef()
+    // const status =  useRef()    
+    //const description =  useRef()
+    var scoresArr=  new Array(FeedbackQuestions.length).fill(0) 
+    const[scores,setScores]=useState(scoresArr)
     const [error, setError] = useState("")
-    function handleClick(e) {
+    const [description,setDescription] =useState("")
+    const handleScoreChange = (e, index) => {
+      const { value } = e.target;
+      const list = [...scores];
+      list[index] = value;
+      setScores(list);
+    };
+    function handleSubmit(e) {
         e.preventDefault()
+        let scores_string = scores.toString();
+        console.log(paper.title, user.username)
+        console.log(scores_string)
+        console.log(description)
+
         const config = {
             headers: {
                 'Content-type': 'application/json',
@@ -25,9 +41,12 @@ export default function SendFeedback (props) {
               'http://127.0.0.1:8000/sendFeedback',
               {"title":paper.title,
                "username":user.username,
-                "score":score.current.value,
-                "status":status.current.value,
-                "description":description.current.value
+               "q1":scores_string, "q2":"1", "q3":"1",  "q4":"1","q5":"1","q6":"1","q7":"1","q8":"1",
+               "q9":"1","q10":"1",
+               "description":description,
+                // "score":score.current.value,
+                // "status":status.current.value,
+                // "description":description.current.value
                 }
               , config
             ).then((response) => response)
@@ -39,25 +58,7 @@ export default function SendFeedback (props) {
           })
     }
 
-    function handleDownload(e) {
-      e.preventDefault()
-      const config = {
-        headers: {
-            'Content-type': 'application/json',
-            
-        }
-      }
-    const result = axios.post(
-        'http://127.0.0.1:8000/getPaperFile',
-        {
-          'title':paper.title
-        },
-        config
-      ).then((response) => response)
-      .then((response) => {
-        console.log(response)
-    })
-    }
+
     return(
         <div className={SendFeedbackCss}>
             <div class='container details-of-paper'>
@@ -68,39 +69,41 @@ export default function SendFeedback (props) {
                     </Link>
                   </div>
               </div>
-              <div>
-                Paper Title: {paper.title}
-              </div>
-              <div>
-                Paper Authors: {paper.authors}
-              </div>
-              <div>
-                Paper File: <button  class="btn btn-primary" onClick={handleDownload}>get file</button>
-              </div>
-              <div>
-                number of pages: {paper.NOM}
-              </div>
-              <div>
-                Abstract: {paper.summary}
-              </div>
+              <PaperInfo />
+              <br />
             </div>
             
             <div class='container details-of-paper'>
-              <Form onSubmit={handleClick} >
-              <Form.Group >
+              <form onSubmit={handleSubmit}>
                 <h2 className='send-feedback-header'>Send Feedback</h2>
+                 
+                  {/* ======Questions===== */ 
+                    FeedbackQuestions.map((singleQ,index) => (
+                    <div key={index}>
+                      <br />
+                      <label >{singleQ.label}</label>
+                      <div class='row mb-3'>
+                        <label class='col-1 col-form-label'>score:</label>
+                        <div class='col-sm-11'>
+                          <input type="number" id={singleQ.value}class=" form-control" onChange={(e) => handleScoreChange(e, index)} />
+                        </div>
+                      </div>
+                    </div>
+                      ))
+                  }  
+                  <br />
+                  <div class='row mb-3'>
+                    <label class='col-2 col-form-label'>Description:</label>
+                    <div class='col-sm-10'>
+                      <textarea class="form-control"  rows="3" value={description}
+                          onChange={e => setDescription(e.target.value)}></textarea>                    
+                    </div>
+                  </div>
+                <button type="submit" class="btn mr-2">Send Feedback</button>
                 {error==="Your feedback has been submitted." &&
                     <Alert variant='success'>{error}</Alert>
-                  }
-                <Form.Label>Score: </Form.Label>
-                <Form.Control type="number" ref={score} required />
-                <Form.Label>Status:</Form.Label>
-                <Form.Control type="text" ref={status} required />
-                <Form.Label>Description</Form.Label>
-                <Form.Control as="textarea" ref={description} id='description' rows={3} />
-              </Form.Group>
-              <Button type="submit" className="mr-2">Send Feedback</Button>
-              </Form>
+                  }                
+              </form>
             </div>
         </div>
     )

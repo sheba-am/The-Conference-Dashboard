@@ -91,6 +91,7 @@ function NewPaper(props) {
           'language': language,
           'NOM': numberOfPages,
           'field': field,
+          'subfields': '',
           'title':inputTitle,
           'summary':abstract,
           'paperFile':uploadedFile,
