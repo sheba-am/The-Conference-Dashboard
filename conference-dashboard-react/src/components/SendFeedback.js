@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState, useRef} from 'react'
+import React, {useContext, useEffect, useState} from 'react'
 
 import { Link, Navigate } from "react-router-dom";
 import { PaperContext } from '../contexts/PaperContext';
@@ -7,23 +7,43 @@ import { Container, Form, Button, Alert } from 'react-bootstrap'
 import { MdArrowBackIosNew } from "react-icons/md";
 import PaperInfo from './PaperInfo';
 import { FeedbackQuestions } from '../data/FormData';
+import Judge_Approval from '../pages/Judge_Approval';
 export default function SendFeedback (props) {
   const SendFeedbackCss = props.isOpen ? "content open" : "content";
     var paper = JSON.parse(localStorage.getItem("selectedPaper")); //retrieve the object
     var user = JSON.parse(localStorage.getItem("user"));
-    // const score =  useRef()
-    // const status =  useRef()    
-    //const description =  useRef()
-    var scoresArr=  new Array(FeedbackQuestions.length).fill(0) 
+    const [feedback, setFeedback] = useState();
+    const config = {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+          
+      }
+    }
+    useEffect(() => {
+      const viewfeedback = axios.post(
+        'http://127.0.0.1:8000/viewFeedback',
+        {
+          'title':paper.title,
+          'username':user.username
+        }
+        , config
+      ).then((response) => response)
+      .then((response) => {
+        setFeedback(response.data)
+      })
+    }, []);
+    console.log(feedback)
+    var scoresArr =feedback?feedback.scores: new Array(FeedbackQuestions.length).fill(0) 
     const[scores,setScores]=useState(scoresArr)
     const [error, setError] = useState("")
-    const [description,setDescription] =useState("")
+    const [description,setDescription] =feedback?useState(feedback.scores):useState("")
     const handleScoreChange = (e, index) => {
       const { value } = e.target;
       const list = [...scores];
       list[index] = value;
       setScores(list);
     };
+
     function handleSubmit(e) {
         e.preventDefault()
         let scores_string = scores.toString();
@@ -41,8 +61,7 @@ export default function SendFeedback (props) {
               'http://127.0.0.1:8000/sendFeedback',
               {"title":paper.title,
                "username":user.username,
-               "q1":scores_string, "q2":"1", "q3":"1",  "q4":"1","q5":"1","q6":"1","q7":"1","q8":"1",
-               "q9":"1","q10":"1",
+               "scores":scores_string,
                "description":description,
                 // "score":score.current.value,
                 // "status":status.current.value,
@@ -72,7 +91,8 @@ export default function SendFeedback (props) {
               <PaperInfo />
               <br />
             </div>
-            
+            <br />
+            <Judge_Approval />
             <div class='container details-of-paper'>
               <form onSubmit={handleSubmit}>
                 <h2 className='send-feedback-header'>Send Feedback</h2>
@@ -102,7 +122,8 @@ export default function SendFeedback (props) {
                 <button type="submit" class="btn mr-2">Send Feedback</button>
                 {error==="Your feedback has been submitted." &&
                     <Alert variant='success'>{error}</Alert>
-                  }                
+                  }  
+                <br />              
               </form>
             </div>
         </div>
