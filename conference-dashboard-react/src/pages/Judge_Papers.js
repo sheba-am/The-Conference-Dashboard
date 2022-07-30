@@ -1,31 +1,65 @@
 import React from 'react'
 import MyPapersTable from '../components/MyPapersTable'
 function Judge_Papers({papersData, columns, judgeFeedbackData}) {
-    var noFeedbackTitle=[];
-    var sentFeedbackTitle=[];
-    var noFeedbackPaper=[];
-    var sentFeedbackPaper=[];
+    console.log('judgefeedbackdata',judgeFeedbackData)
+    //we get a list of sent feedback and not sent feedback from all the feedbacks of this judge and from all the papers choose this 
+    var pendingApprovalTitle= []; 
+    var pendingJudgmentTitle=[];
+    var judgedTitle=[];
+    var rejectedTitle = [];
+    var allJudgesPapers =[];  
+    var pendingApprovalPapers = [];
+    var pendingJudgmentPapers= []; //all the papers which judge has had no scores
+    var judgedPapers= []; //all the papers which judge has saved a score
+    var rejectedPapers = []
     if (judgeFeedbackData) {
-      //split all feedbacks between sent feedbacks and not sent feedbacks
+      //split all feedbacks of current judge
       for (let i=0 ; i<judgeFeedbackData.length ; i++){
-        if (judgeFeedbackData[i].score ==="N/A") {
-          noFeedbackTitle.push(judgeFeedbackData[i].paper)
-        } else {
-          sentFeedbackTitle.push(judgeFeedbackData[i].paper)
-        }
+        if(judgeFeedbackData[i].accepted ===false) {
+          rejectedTitle.push(judgeFeedbackData[i].paper)
+        } else if(judgeFeedbackData[i].accepted === true) {
+          if (judgeFeedbackData[i].scores ==="N/A") {
+            pendingJudgmentTitle.push(judgeFeedbackData[i].paper)
+          } else {
+            judgedTitle.push(judgeFeedbackData[i].paper)
+          }          
+        } else if(judgeFeedbackData[i].accepted === null) {
+          pendingApprovalTitle.push(judgeFeedbackData[i].paper)
       }
-  
+
+      }      
+      // for (let i=0 ; i<judgeFeedbackData.length ; i++){
+      //   if (judgeFeedbackData[i].scores ==="N/A") {
+      //     noFeedbackTitle.push(judgeFeedbackData[i].paper)
+      //   } else {
+      //     sentFeedbackTitle.push(judgeFeedbackData[i].paper)
+      //   }
+      // }
+      console.log('pendingApproval',pendingApprovalTitle)
+      console.log('pending judgment',pendingJudgmentTitle)
+      console.log('judges',judgedTitle)
+      console.log('rejected',rejectedTitle)
   
       if(papersData){
         for (let i=0 ; i<papersData.length ; i++){
-            if (noFeedbackTitle.includes(papersData[i].title)){
-              noFeedbackPaper.push(papersData[i])
-            } else  if (sentFeedbackTitle.includes(papersData[i].title)){
-              sentFeedbackPaper.push(papersData[i])
-            }
+          if (pendingApprovalTitle.includes(papersData[i].title)){
+            pendingApprovalPapers.push(papersData[i])
+          } else if (pendingJudgmentTitle.includes(papersData[i].title)){
+            pendingJudgmentPapers.push(papersData[i])
+          } else  if (judgedTitle.includes(papersData[i].title)){
+            judgedPapers.push(papersData[i])
+          } else  if (rejectedTitle.includes(papersData[i].title)){
+            rejectedPapers.push(papersData[i])
+          }
         }
       }
-  
+      console.log("papers")
+      console.log('pendingApproval',pendingApprovalPapers)
+      console.log('pending judgment',pendingJudgmentPapers)
+      console.log('judges',judgedPapers)
+      console.log('rejected',rejectedPapers)
+      /*all of the papers assigned to current judge */
+      allJudgesPapers = [].concat(pendingApprovalPapers,pendingJudgmentPapers,judgedPapers,rejectedPapers); 
     }    
   return (
     <div>
@@ -33,30 +67,51 @@ function Judge_Papers({papersData, columns, judgeFeedbackData}) {
           <br />
           <ul class="nav nav-tabs" role="tablist">
             <li class="nav-item">
-              <a class="nav-link active" data-bs-toggle="tab" href="#home">All</a>
+              <a class="nav-link active" data-bs-toggle="tab" href="#menu0">All</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" data-bs-toggle="tab" href="#menu1">Not Sent</a>
+              <a class="nav-link " data-bs-toggle="tab" href="#menu1">Pending Approval</a>
+            </li>          
+            <li class="nav-item">
+              <a class="nav-link" data-bs-toggle="tab" href="#menu2">Pending Judgement</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" data-bs-toggle="tab" href="#menu2">Sent</a>
+              <a class="nav-link" data-bs-toggle="tab" href="#menu3">Judged</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link " data-bs-toggle="tab" href="#menu4">Rejected</a>
+            </li>            
           </ul>
+          {/* ======== Tab Content ========== */}
           <div class="tab-content">
-            <div id="home" class="container tab-pane active"><br />
+            <div id="menu0" class="container tab-pane active"><br />
               <h3>All</h3>
-              {papersData ? <MyPapersTable columns={columns} data={papersData} /> : <h2>Loading...</h2>}
-            </div>
-            <div id="menu1" class="container tab-pane fade"><br />
-              <h3>Not Sent</h3>
               {
-                noFeedbackPaper.length>0 ? <MyPapersTable columns={columns} data={noFeedbackPaper} /> : <h2>Loading...</h2>
+                allJudgesPapers.length>0 ? <MyPapersTable columns={columns} data={allJudgesPapers} /> : <h4>No Results</h4>
+              }
+            </div>
+            <div id="menu1" class="container tab-pane "><br />
+              <h3>Pending Approval</h3>
+              {
+                pendingApprovalPapers.length>0 ? <MyPapersTable columns={columns} data={pendingApprovalPapers} /> : <h4>No Results</h4>
               }
             </div>
             <div id="menu2" class="container tab-pane fade"><br />
-              <h3>Sent</h3>
+              <h3>Pending Judgement</h3>
               {
-                sentFeedbackPaper.length>0 ? <MyPapersTable columns={columns} data={sentFeedbackPaper} /> : <h2>Loading...</h2>
+                pendingJudgmentPapers.length>0 ? <MyPapersTable columns={columns} data={pendingJudgmentPapers} /> : <h4>No Results</h4>
+              }
+            </div>
+            <div id="menu3" class="container tab-pane fade"><br />
+              <h3>Judged</h3>
+              {
+                judgedPapers.length>0 ? <MyPapersTable columns={columns} data={judgedPapers} /> : <h4>No Results</h4>
+              }
+            </div>
+            <div id="menu4" class="container tab-pane fade"><br />
+              <h3>Rejected</h3>
+              {
+                rejectedPapers.length>0 ? <MyPapersTable columns={columns} data={rejectedPapers} /> : <h4>No Results</h4>
               }
             </div>
           </div>

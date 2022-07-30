@@ -1,9 +1,18 @@
 import React, {useState}  from 'react'
 
-function JudgesTable(props) {
+function JudgesTable({assignedJudgeData}) {
     var paper = JSON.parse(localStorage.getItem("selectedPaper")); //retrieve the object
-    const isTableEmpty = props.assignedJudgeData && props.assignedJudgeData.length>0  ? "table papers-table justify-content-center table table-hover align-middle" : "table papers-table-empty justify-content-center table table-hover align-middle";
+    const isTableEmpty = assignedJudgeData && assignedJudgeData.length>0  ? "table papers-table justify-content-center table table-hover align-middle" : "table papers-table-empty justify-content-center table table-hover align-middle";
+    function getAvg(grades) {
+        const total = grades.reduce((acc, c) => acc + c, 0);
+        return total / grades.length;
+      }
     const [feedbacks, setFeedbacks] = useState([]);
+    var averageScore =[]  // we store average of all scores in this array
+    assignedJudgeData.map((singleJudge) => (
+        singleJudge.scores!=='N/A' ?averageScore.push(getAvg(singleJudge.scores.split(',').map(Number))): averageScore.push('N/A')
+    ))
+    console.log('ave',averageScore)
   return (
     <div id='papers-table' class="table-responsive-md">
         
@@ -12,22 +21,24 @@ function JudgesTable(props) {
         <tr class="float-right">
             <th scope="col" class='papers-table-header-item'>#</th>
             <th scope="col" class='papers-table-header-item'>Judge name</th>
+            <th scope="col" class='papers-table-header-item'>Avg score</th>
             <th scope="col" class='papers-table-header-item'>state</th>
-            <th scope="col" class='papers-table-header-item'>score</th>
             <th scope="col" class='papers-table-header-item'>feedback</th>             
         </tr>
         </thead>
         <tbody class="papers-table-body">
         
             {
-                props.assignedJudgeData && props.assignedJudgeData.map((item,index) => {
+                (assignedJudgeData && averageScore) && assignedJudgeData.map((item,index) => {
                     return (
                     
                         <tr key={index}  >
                             <th scope="row" class='table-index'>{index + 1}</th>
                             <td>{item.judge}</td>
-                            <td> {item.status}</td>
-                            <td> {item.score}</td>
+                            <td> {averageScore[index]}</td>
+                            {averageScore[index]>= 10 && <td>passed</td>}
+                            {averageScore[index]< 10 && <td>failed</td>}
+                            {averageScore[index] === 'N/A' && <td>N/A</td>}
                             <td> {item.description}</td>
                         </tr>
                     
