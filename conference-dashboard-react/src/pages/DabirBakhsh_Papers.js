@@ -4,15 +4,33 @@ function DabirBakhsh_Papers({columns, papersData}) {
     {// this will be used in other instances
   /* {userStatusData.filter(car => car.value === "standard").map((singelUser,index)=>{return(<div>{singelUser.label}</div> )} ) } */}
   var user = JSON.parse(localStorage.getItem("user")); //retrieve the object
-  var allPapers =[]
-  var pendingApprovalPapers = []
-  var pendingRevisePapers = []
+  var allPapers =[] // all papers shown to 
+  var newPapers= []
+  var pendingJudgmentPapers = []
+  var judgedPapers = []
   var approvedPapers = []
   var rejectedPapers = []
+  // var pendingApprovalPapers = []
+  // var pendingRevisePapers = []
+  // var approvedPapers = []
+  // var rejectedPapers = []
   // dabir bakhsh can only see papers in their own field
   if (papersData) {
     allPapers = papersData.filter(data => data.field.includes(user.field)).map((singlePaper,index)=>{return(singlePaper)} )  
-             
+    console.log(allPapers)
+    for(let i=0 ; i<allPapers.length ; i++) {
+      if(allPapers[i].dabirBakhsh===null) {
+        newPapers.push(allPapers[i])
+      } else if(allPapers[i].dabirBakhsh==='pending judgement') {
+        pendingJudgmentPapers.push(allPapers[i])
+      } else if(allPapers[i].dabirBakhsh==='judged') {
+        judgedPapers.push(allPapers[i])
+      } else if(allPapers[i].dabirBakhsh==='approved') {
+        approvedPapers.push(allPapers[i])
+      } else if(allPapers[i].dabirBakhsh==='rejected') {
+        rejectedPapers.push(allPapers[i])
+      }
+    }
   }
   // if(papersData) {
   //   for(let i=0 ; i<papersData.length ; i++) {
@@ -68,24 +86,24 @@ function DabirBakhsh_Papers({columns, papersData}) {
             {/* ================== */}
             <div id="menu1" class="container tab-pane fade"><br />
               <h3>New</h3>
-              {pendingApprovalPapers.length >0 ? <MyPapersTable columns={columns} data={pendingApprovalPapers} />:<h4>No Results</h4>}
+              {newPapers.length >0 ? <MyPapersTable columns={columns} data={newPapers} />:<h4>No Results</h4>}
 
             </div>
             {/* ================== */}
             <div id="menu2" class="container tab-pane fade"><br />
               <h3>Pending Judgement</h3>
-              {pendingRevisePapers.length >0 ? <MyPapersTable columns={columns} data={pendingRevisePapers} />:<h4>No Results</h4>}       
+              {pendingJudgmentPapers.length >0 ? <MyPapersTable columns={columns} data={pendingJudgmentPapers} />:<h4>No Results</h4>}       
 
             </div>
             {/* ================== */}
             <div id="menu3" class="container tab-pane fade"><br />
               <h3>Judged</h3>
-              {approvedPapers.length >0 ? <MyPapersTable columns={columns} data={approvedPapers} />:<h4>No Results</h4>}
+              {judgedPapers.length >0 ? <MyPapersTable columns={columns} data={judgedPapers} />:<h4>No Results</h4>}
             </div>
             {/* ================== */}
             <div id="menu4" class="container tab-pane fade"><br />
               <h3>Approved</h3>
-              {rejectedPapers.length >0 ? <MyPapersTable columns={columns} data={rejectedPapers} />:<h4>No Results</h4>}
+              {approvedPapers.length >0 ? <MyPapersTable columns={columns} data={approvedPapers} />:<h4>No Results</h4>}
             </div>
             {/* ================== */}
             <div id="menu5" class="container tab-pane fade"><br />

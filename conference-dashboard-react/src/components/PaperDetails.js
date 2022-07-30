@@ -11,6 +11,7 @@ import { MdArrowBackIosNew } from "react-icons/md";
 import { Container } from 'react-bootstrap';
 import PaperInfo from './PaperInfo';
 import DabirKhane_Approval from '../pages/DabirKhane_Approval';
+import DabirBakhsh_Approval from '../pages/DabirBakhsh_Approval';
   // let feedbacks = []
 const config = {
   headers: {
@@ -111,6 +112,8 @@ function PaperDetails(props) {
         </div>
         <br />
         <DabirKhane_Approval paper={paper} />
+        <br />
+        <DabirBakhsh_Approval />
           {/*==== Judges Table ==== */}
         <div>
           <div class='row paper-details-judge-header'>
