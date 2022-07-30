@@ -64,8 +64,9 @@ class FeedBack(models.Model):
     # q9 = models.IntegerField(null=True, blank=True)
     # q10 = models.IntegerField(null=True, blank=True)
     description = models.CharField(blank=True, max_length=2048)
-    dateAssigned = models.DateTimeField(null=True, blank=True, auto_now_add=True)
+    dateAssigned = models.DateTimeField(null=True, blank=True, auto_now_add=True, editable=True)
     dateAccepted = models.DateTimeField(null=True, blank=True, auto_now=False, auto_now_add=False)
+    timeLeft = models.CharField(blank=True, max_length=20)
 
     def __str__(self):
         return (str(self.paper) + "_" + str(self.judge))

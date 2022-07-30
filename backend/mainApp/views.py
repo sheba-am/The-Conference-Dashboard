@@ -19,21 +19,108 @@ from django.db.models import Q
 from .models import BaseUser, Paper, FeedBack
 from .serializers import UserSerializer, PaperSerializer, FeedBackSerializer
 from django.core.mail import send_mail
-from datetime import datetime, timedelta
+import datetime
+import time
+
+def feedback_check():
+    for item in FeedBack.objects.all():
+        if(item.accepted==None):
+            timeAssigned = item.dateAssigned
+            timeNow = datetime.datetime.now(datetime.timezone.utc)
+            dif = timeNow - timeAssigned
+            timeLeft = 21 - (timeNow.date() - timeAssigned.date()).days
+            print(timeLeft)
+            if(timeLeft>7):
+                if(timeLeft==12 or timeLeft==8):
+                    send_mail(
+                    subject = 'Paper Assigment',
+                    message = str(item.judge) + " paper with the title '" + str(item.paper) + "' has been assigned to you. Please accept or decline within" + str(timeLeft-7) + " days.",
+                    from_email = 'conference025@gmail.com',
+                    recipient_list = [item.judge.email],
+                    fail_silently = False,
+                    )
+            else:
+                if(timeLeft==7):
+                    end_mail(
+                        subject = 'Paper Assigment',
+                        message = str(item.judge) + " paper with the title '" + str(item.paper) + "' has been assigned to you. You have been given 7 additional days to accept or decline. After this duration you will no loger be able to participate in the evaluation of this paper.",
+                        from_email = 'conference025@gmail.com',
+                        recipient_list = [item.judge.email],
+                        fail_silently = False,
+                        )
+                elif(timeLeft==5 or timeLeft==1):
+                    send_mail(
+                        subject = 'Paper Assigment',
+                        message = str(item.judge) + " paper with the title '" + str(item.paper) + "' has been assigned to you. Please accept or decline within" + str(timeLeft) + "days.",
+                        from_email = 'conference025@gmail.com',
+                        recipient_list = [item.judge.email],
+                        fail_silently = False,
+                        )
+                elif(timeLeft==0):
+                    send_mail(
+                        subject = 'Paper Assigment',
+                        message = str(item.judge) + " You can no longer participate in the evaluation of the paper with the title '" + str(item.paper) + "' since the deadline has passed.",
+                        from_email = 'conference025@gmail.com',
+                        recipient_list = [item.judge.email],
+                        fail_silently = False,
+                        )
+                    item.delete()
+
+        elif(item.scores=="N/A"):
+            timeAccepted = item.dateAccepted
+            timeNow = datetime.datetime.now(datetime.timezone.utc)
+            dif = timeNow - timeAccepted
+            timeLeft = 21 - (timeNow.date() - timeAccepted.date()).days
+            print(timeLeft)
+            if(timeLeft>7):
+                if(timeLeft==12 or timeLeft==8):
+                    send_mail(
+                    subject = 'Paper Judgment',
+                    message = str(item.judge) + " you have not submitted an evaluation for the paper with the title '" + str(item.paper) + "' yet. Please submit a feedback within " + str(timeLeft-7) + " days.",
+                    from_email = 'conference025@gmail.com',
+                    recipient_list = [item.judge.email],
+                    fail_silently = False,
+                    )
+            else:
+                if(timeLeft==7):
+                    send_mail(
+                        subject = 'Paper Judgment',
+                        message = str(item.judge) + " you have been give 7 additional days to submit a feedback for the paper with the title '" + str(item.paper) + "'. After this duration you will no loger be able to participate in the evaluation of this paper.",
+                        from_email = 'conference025@gmail.com',
+                        recipient_list = [item.judge.email],
+                        fail_silently = False,
+                        )
+                elif(timeLeft==5 or timeLeft==1):
+                    send_mail(
+                        subject = 'Paper Judgment',
+                        message = str(item.judge) + " you have not submitted an evaluation for the paper with the title '" + str(item.paper) + "' yet. Please submit a feedback within " + str(timeLeft) + " days.",
+                        from_email = 'conference025@gmail.com',
+                        recipient_list = [item.judge.email],
+                        fail_silently = False,
+                        )
+                elif(timeLeft==0):
+                    send_mail(
+                        subject = 'Paper Judgment',
+                        message = str(item.judge) + " You can no longer participate in the evaluation of the paper with the title '" + str(item.paper) + "' since the deadline has passed.",
+                        from_email = 'conference025@gmail.com',
+                        recipient_list = [item.judge.email],
+                        fail_silently = False,
+                        )
+                    item.delete()
 
 
 @api_view(['POST'])
 def sendEmail(request):
-    # smtpObj = smtplib.SMTP('smtp server name',port)
-    # smtpObj.starttls() 
-    # smtpObj.login(email, password)
-    send_mail(
-    subject = 'test',
-    message = 'This is a test',
-    from_email = 'conference025@gmail.com',
-    recipient_list = ['masoomehmokhtari693@gmail.com'],
-    fail_silently = False,
-)
+#     send_mail(
+#     subject = 'test',
+#     message = 'This is a test',
+#     from_email = 'conference025@gmail.com',
+#     recipient_list = ['masoomehmokhtari693@gmail.com'],
+#     fail_silently = False,
+# )
+    for item in BaseUser.objects.all():
+        item.email = "masoomehmokhtari693@gmail.com"
+        item.save()
     return Response("email sent")
 
 @api_view(['POST'])
@@ -185,6 +272,30 @@ def viewAllFeedback(request):
     data = request.data
     paper = Paper.objects.get(title=data['title'].lower())
     feedback = FeedBack.objects.filter(paper=paper)
+    for item in feedback:
+        if(item.accepted==None):
+            timeAssigned = item.dateAssigned
+            timeNow = datetime.datetime.now(datetime.timezone.utc)
+            dif = timeNow - timeAssigned
+            timeLeft = 21 - (timeNow.date() - timeAssigned.date()).days
+            if(timeLeft>7):
+                item.timeLeft = str(timeLeft - 7) + ",green"
+            else:
+                item.timeLeft = str(timeLeft) + ",red"
+        elif(item.scores=="N/A"):
+            timeAccepted = item.dateAccepted
+            timeNow = datetime.datetime.now(datetime.timezone.utc)
+            dif = timeNow - timeAccepted
+            timeLeft = 21 - (timeNow.date() - timeAccepted.date()).days
+            print(timeLeft)
+            if(timeLeft>7):
+                item.timeLeft = str(timeLeft - 7) + ",green"
+            else:
+                item.timeLeft = str(timeLeft) + ",red"
+        else:
+            item.timeLeft = "done"
+        item.save()
+
     serializer = FeedBackSerializer(feedback,many=True)
     return Response(serializer.data)
 
@@ -251,7 +362,7 @@ def acceptPaper(request):
     feedback = FeedBack.objects.get(Q(paper=paper) & Q(judge=judge))
     if(json.loads(data['approval'].lower())):
         feedback.accepted = data['approval']
-        feedback.dateAccepted = datetime.now()
+        feedback.dateAccepted = datetime.datetime.now()
         feedback.save()
         serializer = FeedBackSerializer(feedback,many=False)
         return Response(serializer.data)
@@ -342,7 +453,7 @@ def assignJudge(request):
                 #send email
                 send_mail(
                 subject = 'Paper Assigment',
-                message = item + " paper with the title '" + data['title'] + "' has been assigned to you. Please accept or decline within x days.",
+                message = item + " paper with the title '" + data['title'] + "' has been assigned to you. Please accept or decline within 14 days.",
                 from_email = 'conference025@gmail.com',
                 recipient_list = ['masoomehmokhtari693@gmail.com'],
                 fail_silently = False,
@@ -396,3 +507,12 @@ def publish(request):
     
     serializer = PaperSerializer(paper,many=False)
     return Response(serializer.data)
+
+# def testfunc():
+#     starttime = time.time()
+#     while True:
+#         for item in FeedBack.objects.all():
+#             print(item)
+#             print(item.accepted)
+#         time.sleep(5.0 - ((time.time() - starttime) % 5.0))
+# testfunc()
