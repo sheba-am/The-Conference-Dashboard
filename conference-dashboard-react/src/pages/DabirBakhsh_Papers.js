@@ -10,16 +10,13 @@ function DabirBakhsh_Papers({columns, papersData}) {
   var judgedPapers = []
   var approvedPapers = []
   var rejectedPapers = []
-  // var pendingApprovalPapers = []
-  // var pendingRevisePapers = []
-  // var approvedPapers = []
-  // var rejectedPapers = []
+
   // dabir bakhsh can only see papers in their own field
   if (papersData) {
     allPapers = papersData.filter(data => data.field.includes(user.field)).map((singlePaper,index)=>{return(singlePaper)} )  
     console.log(allPapers)
     for(let i=0 ; i<allPapers.length ; i++) {
-      if(allPapers[i].dabirBakhsh===null) {
+      if(allPapers[i].dabirBakhsh===null && allPapers[i].dabirKhane.includes('approved')) {
         newPapers.push(allPapers[i])
       } else if(allPapers[i].dabirBakhsh==='pending judgement') {
         pendingJudgmentPapers.push(allPapers[i])
@@ -32,19 +29,6 @@ function DabirBakhsh_Papers({columns, papersData}) {
       }
     }
   }
-  // if(papersData) {
-  //   for(let i=0 ; i<papersData.length ; i++) {
-  //     if(papersData[i].dabirKhane=== null) {
-  //       pendingApprovalPapers.push(papersData[i])
-  //     } else if(papersData[i].dabirKhane.includes('revise')) {
-  //       pendingRevisePapers.push(papersData[i])
-  //     } else if(papersData[i].dabirKhane.includes('approve')) {
-  //       approvedPapers.push(papersData[i])
-  //     }  else if(papersData[i].dabirKhane.includes('reject')) {
-  //       rejectedPapers.push(papersData[i])
-  //     }
-  //   }
-  // }
   // if (papersData) {
   //   approvedPapers = papersData.filter(data => data.dabirKhane.includes('approve')).map((singlePaper,index)=>{return(singlePaper)} )  
   //   // pendingApprovalPapers = papersData.filter(data => data.dabirKhane===null).map((singlePaper,index)=>{return(singlePaper)} )  

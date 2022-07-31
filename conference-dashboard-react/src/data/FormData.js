@@ -76,9 +76,9 @@ export const fields = [
   ]
   export const DabirKhaneApproval =[
     {value:' ', label: "Pending"},
-    {value: "revise", label: "Revise"},
-    {value: "approve", label: "Approve"},
-    {value: "reject", label: "Reject"},
+    {value: "revised", label: "Revise"},
+    {value: "approved", label: "Approve"},
+    {value: "rejected", label: "Reject"},
      
   ]
 

@@ -11,11 +11,11 @@ function DabirKhane_Papers({columns, papersData}) {
     for(let i=0 ; i<papersData.length ; i++) {
       if(papersData[i].dabirKhane=== null) {
         pendingApprovalPapers.push(papersData[i])
-      } else if(papersData[i].dabirKhane.includes('revise')) {
+      } else if(papersData[i].dabirKhane.includes('revised')) {
         pendingRevisePapers.push(papersData[i])
-      } else if(papersData[i].dabirKhane.includes('approve')) {
+      } else if(papersData[i].dabirKhane.includes('approved')) {
         approvedPapers.push(papersData[i])
-      }  else if(papersData[i].dabirKhane.includes('reject')) {
+      }  else if(papersData[i].dabirKhane.includes('rejected')) {
         rejectedPapers.push(papersData[i])
       }
     }

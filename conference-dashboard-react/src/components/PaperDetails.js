@@ -12,6 +12,7 @@ import { Container } from 'react-bootstrap';
 import PaperInfo from './PaperInfo';
 import DabirKhane_Approval from '../pages/DabirKhane_Approval';
 import DabirBakhsh_Approval from '../pages/DabirBakhsh_Approval';
+import DabirConference_Approval from '../pages/DabirConference_Approval';
   // let feedbacks = []
 const config = {
   headers: {
@@ -114,6 +115,8 @@ function PaperDetails(props) {
         <DabirKhane_Approval paper={paper} />
         <br />
         <DabirBakhsh_Approval />
+        <br />
+        <DabirConference_Approval />
           {/*==== Judges Table ==== */}
         <div>
           <div class='row paper-details-judge-header'>
@@ -121,7 +124,7 @@ function PaperDetails(props) {
               <h3>Judges: </h3>
             </div>
             <div class='col-md-5 col-sm-5 '>
-              {user.status=='dabirbakhsh' &&
+              {(user.status=='dabirbakhsh' || user.status=='dabirconference' ) &&
               <div>
                 <input type="checkbox" class="btn-check" id="btn-check-outlined" autocomplete="off" onClick={handleViewEditJudges}/>
                 <label class="btn edit-judges-checked" for="btn-check-outlined">Edit Judges</label><br></br>
