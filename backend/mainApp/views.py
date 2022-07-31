@@ -234,7 +234,7 @@ def editPaper(request):
     for item in allAuthors:
         BaseUser.objects.get(username=item).userPapers.add(paper)
     user = BaseUser.objects.get(username=allAuthors[0])
-    serializer = PaperSerializer(user.papers,many=True)
+    serializer = PaperSerializer(user.userPapers,many=True)
     return Response("")
 
 @api_view(['POST'])
