@@ -12,6 +12,7 @@ export default function SendFeedback (props) {
   const SendFeedbackCss = props.isOpen ? "content open" : "content";
     var paper = JSON.parse(localStorage.getItem("selectedPaper")); //retrieve the object
     var user = JSON.parse(localStorage.getItem("user"));
+
     const [feedback, setFeedback] = useState();
     const config = {
       headers: {
@@ -30,9 +31,12 @@ export default function SendFeedback (props) {
       ).then((response) => response)
       .then((response) => {
         setFeedback(response.data)
+        console.log('viewfeedback', response.data)
       })
     }, []);
     console.log(feedback)
+    var timeLeft = feedback && feedback.timeLeft.split(',')
+
     var scoresArr =feedback?feedback.scores: new Array(FeedbackQuestions.length).fill(0) 
     const[scores,setScores]=useState(scoresArr)
     const [error, setError] = useState("")
@@ -87,6 +91,10 @@ export default function SendFeedback (props) {
                         <MdArrowBackIosNew />
                     </Link>
                   </div>
+
+              </div>
+              <div class="ml-auto">
+                Days Left: {timeLeft && timeLeft[0]}
               </div>
               <PaperInfo />
               <br />

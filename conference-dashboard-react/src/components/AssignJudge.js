@@ -73,11 +73,11 @@ console.log(assignedJudgeNames)
         //we need to compare new judges and the prev one to see which judge was removed/added
         var removedJudges = assignedJudgeNames.filter(x => !newJudgeList.includes(x))
         var addedJudges = newJudgeList.filter(x => !assignedJudgeNames.includes(x))
-        let strAddedJudges = ""        
-        for (let i = 0; i < addedJudges.length; i++) {
-            strAddedJudges+=addedJudges[i]+",";
+        let strAddedJudges =addedJudges.toString()        
+        // for (let i = 0; i < addedJudges.length; i++) {
+        //     strAddedJudges+=addedJudges[i]+",";
 
-        } 
+        // } 
         
         let strRemovedJudges = ""        
         for (let i = 0; i < removedJudges.length; i++) {

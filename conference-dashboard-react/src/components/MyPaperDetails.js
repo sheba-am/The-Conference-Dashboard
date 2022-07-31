@@ -29,6 +29,7 @@ function MyPaperDetails(props) {
     setDeleteOpen(!deleteOpen);
   };
   const [paper, setPaper] = useState(JSON.parse(localStorage.getItem("selectedPaper"))); //retrieve the object
+  console.log('o',paper)
   //========= Edit Judges =============
   const [editJudgesOpen, setEditJudgesOpen] = useState(false);
   const handleViewEditJudges = () => {
@@ -88,9 +89,12 @@ function MyPaperDetails(props) {
             </div>
             
             <div class='col-lg-1 col-md-2 col-sm-2 '>
-              <Link to='/dashboard/edit-paper' class="btn btn-primary">
+              {
+                ( paper.dabirKhane === null|| paper.dabirKhane ==='pending' || paper.dabirKhane.includes('revised')) &&
+                <Link to='/dashboard/edit-paper' class="btn btn-primary">
                   edit
               </Link>
+              }
             </div>
             
           
@@ -109,6 +113,17 @@ function MyPaperDetails(props) {
           <div><DeleteModal isOpen={deleteOpen} toggleDelete={handleViewDelete} /></div>
           <PaperInfo />
         </div>
+        <br />
+        {
+          (  paper.dabirKhane && paper.dabirKhane.includes('revised') )&&  
+          <div class=' container details-of-paper'>
+            <br />
+            <h2> You Paper was revised </h2>
+            <h5>Please make neccasary changes and save the paper</h5>
+            <div>message: {paper.dabirKhane && paper.dabirKhane.split(':')[1]} </div>
+            <br />
+          </div>
+        }
         <br />
           {/*==== Judges Table ==== */}
         <div>

@@ -17,6 +17,8 @@ function DabirKhane_Papers({columns, papersData}) {
         approvedPapers.push(papersData[i])
       }  else if(papersData[i].dabirKhane.includes('rejected')) {
         rejectedPapers.push(papersData[i])
+      } else {
+        pendingApprovalPapers.push(papersData[i])
       }
     }
   }

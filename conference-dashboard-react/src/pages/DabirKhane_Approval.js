@@ -34,7 +34,7 @@ function DabirKhane_Approval({paper}) {
     //when there's any state but revise clear the message box
     function handleApproval(e) {
         setApproval(e)
-        if (e !=='revise'){
+        if (e !=='revised'){
             setApprovalMsg('')
         }
 
@@ -69,7 +69,7 @@ function DabirKhane_Approval({paper}) {
                     <div class='col'>
                         <textarea class="form-control"  rows="3" value={approvalMsg}
                         onChange={e => setApprovalMsg(e.target.value)}
-                        disabled={approval !=='revise'}></textarea>
+                        disabled={approval !=='revised'}></textarea>
                     </div>
             </div>
             <br />

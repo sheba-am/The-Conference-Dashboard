@@ -19,7 +19,7 @@ function DabirConference_Papers({columns, papersData}) {
             approvedPapers.push(papersData[i])
           } else if(papersData[i].dabirConference === 'rejected') {
             rejectedPapers.push(papersData[i])
-          }else if (papersData[i].dabirKhane===null || papersData[i].dabirKhane.includes('revised') ) {
+          }else if (papersData[i].dabirKhane===null||papersData[i].dabirKhane==='pending' || papersData[i].dabirKhane.includes('revised') ) {
             pendingDabirKhanePapers.push(papersData[i])
           } else if (papersData[i].dabirKhane.includes('rejected')) {
             rejectedByDabirKhanePapers.push(papersData[i])

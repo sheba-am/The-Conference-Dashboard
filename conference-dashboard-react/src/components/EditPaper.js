@@ -50,7 +50,7 @@ function NewPaper(props) {
  function ChangeField(e) {
   //when we change field we need to clear subfield
   setField(e)
-  setSubFieldList([""])
+  setSubFieldList([''])
 }  
   //=========subfield input ===========
   const [subFieldList, setSubFieldList] = useState(paper.subfields.split(','));
@@ -143,10 +143,19 @@ function NewPaper(props) {
             }
           }
           localStorage.setItem("papers", newPapers)
-          navigate('/dashboard/papers')
+          navigate('/dashboard/my-papers')
         }
       })
-      
+      const approval_result =(paper && paper.dabirKhane && paper.dabirKhane.includes('revised') )&& axios.post(
+        'http://127.0.0.1:8000/dabirkhaneApproval',
+        {'title':paper.title,'approval':'pending'}
+        ,config
+        ).then((response) => response)
+        .then((response) => {
+            //put the new data into local storage 
+            localStorage.setItem("selectedPaper", JSON.stringify(response.data))
+            
+    })
   }
 
   //redirect if the user is not authenticated
@@ -155,7 +164,7 @@ function NewPaper(props) {
       <div id='edit-paper' class='container "w-100 shadow p-3 mb-5 bg-white rounded"'>
           <div class='row'>
             <div class='col-lg-1 col-md-1 col-sm-2 '>
-              <Link to='/dashboard/paper-details' class="btn edit-paper-button">
+              <Link to='/dashboard/my-paper-details' class="btn edit-paper-button">
                   <MdArrowBackIosNew />
               </Link>
             </div>
