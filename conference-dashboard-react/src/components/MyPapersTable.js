@@ -46,11 +46,13 @@ function MyPapersTable({ columns, data , myPaper}) {
                 {headerGroup.headers.map(column => (
                   <th scope="col" class='papers-table-header-item' {...column.getHeaderProps()}>{column.render('Header')}</th>
                 ))}
-                  <th scope="col-1"  class='papers-table-header-item'>More</th>
+                  { (!myPaper && ( user.status==="judge" || user.status==="dabirconference" ) )
+                    && <th scope="col-1"  class='papers-table-header-item'>Feedback</th>
+                  }                  
                   {/* <th scope="col">Score</th> */}
-                  {/* { user.status==="dabirconference" &&<th scope="col-1"  class='papers-table-header-item'>More</th>} */}
-                  {/* { user.status==="standard" &&<th scope="col-1"  class='papers-table-header-item'>More</th>} */}
-                  {/* {user.status==="judge" && <th scope="col-1"  class='papers-table-header-item'>Feedback</th>} */}
+                  { myPaper &&<th scope="col-1"  class='papers-table-header-item'>More</th>}
+                  { (!myPaper && user.status!=="judge" )  &&<th scope="col-1"  class='papers-table-header-item'>More</th>}
+
               </tr>
             ))}
           </thead>
@@ -66,25 +68,32 @@ function MyPapersTable({ columns, data , myPaper}) {
                     )
                   })}
                   
-                  <td class='col-1'>
+                  
                     {//when viewing their own paper 
-                      myPaper && <Link to='/dashboard/my-paper-details' class="btn btn-primary details-btn" onClick={() => showDetails(row.original)}>
-                          ...
-                      </Link>
+                      myPaper &&
+                      <td  class='col-1'>
+                         <Link to='/dashboard/my-paper-details' class="btn btn-primary details-btn" onClick={() => showDetails(row.original)}>
+                            ...
+                        </Link>
+                      </td>
                     }
+                    { //when user is a judge and is veiwing assigned papers to them
+                      (!myPaper && ( user.status==="judge" || user.status==="dabirconference" ) ) &&
+                      <td  class='col-1'>
+                        <Link to='/dashboard/send-feedback' class="btn btn-primary  send-feedback-btn" onClick={() => showDetails(row.original)}>
+                            Send Feedback
+                        </Link>
+                      </td>
+                    }                    
                     { /* when other users are viewing the papers */
-                      (!myPaper &&user.status!=="judge" )&& <Link to='/dashboard/paper-details' class="btn btn-primary details-btn" onClick={() => showDetails(row.original)}>
-                          ...
-                      </Link>
+                      (!myPaper && user.status!=="judge" ) && <td>
+                        <Link to='/dashboard/paper-details' class="btn btn-primary details-btn" onClick={() => showDetails(row.original)}>
+                            ...
+                        </Link>
+                      </td>
                     }
 
-                    { //when user is a judge and is veiwing assigned papers to them
-                      (!myPaper &&user.status==="judge" ) &&
-                      <Link to='/dashboard/send-feedback' class="btn btn-primary  send-feedback-btn" onClick={() => showDetails(row.original)}>
-                          Send Feedback
-                      </Link>
-                    }                    
-                  </td>
+                  
                   
         
 

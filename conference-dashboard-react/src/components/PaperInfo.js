@@ -47,6 +47,12 @@ function PaperInfo() {
               Paper Authors: {paper.authors}
             </div>
             <div>
+              Field: {paper.field}
+            </div>
+            <div>
+              Subfield: {paper.subfields}
+            </div>                        
+            <div>
               {/* Sent Date: {paper.send_date} */}
             </div>
             <div>
