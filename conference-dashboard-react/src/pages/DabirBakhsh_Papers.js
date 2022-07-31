@@ -16,7 +16,7 @@ function DabirBakhsh_Papers({columns, papersData}) {
     allPapers = papersData.filter(data => data.field.includes(user.field)).map((singlePaper,index)=>{return(singlePaper)} )  
     console.log(allPapers)
     for(let i=0 ; i<allPapers.length ; i++) {
-      if(allPapers[i].dabirBakhsh===null && allPapers[i].dabirKhane.includes('approved')) {
+      if(allPapers[i].dabirBakhsh===null && allPapers[i].dabirKhane && allPapers[i].dabirKhane.includes('approved')) {
         newPapers.push(allPapers[i])
       } else if(allPapers[i].dabirBakhsh==='pending judgement') {
         pendingJudgmentPapers.push(allPapers[i])
