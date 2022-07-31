@@ -1,5 +1,5 @@
 import React,{ useState,useRef,useContext, useEffect} from 'react'
-import {fields, methodOfPresentationData, languageData} from '../data/FormData'
+import {fieldsData, methodOfPresentationData, languageData} from '../data/FormData'
 import { Link, Navigate ,useNavigate} from 'react-router-dom';
 //import ReactTable from "react-table";
 import { PaperContext } from '../contexts/PaperContext';
@@ -11,6 +11,7 @@ function NewPaper(props) {
   const user = JSON.parse(localStorage.getItem("user"))
   const Papers = props.isOpen ? "content open" : "content";
   const [inputTitle, setInputTitle] = useState(paper.title);
+  const [authorData, setAuthorData] = useState([])
   const [field, setField] = useState(paper.field);
   const [methodOfPresentation, setMOP] = useState(paper.MOP);
   const [language, setLanguage] = useState(paper.language);
@@ -20,7 +21,6 @@ function NewPaper(props) {
   const [error, setError] = useState("");
 // ========== Get all users from server===============
   const users = []
-  const [authorData, setAuthorData] = useState([])
   // const [names, setNames] = useState([])
   // const [usernames, setUsernames] = useState([])
   useEffect(() => {
@@ -45,6 +45,33 @@ function NewPaper(props) {
         }
       })
   },[])
+
+ // ======Change Field=====
+ function ChangeField(e) {
+  //when we change field we need to clear subfield
+  setField(e)
+  setSubFieldList([""])
+}  
+  //=========subfield input ===========
+  const [subFieldList, setSubFieldList] = useState(paper.subfields.split(','));
+  const dynamicSubField = subFieldList.length == 1 ? "one-author-select": "author-select";
+  const handleSubFieldChange = (e, index) => {
+    const { name, value } = e.target;
+    const list = [...subFieldList];
+    list[index] = value;
+    setSubFieldList(list);
+  };
+
+  const handleSubFieldRemove = (index) => {
+    const list = [...subFieldList];
+    list.splice(index, 1);
+    setSubFieldList(list);
+  };
+
+  const handleSubFieldAdd = () => {
+    setSubFieldList([...subFieldList, ""]);
+  };
+      
   //=========Author input ===========
 
   const [authorList, setAuthorList] = useState(paper.authors.split(","));
@@ -92,6 +119,7 @@ function NewPaper(props) {
           'language': language,
           'NOM': numberOfPages,
           'field': field,
+          'subfields':subFieldList.toString(),
           'title':inputTitle,
           'summary':abstract,
           'paperFile':uploadedFile,
@@ -147,7 +175,7 @@ function NewPaper(props) {
               <div class="row mb-3">
                 <label for="inputTitle" class="col-sm-2 col-form-label">Author</label>
                 <div class="col-sm-10">
-      
+                    {/* we map a list of selectboxes in which we can choose authors from */}      
                   {authorList.map((singleAuthor, index) => (
                     <div  key={index} >
                       <div class="input-group mb-3">
@@ -188,19 +216,71 @@ function NewPaper(props) {
                 </div>
               </div>
               <div class="row mb-3">
-              <label for="inputTitle" class="col-sm-2 col-form-label" >field</label>
+                <label for="inputTitle" class="col-sm-2 col-form-label" >field</label>
                 <div class="col-sm-10">
                   <select class="form-select edit-paper-select" aria-label="Default select example"
-                  value={field} onChange={(e) => setField(e.target.value)}
+                  value={field} onChange={(e) => ChangeField(e.target.value)}
                   >
                     <option defaultValue={field} disabled hidden></option>
-                    {fields.map(( item ) => (
+                    {fieldsData.map(( item ) => (
                       <option value={item.value}> {item.label} </option>
                       )
                     )}
                   </select>
                 </div>
               </div>
+
+              <div class="row mb-3">
+                <label for="inputTitle" class="col-sm-2 col-form-label" >subfield</label>
+                <div class="col-sm-10">
+                  {subFieldList.map((singlesubfield, index) => (
+                      <div key={index} >
+                        <div class="input-group mb-3">
+                          <select class="form-select" 
+                            id={dynamicSubField}
+                            value={singlesubfield}
+                            onChange={(e) => handleSubFieldChange(e, index)}
+                            required
+                          >
+                            <option value="" selected disabled hidden>Choose subfield...</option>
+                            {field && fieldsData.find((single) => single.value ===field).subfields.map(( item ) => (
+                              <option value={item.value}> {item.label} </option>
+                              )
+                            )}
+                          </select>
+                          {subFieldList.length !== 1 && (
+                            <button class="btn btn-outline-secondary" type="button" id="button-remove"
+                              onClick={() => handleSubFieldRemove(index)}
+        
+                            >
+                              Remove
+                            </button>
+                          )}
+                        </div>
+                        <div>
+                          {/*  maximum number of authers is 4 */}
+                          {subFieldList.length - 1 === index && subFieldList.length < 4 && (
+                              <button
+                              class="btn btn-outline-secondary" type="button" id="button-addon2"
+                                onClick={handleSubFieldAdd}
+                              >
+                                Add
+                              </button>
+                          )}
+                        </div>
+                      </div>
+                    ))}                  
+                  {/* <select class="form-select edit-paper-select" aria-label="Default select example"
+                  value={subField} onChange={(e) => setSubField(e.target.value)}
+                  >
+                    <option value="" selected disabled hidden>Choose subfield...</option>
+                    {field && fieldsData.find((single) => single.value ===field).subfields.map(( item ) => (
+                      <option value={item.value}> {item.label} </option>
+                      )
+                    )}
+                  </select> */}
+                </div>
+              </div>              
               <div class="row mb-3">
               <label for="inputTitle" class="col-sm-2 col-form-label" >method of presentation</label>
                 <div class="col-sm-10">
