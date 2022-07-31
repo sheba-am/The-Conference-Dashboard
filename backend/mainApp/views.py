@@ -229,7 +229,7 @@ def editPaper(request):
     paper.summary=data['summary'].lower()
     paper.paperFile=data['paperFile']
     paper.MOP=data['MOP'].lower()
-    paper.save(update_fields=['authors','judges','NOM','field','title','summary','paperFile','MOP'])
+    paper.save(update_fields=['authors','judges','NOM','field','subfields','title','summary','paperFile','MOP'])
     allAuthors = data['authors'].split(",")
     for item in allAuthors:
         BaseUser.objects.get(username=item).userPapers.add(paper)
