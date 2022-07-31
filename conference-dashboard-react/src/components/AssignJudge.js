@@ -25,11 +25,12 @@ export default function AssignJudge(props) {
             assignedJudgeNames.push(props.assignedJudgeData[i]["judge"])
         }
     } else {
-        assignedJudgeNames=[""]
+        assignedJudgeNames=["",""]
     }
 console.log(assignedJudgeNames)
   const [newJudgeList, setnewJudgeList] = useState(assignedJudgeNames);
-  const dynamicJudge = newJudgeList.length == 1 ? "one-judge-select": "judge-select";
+  //when there's not remove button css changes
+  const dynamicJudge = newJudgeList.length == 2 ? "one-judge-select": "judge-select"; 
   const handleJudgeChange = (e, index) => {
     const { name, value } = e.target;
     const list = [...newJudgeList];
@@ -130,7 +131,7 @@ console.log(assignedJudgeNames)
                                 )
                                 )}
                             </select> 
-                            {newJudgeList.length !== 1 && (
+                            {newJudgeList.length !==2  && (
                                 <button class="btn btn-outline-secondary" type="button" id="button-remove" 
                                 onClick={() => handleJudgeRemove(index)}
                                 
