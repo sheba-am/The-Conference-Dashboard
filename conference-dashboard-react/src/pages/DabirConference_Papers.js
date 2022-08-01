@@ -46,34 +46,34 @@ function DabirConference_Papers({columns, papersData}) {
         <div>         
           <ul class="nav nav-tabs" role="tablist">
             <li class="nav-item">
-              <a class="nav-link active" data-bs-toggle="tab" href="#menu0">All {papersData && papersData.length}</a>
+              <a class="nav-link active" data-bs-toggle="tab" href="#menu0">All</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" data-bs-toggle="tab" href="#menu1">Pending Dabir Khane {pendingDabirKhanePapers.length} </a>
+              <a class="nav-link" data-bs-toggle="tab" href="#menu1">Pending Dabir Khane</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" data-bs-toggle="tab" href="#menu2">Rejected By Dabir Khane {rejectedByDabirKhanePapers.length} </a>
+              <a class="nav-link" data-bs-toggle="tab" href="#menu2">Rejected By Dabir Khane</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" data-bs-toggle="tab" href="#menu3">Pending Judge Assignment {pendingJudgeAssignmentPapers.length} </a>
+              <a class="nav-link" data-bs-toggle="tab" href="#menu3">Pending Judge Assignment</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" data-bs-toggle="tab" href="#menu4">Pending Judgment {pendingJudgmentPapers.length} </a>
+              <a class="nav-link" data-bs-toggle="tab" href="#menu4">Pending Judgment</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" data-bs-toggle="tab" href="#menu5">Pending Dabir Bakhsh {pendingDabirBakhshPapers.length} </a>
+              <a class="nav-link" data-bs-toggle="tab" href="#menu5">Pending Dabir Bakhsh</a>
             </li>  
             <li class="nav-item">
-              <a class="nav-link" data-bs-toggle="tab" href="#menu6">Approved By Bakhsh {approvedByDabirBakhshPapers.length} </a>
+              <a class="nav-link" data-bs-toggle="tab" href="#menu6">Approved By Bakhsh</a>
             </li>   
             <li class="nav-item">
-              <a class="nav-link" data-bs-toggle="tab" href="#menu7">Rejected By Bakhsh {rejectedByDabirBakhshPapers.length} </a>
+              <a class="nav-link" data-bs-toggle="tab" href="#menu7">Rejected By Bakhsh</a>
             </li>                     
             <li class="nav-item">
-              <a class="nav-link" data-bs-toggle="tab" href="#menu8">Approved {approvedPapers.length} </a>
+              <a class="nav-link" data-bs-toggle="tab" href="#menu8">Approved</a>
             </li> 
             <li class="nav-item">
-              <a class="nav-link" data-bs-toggle="tab" href="#menu9">Rejected {rejectedPapers.length} </a>
+              <a class="nav-link" data-bs-toggle="tab" href="#menu9">Rejected</a>
             </li>               
 
           </ul>
