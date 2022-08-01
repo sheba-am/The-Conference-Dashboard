@@ -41,22 +41,22 @@ function DabirBakhsh_Papers({columns, papersData}) {
         <div>         
           <ul class="nav nav-tabs" role="tablist">
             <li class="nav-item">
-              <a class="nav-link active" data-bs-toggle="tab" href="#menu0">All</a>
+              <a class="nav-link active" data-bs-toggle="tab" href="#menu0">All {allPapers.length} </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" data-bs-toggle="tab" href="#menu1">New</a>
+              <a class="nav-link" data-bs-toggle="tab" href="#menu1">New {newPapers.length}</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" data-bs-toggle="tab" href="#menu2">Pending Judgment</a>
+              <a class="nav-link" data-bs-toggle="tab" href="#menu2">Pending Judgment {pendingJudgmentPapers.length} </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" data-bs-toggle="tab" href="#menu3">Judged</a>
+              <a class="nav-link" data-bs-toggle="tab" href="#menu3">Judged {judgedPapers.length} </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" data-bs-toggle="tab" href="#menu4">Approved</a>
+              <a class="nav-link" data-bs-toggle="tab" href="#menu4">Approved {approvedPapers.length} </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" data-bs-toggle="tab" href="#menu4">Rejected</a>
+              <a class="nav-link" data-bs-toggle="tab" href="#menu4">Rejected {rejectedPapers.length} </a>
             </li>
           </ul>
           {/* ========== Content of Tabs ============= */}
@@ -75,7 +75,7 @@ function DabirBakhsh_Papers({columns, papersData}) {
             </div>
             {/* ================== */}
             <div id="menu2" class="container tab-pane fade"><br />
-              <h3>Pending Judgement</h3>
+              <h3>Pending Judgment</h3>
               {pendingJudgmentPapers.length >0 ? <MyPapersTable columns={columns} data={pendingJudgmentPapers} />:<h4>No Results</h4>}       
 
             </div>

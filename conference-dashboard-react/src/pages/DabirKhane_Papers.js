@@ -34,19 +34,19 @@ function DabirKhane_Papers({columns, papersData}) {
         <div>         
           <ul class="nav nav-tabs" role="tablist">
             <li class="nav-item">
-              <a class="nav-link active" data-bs-toggle="tab" href="#menu0">All</a>
+              <a class="nav-link active" data-bs-toggle="tab" href="#menu0">All  {papersData && papersData.length} </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" data-bs-toggle="tab" href="#menu1">Pending Approval</a>
+              <a class="nav-link" data-bs-toggle="tab" href="#menu1">Pending Approval {pendingApprovalPapers.length } </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" data-bs-toggle="tab" href="#menu2">Pending Revise</a>
+              <a class="nav-link" data-bs-toggle="tab" href="#menu2">Pending Revise {pendingRevisePapers.length} </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" data-bs-toggle="tab" href="#menu3">Aprroved</a>
+              <a class="nav-link" data-bs-toggle="tab" href="#menu3">Approved {approvedPapers.length} </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" data-bs-toggle="tab" href="#menu4">Rejected</a>
+              <a class="nav-link" data-bs-toggle="tab" href="#menu4">Rejected {rejectedPapers.length} </a>
             </li>
           </ul>
           {/* ========== Content of Tabs ============= */}
@@ -59,7 +59,7 @@ function DabirKhane_Papers({columns, papersData}) {
             </div>
             {/* ================== */}
             <div id="menu1" class="container tab-pane fade"><br />
-              <h3>Pending Aprroval</h3>
+              <h3>Pending Approval</h3>
               {pendingApprovalPapers.length >0 ? <MyPapersTable columns={columns} data={pendingApprovalPapers} />:<h4>No Results</h4>}
 
             </div>
@@ -71,7 +71,7 @@ function DabirKhane_Papers({columns, papersData}) {
             </div>
             {/* ================== */}
             <div id="menu3" class="container tab-pane fade"><br />
-              <h3>Aprroved</h3>
+              <h3>Approved</h3>
               {approvedPapers.length >0 ? <MyPapersTable columns={columns} data={approvedPapers} />:<h4>No Results</h4>}
             </div>
             {/* ================== */}
