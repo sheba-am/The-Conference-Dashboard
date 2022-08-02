@@ -100,9 +100,9 @@ export default function SendFeedback (props) {
               <br />
             </div>
             <br />
-            <Judge_Approval />
+            {(feedback && feedback.accepted !==true) &&<Judge_Approval />}
             <div class='container details-of-paper'>
-              <form onSubmit={handleSubmit}>
+              {(feedback && feedback.accepted ===true) && <form onSubmit={handleSubmit}>
                 <h2 className='send-feedback-header'>Send Feedback</h2>
                  
                   {/* ======Questions===== */ 
@@ -113,7 +113,7 @@ export default function SendFeedback (props) {
                       <div class='row mb-3'>
                         <label class='col-1 col-form-label'>score:</label>
                         <div class='col-sm-11'>
-                          <input type="number" id={singleQ.value}class=" form-control" onChange={(e) => handleScoreChange(e, index)} />
+                          <input type="number" id={singleQ.value}class=" form-control" onChange={(e) => handleScoreChange(e, index)} required/>
                         </div>
                       </div>
                     </div>
@@ -132,7 +132,7 @@ export default function SendFeedback (props) {
                     <Alert variant='success'>{error}</Alert>
                   }  
                 <br />              
-              </form>
+              </form>}
             </div>
         </div>
     )
