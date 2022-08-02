@@ -67,19 +67,19 @@ function Judge_Papers({papersData, columns, judgeFeedbackData}) {
           <br />
           <ul class="nav nav-tabs" role="tablist">
             <li class="nav-item">
-              <a class="nav-link active" data-bs-toggle="tab" href="#menu0">All</a>
+              <a class="nav-link active" data-bs-toggle="tab" href="#menu0">All {allJudgesPapers.length} </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link " data-bs-toggle="tab" href="#menu1">Pending Approval</a>
+              <a class="nav-link " data-bs-toggle="tab" href="#menu1">Pending Approval {pendingApprovalPapers.length}</a>
             </li>          
             <li class="nav-item">
-              <a class="nav-link" data-bs-toggle="tab" href="#menu2">Pending Judgement</a>
+              <a class="nav-link" data-bs-toggle="tab" href="#menu2">Pending Judgement {pendingJudgmentPapers.length} </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" data-bs-toggle="tab" href="#menu3">Judged</a>
+              <a class="nav-link" data-bs-toggle="tab" href="#menu3">Judged{judgedPapers.length>0} </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link " data-bs-toggle="tab" href="#menu4">Rejected</a>
+              <a class="nav-link " data-bs-toggle="tab" href="#menu4">Rejected {rejectedPapers.length} </a>
             </li>            
           </ul>
           {/* ======== Tab Content ========== */}

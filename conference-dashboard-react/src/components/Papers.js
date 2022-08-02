@@ -69,7 +69,7 @@ function Papers(props) {
   return ((!user)? <Navigate to="/signup"/> :
     <div  className={PapersCss}>
       
-      <div class="container mt-3">
+      <div id="papers-container" class="container mt-3">
         <h2>Manage Papers</h2>
         {
           user.status==='judge' && <Judge_Papers columns={columns} papersData={papersData} judgeFeedbackData={judgeFeedbackData} />
@@ -85,7 +85,7 @@ function Papers(props) {
           user.status==='dabirbakhsh' && <DabirBakhsh_Papers columns={columns} papersData={papersData} />
         }                       
       </div>
-
+      <br />
     </div>
   )
 }

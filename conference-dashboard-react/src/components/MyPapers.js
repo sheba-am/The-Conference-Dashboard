@@ -75,19 +75,19 @@ function MyPapers(props) {
         <div>         
           <ul class="nav nav-tabs" role="tablist">
             <li class="nav-item">
-              <a class="nav-link active" data-bs-toggle="tab" href="#menu0">All</a>
+              <a class="nav-link active" data-bs-toggle="tab" href="#menu0">All {papersData && papersData.length} </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" data-bs-toggle="tab" href="#menu1">Pending</a>
+              <a class="nav-link" data-bs-toggle="tab" href="#menu1">Pending {pendingPapers.length} </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" data-bs-toggle="tab" href="#menu2">Revise</a>
+              <a class="nav-link" data-bs-toggle="tab" href="#menu2">Revise {revisedPapers.length} </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" data-bs-toggle="tab" href="#menu3">Aprroved</a>
+              <a class="nav-link" data-bs-toggle="tab" href="#menu3">Aprroved {approvedPapers.length} </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" data-bs-toggle="tab" href="#menu4">Rejected</a>
+              <a class="nav-link" data-bs-toggle="tab" href="#menu4">Rejected {rejectedPapers.length} </a>
             </li>
           </ul>
 

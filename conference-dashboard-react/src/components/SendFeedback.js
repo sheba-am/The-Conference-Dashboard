@@ -12,6 +12,7 @@ export default function SendFeedback (props) {
   const SendFeedbackCss = props.isOpen ? "content open" : "content";
     var paper = JSON.parse(localStorage.getItem("selectedPaper")); //retrieve the object
     var user = JSON.parse(localStorage.getItem("user"));
+
     const [feedback, setFeedback] = useState();
     const config = {
       headers: {
@@ -30,9 +31,12 @@ export default function SendFeedback (props) {
       ).then((response) => response)
       .then((response) => {
         setFeedback(response.data)
+        console.log('viewfeedback', response.data)
       })
     }, []);
     console.log(feedback)
+    var timeLeft = feedback && feedback.timeLeft.split(',')
+
     var scoresArr =feedback?feedback.scores: new Array(FeedbackQuestions.length).fill(0) 
     const[scores,setScores]=useState(scoresArr)
     const [error, setError] = useState("")
@@ -87,14 +91,18 @@ export default function SendFeedback (props) {
                         <MdArrowBackIosNew />
                     </Link>
                   </div>
+
+              </div>
+              <div class="ml-auto">
+                Days Left: {timeLeft && timeLeft[0]}
               </div>
               <PaperInfo />
               <br />
             </div>
             <br />
-            <Judge_Approval />
+            {(feedback && feedback.accepted !==true) &&<Judge_Approval />}
             <div class='container details-of-paper'>
-              <form onSubmit={handleSubmit}>
+              {(feedback && feedback.accepted ===true) && <form onSubmit={handleSubmit}>
                 <h2 className='send-feedback-header'>Send Feedback</h2>
                  
                   {/* ======Questions===== */ 
@@ -105,7 +113,7 @@ export default function SendFeedback (props) {
                       <div class='row mb-3'>
                         <label class='col-1 col-form-label'>score:</label>
                         <div class='col-sm-11'>
-                          <input type="number" id={singleQ.value}class=" form-control" onChange={(e) => handleScoreChange(e, index)} />
+                          <input type="number" id={singleQ.value}class=" form-control" onChange={(e) => handleScoreChange(e, index)} required/>
                         </div>
                       </div>
                     </div>
@@ -124,7 +132,7 @@ export default function SendFeedback (props) {
                     <Alert variant='success'>{error}</Alert>
                   }  
                 <br />              
-              </form>
+              </form>}
             </div>
         </div>
     )

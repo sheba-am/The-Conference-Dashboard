@@ -1,5 +1,5 @@
 import React, {useState}  from 'react'
-
+import {FeedbackQuestions} from '../data/FormData'
 function JudgesTable({assignedJudgeData}) {
     var paper = JSON.parse(localStorage.getItem("selectedPaper")); //retrieve the object
     const isTableEmpty = assignedJudgeData && assignedJudgeData.length>0  ? "table papers-table justify-content-center table table-hover align-middle" : "table papers-table-empty justify-content-center table table-hover align-middle";
@@ -9,6 +9,7 @@ function JudgesTable({assignedJudgeData}) {
       }
     const [feedbacks, setFeedbacks] = useState([]);
     var averageScore =[]  // we store average of all scores in this array
+    var scoresCount = FeedbackQuestions
     assignedJudgeData.map((singleJudge) => (
         singleJudge.scores!=='N/A' ?averageScore.push(getAvg(singleJudge.scores.split(',').map(Number))): averageScore.push('N/A')
     ))
@@ -21,6 +22,7 @@ function JudgesTable({assignedJudgeData}) {
         <tr class="float-right">
             <th scope="col" class='papers-table-header-item'>#</th>
             <th scope="col" class='papers-table-header-item'>Judge name</th>
+            {scoresCount.map((single_Q,index) => (<th key={index}  scope="col" class='papers-table-header-item'>Q{index+1}</th>))}
             <th scope="col" class='papers-table-header-item'>Avg score</th>
             <th scope="col" class='papers-table-header-item'>state</th>
             <th scope="col" class='papers-table-header-item'>feedback</th>             
@@ -35,10 +37,15 @@ function JudgesTable({assignedJudgeData}) {
                         <tr key={index}  >
                             <th scope="row" class='table-index'>{index + 1}</th>
                             <td>{item.judge}</td>
+                            {
+                                item.scores !== 'N/A' &&item.scores.split(',').map((singleScore)=>(<td>{singleScore}</td>))
+                            }
+                            {item.scores === 'N/A' && scoresCount.map((singleNa,index) =>(<td>N/A</td>))}
                             <td> {averageScore[index]}</td>
                             {averageScore[index]>= 10 && <td>passed</td>}
                             {averageScore[index]< 10 && <td>failed</td>}
-                            {averageScore[index] === 'N/A' && <td>N/A</td>}
+                            {item.accepted ===null && <td> pending accept</td>}
+                            {(item.accepted ==='true' && averageScore[index] === 'N/A') && <td>N/A </td>}
                             <td> {item.description}</td>
                         </tr>
                     

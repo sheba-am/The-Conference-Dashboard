@@ -103,7 +103,7 @@ function PaperDetails(props) {
             </div>
             
 
-            {user.status=='dabirconference' && paper.published == false?<div class='col-lg-2 col-md-2 col-sm-3'><button class="btn btn-primary" onClick={handlePublish}>
+            {user.status=='dabirconference' && paper.published === false?<div class='col-lg-2 col-md-2 col-sm-3'><button class="btn btn-primary" onClick={handlePublish}>
                 publish
               </button></div>:<div></div>}
           
