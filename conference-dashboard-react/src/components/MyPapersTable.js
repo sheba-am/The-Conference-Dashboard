@@ -149,7 +149,7 @@ function MyPapersTable({ columns, data , myPaper}) {
           <button class='btn page-button' onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>
             <MdLastPage />
           </button>{' '}          
-          <span>
+          {/* <span>
             Go to page:{' '}
             <input
               type="number"
@@ -172,7 +172,7 @@ function MyPapersTable({ columns, data , myPaper}) {
                 Show {pageSize}
               </option>
             ))}
-          </select>
+          </select> */}
         </div>        
       </div>
       </>

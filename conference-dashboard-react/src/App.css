@@ -106,9 +106,16 @@
   background-color: #F6FBF4;
 }
 .papers-table {
-  border-radius: 20px;
+  /* border-radius: 20px;
   width: 50vw;
-  background-color: #F6FBF4;
+  background-color: #f6fbf4a8; */
+/* From https://css.glass */
+background: rgba(255, 255, 255, 0.56);
+border-radius: 16px;
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(5.6px);
+-webkit-backdrop-filter: blur(5.6px);
+border: 1px solid rgba(255, 255, 255, 0.43);  
 }
 
 
@@ -736,6 +743,12 @@ border-radius: 12px ;
 
 .has-search .form-control {
   padding-left: 2.375rem;
+background: rgba(255, 255, 255, 0.41);
+border-radius: 16px;
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(5px);
+-webkit-backdrop-filter: blur(5px);
+border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 .has-search .form-control-feedback {
@@ -754,9 +767,17 @@ border-radius: 12px ;
   background-color: rgb(255, 255, 255);
   border-radius: 12px;
   margin: 0 5px 0 5px;
-  height: 40px;
+  font-size: 1.4em;
+  /* align-items: center;
+  display: table-cell;
+  vertical-align: middle; */
 }
 
 .pagination .page-button:hover {
   background-color: #F66B0E;
 }
+ /* #papers-container {
+  background-color: #D9D9D9;
+  border-radius: 5px;
+  
+ } */
