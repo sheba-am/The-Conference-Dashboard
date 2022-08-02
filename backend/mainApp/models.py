@@ -5,6 +5,7 @@ from django.contrib.auth.models import AbstractUser
 class Paper(models.Model):
     authors = models.CharField(max_length=64)
     judges = models.CharField(max_length=64, blank=True)
+    status = models.CharField(max_length=128, blank=True)
     language = models.CharField(max_length=64)
     #number of pages
     NOM = models.CharField(max_length=64)

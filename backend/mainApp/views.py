@@ -178,8 +178,28 @@ def viewPublished(request):
 def viewPapers(request):
     data = request.data
     user = BaseUser.objects.get(username=data['username'])
-    serializer = PaperSerializer(user.userPapers,many=True)
-    return Response(serializer.data)
+    serializers = []
+    for item in user.userPapers.all():
+        judges = []
+        status = []
+        feedbacks = FeedBack.objects.filter(paper=item)
+        for feedback in feedbacks:
+            if(feedback):
+                judges.append(str(feedback.judge))
+                if(feedback.accepted):
+                    status.append("accepted")
+                elif(not feedback.accepted):
+                    status.append("not accepted")
+                elif(feedback.scores=="N/A"):
+                    status.append("no feedback")
+                else:
+                    status.append("feedback")
+
+        newPaper = PaperSerializer(item, many=False).data
+        newPaper['judges'] = ','.join(map(str, judges))
+        newPaper['status'] = ','.join(map(str, status))
+        serializers.append(newPaper)
+    return Response(serializers)
 
 @api_view(['POST'])
 def addPaper(request):
@@ -449,15 +469,15 @@ def assignJudge(request):
                     scores = "N/A",
                     description="N/A"
                 )
-
-                #send email
-                send_mail(
-                subject = 'Paper Assigment',
-                message = item + " paper with the title '" + data['title'] + "' has been assigned to you. Please accept or decline within 14 days.",
-                from_email = 'conference025@gmail.com',
-                recipient_list = ['masoomehmokhtari693@gmail.com'],
-                fail_silently = False,
-                )
+                #undo when done
+                # #send email
+                # send_mail(
+                # subject = 'Paper Assigment',
+                # message = item + " paper with the title '" + data['title'] + "' has been assigned to you. Please accept or decline within 14 days.",
+                # from_email = 'conference025@gmail.com',
+                # recipient_list = ['masoomehmokhtari693@gmail.com'],
+                # fail_silently = False,
+                # )
     serializer = PaperSerializer(paper,many=False)
     return Response(serializer.data)
 
@@ -499,8 +519,29 @@ def promote(request):
 @api_view(['POST'])
 def viewAllPapers(request):
     papers = Paper.objects.all()
-    serializer = PaperSerializer(papers,many=True)
-    return Response(serializer.data)
+    print(papers)
+    serializers = []
+    for item in papers:
+        judges = []
+        status = []
+        feedbacks = FeedBack.objects.filter(paper=item)
+        for feedback in feedbacks:
+            if(feedback):
+                judges.append(str(feedback.judge))
+                if(feedback.accepted):
+                    status.append("accepted")
+                elif(not feedback.accepted):
+                    status.append("not accepted")
+                elif(feedback.scores=="N/A"):
+                    status.append("no feedback")
+                else:
+                    status.append("feedback")
+
+        newPaper = PaperSerializer(item, many=False).data
+        newPaper['judges'] = ','.join(map(str, judges))
+        newPaper['status'] = ','.join(map(str, status))
+        serializers.append(newPaper)
+    return Response(serializers)
 
 @api_view(['POST'])
 def publish(request):
