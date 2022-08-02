@@ -732,3 +732,31 @@ transform: translateY(-2px);
 #Homepage .carousel-inner {
 border-radius: 12px ;
 }
+/*  ================== MyPapersTable ================== */
+
+.has-search .form-control {
+  padding-left: 2.375rem;
+}
+
+.has-search .form-control-feedback {
+  position: absolute;
+  z-index: 2;
+  display: block;
+  width: 2.375rem;
+  height: 2.375rem;
+  line-height: 2.375rem;
+  text-align: center;
+  pointer-events: none;
+  color: #aaa;
+}
+
+.pagination .page-button {
+  background-color: rgb(255, 255, 255);
+  border-radius: 12px;
+  margin: 0 5px 0 5px;
+  height: 40px;
+}
+
+.pagination .page-button:hover {
+  background-color: #F66B0E;
+}
