@@ -63,7 +63,8 @@ function Papers(props) {
   const columns = React.useMemo(
     () => columnsData,[]
   )
- 
+  // tasks.forEach( task => task.start_date = task.start_date.format("YYYY-MM-DD") );
+  // return tasks;
 
   //redirect if the user is not authenticated
   return ((!user)? <Navigate to="/signup"/> :
