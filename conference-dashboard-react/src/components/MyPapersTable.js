@@ -1,11 +1,7 @@
 import React , {useContext, useState, useEffect}from 'react'
 
-import { Link, Navigate } from 'react-router-dom';
-import { PaperContext } from '../contexts/PaperContext';
-import axios from 'axios'
-import { Container } from 'react-bootstrap';
-import {useTable, useGlobalFilter, usePagination,Row, Tabs,Tab} from 'react-table';
-import {columnsData} from '../data/columns';
+import { Link } from 'react-router-dom';
+import {useTable, useGlobalFilter, usePagination} from 'react-table';
 import { GlobalFilter } from './GlobalFilter';
 import {MdFirstPage, MdLastPage, MdNavigateBefore, MdNavigateNext} from  "react-icons/md";
 function MyPapersTable({ columns, data , myPaper}) {
@@ -40,7 +36,7 @@ function MyPapersTable({ columns, data , myPaper}) {
     } = useTable({
       columns,
       data,
-      initialState: { pageIndex: 0 },
+      initialState: {hiddenColumns:['status'], pageIndex: 0 },
     },useGlobalFilter, usePagination)
   
     const {globalFilter} = state
@@ -91,6 +87,7 @@ function MyPapersTable({ columns, data , myPaper}) {
                 <tr key={index} {...row.getRowProps()}>
                   <th scope="row" class='col-1 table-index'>{index+1}</th>
                   {row.cells.map(cell => {
+                    console.log('cell', cell)
                     return (
                         <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
                     )
@@ -120,10 +117,6 @@ function MyPapersTable({ columns, data , myPaper}) {
                         </Link>
                       </td>
                     }
-
-                  
-                  
-        
 
                 </tr>
               )

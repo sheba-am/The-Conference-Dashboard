@@ -7,7 +7,7 @@
   background-color: lightcoral;
 } */
 
- /* =================== SIDEBAR ===================*/
+ /* ================== SIDEBAR ==================*/
 
 @media only screen and (max-width: 768px) {
   #sidebar .sidebar {
@@ -781,3 +781,14 @@ border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 5px;
   
  } */
+
+.judge-pending-accept {
+  background-color: yellow;
+}
+
+.judge-pending-judgment {
+  background-color: green;
+}
+.judge-judged {
+  background-color: lightcoral;
+}

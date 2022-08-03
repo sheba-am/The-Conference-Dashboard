@@ -76,7 +76,7 @@ function Judge_Papers({papersData, columns, judgeFeedbackData}) {
               <a class="nav-link" data-bs-toggle="tab" href="#menu2">Pending Judgement {pendingJudgmentPapers.length} </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" data-bs-toggle="tab" href="#menu3">Judged{judgedPapers.length>0} </a>
+              <a class="nav-link" data-bs-toggle="tab" href="#menu3">Judged{judgedPapers.length} </a>
             </li>
             <li class="nav-item">
               <a class="nav-link " data-bs-toggle="tab" href="#menu4">Rejected {rejectedPapers.length} </a>
