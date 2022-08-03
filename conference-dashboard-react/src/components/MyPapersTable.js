@@ -4,9 +4,10 @@ import { Link, Navigate } from 'react-router-dom';
 import { PaperContext } from '../contexts/PaperContext';
 import axios from 'axios'
 import { Container } from 'react-bootstrap';
-import {useTable, useGlobalFilter,Row, Tabs,Tab} from 'react-table';
+import {useTable, useGlobalFilter, usePagination,Row, Tabs,Tab} from 'react-table';
 import {columnsData} from '../data/columns';
 import { GlobalFilter } from './GlobalFilter';
+import {MdFirstPage, MdLastPage, MdNavigateBefore, MdNavigateNext} from  "react-icons/md";
 function MyPapersTable({ columns, data , myPaper}) {
     const user = JSON.parse(localStorage.getItem("user"))
   
@@ -21,14 +22,26 @@ function MyPapersTable({ columns, data , myPaper}) {
       getTableProps,
       getTableBodyProps,
       headerGroups,
-      rows,
       prepareRow,
       state, 
-      setGlobalFilter
+      setGlobalFilter,
+      page, // Instead of using 'rows', we'll use page,
+      // which has only the rows for the active page
+  
+      canPreviousPage,
+      canNextPage,
+      pageOptions,
+      pageCount,
+      gotoPage,
+      nextPage,
+      previousPage,
+      setPageSize,
+      state: { pageIndex, pageSize },
     } = useTable({
       columns,
       data,
-    },useGlobalFilter)
+      initialState: { pageIndex: 0 },
+    },useGlobalFilter, usePagination)
   
     const {globalFilter} = state
     const isTableEmpty = data && data.length >0 ? "table papers-table justify-content-center  table-hover align-middle" : "table papers-table-empty justify-content-center  table-hover align-middle";
@@ -38,6 +51,21 @@ function MyPapersTable({ columns, data , myPaper}) {
       <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter} />
   
       <div id='papers-table' class="table-responsive-md">
+        <pre>
+          <code>
+            { /*JSON.stringify(
+              {
+                pageIndex,
+                pageSize,
+                pageCount,
+                canNextPage,
+                canPreviousPage,
+              },
+              null,
+              2
+            ) */}
+          </code>
+        </pre>        
         <table class={isTableEmpty} {...getTableProps()}>
           <thead class='papers-table-header'>
             {headerGroups.map(headerGroup => (
@@ -57,7 +85,7 @@ function MyPapersTable({ columns, data , myPaper}) {
             ))}
           </thead>
           <tbody class="papers-table-body" {...getTableBodyProps()}>
-            {rows.map((row, index) => {
+            {page.map((row, index) => {
               prepareRow(row)
               return (
                 <tr key={index} {...row.getRowProps()}>
@@ -102,6 +130,50 @@ function MyPapersTable({ columns, data , myPaper}) {
             })}
           </tbody>
         </table>
+        <div className="pagination justify-content-center ">
+          <button class='btn page-button' onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
+            <MdFirstPage />
+          </button>{' '}
+          <button class='btn page-button' onClick={() => previousPage()} disabled={!canPreviousPage}>
+            <MdNavigateBefore />
+          </button>{' '}
+
+          <span>
+            Page{' '}
+              {pageIndex + 1} of {pageOptions.length}
+            
+          </span>
+          <button class='btn page-button' onClick={() => nextPage()} disabled={!canNextPage}>
+            <MdNavigateNext />
+          </button>{' '}
+          <button class='btn page-button' onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>
+            <MdLastPage />
+          </button>{' '}          
+          {/* <span>
+            Go to page:{' '}
+            <input
+              type="number"
+              defaultValue={pageIndex + 1}
+              onChange={e => {
+                const page = e.target.value ? Number(e.target.value) - 1 : 0
+                gotoPage(page)
+              }}
+              style={{ width: '100px' }}
+            />
+          </span>{' '}
+          <select 
+            value={pageSize}
+            onChange={e => {
+              setPageSize(Number(e.target.value))
+            }}
+          >
+            {[5, 10, 20, 30, 40, 50].map(pageSize => (
+              <option key={pageSize} value={pageSize}>
+                Show {pageSize}
+              </option>
+            ))}
+          </select> */}
+        </div>        
       </div>
       </>
     )
