@@ -182,22 +182,46 @@ def viewPapers(request):
     for item in user.userPapers.all():
         judges = []
         status = []
+        scores = []
+        timesLeft = []
         feedbacks = FeedBack.objects.filter(paper=item)
         for feedback in feedbacks:
             if(feedback):
                 judges.append(str(feedback.judge))
+                scores.append(str(feedback.scores))
                 if(feedback.accepted):
-                    status.append("accepted")
+                    # status.append("accepted")
+                    if(feedback.scores=="N/A"):
+                        status.append("no feedback")
+                        timeAccepted = feedback.dateAccepted
+                        timeNow = datetime.datetime.now(datetime.timezone.utc)
+                        dif = timeNow - timeAccepted
+                        timeLeft = 21 - (timeNow.date() - timeAccepted.date()).days
+                        print(timeLeft)
+                        if(timeLeft>7):
+                            timesLeft.append(str(timeLeft - 7) + ",green")
+                        else:
+                            timesLeftappend(str(timeLeft) + ",red")
+                    else:
+                        status.append("feedback")
+                        timesLeft.append("done")
                 elif(not feedback.accepted):
                     status.append("not accepted")
-                elif(feedback.scores=="N/A"):
-                    status.append("no feedback")
-                else:
-                    status.append("feedback")
+                    timeAssigned = feedback.dateAssigned
+                    timeNow = datetime.datetime.now(datetime.timezone.utc)
+                    dif = timeNow - timeAssigned
+                    timeLeft = 21 - (timeNow.date() - timeAssigned.date()).days
+                    if(timeLeft>7):
+                        timesLeft.append(str(timeLeft - 7) + ",green")
+                    else:
+                        timesLeft.append(str(timeLeft) + ",red")
+                
 
         newPaper = PaperSerializer(item, many=False).data
         newPaper['judges'] = ','.join(map(str, judges))
         newPaper['status'] = ','.join(map(str, status))
+        newPaper['scores'] = ','.join(map(str, scores))
+        newPaper['timeLeft'] = timesLeft
         serializers.append(newPaper)
     return Response(serializers)
 
@@ -435,7 +459,7 @@ def fieldPapers(request):
 @api_view(['POST'])
 def viewJudges(request):
     data = request.data
-    judges = BaseUser.objects.filter(Q(field=data['field'].lower()) & (Q(status='judge') | Q(status='dabirBakhsh')))
+    judges = BaseUser.objects.filter((Q(field=data['field'].lower()) & (Q(status='judge'))) | Q(status='dabirconference'))
     serializer = UserSerializer(judges,many=True)
     return Response(serializer.data)
 
@@ -524,22 +548,46 @@ def viewAllPapers(request):
     for item in papers:
         judges = []
         status = []
+        scores = []
+        timesLeft = []
         feedbacks = FeedBack.objects.filter(paper=item)
         for feedback in feedbacks:
             if(feedback):
                 judges.append(str(feedback.judge))
+                scores.append(str(feedback.scores))
                 if(feedback.accepted):
-                    status.append("accepted")
+                    # status.append("accepted")
+                    if(feedback.scores=="N/A"):
+                        status.append("no feedback")
+                        timeAccepted = feedback.dateAccepted
+                        timeNow = datetime.datetime.now(datetime.timezone.utc)
+                        dif = timeNow - timeAccepted
+                        timeLeft = 21 - (timeNow.date() - timeAccepted.date()).days
+                        print(timeLeft)
+                        if(timeLeft>7):
+                            timesLeft.append(str(timeLeft - 7) + ",green")
+                        else:
+                            timesLeftappend(str(timeLeft) + ",red")
+                    else:
+                        status.append("feedback")
+                        timesLeft.append("done")
                 elif(not feedback.accepted):
                     status.append("not accepted")
-                elif(feedback.scores=="N/A"):
-                    status.append("no feedback")
-                else:
-                    status.append("feedback")
+                    timeAssigned = feedback.dateAssigned
+                    timeNow = datetime.datetime.now(datetime.timezone.utc)
+                    dif = timeNow - timeAssigned
+                    timeLeft = 21 - (timeNow.date() - timeAssigned.date()).days
+                    if(timeLeft>7):
+                        timesLeft.append(str(timeLeft - 7) + ",green")
+                    else:
+                        timesLeft.append(str(timeLeft) + ",red")
+                
 
         newPaper = PaperSerializer(item, many=False).data
         newPaper['judges'] = ','.join(map(str, judges))
         newPaper['status'] = ','.join(map(str, status))
+        newPaper['scores'] = ','.join(map(str, scores))
+        newPaper['timeLeft'] = timesLeft
         serializers.append(newPaper)
     return Response(serializers)
 
