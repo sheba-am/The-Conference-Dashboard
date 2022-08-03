@@ -435,7 +435,7 @@ def fieldPapers(request):
 @api_view(['POST'])
 def viewJudges(request):
     data = request.data
-    judges = BaseUser.objects.filter(Q(field=data['field'].lower()) & Q(status='judge'))
+    judges = BaseUser.objects.filter(Q(field=data['field'].lower()) & (Q(status='judge') | Q(status='dabirBakhsh')))
     serializer = UserSerializer(judges,many=True)
     return Response(serializer.data)
 
