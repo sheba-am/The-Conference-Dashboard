@@ -2,7 +2,7 @@ import React , {useContext, useState, useEffect}from 'react'
 import { Navigate } from 'react-router-dom';
 import { PaperContext } from '../contexts/PaperContext';
 import axios from 'axios'
-import {columnsData} from '../data/columns';
+import {myPaperColumnsData} from '../data/columns';
 import MyPapersTable from '../components/MyPapersTable'
 import { Link } from 'react-router-dom';
 
@@ -40,7 +40,7 @@ function MyPapers(props) {
   }, [])
   
   const columns = React.useMemo(
-    () => columnsData,[]
+    () => myPaperColumnsData,[]
   )
     var pendingPapers = []
     var revisedPapers = []

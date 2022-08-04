@@ -6,6 +6,7 @@ import { GlobalFilter } from './GlobalFilter';
 import {MdFirstPage, MdLastPage, MdNavigateBefore, MdNavigateNext} from  "react-icons/md";
 import {BsThreeDotsVertical} from  "react-icons/bs";
 import {VscFeedback} from  "react-icons/vsc";
+import { ColumnFilter } from './ColumnFilter';
 function MyPapersTable({ columns, data , myPaper}) {
     const user = JSON.parse(localStorage.getItem("user"))
   
@@ -47,19 +48,8 @@ function MyPapersTable({ columns, data , myPaper}) {
     return (
       <>
       <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter} />
-      <div> 
-        <span> Judge State: </span>
-        <span className="judge-pending-accept"> pending accept</span>&nbsp;
-        <span className="judge-pending-judgment"> pending judgment</span>&nbsp;
-        <span className='judge-judged'> judged</span>
-      </div>
-      <br />
-      <div> 
-        <span> Days Left: </span>
-        <span className="days-left-green"> normal days left</span>&nbsp;
-        <span className="days-left-red"> extra days left</span>&nbsp;
-        <span className='days-left-done'> done</span>
-      </div>      
+      {!myPaper && <ColumnFilter  filter={globalFilter} setFilter={setGlobalFilter} />}
+     
       <div id='papers-table' class="table-responsive-md">
         <pre>
           <code>

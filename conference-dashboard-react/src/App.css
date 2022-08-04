@@ -802,60 +802,131 @@ border: 1px solid rgba(255, 255, 255, 0.3);
   
  } */
 
-.judge-pending-judgment {
-  background-color: #B2B0B075;
-  color: #232323F2;
-  padding: 1px 8px 3px 8px;
-  border-radius: 10px;  
-}
 
 .judge-pending-accept {
   background-color: #F2F61D75;
   color: #B04F08F2;
   padding: 1px 8px 3px 8px;
   border-radius: 10px;  
+  border: 1px #F2F61D75 ;
+}
+.judge-pending-accept.button {
+  -webkit-box-shadow: 3px 3px 11px #000000;
+  -moz-box-shadow: 3px 3px 11px #000000;
+  box-shadow: 3px 3px 11px #000000;
+}
+.judge-pending-accept.pushed-button {
+  -webkit-box-shadow: -2px -2px 0px #000000;
+  -moz-box-shadow: -2px -2px 0px #000000;
+  box-shadow: -2px -2px 0px #000000;
+}
+
+.judge-pending-judgment {
+  background-color: #B2B0B075;
+  color: #232323F2;
+  padding: 1px 8px 3px 8px;
+  border-radius: 10px;  
+  border: 1px #B2B0B075 ;
+}
+.judge-pending-judgment.button {
+  -webkit-box-shadow: 3px 3px 11px #000000;
+  -moz-box-shadow: 3px 3px 11px #000000;
+  box-shadow: 3px 3px 11px #000000;
+}
+.judge-pending-judgment.pushed-button {
+  -webkit-box-shadow: -2px -2px 0px #000000;
+  -moz-box-shadow: -2px -2px 0px #000000;
+  box-shadow: -2px -2px 0px #000000;
 }
 .judge-judged {
   background-color: #50ff102b;
   color: #288E04F2;
   padding: 1px 8px 3px 8px;
   border-radius: 10px;
-
+  border: 1px #50ff102b ;
 }
-
+.judge-judged.button {
+  -webkit-box-shadow: 3px 3px 11px #000000;
+  -moz-box-shadow: 3px 3px 11px #000000;
+  box-shadow: 3px 3px 11px #000000;
+}
+.judge-judged.pushed-button {
+  -webkit-box-shadow: -2px -2px 0px #000000;
+  -moz-box-shadow: -2px -2px 0px #000000;
+  box-shadow: -2px -2px 0px #000000;
+}
 
 .days-left-done {
   background-color: #50ff102b;
   color: #288E04F2;
   padding: 1px 8px 3px 8px;
   border-radius: 10px;
+  border: 1px #50ff102b ;
 }
+.days-left-done.button {
+  -webkit-box-shadow: 3px 3px 11px #000000;
+  -moz-box-shadow: 3px 3px 11px #000000;
+  box-shadow: 3px 3px 11px #000000;
+}
+.days-left-done.pushed-button {
+  -webkit-box-shadow: -2px -2px 0px #000000;
+  -moz-box-shadow: -2px -2px 0px #000000;
+  box-shadow: -2px -2px 0px #000000;
+}
+
 .days-left-green {
   background-color: #086db02a;
   color: #0765a3;
   padding: 1px 8px 3px 8px;
   border-radius: 10px; 
-
+  border: 1px #086db02a ;
+}
+.days-left-green.button {
+  -webkit-box-shadow: 3px 3px 11px #000000;
+  -moz-box-shadow: 3px 3px 11px #000000;
+  box-shadow: 3px 3px 11px #000000;
+}
+.days-left-green.pushed-button {
+  -webkit-box-shadow: -2px -2px 0px #000000;
+  -moz-box-shadow: -2px -2px 0px #000000;
+  box-shadow: -2px -2px 0px #000000;
 }
 .days-left-red {
   background-color: #fa1f1f3f;
   color: #d31212;
-    padding: 1px 8px 3px 8px;
+  padding: 1px 8px 3px 8px;
   border-radius: 10px; 
+  border: 1px #fa1f1f3f ;
+
 }
-.color-test {
-  background: #B2B0B075;
-  background: #232323F2;
-  background: #F41818F2;
-  background: #FCB0B075;
-  background: #F2F61D75;
-  background: #B04F08F2;
-  background: #288E042B;
-  background: #288E04F2;
-  background: #4981a883
-;
+.days-left-red.button {
+  -webkit-box-shadow: 3px 3px 11px #000000;
+  -moz-box-shadow: 3px 3px 11px #000000;
+  box-shadow: 3px 3px 11px #000000;
+}
+.days-left-red.pushed-button {
+  -webkit-box-shadow: -2px -2px 0px #000000;
+  -moz-box-shadow: -2px -2px 0px #000000;
+  box-shadow: -2px -2px 0px #000000;
 }
 
+.clear-filter {
+  background-color: #B2B0B075;
+  color: #232323F2;
+  padding: 1px 8px 3px 8px;
+  border-radius: 10px;  
+  border: 1px #B2B0B075 ;
+  -webkit-box-shadow: 3px 3px 11px #000000;
+  -moz-box-shadow: 3px 3px 11px #000000;
+  box-shadow: 3px 3px 11px #000000;
+}
+
+.clear-filter:active,
+.clear-filter:hover {
+  -webkit-box-shadow: -2px -2px 0px #000000;
+  -moz-box-shadow: -2px -2px 0px #000000;
+  box-shadow: -2px -2px 0px #000000;
+}
 /*  ================== Tabs ================== */
 
 .tab .nav-tabs .line-1 {
@@ -891,7 +962,7 @@ border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 10px;
   -webkit-box-shadow: 2px 2px 5px #000000;
   -moz-box-shadow: 2px 2px 5px #000000;
-  box-shadow: 2px 2px 5px #000000;
+  box-shadow: 2px 2px 5px #9c3f01b9;
 
   }
 
@@ -906,21 +977,7 @@ border: 1px solid rgba(255, 255, 255, 0.3);
     border: 1px 3px 1px 3px solid #fff;
     background-color: #fff ;
 }
-/* .tab .nav-tabs .down {
-  display: block;
-  padding: 10px;
-  border: 1px solid #593082;
-  border-radius: 10px;
-  background: #fff;
-  font-weight: 500;
-  color: #F66B0E;
-  text-align: center;
-  z-index: 1;
-  position: relative;
-  transition: all 0.3s ease 0s;  
-  margin-top: 112px;
-  
-} */
+
 .tab .nav-tabs .down {
   display: block;
   padding: 10px;
