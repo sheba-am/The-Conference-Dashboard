@@ -67,11 +67,15 @@ function MyPapers(props) {
       
       <div class="container mt-3">
         
-        <h2>My Papers</h2>    
-        <Link to='/dashboard/new-paper'  class="btn add-paper-btn" >
-          +New Paper
-        </Link>
 
+        <div class="d-flex bd-highlight mb-3">
+          <div class="p-2 bd-highlight"><h2>My Papers</h2></div>
+          <div class="ms-auto p-2 bd-highlight">
+            <Link to='/dashboard/new-paper'  class="btn add-paper-btn" >
+              +New Paper
+            </Link>
+          </div>
+        </div>
         <div>         
           <ul class="nav nav-tabs" role="tablist">
             <li class="nav-item">

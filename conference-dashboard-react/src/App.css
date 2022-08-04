@@ -192,8 +192,8 @@ body #root #App #dashboard .row .col .container  .add-paper-btn:hover {
   
 }
 #papers-table .table .papers-table-body {
-  color: #2C2C2C;
-  
+  color: #1d1d1d;
+  font-weight: 470;
 }
 #papers-table .table .papers-table-body .details-btn {
     /* width: 130px; */
@@ -763,17 +763,38 @@ border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 .pagination .page-button {
-  background-color: rgb(255, 255, 255);
-  border-radius: 12px;
   margin: 0 5px 0 5px;
+  color:black;
   font-size: 1.4em;
   /* align-items: center;
   display: table-cell;
   vertical-align: middle; */
-}
+  padding: 2px 10px 4px 10px;
+  -webkit-border-radius: 28px;
+  -moz-border-radius: 28px;
+  border-radius: 12px;
+  -webkit-box-shadow: 3px 3px 8px #a5a5a5;
+  -moz-box-shadow: 3px 3px 8px #a5a5a5;
+  box-shadow: 3px 3px 8px #868686;
+  border: 0px solid #ffffff;
+  background-color: rgb(236, 236, 236);
+  font-size: 2.2vw;
 
+  text-align: center;
+}
+.pagination .page-button:disabled {
+  background: rgba(255, 255, 255, 0.43);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5.3px);
+  -webkit-backdrop-filter: blur(5.3px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
 .pagination .page-button:hover {
   background-color: #F66B0E;
+  box-shadow: 0;
+}
+.pagination .page-text {
+  padding: 2vh 0 0 0;
 }
  /* #papers-container {
   background-color: #D9D9D9;
@@ -781,14 +802,14 @@ border: 1px solid rgba(255, 255, 255, 0.3);
   
  } */
 
-.judge-pending-accept {
+.judge-pending-judgment {
   background-color: #B2B0B075;
   color: #232323F2;
   padding: 1px 8px 3px 8px;
   border-radius: 10px;  
 }
 
-.judge-pending-judgment {
+.judge-pending-accept {
   background-color: #F2F61D75;
   color: #B04F08F2;
   padding: 1px 8px 3px 8px;
@@ -810,8 +831,8 @@ border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 10px;
 }
 .days-left-green {
-  background-color: #F2F61D75;
-  color: #B04F08F2;
+  background-color: #086db02a;
+  color: #0765a3;
   padding: 1px 8px 3px 8px;
   border-radius: 10px; 
 
@@ -836,21 +857,31 @@ border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 /*  ================== Tabs ================== */
-/* .nav-tabs .nav-item .nav-link {
-  background-color: rgba(255, 255, 255, 0.56);
-  color: black;
-  border-radius: 8px 8px 0 0;
-} */
 
-/* .nav-tabs .nav-item .nav-link {
-  background-color: rgba(255, 255, 255, 0.56);
-  color: black;
-	border-bottom: 50px solid #555;
-	border-left: 25px solid transparent;
-	border-right: 25px solid transparent;
-	height: 0;
-} */
+.tab .nav-tabs .line-1 {
+  width: 80vw ;
+  height: 0.9vh;
+  border-bottom: 0.1 solid rgba(255, 255, 255, 0.55);
+  position: absolute;
+  margin-top: 12vh;
 
+  -webkit-border-radius: 9px;
+  -moz-border-radius: 9px;
+  border-radius: 9px;
+
+  background: rgba(255, 255, 255, 0.36);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(4.6px);
+  -webkit-backdrop-filter: blur(4.6px);
+} 
+.nav-tabs .nav-item .nav-link .number-badge  { 
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(2.4px);
+  -webkit-backdrop-filter: blur(2.4px);
+  padding: 0.4vw 0.6vw 0.4vw 0.6vw;
+}
 .nav-tabs .nav-item .nav-link.active {
   background-color: #F66B0E;
   border: 2px solid #F66B0E;
@@ -863,25 +894,7 @@ border: 1px solid rgba(255, 255, 255, 0.3);
   box-shadow: 2px 2px 5px #000000;
 
   }
-  .tab .nav-tabs .line-1 {
-    width: 80vw ;
-    height: 2px;
-    border-bottom: 4px solid rgba(255, 255, 255, 0.55);
-    position: absolute;
-    margin-top: 78px;
 
-    -webkit-border-radius: 9px;
-    -moz-border-radius: 9px;
-    border-radius: 9px;
-    /* -webkit-box-shadow: 3px 3px 3px #cfcfcfb7;
-    -moz-box-shadow: 3px 3px 3px #cfcfcfb7;
-    box-shadow: 3px 3px 3px #cfcfcfb7; */
-
-    background: rgba(255, 255, 255, 0.36);
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(4.6px);
-    -webkit-backdrop-filter: blur(4.6px);
-  }  
   a:hover,a:focus{
     outline: none;
     text-decoration: none;
@@ -917,7 +930,7 @@ border: 1px solid rgba(255, 255, 255, 0.3);
   z-index: 1;
   position: relative;
   transition: all 0.3s ease 0s;  
-  margin-top: 112px;
+  margin-top: 62px;
   font-size: 1.2vw;
   background: rgba(255, 255, 255, 0.12);
 border-radius: 10px;
@@ -925,6 +938,8 @@ box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 backdrop-filter: blur(0.5px);
 -webkit-backdrop-filter: blur(0.5px);
 border: 1px solid rgba(255, 255, 255, 0.28);
+margin-right: 3px;
+
 }
 .tab .nav-tabs .up {
   display: block;
@@ -941,7 +956,9 @@ border: 1px solid rgba(255, 255, 255, 0.28);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(0.5px);
   -webkit-backdrop-filter: blur(0.5px);
-  border: 1px solid rgba(255, 255, 255, 0.28);    
+  border: 1px solid rgba(255, 255, 255, 0.28); 
+  margin-right: 3px;
+  
 }
 .tab .nav-tabs .down:before{
   content: "";
@@ -950,7 +967,7 @@ border: 1px solid rgba(255, 255, 255, 0.28);
   border-radius: 50%;
   margin: 0 auto;
   position: absolute;
-  top: -40px;
+  top: -6.5vh;
   left: 0;
   right: 0;
   background: rgba(255, 255, 255, 0.60);
@@ -968,7 +985,7 @@ border: 1px solid rgba(255, 255, 255, 0.28);
     border-radius: 50%;
     margin: 0 auto;
     position: absolute;
-    bottom: -43px;
+    bottom: -6.3vh;
     left: 0;
     right: 0;
     background: rgba(255, 255, 255, 0.60);
@@ -990,16 +1007,7 @@ border: 1px solid rgba(255, 255, 255, 0.28);
   transform: scale(2);
 }
 
-/* .tab .tab-content{
-    padding: 20px;
-    margin-top: 0;
-    border-radius: 0 0 5px 5px;
-    font-size: 15px;
-    color: #7a9181;
-    background: #fff;
-    line-height: 30px;
+.tab .tab-content .tab-pane {
+  background-color: rgba(240, 240, 240, 0.89);
+  border-radius: 10px;
 }
-.tab .tab-content h3{
-    font-size: 24px;
-    margin-top: 5px;
-} */
