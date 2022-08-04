@@ -115,7 +115,6 @@ border-radius: 16px;
 box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 backdrop-filter: blur(5.6px);
 -webkit-backdrop-filter: blur(5.6px);
-border: 1px solid rgba(255, 255, 255, 0.43);  
 }
 
 
@@ -783,12 +782,55 @@ border: 1px solid rgba(255, 255, 255, 0.3);
  } */
 
 .judge-pending-accept {
-  background-color: yellow;
+  background-color: #B2B0B075;
+  color: #232323F2;
+  padding: 1px 8px 3px 8px;
+  border-radius: 10px;  
 }
 
 .judge-pending-judgment {
-  background-color: green;
+  background-color: #F2F61D75;
+  color: #B04F08F2;
+  padding: 1px 8px 3px 8px;
+  border-radius: 10px;  
 }
 .judge-judged {
-  background-color: lightcoral;
+  background-color: #50ff102b;
+  color: #288E04F2;
+  padding: 1px 8px 3px 8px;
+  border-radius: 10px;
+
+}
+
+
+.days-left-done {
+  background-color: #50ff102b;
+  color: #288E04F2;
+  padding: 1px 8px 3px 8px;
+  border-radius: 10px;
+}
+.days-left-green {
+  background-color: #F2F61D75;
+  color: #B04F08F2;
+  padding: 1px 8px 3px 8px;
+  border-radius: 10px; 
+
+}
+.days-left-red {
+  background-color: #fa1f1f3f;
+  color: #d31212;
+    padding: 1px 8px 3px 8px;
+  border-radius: 10px; 
+}
+.color-test {
+  background: #B2B0B075;
+  background: #232323F2;
+  background: #F41818F2;
+  background: #FCB0B075;
+  background: #F2F61D75;
+  background: #B04F08F2;
+  background: #288E042B;
+  background: #288E04F2;
+  background: #4981a883
+;
 }
