@@ -1,6 +1,26 @@
-import React from 'react'
+import React ,{useRef}from 'react'
 import MyPapersTable from '../components/MyPapersTable'
 function DabirConference_Papers({columns, papersData}) {
+  var menu0Width=useRef() ;
+  var menu1Width=useRef() ;
+  var menu2Width=useRef() ;
+  var menu3Width=useRef() ;
+  var menu4Width=useRef() ;
+  var menu5Width=useRef() ;
+  var menu6Width=useRef() ;
+  var menu7Width=useRef() ;
+  var menu8Width=useRef() ;
+
+  var menu1MarginLeft = menu0Width.current && -(menu0Width.current.offsetWidth/2)
+  var menu2MarginLeft = menu1Width.current && -(menu1Width.current.offsetWidth/2)
+  var menu3MarginLeft = menu2Width.current && -(menu2Width.current.offsetWidth/2)
+  var menu4MarginLeft = menu3Width.current && -(menu3Width.current.offsetWidth/2)
+  var menu5MarginLeft = menu4Width.current && -(menu4Width.current.offsetWidth/2)
+  var menu6MarginLeft = menu5Width.current && -(menu5Width.current.offsetWidth/2)
+  var menu7MarginLeft = menu6Width.current && -(menu6Width.current.offsetWidth/2)
+  var menu8MarginLeft = menu7Width.current && -(menu7Width.current.offsetWidth/2)
+  var menu9MarginLeft = menu8Width.current && -(menu8Width.current.offsetWidth/2)
+
     {// this will be used in other instances
   /* {userStatusData.filter(car => car.value === "standard").map((singelUser,index)=>{return(<div>{singelUser.label}</div> )} ) } */}
       console.log(papersData)
@@ -43,37 +63,46 @@ function DabirConference_Papers({columns, papersData}) {
 
   return (
     <div>
-        <div>         
+        <div  class="tab" >         
           <ul class="nav nav-tabs" role="tablist">
+          <div class="line-1"> </div>
             <li class="nav-item">
-              <a class="nav-link active" data-bs-toggle="tab" href="#menu0">All {papersData && papersData.length}</a>
+              <a ref={menu0Width} class="nav-link up active" style={{'margin-left':'-25px'}} data-bs-toggle="tab" href="#menu0">All Papers {papersData && papersData.length}</a>
             </li>
+
             <li class="nav-item">
-              <a class="nav-link" data-bs-toggle="tab" href="#menu1">Pending Dabir Khane {pendingDabirKhanePapers.length} </a>
+              <a ref={menu1Width} class="nav-link down" style={{'margin-left':menu1MarginLeft}} data-bs-toggle="tab" href="#menu1">Pending Dabir Khane {pendingDabirKhanePapers.length} </a>
             </li>
+
             <li class="nav-item">
-              <a class="nav-link" data-bs-toggle="tab" href="#menu2">Rejected By Dabir Khane {rejectedByDabirKhanePapers.length} </a>
+              <a ref={menu2Width} class="nav-link up" style={{'margin-left':menu2MarginLeft}} data-bs-toggle="tab" href="#menu2">Rejected Dabir Khane {rejectedByDabirKhanePapers.length} </a>
             </li>
+
             <li class="nav-item">
-              <a class="nav-link" data-bs-toggle="tab" href="#menu3">Pending Judge Assignment {pendingJudgeAssignmentPapers.length} </a>
+              <a ref={menu3Width} class="nav-link down" style={{'margin-left':menu3MarginLeft}}  data-bs-toggle="tab" href="#menu3">Pending Judge Assign {pendingJudgeAssignmentPapers.length} </a>
             </li>
+
             <li class="nav-item">
-              <a class="nav-link" data-bs-toggle="tab" href="#menu4">Pending Judgment {pendingJudgmentPapers.length} </a>
+              <a ref={menu4Width} class="nav-link up"  style={{'margin-left':menu4MarginLeft}} data-bs-toggle="tab" href="#menu4">Pending Judge Judgment {pendingJudgmentPapers.length} </a>
             </li>
+
             <li class="nav-item">
-              <a class="nav-link" data-bs-toggle="tab" href="#menu5">Pending Dabir Bakhsh {pendingDabirBakhshPapers.length} </a>
-            </li>  
+              <a ref={menu5Width} class="nav-link down"  style={{'margin-left':menu5MarginLeft}} data-bs-toggle="tab" href="#menu5">Pending Dabir Bakhsh {pendingDabirBakhshPapers.length} </a>
+            </li>
+
             <li class="nav-item">
-              <a class="nav-link" data-bs-toggle="tab" href="#menu6">Approved By Bakhsh {approvedByDabirBakhshPapers.length} </a>
+              <a ref={menu6Width} class="nav-link up"  style={{'margin-left':menu6MarginLeft}} data-bs-toggle="tab" href="#menu6">Approved Dabir Bakhsh {approvedByDabirBakhshPapers.length} </a>
             </li>   
+
             <li class="nav-item">
-              <a class="nav-link" data-bs-toggle="tab" href="#menu7">Rejected By Bakhsh {rejectedByDabirBakhshPapers.length} </a>
-            </li>                     
+              <a ref={menu7Width} class="nav-link down"  style={{'margin-left':menu7MarginLeft}} data-bs-toggle="tab" href="#menu7">Rejected Dabir Bakhsh {rejectedByDabirBakhshPapers.length} </a>
+            </li>   
+
             <li class="nav-item">
-              <a class="nav-link" data-bs-toggle="tab" href="#menu8">Approved {approvedPapers.length} </a>
+              <a ref={menu8Width}class="nav-link up"  style={{'margin-left':menu8MarginLeft}} data-bs-toggle="tab" href="#menu8">Approved Papers {approvedPapers.length} </a>
             </li> 
             <li class="nav-item">
-              <a class="nav-link" data-bs-toggle="tab" href="#menu9">Rejected {rejectedPapers.length} </a>
+              <a class="nav-link down" style={{'margin-left':menu9MarginLeft}} data-bs-toggle="tab" href="#menu9">Rejected Papers {rejectedPapers.length} </a>
             </li>               
 
           </ul>
