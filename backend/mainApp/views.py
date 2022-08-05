@@ -201,9 +201,9 @@ def viewPapers(request):
                         if(timeLeft>7):
                             timesLeft.append(str(timeLeft - 7) + ",green")
                         else:
-                            timesLeftappend(str(timeLeft) + ",red")
+                            timesLeft.append(str(timeLeft) + ",red")
                     else:
-                        status.append("feedback")
+                        status.append("sent feedback")
                         timesLeft.append("done")
                 elif(not feedback.accepted):
                     status.append("not accepted")
@@ -569,7 +569,7 @@ def viewAllPapers(request):
                         else:
                             timesLeftappend(str(timeLeft) + ",red")
                     else:
-                        status.append("feedback")
+                        status.append("sent feedback")
                         timesLeft.append("done")
                 elif(not feedback.accepted):
                     status.append("not accepted")
