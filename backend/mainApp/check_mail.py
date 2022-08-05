@@ -3,5 +3,5 @@ from mainApp.views import feedback_check
 
 def start():
     scheduler = BackgroundScheduler()
-    scheduler.add_job(feedback_check, "interval", minutes=1440, id='feedback_checker_001')
+    scheduler.add_job(feedback_check, trigger='cron', hour='0', minute='0', id='feedback_checker_001')
     scheduler.start()
