@@ -35,18 +35,7 @@ export const DabirConferenceSidebarData = [
     icon: <AiIcons.AiFillEdit />,
     iconClosed: <RiIcons.RiArrowDownSFill />,
     iconOpened: <RiIcons.RiArrowUpSFill />,
-    subNav: [
-      {
-        title: 'Users',
-        path: '/overview/users',
-        icon: <IoIcons.IoIosPaper />
-      },
-      {
-        title: 'Revenue',
-        path: '/overview/revenue',
-        icon: <IoIcons.IoIosPaper />
-      }
-    ]    
+   
   },
   {
     title: 'My Papers',
@@ -195,4 +184,46 @@ export const DashboadMainPageData = [
   //   cName: 'admin-manage-judges'
   // },  
   
+];
+
+export const submenuSidebarData = [
+  {
+    title: 'Home',
+    path: '/dashboard',
+    icon: <AiIcons.AiFillHome />,
+  },
+  {
+    title: 'Edit Info',
+    path: '/dashboard/editinfo',
+    icon: <AiIcons.AiFillEdit />,
+    iconClosed: <RiIcons.RiArrowDownSFill />,
+    iconOpened: <RiIcons.RiArrowUpSFill />,
+    subNav: [
+      {
+        title: 'Users',
+        path: '/overview/users',
+        icon: <IoIcons.IoIosPaper />
+      },
+      {
+        title: 'Revenue',
+        path: '/overview/revenue',
+        icon: <IoIcons.IoIosPaper />
+      }
+    ]    
+  },
+  {
+    title: 'My Papers',
+    path: '/dashboard/my-papers',
+    icon: <IoIcons.IoIosPaper />,
+  },  
+  {
+    title: 'Manage Papers',
+    path: '/dashboard/papers',
+    icon: <IoIcons.IoIosPaper />,
+  },
+  {
+    title: 'Manage Users',
+    path: '/dashboard/allusers',
+    icon: <IoPeopleSharp/>,
+  },
 ];

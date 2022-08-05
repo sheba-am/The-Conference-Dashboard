@@ -64,6 +64,7 @@ export const fields = [
    {value: 'computational theory and mathematics', label:'computational theory and mathematics'},
    {value: 'computer science (general)', label:'computer science (general)' },
    {value: 'computer science application', label:'computer science application' },
+   {value:'all', label:'All'},
   ]
   export const fieldsData = [
     {
@@ -161,6 +162,10 @@ export const fields = [
         {value:"computers and psychology",label:"Computers and Psychology"},
       ],
     },
+    {
+      value: 'all',
+      label: 'All',
+    }
     ]
   
   export const userStatusData = [

@@ -91,7 +91,7 @@ function MyPapersTable({ columns, data , myPaper}) {
                 <tr key={index} {...row.getRowProps()}>
                   <th scope="row" class='col table-index'>{index+1}</th>
                   {row.cells.map(cell => {
-                    console.log('cell', cell)
+                    //console.log('cell', cell)
                     return (
                         <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
                     )

@@ -6,7 +6,7 @@ function Judge_Approval() {
 
     // ========== Submit ===========
     const handleSubmit = (e) => {
-        console.log('e',e)
+        //console.log('e',e)
         //evt.preventDefault()
         const config = {
             headers: {

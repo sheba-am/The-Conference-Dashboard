@@ -2,9 +2,10 @@ import React, { useRef, useState, useEffect } from 'react'
 import { Container, Form, Button, Alert } from 'react-bootstrap'
 import axios from 'axios'
 import Select from 'react-select';
-import {fields, cities,countries, universities, degrees, majors, genders} from '../data/FormData'
+import {fieldsData, cities,countries, universities, degrees, majors, genders} from '../data/FormData'
 export default function EditInfo(props) {
     const EditInfo = props.isOpen ? "content open" : "content";
+    const [field, setField] = useState("");
     const user = JSON.parse(localStorage.getItem('user'))
     const username =  useRef()
     const firstName =  useRef()
@@ -16,7 +17,6 @@ export default function EditInfo(props) {
     const university =  useRef()
     const country =  useRef()
     const city =  useRef()
-    const field =  useRef()
     const email =  useRef()
     const password =  useRef()
     const [error, setError] = useState("")
@@ -36,7 +36,7 @@ export default function EditInfo(props) {
         country.current.value = user['country']
         city.current.value = user['city']
         email.current.value = user['email']
-        field.current.value = user['field']
+        setField(user['field'])
 
       });
 
@@ -63,7 +63,8 @@ export default function EditInfo(props) {
                "university":university.current.props.value.value,
                "country":country.current.props.value.value,
                "city":city.current.props.value.value,
-               "field":field.current.props.value.value,
+               "field":field,
+               "subfields": subFieldList.toString(),
               }
             , config
           ).then((response) => response)
@@ -72,6 +73,32 @@ export default function EditInfo(props) {
               setError("Info Updated successfully")
         })
     }
+      // ======Change Field=====
+      function ChangeField(e) {
+        //when we change field we need to clear subfield
+        setField(e)
+        setSubFieldList([""])
+      }
+      //=========subfield input ===========
+      
+      const [subFieldList, setSubFieldList] = useState(['']);
+      const dynamicSubField = subFieldList.length == 1 ? "one-author-select": "author-select";
+      const handleSubFieldChange = (e, index) => {
+        const { name, value } = e.target;
+        const list = [...subFieldList];
+        list[index] = value;
+        setSubFieldList(list);
+      };
+
+      const handleSubFieldRemove = (index) => {
+        const list = [...subFieldList];
+        list.splice(index, 1);
+        setSubFieldList(list);
+      };
+
+      const handleSubFieldAdd = () => {
+        setSubFieldList([...subFieldList, ""]);
+      };    
     return(
           <div className={EditInfo}>
             <Container id='edit-info'>
@@ -151,11 +178,53 @@ export default function EditInfo(props) {
                   defaultValue={{value: user['city'], label: user['city']}}
                   />
                   <Form.Label>Field:</Form.Label>
-                  <Select ref={field}
-                  value={fields.value}
-                  options={fields}
-                  defaultValue={{value: user['field'], label: user['field']}}
-                  />
+                  <select class="form-select edit-paper-select" aria-label="Default select example"
+                  value={field} onChange={(e) => ChangeField(e.target.value)}
+                  >
+                    <option value="" selected disabled hidden>Choose field...</option>
+                    {fieldsData.map(( item ) => (
+                      <option value={item.value}> {item.label} </option>
+                      )
+                    )}
+                  </select>                          
+                  <Form.Label>SubField:</Form.Label>
+                    {subFieldList.map((singlesubfield, index) => (
+                        <div key={index} >
+                          <div class="input-group mb-3">
+                            <select class="form-select" 
+                              id={dynamicSubField}
+                              value={singlesubfield}
+                              onChange={(e) => handleSubFieldChange(e, index)}
+                              required
+                            >
+                              <option value="" selected disabled hidden>Choose subfield...</option>
+                              {field && fieldsData.find((single) => single.value ===field).subfields.map(( item ) => (
+                                <option value={item.value}> {item.label} </option>
+                                )
+                              )}
+                            </select>
+                            {subFieldList.length !== 1 && (
+                              <button class="btn btn-outline-secondary" type="button" id="button-remove"
+                                onClick={() => handleSubFieldRemove(index)}
+          
+                              >
+                                Remove
+                              </button>
+                            )}
+                          </div>
+                          <div>
+                            {/*  maximum number of authers is 4 */}
+                            {subFieldList.length - 1 === index && subFieldList.length < 4 && (
+                                <button
+                                class="btn btn-outline-secondary" type="button" id="button-addon2"
+                                  onClick={handleSubFieldAdd}
+                                >
+                                  Add
+                                </button>
+                            )}
+                          </div>
+                        </div>
+                      ))}
                   <Form.Label>Email:</Form.Label>
                   <Form.Control type="email" ref={email} required />
                 </Form.Group>
