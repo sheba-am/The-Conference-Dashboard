@@ -1,6 +1,7 @@
-import React from 'react'
+import React  from 'react'
 import MyPapersTable from '../components/MyPapersTable'
 function DabirBakhsh_Papers({columns, papersData}) {
+
     {// this will be used in other instances
   /* {userStatusData.filter(car => car.value === "standard").map((singelUser,index)=>{return(<div>{singelUser.label}</div> )} ) } */}
   var user = JSON.parse(localStorage.getItem("user")); //retrieve the object
@@ -38,27 +39,36 @@ function DabirBakhsh_Papers({columns, papersData}) {
 
   return (
     <div>
-        <div>         
+        <div  class="tab" >         
           <ul class="nav nav-tabs" role="tablist">
+          <div class="line-1"> </div>
             <li class="nav-item">
-              <a class="nav-link active" data-bs-toggle="tab" href="#menu0">All {allPapers.length} </a>
+              <a class="nav-link up up-bakhsh active" data-bs-toggle="tab" href="#menu0">
+                All papers <span  className='number-badge'>{allPapers.length} </span></a>
             </li>
+
             <li class="nav-item">
-              <a class="nav-link" data-bs-toggle="tab" href="#menu1">New {newPapers.length}</a>
+              <a class="nav-link down down-bakhsh"  data-bs-toggle="tab" href="#menu1 ">New Papers <span className='number-badge'>{newPapers.length}</span></a>
             </li>
+
             <li class="nav-item">
-              <a class="nav-link" data-bs-toggle="tab" href="#menu2">Pending Judgment {pendingJudgmentPapers.length} </a>
+              <a  class="nav-link up up-bakhsh" data-bs-toggle="tab" href="#menu2">Pending Judgment <span className='number-badge'>{pendingJudgmentPapers.length}</span> </a>
             </li>
+
             <li class="nav-item">
-              <a class="nav-link" data-bs-toggle="tab" href="#menu3">Judged {judgedPapers.length} </a>
+              <a class="nav-link down down-bakhsh"   data-bs-toggle="tab" href="#menu3">Judged <span className='number-badge'>{judgedPapers.length}</span> </a>
             </li>
+
             <li class="nav-item">
-              <a class="nav-link" data-bs-toggle="tab" href="#menu4">Approved {approvedPapers.length} </a>
+              <a  class="nav-link up up-bakhsh" data-bs-toggle="tab" href="#menu4">Approved <span className='number-badge'>{approvedPapers.length}</span> </a>
             </li>
+
             <li class="nav-item">
-              <a class="nav-link" data-bs-toggle="tab" href="#menu4">Rejected {rejectedPapers.length} </a>
+              <a class="nav-link down down-bakhsh" data-bs-toggle="tab" href="#menu5">Rejected <span className='number-badge'>{rejectedPapers.length}</span> </a>
             </li>
+
           </ul>
+          <br />
           {/* ========== Content of Tabs ============= */}
           <div class="tab-content">
             {/* ================== */}

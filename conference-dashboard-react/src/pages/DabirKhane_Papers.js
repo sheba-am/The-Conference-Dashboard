@@ -31,24 +31,26 @@ function DabirKhane_Papers({columns, papersData}) {
 
   return (
     <div>
-        <div>         
+        <div className='tab'>         
           <ul class="nav nav-tabs" role="tablist">
+            <div class="line-1"> </div>
             <li class="nav-item">
-              <a class="nav-link active" data-bs-toggle="tab" href="#menu0">All  {papersData && papersData.length} </a>
+              <a class="nav-link up up-bakhsh active" data-bs-toggle="tab" href="#menu0">All Papers <span className='number-badge'>{papersData && papersData.length}</span> </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" data-bs-toggle="tab" href="#menu1">Pending Approval {pendingApprovalPapers.length } </a>
+              <a class="nav-link down down-bakhsh" data-bs-toggle="tab" href="#menu1">Pending Approval <span className='number-badge'>{pendingApprovalPapers.length }</span> </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" data-bs-toggle="tab" href="#menu2">Pending Revise {pendingRevisePapers.length} </a>
+              <a class="nav-link up up-bakhsh" data-bs-toggle="tab" href="#menu2">Pending Revise <span className='number-badge'>{pendingRevisePapers.length}</span> </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" data-bs-toggle="tab" href="#menu3">Approved {approvedPapers.length} </a>
+              <a class="nav-link down down-bakhsh" data-bs-toggle="tab" href="#menu3">Approved <span className='number-badge'>{approvedPapers.length}</span> </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" data-bs-toggle="tab" href="#menu4">Rejected {rejectedPapers.length} </a>
+              <a class="nav-link up up-bakhsh" data-bs-toggle="tab" href="#menu4">Rejected <span className='number-badge'>{rejectedPapers.length}</span></a>
             </li>
           </ul>
+          <br />
           {/* ========== Content of Tabs ============= */}
           <div class="tab-content">
             {/* ================== */}

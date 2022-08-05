@@ -1,6 +1,7 @@
-import React from 'react'
+import React ,{useRef}from 'react'
 import MyPapersTable from '../components/MyPapersTable'
 function DabirConference_Papers({columns, papersData}) {
+
     {// this will be used in other instances
   /* {userStatusData.filter(car => car.value === "standard").map((singelUser,index)=>{return(<div>{singelUser.label}</div> )} ) } */}
       console.log(papersData)
@@ -43,40 +44,54 @@ function DabirConference_Papers({columns, papersData}) {
 
   return (
     <div>
-        <div>         
+        <div  class="tab" >         
           <ul class="nav nav-tabs" role="tablist">
+            <div class="line-1"> </div>
             <li class="nav-item">
-              <a class="nav-link active" data-bs-toggle="tab" href="#menu0">All {papersData && papersData.length}</a>
+              <a  class="nav-link up active" style={{'margin-left':'-25px'}} data-bs-toggle="tab" href="#menu0">
+                All Papers <span className='number-badge'>{papersData && papersData.length}</span>
+               </a>
             </li>
+
             <li class="nav-item">
-              <a class="nav-link" data-bs-toggle="tab" href="#menu1">Pending Dabir Khane {pendingDabirKhanePapers.length} </a>
+              <a class="nav-link up"  data-bs-toggle="tab" href="#menu2">Rejected Dabir Khane <span className='number-badge'>{rejectedByDabirKhanePapers.length}</span> </a>
             </li>
+
             <li class="nav-item">
-              <a class="nav-link" data-bs-toggle="tab" href="#menu2">Rejected By Dabir Khane {rejectedByDabirKhanePapers.length} </a>
+              <a class="nav-link up"  data-bs-toggle="tab" href="#menu4">Pending Judge Judgment <span className='number-badge'>{pendingJudgmentPapers.length}</span> </a>
             </li>
+
+
             <li class="nav-item">
-              <a class="nav-link" data-bs-toggle="tab" href="#menu3">Pending Judge Assignment {pendingJudgeAssignmentPapers.length} </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" data-bs-toggle="tab" href="#menu4">Pending Judgment {pendingJudgmentPapers.length} </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" data-bs-toggle="tab" href="#menu5">Pending Dabir Bakhsh {pendingDabirBakhshPapers.length} </a>
-            </li>  
-            <li class="nav-item">
-              <a class="nav-link" data-bs-toggle="tab" href="#menu6">Approved By Bakhsh {approvedByDabirBakhshPapers.length} </a>
+              <a class="nav-link up" data-bs-toggle="tab" href="#menu6">Approved Dabir Bakhsh <span className='number-badge'>{approvedByDabirBakhshPapers.length} </span></a>
             </li>   
+
             <li class="nav-item">
-              <a class="nav-link" data-bs-toggle="tab" href="#menu7">Rejected By Bakhsh {rejectedByDabirBakhshPapers.length} </a>
-            </li>                     
-            <li class="nav-item">
-              <a class="nav-link" data-bs-toggle="tab" href="#menu8">Approved {approvedPapers.length} </a>
+              <a class="nav-link up"  data-bs-toggle="tab" href="#menu8">Approved Papers <span className='number-badge'>{approvedPapers.length} </span></a>
             </li> 
+
             <li class="nav-item">
-              <a class="nav-link" data-bs-toggle="tab" href="#menu9">Rejected {rejectedPapers.length} </a>
+              <a class="nav-link down" style={{'margin-left':'1vw'}} data-bs-toggle="tab" href="#menu1">Pending Dabir Khane <span className='number-badge'>{pendingDabirKhanePapers.length}</span> </a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link down"   data-bs-toggle="tab" href="#menu3">Pending Judge Assign <span className='number-badge'>{pendingJudgeAssignmentPapers.length}</span> </a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link down"   data-bs-toggle="tab" href="#menu5">Pending Dabir Bakhsh <span className='number-badge'>{pendingDabirBakhshPapers.length}</span> </a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link down"  style={{'margin-left':'2vw'}} data-bs-toggle="tab" href="#menu7">Rejected Dabir Bakhsh <span className='number-badge'>{rejectedByDabirBakhshPapers.length}</span> </a>
+            </li>   
+
+            <li class="nav-item">
+              <a class="nav-link down" data-bs-toggle="tab" href="#menu9">Rejected Papers <span className='number-badge'>{rejectedPapers.length}</span> </a>
             </li>               
 
           </ul>
+          <br />
           {/* ========== Content of Tabs ============= */}
           <div class="tab-content">
             {/* ================== */}
@@ -128,7 +143,8 @@ function DabirConference_Papers({columns, papersData}) {
             <div id="menu9" class="container tab-pane "><br />
               <h3>Rejected</h3>
               {rejectedPapers.length>0  ? <MyPapersTable columns={columns} data={rejectedPapers} myPaper={false} />:<h4>No Results</h4>}        
-            </div>                                                        
+            </div>
+            <br />                                                        
           </div>
         </div>        
     </div>

@@ -4,6 +4,9 @@ import { Link } from 'react-router-dom';
 import {useTable, useGlobalFilter, usePagination} from 'react-table';
 import { GlobalFilter } from './GlobalFilter';
 import {MdFirstPage, MdLastPage, MdNavigateBefore, MdNavigateNext} from  "react-icons/md";
+import {BsThreeDotsVertical} from  "react-icons/bs";
+import {VscFeedback} from  "react-icons/vsc";
+import { ColumnFilter } from './ColumnFilter';
 function MyPapersTable({ columns, data , myPaper}) {
     const user = JSON.parse(localStorage.getItem("user"))
   
@@ -45,7 +48,8 @@ function MyPapersTable({ columns, data , myPaper}) {
     return (
       <>
       <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter} />
-  
+      {!myPaper && <ColumnFilter  filter={globalFilter} setFilter={setGlobalFilter} />}
+     
       <div id='papers-table' class="table-responsive-md">
         <pre>
           <code>
@@ -66,7 +70,7 @@ function MyPapersTable({ columns, data , myPaper}) {
           <thead class='papers-table-header'>
             {headerGroups.map(headerGroup => (
               <tr class="float-right " {...headerGroup.getHeaderGroupProps()}>
-                <th scope="col-1" class='papers-table-header-item'>#</th>
+                <th scope="col" class='papers-table-header-item'>#</th>
                 {headerGroup.headers.map(column => (
                   <th scope="col" class='papers-table-header-item' {...column.getHeaderProps()}>{column.render('Header')}</th>
                 ))}
@@ -85,7 +89,7 @@ function MyPapersTable({ columns, data , myPaper}) {
               prepareRow(row)
               return (
                 <tr key={index} {...row.getRowProps()}>
-                  <th scope="row" class='col-1 table-index'>{index+1}</th>
+                  <th scope="row" class='col table-index'>{index+1}</th>
                   {row.cells.map(cell => {
                     console.log('cell', cell)
                     return (
@@ -98,22 +102,22 @@ function MyPapersTable({ columns, data , myPaper}) {
                       myPaper &&
                       <td  class='col-1'>
                          <Link to='/dashboard/my-paper-details' class="btn btn-primary details-btn" onClick={() => showDetails(row.original)}>
-                            ...
+                          <BsThreeDotsVertical />
                         </Link>
                       </td>
                     }
                     { //when user is a judge and is veiwing assigned papers to them
                       (!myPaper && ( user.status==="judge" || user.status==="dabirconference" ) ) &&
                       <td  class='col-1'>
-                        <Link to='/dashboard/send-feedback' class="btn btn-primary  send-feedback-btn" onClick={() => showDetails(row.original)}>
-                            Send Feedback
+                        <Link to='/dashboard/send-feedback' class="btn btn-primary details-btn" onClick={() => showDetails(row.original)}>
+                            <VscFeedback />
                         </Link>
                       </td>
                     }                    
                     { /* when other users are viewing the papers */
                       (!myPaper && user.status!=="judge" ) && <td>
                         <Link to='/dashboard/paper-details' class="btn btn-primary details-btn" onClick={() => showDetails(row.original)}>
-                            ...
+                            <BsThreeDotsVertical />
                         </Link>
                       </td>
                     }
@@ -131,7 +135,7 @@ function MyPapersTable({ columns, data , myPaper}) {
             <MdNavigateBefore />
           </button>{' '}
 
-          <span>
+          <span className="page-text">
             Page{' '}
               {pageIndex + 1} of {pageOptions.length}
             
@@ -166,7 +170,8 @@ function MyPapersTable({ columns, data , myPaper}) {
               </option>
             ))}
           </select> */}
-        </div>        
+        </div> 
+        <br />       
       </div>
       </>
     )
