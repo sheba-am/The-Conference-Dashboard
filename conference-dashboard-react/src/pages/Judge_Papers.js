@@ -53,11 +53,7 @@ function Judge_Papers({papersData, columns, judgeFeedbackData}) {
           }
         }
       }
-      console.log("papers")
-      console.log('pendingApproval',pendingApprovalPapers)
-      console.log('pending judgment',pendingJudgmentPapers)
-      console.log('judges',judgedPapers)
-      console.log('rejected',rejectedPapers)
+
       /*all of the papers assigned to current judge */
       allJudgesPapers = [].concat(pendingApprovalPapers,pendingJudgmentPapers,judgedPapers,rejectedPapers); 
     }    
@@ -65,23 +61,27 @@ function Judge_Papers({papersData, columns, judgeFeedbackData}) {
     <div>
           
           <br />
-          <ul class="nav nav-tabs" role="tablist">
-            <li class="nav-item">
-              <a class="nav-link active" data-bs-toggle="tab" href="#menu0">All {allJudgesPapers.length} </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link " data-bs-toggle="tab" href="#menu1">Pending Approval {pendingApprovalPapers.length}</a>
-            </li>          
-            <li class="nav-item">
-              <a class="nav-link" data-bs-toggle="tab" href="#menu2">Pending Judgement {pendingJudgmentPapers.length} </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" data-bs-toggle="tab" href="#menu3">Judged{judgedPapers.length} </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link " data-bs-toggle="tab" href="#menu4">Rejected {rejectedPapers.length} </a>
-            </li>            
-          </ul>
+        <div className='tab'>
+            <ul class="nav nav-tabs" role="tablist">
+              <div class="line-1"> </div>
+              <li class="nav-item">
+                <a class="nav-link up up-bakhsh active" data-bs-toggle="tab" href="#menu0">All Papers <span className='number-badge'>{allJudgesPapers.length}</span> </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link down down-bakhsh" data-bs-toggle="tab" href="#menu1">Pending Approval <span className='number-badge'>{pendingApprovalPapers.length}</span></a>
+              </li>
+              <li class="nav-item"> 
+                <a class="nav-link up up-bakhsh" data-bs-toggle="tab" href="#menu2">Pending Judgement <span className='number-badge'>{pendingJudgmentPapers.length}</span> </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link down down-bakhsh" data-bs-toggle="tab" href="#menu3">Judged <span className='number-badge'>{judgedPapers.length}</span> </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link up up-bakhsh" data-bs-toggle="tab" href="#menu4">Rejected <span className='number-badge'>{rejectedPapers.length}</span> </a>
+              </li>
+            </ul>
+          
+          <br />
           {/* ======== Tab Content ========== */}
           <div class="tab-content">
             <div id="menu0" class="container tab-pane active"><br />
@@ -115,6 +115,7 @@ function Judge_Papers({papersData, columns, judgeFeedbackData}) {
               }
             </div>
           </div>
+      </div>
     </div>
   )
 }

@@ -76,53 +76,56 @@ function MyPapers(props) {
             </Link>
           </div>
         </div>
-        <div>         
+        <div className='tab'>         
           <ul class="nav nav-tabs" role="tablist">
+            <div class="line-1"> </div>
             <li class="nav-item">
-              <a class="nav-link active" data-bs-toggle="tab" href="#menu0">All {papersData && papersData.length} </a>
+              <a class="nav-link up up-bakhsh active" data-bs-toggle="tab" href="#menu0">All Papers <span className='number-badge'>{papersData && papersData.length}</span> </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" data-bs-toggle="tab" href="#menu1">Pending {pendingPapers.length} </a>
+              <a class="nav-link down down-bakhsh" data-bs-toggle="tab" href="#menu1">Pending Papers <span className='number-badge'>{pendingPapers.length}</span> </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" data-bs-toggle="tab" href="#menu2">Revise {revisedPapers.length} </a>
+              <a class="nav-link up up-bakhsh" data-bs-toggle="tab" href="#menu2">Revise Papers <span className='number-badge'>{revisedPapers.length}</span> </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" data-bs-toggle="tab" href="#menu3">Aprroved {approvedPapers.length} </a>
+              <a class="nav-link down down-bakhsh" data-bs-toggle="tab" href="#menu3">Aprroved Papers <span className='number-badge'>{approvedPapers.length}</span> </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" data-bs-toggle="tab" href="#menu4">Rejected {rejectedPapers.length} </a>
+              <a class="nav-link up up-bakhsh" data-bs-toggle="tab" href="#menu4">Rejected Papers <span className='number-badge'>{rejectedPapers.length}</span> </a>
             </li>
           </ul>
-
+          <br />
+          {/* ======== Tab Content ========== */}
           <div class="tab-content">
             <div id="menu0" class="container tab-pane active"><br />
               <h3>All</h3>
               {papersData ? <MyPapersTable columns={columns} data={papersData}  myPaper={true} />:<h4>Loading...</h4>}
+              <br />
             </div>
             <div id="menu1" class="container tab-pane fade"><br />
               <h3>Pending</h3>
               {pendingPapers.length>0 ? <MyPapersTable columns={columns} data={pendingPapers} myPaper={true}/>:<h4>No Results</h4>}
-
+              <br />
             </div>
             <div id="menu2" class="container tab-pane fade"><br />
               <h3>Revise</h3>
               {revisedPapers.length>0 ? <MyPapersTable columns={columns} data={revisedPapers} myPaper={true} />:<h4>No Results</h4>}
-
+              <br />
             </div>
             <div id="menu3" class="container tab-pane fade"><br />
               <h3>Aprroved</h3>
               {approvedPapers.length>0 ? <MyPapersTable columns={columns} data={approvedPapers} myPaper={true} />:<h4>No Results</h4>}
-
+              <br />
             </div>
             <div id="menu4" class="container tab-pane fade"><br />
               <h3>Rejected</h3>
               {rejectedPapers.length>0 ? <MyPapersTable columns={columns} data={rejectedPapers} myPaper={true} />:<h4>No Results</h4>}
-
+              <br />
             </div>
           </div>
         </div>        
-                
+      
         
 
        
