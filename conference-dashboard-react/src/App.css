@@ -27,6 +27,24 @@
     right: 0;
   }
 }
+#sidebar .profile-pic {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+#sidebar .navbar-header {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+#sidebar .navbar-header .sidebar-logout {
+  color:white;
+  font-size: 1.5em;
+  background-color: #0B1F2D ;
+  border: 1px #0B1F2D;
+}
+
 .sidebar {
   position: fixed;
   top: 0;
