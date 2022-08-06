@@ -1,12 +1,13 @@
 import React , {useContext, useState, useEffect}from 'react'
 
 import { Link } from 'react-router-dom';
-import {useTable, useGlobalFilter, usePagination} from 'react-table';
+import {useTable, useGlobalFilter, usePagination, useSortBy} from 'react-table';
 import { GlobalFilter } from './GlobalFilter';
 import {MdFirstPage, MdLastPage, MdNavigateBefore, MdNavigateNext} from  "react-icons/md";
 import {BsThreeDotsVertical} from  "react-icons/bs";
 import {VscFeedback} from  "react-icons/vsc";
 import { ColumnFilter } from './ColumnFilter';
+import { FaSortUp, FaSortDown,FaSort } from "react-icons/fa";
 function MyPapersTable({ columns, data , myPaper}) {
     const user = JSON.parse(localStorage.getItem("user"))
   
@@ -40,7 +41,7 @@ function MyPapersTable({ columns, data , myPaper}) {
       columns,
       data,
       initialState: {hiddenColumns:['status'], pageIndex: 0 },
-    },useGlobalFilter, usePagination)
+    },useGlobalFilter, useSortBy, usePagination)
   
     const {globalFilter} = state
     const isTableEmpty = data && data.length >0 ? "table papers-table justify-content-center  table-hover align-middle" : "table papers-table-empty justify-content-center  table-hover align-middle";
@@ -72,7 +73,16 @@ function MyPapersTable({ columns, data , myPaper}) {
               <tr class="float-right " {...headerGroup.getHeaderGroupProps()}>
                 <th scope="col" class='papers-table-header-item'>#</th>
                 {headerGroup.headers.map(column => (
-                  <th scope="col" class='papers-table-header-item' {...column.getHeaderProps()}>{column.render('Header')}</th>
+                  <th scope="col" class='papers-table-header-item' {...column.getHeaderProps(column.getSortByToggleProps())}>{column.render('Header')}
+                  {/* this is for sorting */}
+                  <span> 
+                    {column.isSorted
+                      ? column.isSortedDesc
+                        ? <FaSortDown />
+                        : <FaSortUp />
+                      : <FaSort />}
+                  </span>
+                  </th>
                 ))}
                   { (!myPaper && ( user.status==="judge" || user.status==="dabirconference" ) )
                     && <th scope="col-1"  class='papers-table-header-item'>Feedback</th>
