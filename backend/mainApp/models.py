@@ -18,9 +18,9 @@ class Paper(models.Model):
     #method of presentation
     MOP = models.CharField(max_length=64)
     published = models.BooleanField(default=False)
-    dabirKhane = models.CharField(default=None, null=True, max_length=2048)
-    dabirBakhsh = models.CharField(default=None, null=True, max_length=2048)
-    dabirConference = models.CharField(default=None, null=True, max_length=2048)
+    dabirKhane = models.CharField(default=None, null=True, blank=True, max_length=2048)
+    dabirBakhsh = models.CharField(default=None, null=True, blank=True, max_length=2048)
+    dabirConference = models.CharField(default=None, null=True, blank=True, max_length=2048)
     def __str__(self):
         return self.title
 
