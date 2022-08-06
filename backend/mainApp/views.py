@@ -306,7 +306,7 @@ def EditInfo(request):
     user.field = data['field'].lower()
     user.subfields = data['subfields'].lower()
     user.save(update_fields=['email','password','first_name','last_name',
-    'gender','SNN','major','degree','university','country','city','field'])
+    'gender','SNN','major','degree','university','country','city','field','subfields'])
     serializer = UserSerializer(user,many=False)
     return Response(serializer.data)
 
