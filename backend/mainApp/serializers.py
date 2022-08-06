@@ -7,7 +7,7 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ['username', 'password', 'email',
         'first_name', 'last_name', 'gender', 'SNN',
         'major', 'degree', 'university', 'country',
-        'city', 'status','field'
+        'city', 'status','field', 'subfields'
         ]
 
 class PaperSerializer(serializers.ModelSerializer):
