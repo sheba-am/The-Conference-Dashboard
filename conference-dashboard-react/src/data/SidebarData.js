@@ -244,5 +244,9 @@ export const userStatus =[
   {
     value:'standard',
     label:'Standard',
-  },  
+  }, 
+  {
+    value:'judge',
+    label:'Judge',
+  },   
 ];

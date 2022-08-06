@@ -11,7 +11,7 @@ function JudgesTable({assignedJudgeData}) {
     var averageScore =[]  // we store average of all scores in this array
     var scoresCount = FeedbackQuestions
     assignedJudgeData.map((singleJudge) => (
-        singleJudge.scores!=='N/A' ?averageScore.push(getAvg(singleJudge.scores.split(',').map(Number))): averageScore.push('N/A')
+        singleJudge.scores!=='N/A' ?averageScore.push(getAvg(singleJudge.scores.split(',').map(Number)).toFixed(2)): averageScore.push('N/A')
     ))
     console.log('ave',averageScore)
   return (
