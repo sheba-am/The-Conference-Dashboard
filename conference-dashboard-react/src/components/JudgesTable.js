@@ -42,9 +42,9 @@ function JudgesTable({assignedJudgeData}) {
                             }
                             {item.scores === 'N/A' && scoresCount.map((singleNa,index) =>(<td>N/A</td>))}
                             <td> {averageScore[index]}</td>
-                            {averageScore[index]>= 10 && <td>passed</td>}
-                            {averageScore[index]< 10 && <td>failed</td>}
-                            {item.accepted ===null && <td> pending accept</td>}
+                            {averageScore[index]>= 10 && <td><span className='days-left-done'>passed</span></td>}
+                            {averageScore[index]< 10 && <td><span className='days-left-red'>failed</span></td>}
+                            {item.accepted ===null && <td> <span className='judge-pending-accept'>pending accept</span></td>}
                             {(item.accepted ==='true' && averageScore[index] === 'N/A') && <td>N/A </td>}
                             <td> {item.description}</td>
                         </tr>
