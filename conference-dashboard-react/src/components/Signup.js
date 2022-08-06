@@ -4,7 +4,7 @@ import { useNavigate, Navigate } from "react-router-dom";
 import axios from 'axios'
 import Select from 'react-select';
 import NavbarComp from './NavbarComp';
-import {fields, cities,countries, universities, degrees, majors, genders} from '../data/FormData'
+import {cities,countries, universities, degrees, majors, genders,fieldsData} from '../data/FormData'
 export default function Signup() {
     const username =  useRef()
     const firstName =  useRef()
@@ -16,7 +16,7 @@ export default function Signup() {
     const university =  useRef()
     const country =  useRef()
     const city =  useRef()
-    const field =  useRef()
+    //const field =  useRef()
     const email =  useRef()
     const password =  useRef()
     const logUser = useRef()
@@ -47,8 +47,9 @@ export default function Signup() {
             "university":university.current.props.value.value,
             "country":country.current.props.value.value,
             "city":city.current.props.value.value,
-            "field":field.current.props.value.value,
-             "status":"standard"
+            "field":field,
+             "status":"standard",
+             "subfields":subFieldList.toString(),
             }
           , config
         ).then((response) => response)
@@ -91,7 +92,33 @@ export default function Signup() {
         })
         
       }
+      // ======Change Field=====
+      const [field, setField] = useState("");
+      function ChangeField(e) {
+        //when we change field we need to clear subfield
+        setField(e)
+        setSubFieldList([""])
+      }
+      //=========subfield input ===========
+      
+      const [subFieldList, setSubFieldList] = useState([""]);
+      const dynamicSubField = subFieldList.length == 1 ? "one-author-select": "author-select";
+      const handleSubFieldChange = (e, index) => {
+        const { name, value } = e.target;
+        const list = [...subFieldList];
+        list[index] = value;
+        setSubFieldList(list);
+      };
 
+      const handleSubFieldRemove = (index) => {
+        const list = [...subFieldList];
+        list.splice(index, 1);
+        setSubFieldList(list);
+      };
+
+      const handleSubFieldAdd = () => {
+        setSubFieldList([...subFieldList, ""]);
+      };
     //redirect if the user is not authenticated
   return ((user)? <Navigate to="/dashboard"/> :
         <div id='Signup'>
@@ -169,12 +196,60 @@ export default function Signup() {
                           defaultValue={{value: "rasht", label: "rasht"}}
                           />
                           <Form.Label>Field:</Form.Label>
-                          <Select ref={field}
+                          {/* <Select 
                           required = 'required'
-                          value={fields.value}
-                          options={fields}
-                          defaultValue={{value: "Computer Science", label: "Computer Science"}}
-                          />
+                          value={field}
+                          options={fieldsData}
+                          
+                          onChange={(e) => ChangeField(e.target.value)}
+                          /> */}
+                          <select class="form-select edit-paper-select" aria-label="Default select example"
+                          value={field} onChange={(e) => ChangeField(e.target.value)}
+                          >
+                            <option value="" selected disabled hidden>Choose field...</option>
+                            {fieldsData.map(( item ) => (
+                              <option value={item.value}> {item.label} </option>
+                              )
+                            )}
+                          </select>                          
+                          <Form.Label>SubField:</Form.Label>
+                            {subFieldList.map((singlesubfield, index) => (
+                                <div key={index} >
+                                  <div class="input-group mb-3">
+                                    <select class="form-select" 
+                                      id={dynamicSubField}
+                                      value={singlesubfield}
+                                      onChange={(e) => handleSubFieldChange(e, index)}
+                                      required
+                                    >
+                                      <option value="" selected disabled hidden>Choose subfield...</option>
+                                      {field && fieldsData.find((single) => single.value ===field).subfields.map(( item ) => (
+                                        <option value={item.value}> {item.label} </option>
+                                        )
+                                      )}
+                                    </select>
+                                    {subFieldList.length !== 1 && (
+                                      <button class="btn btn-outline-secondary" type="button" id="button-remove"
+                                        onClick={() => handleSubFieldRemove(index)}
+                  
+                                      >
+                                        Remove
+                                      </button>
+                                    )}
+                                  </div>
+                                  <div>
+                                    {/*  maximum number of authers is 4 */}
+                                    {subFieldList.length - 1 === index && subFieldList.length < 4 && (
+                                        <button
+                                        class="btn btn-outline-secondary" type="button" id="button-addon2"
+                                          onClick={handleSubFieldAdd}
+                                        >
+                                          Add
+                                        </button>
+                                    )}
+                                  </div>
+                                </div>
+                              ))}                  
                           <Form.Label>Email:</Form.Label>
                           <Form.Control type="email" ref={email} required />
                         </Form.Group>

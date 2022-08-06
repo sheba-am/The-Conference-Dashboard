@@ -1,7 +1,6 @@
 import React from 'react'
 import MyPapersTable from '../components/MyPapersTable'
 function Judge_Papers({papersData, columns, judgeFeedbackData}) {
-    console.log('judgefeedbackdata',judgeFeedbackData)
     //we get a list of sent feedback and not sent feedback from all the feedbacks of this judge and from all the papers choose this 
     var pendingApprovalTitle= []; 
     var pendingJudgmentTitle=[];
@@ -35,10 +34,7 @@ function Judge_Papers({papersData, columns, judgeFeedbackData}) {
       //     sentFeedbackTitle.push(judgeFeedbackData[i].paper)
       //   }
       // }
-      console.log('pendingApproval',pendingApprovalTitle)
-      console.log('pending judgment',pendingJudgmentTitle)
-      console.log('judges',judgedTitle)
-      console.log('rejected',rejectedTitle)
+
   
       if(papersData){
         for (let i=0 ; i<papersData.length ; i++){

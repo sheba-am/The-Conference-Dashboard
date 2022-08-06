@@ -124,7 +124,6 @@ function NewPaper(props) {
           'summary':abstract,
           'paperFile':uploadedFile,
           'MOP':methodOfPresentation,
-
          }
         , config
       ).then((response) => response)
@@ -174,7 +173,7 @@ function NewPaper(props) {
           </div>
           <form onSubmit={handleSubmit}>
               <div class="row mb-3">
-                  <label for="inputTitle" class=" col-2 col-form-label">Title</label>
+                  <label class=" col-2 col-form-label">Title</label>
                   <div class="col-sm-10" >
                     <input type="textarea" class="form-control"  readonly='readonly' value={inputTitle}
                     onChange={e => setInputTitle(e.target.value)}
@@ -182,7 +181,7 @@ function NewPaper(props) {
                   </div>
               </div>
               <div class="row mb-3">
-                <label for="inputTitle" class="col-sm-2 col-form-label">Author</label>
+                <label class="col-sm-2 col-form-label">Author</label>
                 <div class="col-sm-10">
                     {/* we map a list of selectboxes in which we can choose authors from */}      
                   {authorList.map((singleAuthor, index) => (
@@ -225,7 +224,7 @@ function NewPaper(props) {
                 </div>
               </div>
               <div class="row mb-3">
-                <label for="inputTitle" class="col-sm-2 col-form-label" >field</label>
+                <label class="col-sm-2 col-form-label" >field</label>
                 <div class="col-sm-10">
                   <select class="form-select edit-paper-select" aria-label="Default select example"
                   value={field} onChange={(e) => ChangeField(e.target.value)}
@@ -240,7 +239,7 @@ function NewPaper(props) {
               </div>
 
               <div class="row mb-3">
-                <label for="inputTitle" class="col-sm-2 col-form-label" >subfield</label>
+                <label class="col-sm-2 col-form-label" >subfield</label>
                 <div class="col-sm-10">
                   {subFieldList.map((singlesubfield, index) => (
                       <div key={index} >
@@ -291,7 +290,7 @@ function NewPaper(props) {
                 </div>
               </div>              
               <div class="row mb-3">
-              <label for="inputTitle" class="col-sm-2 col-form-label" >method of presentation</label>
+              <label class="col-sm-2 col-form-label" >method of presentation</label>
                 <div class="col-sm-10">
                   <select class="form-select edit-paper-select" aria-label="Default select example"
                   value={methodOfPresentation} onChange={(e) => setMOP(e.target.value)}
@@ -305,7 +304,7 @@ function NewPaper(props) {
                 </div>
               </div>
               <div class="row mb-3">
-              <label for="inputTitle" class="col-sm-2 col-form-label">language</label>
+              <label class="col-sm-2 col-form-label">language</label>
                 <div class="col-sm-10">
                 <select class="form-select edit-paper-select" aria-label="Default select example"
                   value={language} onChange={(e) => setLanguage(e.target.value)}
@@ -325,7 +324,7 @@ function NewPaper(props) {
                 /></div>
               </div>
               <div class="row mb-3">
-              <label for="inputTitle" class="col-sm-2 col-form-label">Abstract</label>
+              <label  class="col-sm-2 col-form-label">Abstract</label>
                 <div class="col-sm-10">
                   <textarea class="form-control edit-paper-select"  rows="3" value={abstract}
                   onChange={e => setAbstract(e.target.value)}
@@ -333,7 +332,7 @@ function NewPaper(props) {
                 </div>
               </div>
               <div class="row mb-3">
-              <label for="inputTitle" class="col-sm-2 col-form-label">number of pages</label>
+              <label class="col-sm-2 col-form-label">number of pages</label>
                 <div class="col-sm-10 form-outline">
                   <input type="number" id="typeNumber" class="form-control" value={numberOfPages}
                   onChange={e => setNumberOfPages(e.target.value)}
