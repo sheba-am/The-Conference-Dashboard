@@ -14,7 +14,7 @@ function DabirBakhsh_Papers({columns, papersData}) {
 
   // dabir bakhsh can only see papers in their own field
   if (papersData) {
-    allPapers = papersData.filter(data => data.field.includes(user.field)).map((singlePaper,index)=>{return(singlePaper)} )  
+    allPapers = papersData.filter(data => data.field.includes(user.field) && data.dabirKhane && data.dabirKhane.includes('approved')).map((singlePaper,index)=>{return(singlePaper)} )  
     console.log(allPapers)
     for(let i=0 ; i<allPapers.length ; i++) {
       if(allPapers[i].dabirBakhsh===null && allPapers[i].dabirKhane && allPapers[i].dabirKhane.includes('approved')) {

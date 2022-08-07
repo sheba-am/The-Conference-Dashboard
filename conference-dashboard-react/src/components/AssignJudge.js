@@ -131,7 +131,7 @@ console.log(assignedJudgeNames)
                                 )
                                 )}
                             </select> 
-                            {newJudgeList.length !==2  && (
+                            {newJudgeList.length >2  && (
                                 <button class="btn btn-outline-secondary" type="button" id="button-remove" 
                                 onClick={() => handleJudgeRemove(index)}
                                 

@@ -227,3 +227,26 @@ export const submenuSidebarData = [
     icon: <IoPeopleSharp/>,
   },
 ];
+
+export const userStatus =[
+  {
+    value:'dabirconference',
+    label:'Dabir Conference',
+  },
+  {
+    value:'dabirbakhsh',
+    label:'Dabir Bakhsh',
+  },  
+  {
+    value:'dabirkhane',
+    label:'Dabir Khane',
+  },  
+  {
+    value:'standard',
+    label:'Standard',
+  }, 
+  {
+    value:'judge',
+    label:'Judge',
+  },   
+];

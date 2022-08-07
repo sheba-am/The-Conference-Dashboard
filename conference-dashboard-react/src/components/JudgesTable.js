@@ -11,7 +11,7 @@ function JudgesTable({assignedJudgeData}) {
     var averageScore =[]  // we store average of all scores in this array
     var scoresCount = FeedbackQuestions
     assignedJudgeData.map((singleJudge) => (
-        singleJudge.scores!=='N/A' ?averageScore.push(getAvg(singleJudge.scores.split(',').map(Number))): averageScore.push('N/A')
+        singleJudge.scores!=='N/A' ?averageScore.push(getAvg(singleJudge.scores.split(',').map(Number)).toFixed(2)): averageScore.push('N/A')
     ))
     console.log('ave',averageScore)
   return (
@@ -40,12 +40,13 @@ function JudgesTable({assignedJudgeData}) {
                             {
                                 item.scores !== 'N/A' &&item.scores.split(',').map((singleScore)=>(<td>{singleScore}</td>))
                             }
+                            
                             {item.scores === 'N/A' && scoresCount.map((singleNa,index) =>(<td>N/A</td>))}
                             <td> {averageScore[index]}</td>
-                            {averageScore[index]>= 10 && <td>passed</td>}
-                            {averageScore[index]< 10 && <td>failed</td>}
-                            {item.accepted ===null && <td> pending accept</td>}
-                            {(item.accepted ==='true' && averageScore[index] === 'N/A') && <td>N/A </td>}
+                            {averageScore[index]>= 10 && <td><span className='days-left-done'>passed</span></td>}
+                            {averageScore[index]< 10 && <td><span className='days-left-red'>failed</span></td>}
+                            {item.accepted ===null && <td> <span className='judge-pending-accept'>pending accept</span></td>}
+                            {(item.accepted !==null && averageScore[index] === 'N/A') && <td><span className='days-left-green'>pending judgment</span> </td>}
                             <td> {item.description}</td>
                         </tr>
                     
