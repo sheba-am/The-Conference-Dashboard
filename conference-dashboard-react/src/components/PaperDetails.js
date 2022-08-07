@@ -114,9 +114,9 @@ function PaperDetails(props) {
         <br />
         {(user.status=='dabirkhane' || user.status=='dabirconference' ) && <DabirKhane_Approval paper={paper} />}
         <br />
-        {(user.status=='dabirbakhsh' || user.status=='dabirconference' ) && <DabirBakhsh_Approval />}
+        {((user.status=='dabirbakhsh' || user.status=='dabirconference' )&& paper.dabirBakhsh==='judged') && <DabirBakhsh_Approval />}
         <br />
-        <DabirConference_Approval />
+        {user.status=='dabirconference' && <DabirConference_Approval />}
           {/*==== Judges Table ==== */}
         <div>
           <div class='row paper-details-judge-header'>
