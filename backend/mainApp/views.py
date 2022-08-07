@@ -263,7 +263,9 @@ def getPaperFile(request):
 @api_view(['POST'])
 def editPaper(request):
     data = request.data
-    paper = Paper.objects.get(title=data['title'])
+    paper = Paper.objects.get(id=data['id'])
+    print(paper)
+    paper.title=data['title'].lower()
     paper.authors=data['authors'].lower()
     paper.language=data['language'].lower()
     paper.NOM=data['NOM'].lower()
@@ -273,7 +275,7 @@ def editPaper(request):
     paper.summary=data['summary'].lower()
     paper.paperFile=data['paperFile']
     paper.MOP=data['MOP'].lower()
-    paper.save(update_fields=['authors','NOM','field','subfields','title','summary','paperFile','MOP'])
+    paper.save(update_fields=['title','authors','NOM','field','subfields','title','summary','paperFile','MOP'])
     allAuthors = data['authors'].split(",")
     for item in allAuthors:
         BaseUser.objects.get(username=item).userPapers.add(paper)
@@ -428,7 +430,7 @@ def dabirkhaneApproval(request):
 @api_view(['POST'])
 def changeTitle(request):
     data = request.data
-    paper = Paper.objects.get(title=data['title'].lower())
+    paper = Paper.objects.get(id=data['id'].lower())
     try:
         paper.title = data['newTitle']
         paper.save()
