@@ -27,7 +27,7 @@ export const columnsData = [
                             singleJudgeStyle="judge-pending-accept"
                         } else if(statusArr[index]==='no feedback') {
                             singleJudgeStyle="judge-pending-judgment"
-                        }else if(statusArr[index]==='feedback') {
+                        }else if(statusArr[index]==='sent feedback') {
                             singleJudgeStyle="judge-judged"
                         } else {
                             singleJudgeStyle=""
@@ -63,7 +63,26 @@ export const columnsData = [
                         return <span className={singleJudgeStyle} key={index}>{singleVal==='done'? singleVal:singleVal.split(',')[0]+' days left'}  </span>
                     })}
             </span>
-        },        
+        }, 
+ 
+
+    }, 
+    { 
+        Header: 'Score',
+        accessor:'scores',
+        Cell:({value}) => {
+            if(!value.includes('N/A')) {
+                var ScoresArr = value.split(',').map(Number)
+                function getAvg(grades) {
+                    const total = grades.reduce((acc, c) => acc + c, 0);
+                    return total / grades.length;
+                  }
+                var finalScore=getAvg(ScoresArr).toFixed(2)
+                return <span>{finalScore}</span>
+            } else {
+                return <span>N/A</span>
+            }
+        },
     },            
     ]
     
