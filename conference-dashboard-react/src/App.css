@@ -588,6 +588,10 @@ transform: translateY(-2px);
 
 }
 /*  ================== DashboardMainPage ================== */
+#main-page .stacked-chart {
+  background-color: white;
+  border-radius: 10px;
+}
 #main-page .row .main-page-card{
   border-radius: 15px;
   margin: 2vh 1.5vw 2vh 1.5vw;
@@ -1091,4 +1095,31 @@ margin-right: 3px;
 .tab .tab-content .tab-pane {
   background-color: rgba(240, 240, 240, 0.89);
   border-radius: 10px;
+}
+.color-picker {
+  background-color: #FEC0AA
+  #8DA9C4
+  #13315C
+  #A1CF6B
+  #7AC74F
+  #E87461
+  #FFEAEE
+  #EAC9C1
+  #FFC857
+  #E7E393
+  #D3AB9E
+  #C9D5B5
+  #FFA630
+  #D7E8BA
+  #EDBF85
+  #F7F06D
+  #E83F6F
+  #F6B6C8
+  #E4BB97
+  #FEF5EF
+  #D6E3F8
+  #55DDE0
+  #F6AE2D
+  #6AB547
+  
 }

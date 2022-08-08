@@ -89,11 +89,11 @@ function PaperDetails(props) {
               </Link>
             </div>
             
-            <div class='col-lg-1 col-md-2 col-sm-2 '>
+            {user.status !=='dabirbakhsh' &&<div class='col-lg-1 col-md-2 col-sm-2 '>
               <Link to='/dashboard/edit-paper' class="btn btn-primary">
                   edit
               </Link>
-            </div>
+            </div>}
             
           
             <div class='col-lg-2 col-md-2 col-sm-3'>

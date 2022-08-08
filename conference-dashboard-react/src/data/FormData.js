@@ -71,9 +71,9 @@ export const fields = [
       value: 'arificial intelligence', 
       label:'arificial intelligence',
       subfields: [
-        {value:"machine learning", label:"machine learning",},
-        {value:"neural networks", label:"neural networks",},
-        {value:"robotics", label:"robotics",},
+        {value:"machine learning", label:"machine learning", color:"#FEC0AA"},
+        {value:"neural networks", label:"neural networks", color:"#8DA9C4"},
+        {value:"robotics", label:"robotics", color:"#13315C"},
       ],
     },
     {
@@ -81,8 +81,8 @@ export const fields = [
       label:'computer networks and communications',
       subfields: [
         
-        {value:"internet and web technology", label:"internet and web technology"},
-        {value:"networking", label:"networking"},
+        {value:"internet and web technology", label:"internet and web technology", color:"#A1CF6B"},
+        {value:"networking", label:"networking", color:"#E87461"},
 
       ],
     },
@@ -91,26 +91,26 @@ export const fields = [
       label:'hardware and architecture',
       subfields: [
         
-        {value:"control structures and microprogramming", label:"control structures and microprogramming"},
-        {value:"integrated circuits", label:"integrated circuits"},
-        {value:"logic design", label:"logic design"},
+        {value:"control structures and microprogramming", label:"control structures and microprogramming", color:"#7AC74F"},
+        {value:"integrated circuits", label:"integrated circuits", color:"#BCA3AC"},
+        {value:"logic design", label:"logic design", color:"#FFC857"},
       ],
     },
     {
       value: 'information systems',
       label:'information systems',
       subfields: [
-        {value:"information interfaces and presentation",label:"Information Interfaces and Presentation"},
-        {value:"information processing and control",label:"Information Processing and Control"},
-        {value:"information search and retrieval",label:"Information Search and Retrieval"},
+        {value:"information interfaces and presentation",label:"Information Interfaces and Presentation", color:"#C9D5B5"},
+        {value:"information processing and control",label:"Information Processing and Control", color:"#FFA630"},
+        {value:"information search and retrieval",label:"Information Search and Retrieval", color:"#D3AB9E"},
       ]
     },
     
       {value: 'computer-human interaction', 
       label:'computer-human interaction',
       subfields: [
-        {value:"computer-guman interaction", label:"Computer-Human Interaction"},
-        {value:"human / computer interaction", label:"Human / Computer Interaction"},
+        {value:"computer-guman interaction", label:"Computer-Human Interaction", color:"#D7E8BA"},
+        {value:"human / computer interaction", label:"Human / Computer Interaction", color:"#EDBF85"},
       ],
     },
     {
@@ -118,10 +118,10 @@ export const fields = [
       label:'software',
       subfields:[
         
-        {value:"database management", label:"database management"},
-        {value:"software engineering", label:"software engineering"},
-        {value:"operation systems", label:"operation systems"},
-        {value:"software(general)", label:"software(general)"},
+        {value:"database management", label:"database management", color:"#F7F06D"},
+        {value:"software engineering", label:"software engineering", color:"#E83F6F"},
+        {value:"operation systems", label:"operation systems", color:"#F6B6C8"},
+        {value:"software(general)", label:"software(general)", color:"#55DDE0"},
       ],
     },
     {
@@ -129,44 +129,44 @@ export const fields = [
       label:'computer graphics and computer-aided design',
       subfields:[
         
-        {value:"computer graphics",label:"computer graphics"},
-        {value:"simulation and modeling",label:"simulation and modeling"},
-        {value:"virtual reality",label:"virtual reality"},
+        {value:"computer graphics",label:"computer graphics", color:"#D6E3F8"},
+        {value:"simulation and modeling",label:"simulation and modeling", color:"#6AB547"},
+        {value:"virtual reality",label:"virtual reality", color:"#F6AE2D"},
       ],
     },
     {
       value: 'computational theory and mathematics', 
       label:'computational theory and mathematics',
       subfields:[
-        {value:"arithmetic and logic structures", label:"Arithmetic and Logic Structures"},
-        {value:"symbolic and algebraic manipulation", label:"Symbolic and Algebraic Manipulation"},
+        {value:"arithmetic and logic structures", label:"Arithmetic and Logic Structures", color:"#FEC0AA"},
+        {value:"symbolic and algebraic manipulation", label:"Symbolic and Algebraic Manipulation", color:"#8DA9C4"},
       ],
     },
     {
       value: 'computer science (general)', 
       label:'computer science (general)',
       subfields:[
-        {value:"coding and information theory", label:"Coding and Information Theory"},
-        {value:"computer system implementation", label:"Computer System Implementation"},
-        {value:"data encryption", label:"Data Encryption"},
+        {value:"coding and information theory", label:"Coding and Information Theory", color:"#13315C"},
+        {value:"computer system implementation", label:"Computer System Implementation", color:"#A1CF6B"},
+        {value:"data encryption", label:"Data Encryption", color:"#E87461"},
       ],
     },
     {
       value: 'computer science application', 
       label:'computer science application',
       subfields:[
-        {value:"agricultural computer and electronic systems",label:"Agricultural Computer and Electronic Systems"},
-        {value:"applications (general)",label:"Applications (General)"},
-        {value:"business intelligence - Data management",label:"Business Intelligence - Data management"},
-        {value:"computers and chemistry",label:"Computers and Chemistry"},
-        {value:"computers and psychology",label:"Computers and Psychology"},
+        {value:"agricultural computer and electronic systems",label:"Agricultural Computer and Electronic Systems", color:"#7AC74F"},
+        {value:"applications (general)",label:"Applications (General)", color:"#98717F"},
+        {value:"business intelligence - Data management",label:"Business Intelligence - Data management", color:"#FFC857"},
+        {value:"computers and chemistry",label:"Computers and Chemistry", color:"#EAC9C1"},
+        {value:"computers and psychology",label:"Computers and Psychology", color:"#E83F6F"},
       ],
     },
     {
       value: 'all',
       label: 'All',
       subfields:[
-        {value:'all', label:'All'}
+        {value:'all', label:'All', color:"#55DDE0"}
       ]
     }
     ]

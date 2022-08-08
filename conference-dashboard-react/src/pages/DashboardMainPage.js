@@ -1,6 +1,16 @@
 import React, {useState, useEffect} from "react"
 import { DashboadMainPageData} from '../data/SidebarData';
 import { Link, Navigate } from "react-router-dom";
+import StackedChart from "./StackedChart";
+import axios from 'axios'
+import { fieldsData } from "../data/FormData";
+
+const config = {
+  headers: {
+    'Content-Type': 'multipart/form-data',
+      
+  }
+}
 const DashboradMainPage = props => {
     //dashboard will be a little smaller when sidebar is open
     const DashboardMainPage = props.isOpen ? "content open" : "content";
@@ -27,11 +37,51 @@ const DashboradMainPage = props => {
 
       },[userState]);
     //redirect if the user is not authenticated
+
+    const [papersData, setPapersData] = useState()
+    
+    useEffect(() =>{  
+    const result = axios.post(
+      'http://127.0.0.1:8000/viewAllPapers' ,
+      {'username': user.username}
+      , config
+    ).then((response) => response)
+    .then((response) => {
+      setPapersData(response.data)
+    })},[])
+    var thefield
+    // var fieldCount = fieldsData.map((singleField) =>{ 
+    //    thefield.push(papersData && papersData.filter((singlePaper) => (singlePaper.field ===singleField.value)).length)
+    //    return thefield
+    //   }
+    // )
+
+    var fieldsCount = papersData && fieldsData.map((singleField) => {
+      let properties = {
+        'value': singleField.value,
+        'label': singleField.label,
+        'subfields': singleField.subfields,
+        'count': 0,
+      };
+      properties['count'] =papersData.filter(item => item.field.includes(singleField.value)).length;      
+      properties['subfields'] = singleField.subfields.map((singleSubField) => {
+        let subFieldProperties = {
+          'value': singleSubField.value,
+          'label': singleSubField.label,
+          'count': 0,
+        };  
+        subFieldProperties['count'] = papersData.filter(item => item.subfields.includes(singleSubField.value)).length;   
+        return subFieldProperties;   
+      })
+      return properties;
+    })
+
+
   return ((!user)? <Navigate to="/signup"/> :
     <div className={DashboardMainPage}>
-        <div id='main-page' class="container">
+      <div id='main-page' class="container">
             <div class="row">
-            <div class='col-lg-1 col-md-2'>
+              <div class='col-lg-1 col-md-2'>
                 <button class='btn logout-btn' onClick={handleLogout}>
                   Logout
                 </button>
@@ -62,9 +112,12 @@ const DashboradMainPage = props => {
                                 </div>
                                 );
                             })
-                        }                        
+                        }
+                        <div className="stacked-chart">
+                          <StackedChart chartData={fieldsCount} />
+                        </div>                        
             </div>
-        </div>
+      </div>
     </div>
   );
 };
