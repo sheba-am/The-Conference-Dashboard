@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from "react";
-import { PieChart, Pie, Sector,Cell } from "recharts";
+import { PieChart, Pie, Sector,Cell, Label } from "recharts";
 import { fieldsData } from "../data/FormData";
 
 
@@ -16,7 +16,7 @@ const renderActiveShape = (props) => {
     fill,
     payload,
     percent,
-    value
+    value,
   } = props;
   const sin = Math.sin(-RADIAN * midAngle);
   const cos = Math.cos(-RADIAN * midAngle);
@@ -30,7 +30,7 @@ const renderActiveShape = (props) => {
 
   return (
     <g>
-      <text x={cx} y={cy} dy={8} textAnchor="middle" fill={fill}>
+      <text x={cx} y={340} dy={38} textAnchor="middle" fill={fill}>
         {payload.name}
       </text>
       <Sector
@@ -84,7 +84,6 @@ export default function PieChartDashboard({chartData}) {
         
       userFieldData.push(obj)
     })
-    console.log('chart',userFieldData)
 
   const [activeIndex, setActiveIndex] = useState(0);
   const onPieEnter = useCallback(
@@ -93,19 +92,18 @@ export default function PieChartDashboard({chartData}) {
     },
     [setActiveIndex]
   );
-  const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
+  //const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
 
   return (
-    <PieChart width={400} height={400}>
+    <PieChart width={800} height={400}>
       <Pie
         activeIndex={activeIndex}
         activeShape={renderActiveShape}
         data={userFieldData}
         cx={200}
         cy={200}
-        innerRadius={60}
-        outerRadius={80}
-        fill="#8884d8"
+        innerRadius={90}
+        outerRadius={110}
         dataKey="value"
         onMouseEnter={onPieEnter}
       >

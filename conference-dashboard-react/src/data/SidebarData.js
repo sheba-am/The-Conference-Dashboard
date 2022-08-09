@@ -5,6 +5,7 @@ import * as IoIcons from 'react-icons/io';
 import { IoPeopleSharp } from "react-icons/io5";
 import { FaNewspaper } from "react-icons/fa";
 import * as RiIcons from 'react-icons/ri';
+import { MdArticle } from "react-icons/md";
 export const StandardSidebarData = [
   {
     title: 'Home',
@@ -19,7 +20,7 @@ export const StandardSidebarData = [
   {
     title: 'My Papers',
     path: '/dashboard/my-papers',
-    icon: <IoIcons.IoIosPaper />,
+    icon: <MdArticle />,
   }, 
 ];
 
@@ -40,7 +41,7 @@ export const DabirConferenceSidebarData = [
   {
     title: 'My Papers',
     path: '/dashboard/my-papers',
-    icon: <IoIcons.IoIosPaper />,
+    icon: <MdArticle />,
   },  
   {
     title: 'Manage Papers',
@@ -69,7 +70,7 @@ export const DabirKhaneSidebarData = [
   {
     title: 'My Papers',
     path: '/dashboard/my-papers',
-    icon: <IoIcons.IoIosPaper />,
+    icon: <MdArticle/>,
   }, 
   {
     title: 'Manage Papers',
@@ -93,7 +94,7 @@ export const DabirBakhshSidebarData = [
   {
     title: 'My Papers',
     path: '/dashboard/my-papers',
-    icon: <IoIcons.IoIosPaper />,
+    icon: <MdArticle />,
   }, 
   {
     title: 'Manage Papers',
@@ -117,7 +118,7 @@ export const JudgeSidebarData = [
   {
     title: 'My Papers',
     path: '/dashboard/my-papers',
-    icon: <IoIcons.IoIosPaper />,
+    icon: <MdArticle />,
   }, 
   {
     title: 'Manage Papers',
@@ -132,58 +133,41 @@ export const DashboadMainPageData = [
     path: '/',
     description:'You can view published papers',
     icon: <FaNewspaper />,
-    
-    cName: 'standard-user-home-page'
+    iconColor: 'yellow-icon',
+    color:'card yellow-card',
   },
   {
     title: 'Edit Info',
     path: '/dashboard/editinfo',
     description:'You can edit your information',
     icon: <AiIcons.AiFillEdit />,
-    cName: 'standard-user-editinfo'
+    iconColor: 'blue-icon',
+    color:'card blue-card',
   },
   {
     title: 'My Papers',
     path: '/dashboard/my-papers',
     description:'You can view your papers',
-    icon: <IoIcons.IoIosPaper />,
-    cName: 'standard-user-papers'
+    icon: <MdArticle />, 
+    iconColor: 'green-icon',
+    color:'card green-card',
   },
   {
-    title: 'Published Papers',
-    path: '/',
-    description:'You can view published papers',
-    icon: <FaNewspaper />,
-    cName: 'admin-home-page'
-  },
-  {
-    title: 'Edit Info',
-    path: '/dashboard/editinfo',
-    description:'You can edit your information',
-    icon: <AiIcons.AiFillEdit />,
-    cName: 'admin-editinfo'
-  },
-  {
-    title: 'Papers',
+    title: 'Manage Papers',
     path: '/dashboard/papers',
-    description:'You can view papers',
+    description:'You can manage papers',
     icon: <IoIcons.IoIosPaper />,
-    cName: 'admin-papers'
-  },
+    iconColor: 'rose-icon',
+    color:'card rose-card',
+  }, 
   {
     title: 'Manage Users',
     path: '/dashboard/allusers',
-    description:'You can manage users and promote standard users to judges',
+    description:'You can view all users',
     icon: <IoPeopleSharp/>,
-    cName: 'admin-manage-standard-user'
-  },
-  // {
-  //   title: 'Manage Judges',
-  //   path: '/dashboard/manage-judges',
-  //   icon: <IoPeopleSharp />,
-  //   cName: 'admin-manage-judges'
-  // },  
-  
+    iconColor: 'purple-icon',
+    color:'card purple-card',
+  },  
 ];
 
 export const submenuSidebarData = [
@@ -214,7 +198,7 @@ export const submenuSidebarData = [
   {
     title: 'My Papers',
     path: '/dashboard/my-papers',
-    icon: <IoIcons.IoIosPaper />,
+    icon: <MdArticle/>,
   },  
   {
     title: 'Manage Papers',

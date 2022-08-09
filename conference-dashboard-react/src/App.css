@@ -588,6 +588,176 @@ transform: translateY(-2px);
 
 }
 /*  ================== DashboardMainPage ================== */
+
+
+.purple-icon {
+  color:#7C2DFCAF;
+  z-index: 10;
+  font-size: 70px;
+  margin-bottom: 10px;
+}
+.yellow-icon {
+  color:rgb(253, 192, 8);
+  z-index: 10;
+  font-size: 70px;
+  margin-bottom: 10px;
+}
+.blue-icon {
+  color: #80aeff;
+  z-index: 10;
+  font-size: 70px;
+  margin-bottom: 10px;
+}
+.green-icon {
+  color: rgb(133, 247, 3);
+  z-index: 10;
+  font-size: 70px;
+  margin-bottom: 10px;
+}
+.rose-icon {
+  color: rgb(255, 133, 41);
+  z-index: 10;
+  font-size: 70px;
+  margin-bottom: 10px;
+}
+#main-page .yellow-card {
+  --bg-color: #ffdf7e;
+  --bg-color-light: #ffeeba;
+  --text-color-hover: #fff;
+  --box-shadow-color: rgba(255, 215, 97, 0.48);
+}
+
+/* #main-page .baby-card {
+  --bg-color: #B8F9D3;
+  --bg-color-light: #e2fced;
+  --text-color-hover: #4C5656;
+  --box-shadow-color: rgba(184, 249, 211, 0.48);
+} */
+#main-page .blue-card {
+  --bg-color: #DCE9FF;
+  --bg-color-light: #f1f7ff;
+  --text-color-hover: #fff;
+  --box-shadow-color: rgba(220, 233, 255, 0.48);
+}
+#main-page .green-card {
+  --bg-color: rgb(212, 250, 169);
+  --bg-color-light: #F0E7FF;
+  --text-color-hover: #fff;
+  --box-shadow-color: rgba(187, 252, 113, 0.48);
+}
+#main-page .rose-card {
+  --bg-color: rgb(255, 196, 152);
+  --bg-color-light: #F0E7FF;
+  --text-color-hover: #fff;
+  --box-shadow-color: rgba(252, 158, 86, 0.48);
+}
+#main-page .purple-card {
+  --bg-color: #CEB2FC;
+  --bg-color-light: #F0E7FF;
+  --text-color-hover: #fff;
+  --box-shadow-color: rgba(206, 178, 252, 0.48);
+}
+
+
+
+#main-page .card {
+  width: 220px;
+  height: 321px;
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  box-shadow: 0 14px 26px rgba(0,0,0,0.04);
+  transition: all 0.3s ease-out;
+  text-decoration: none;
+}
+
+#main-page .card:hover {
+  transform: translateY(-5px) scale(1.005) translateZ(0);
+  box-shadow: 0 24px 36px rgba(0,0,0,0.11),
+    0 24px 46px var(--box-shadow-color);
+}
+
+#main-page .card:hover .overlay {
+  transform: scale(4) translateZ(0);
+}
+
+#main-page .card:hover .circle {
+  border-color: var(--bg-color-light);
+  background: var(--bg-color);
+}
+
+#main-page .card:hover .circle:after {
+  background: var(--bg-color-light);
+}
+
+#main-page .card:hover p {
+  color: var(--text-color-hover);
+}
+
+#main-page .card:active {
+  transform: scale(1) translateZ(0);
+  box-shadow: 0 15px 24px rgba(0,0,0,0.11),
+    0 15px 24px var(--box-shadow-color);
+}
+
+#main-page .card p {
+  font-size: 17px;
+  color: #4C5656;
+  margin-top: 30px;
+  z-index: 1000;
+  transition: color 0.3s ease-out;
+}
+
+#main-page .circle {
+  width: 131px;
+  height: 131px;
+  border-radius: 50%;
+  background: #fff;
+  border: 2px solid var(--bg-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+  transition: all 0.3s ease-out;
+}
+
+#main-page .circle:after {
+  content: "";
+  width: 118px;
+  height: 118px;
+  display: block;
+  position: absolute;
+  background: var(--bg-color);
+  border-radius: 50%;
+  top: 5px;
+  left: 5px;
+  transition: opacity 0.3s ease-out;
+}
+
+#main-page .circle svg {
+  z-index: 10000;
+  transform: translateZ(0);
+}
+
+#main-page .overlay {
+  width: 118px;
+  position: absolute; 
+  height: 118px;
+  border-radius: 50%;
+  background: var(--bg-color);
+  top: 70px;
+  left: 50px;
+  z-index: 0;
+  transition: transform 0.3s ease-out;
+}
+
+
 #main-page .stacked-chart {
   background-color: white;
   border-radius: 10px;

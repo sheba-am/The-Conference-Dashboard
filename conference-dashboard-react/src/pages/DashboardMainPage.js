@@ -5,6 +5,7 @@ import StackedChart from "./StackedChart";
 import axios from 'axios'
 import { fieldsData } from "../data/FormData";
 import PieChartDashboard from "./PieChartDashboard";
+import Cards from "./Cards";
 
 const config = {
   headers: {
@@ -20,10 +21,10 @@ const DashboradMainPage = props => {
     const [userState, setUserState] = useState()
 
     if(user){
-        if (user.status==="admin"){
-          DashboadMainPageData_subset = DashboadMainPageData.slice(3, 8)
-        } else {
-          DashboadMainPageData_subset = DashboadMainPageData.slice(0, 3)
+        if (user.status==="dabirconference"){
+          DashboadMainPageData_subset = DashboadMainPageData.slice(0, 5)
+        } else  if (user.status==="dabirkhane" || user.status==="dabirbakhsh" || user.status==="judge") {
+          DashboadMainPageData_subset = DashboadMainPageData.slice(0, 4)
         }
       }
 
@@ -109,30 +110,16 @@ const DashboradMainPage = props => {
 
             </div>
             <div class="row">  
-                        {
-                            DashboadMainPageData_subset.map((item, index) => {
-                                return (
-                                <div key={index} class="col-sm-6">
-                                    <div class="card main-page-card">
-                                      <div class="card-body ">
-                                              <div   >                                          
-                                                  <h5 class="card-title">{item.icon} {item.title}</h5>
-                                                  <p class="card-text"> {item.description} </p>
-                                                  <Link to={item.path}  class="btn main-page-card-btn">
-                                                      go
-                                                  </Link> 
-                                              </div>
-                                      </div>
-                                    </div>
-                                </div>
-                                );
-                            })
-                        }
-                        <PieChartDashboard chartData={userFieldsCount}/>
-                        <div className="stacked-chart">
-                          <StackedChart chartData={fieldsCount} />
-                        </div>                        
+              <Cards cardsData={DashboadMainPageData_subset} />
             </div>
+                        {/* <div>
+                          <PieChartDashboard chartData={userFieldsCount}/>
+                        </div> */}
+                        {/* <div className="stacked-chart">
+                          <StackedChart chartData={fieldsCount} />
+                        </div>                         */}
+            
+            
       </div>
     </div>
   );
