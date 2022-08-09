@@ -4,6 +4,7 @@ import { Link, Navigate } from "react-router-dom";
 import StackedChart from "./StackedChart";
 import axios from 'axios'
 import { fieldsData } from "../data/FormData";
+import PieChartDashboard from "./PieChartDashboard";
 
 const config = {
   headers: {
@@ -39,23 +40,26 @@ const DashboradMainPage = props => {
     //redirect if the user is not authenticated
 
     const [papersData, setPapersData] = useState()
-    
+    const[ allUsers,setAllUsers] =useState()
     useEffect(() =>{  
-    const result = axios.post(
-      'http://127.0.0.1:8000/viewAllPapers' ,
-      {'username': user.username}
-      , config
-    ).then((response) => response)
-    .then((response) => {
-      setPapersData(response.data)
-    })},[])
-    var thefield
-    // var fieldCount = fieldsData.map((singleField) =>{ 
-    //    thefield.push(papersData && papersData.filter((singlePaper) => (singlePaper.field ===singleField.value)).length)
-    //    return thefield
-    //   }
-    // )
+      const result = axios.post(
+        'http://127.0.0.1:8000/viewAllPapers' ,
+        {'username': user.username}
+        , config
+      ).then((response) => response)
+      .then((response) => {
+        setPapersData(response.data)
+      })
+      const allUsersresult = axios.post(
+        'http://127.0.0.1:8000/getUsers'
+        , config
+      ).then((response) => response)
+      .then((response) => {
+        setAllUsers(response.data)
+      })
+    },[])
 
+    //number of fields and subfields of paper
     var fieldsCount = papersData && fieldsData.map((singleField) => {
       let properties = {
         'value': singleField.value,
@@ -76,7 +80,18 @@ const DashboradMainPage = props => {
       return properties;
     })
 
-
+    //number of fields and subfields of user
+    var userFieldsCount = allUsers && fieldsData.map((singleField) => {
+      let properties = {
+        'value': singleField.value,
+        'label': singleField.label,
+        'subfields': singleField.subfields,
+        'color': singleField.color,
+        'count': 0,
+      };
+      properties['count'] =allUsers.filter(item => item.field.includes(singleField.value)).length;      
+      return properties;
+    })
   return ((!user)? <Navigate to="/signup"/> :
     <div className={DashboardMainPage}>
       <div id='main-page' class="container">
@@ -113,6 +128,7 @@ const DashboradMainPage = props => {
                                 );
                             })
                         }
+                        <PieChartDashboard chartData={userFieldsCount}/>
                         <div className="stacked-chart">
                           <StackedChart chartData={fieldsCount} />
                         </div>                        

@@ -70,6 +70,7 @@ export const fields = [
     {
       value: 'arificial intelligence', 
       label:'arificial intelligence',
+      color:'#F46197' ,
       subfields: [
         {value:"machine learning", label:"machine learning", color:"#FEC0AA"},
         {value:"neural networks", label:"neural networks", color:"#8DA9C4"},
@@ -79,6 +80,7 @@ export const fields = [
     {
       value: 'computer networks and communications', 
       label:'computer networks and communications',
+      color:'#2CA58D',
       subfields: [
         
         {value:"internet and web technology", label:"internet and web technology", color:"#A1CF6B"},
@@ -89,6 +91,7 @@ export const fields = [
     {
       value: 'hardware and architecture', 
       label:'hardware and architecture',
+      color:'#0088FE',
       subfields: [
         
         {value:"control structures and microprogramming", label:"control structures and microprogramming", color:"#7AC74F"},
@@ -99,6 +102,7 @@ export const fields = [
     {
       value: 'information systems',
       label:'information systems',
+      color:'#00C49F',
       subfields: [
         {value:"information interfaces and presentation",label:"Information Interfaces and Presentation", color:"#C9D5B5"},
         {value:"information processing and control",label:"Information Processing and Control", color:"#FFA630"},
@@ -108,6 +112,7 @@ export const fields = [
     
       {value: 'computer-human interaction', 
       label:'computer-human interaction',
+      color:'#FFBB28',
       subfields: [
         {value:"computer-guman interaction", label:"Computer-Human Interaction", color:"#D7E8BA"},
         {value:"human / computer interaction", label:"Human / Computer Interaction", color:"#EDBF85"},
@@ -116,6 +121,7 @@ export const fields = [
     {
       value: 'software', 
       label:'software',
+      color:'#FF8042',
       subfields:[
         
         {value:"database management", label:"database management", color:"#F7F06D"},
@@ -127,6 +133,7 @@ export const fields = [
     {
       value: 'computer graphics and computer-aided design',
       label:'computer graphics and computer-aided design',
+      color:'#E16036',
       subfields:[
         
         {value:"computer graphics",label:"computer graphics", color:"#D6E3F8"},
@@ -137,6 +144,7 @@ export const fields = [
     {
       value: 'computational theory and mathematics', 
       label:'computational theory and mathematics',
+      color: '#7AC74F',
       subfields:[
         {value:"arithmetic and logic structures", label:"Arithmetic and Logic Structures", color:"#FEC0AA"},
         {value:"symbolic and algebraic manipulation", label:"Symbolic and Algebraic Manipulation", color:"#8DA9C4"},
@@ -145,6 +153,7 @@ export const fields = [
     {
       value: 'computer science (general)', 
       label:'computer science (general)',
+      color: '#FE938C',
       subfields:[
         {value:"coding and information theory", label:"Coding and Information Theory", color:"#13315C"},
         {value:"computer system implementation", label:"Computer System Implementation", color:"#A1CF6B"},
@@ -154,6 +163,7 @@ export const fields = [
     {
       value: 'computer science application', 
       label:'computer science application',
+      color:'#32CBFF',
       subfields:[
         {value:"agricultural computer and electronic systems",label:"Agricultural Computer and Electronic Systems", color:"#7AC74F"},
         {value:"applications (general)",label:"Applications (General)", color:"#98717F"},
@@ -165,6 +175,7 @@ export const fields = [
     {
       value: 'all',
       label: 'All',
+      color:'#F7C548',
       subfields:[
         {value:'all', label:'All', color:"#55DDE0"}
       ]

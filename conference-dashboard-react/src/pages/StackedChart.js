@@ -43,7 +43,7 @@ export default function StackedChart({chartData}) {
         <XAxis dataKey="name" />
         <YAxis />
         <Tooltip />
-        <Legend />
+        {/* <Legend /> */}
         {/* same id will go above each other */}
         {/* <Bar dataKey="machine learning" stackId="a" fill="#8884d8" />
         <Bar dataKey="integrated circuits" stackId="a" fill="#82ca9d" />
