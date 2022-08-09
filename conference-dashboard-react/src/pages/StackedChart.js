@@ -24,13 +24,11 @@ export default function StackedChart({chartData}) {
       })
     subFieldData.push(obj)
   })
-  console.log('og', chartData)
-  console.log('chart', subFieldData)
   return (
-    <ResponsiveContainer  width="95%" height={600}>
+    <ResponsiveContainer  width="100%" height={400}>
       <BarChart
-        width={1000}
-        height={600}
+        width={700}
+        height={400}
         data={subFieldData}
         margin={{
           top: 20,
@@ -44,12 +42,6 @@ export default function StackedChart({chartData}) {
         <YAxis />
         <Tooltip />
         {/* <Legend /> */}
-        {/* same id will go above each other */}
-        {/* <Bar dataKey="machine learning" stackId="a" fill="#8884d8" />
-        <Bar dataKey="integrated circuits" stackId="a" fill="#82ca9d" />
-        <Bar dataKey="arificial intelligence" stackId="a" fill="#288E04F2" />
-        <Bar dataKey={singleSubfield.label} stackId="a" fill={singleSubfield.color} />
-        <Bar dataKey="All" stackId="a" fill="#d31212" /> */}
         {fieldsData.map((singleField) => (
             singleField.subfields.map((singleSubfield) => {
               return <Bar dataKey={singleSubfield.label} stackId="a" fill={singleSubfield.color} />

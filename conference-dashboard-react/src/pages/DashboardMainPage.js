@@ -109,15 +109,18 @@ const DashboradMainPage = props => {
               </div>
 
             </div>
-            <div class="row">  
+              <br />
               <Cards cardsData={DashboadMainPageData_subset} />
-            </div>
-                        {/* <div>
-                          <PieChartDashboard chartData={userFieldsCount}/>
-                        </div> */}
-                        {/* <div className="stacked-chart">
-                          <StackedChart chartData={fieldsCount} />
-                        </div>                         */}
+              
+              <br />          
+              <div class='row charts'>
+                <div class='col-sm-12 col-lg-6'>
+                  <PieChartDashboard chartData={userFieldsCount}/>
+                </div>
+                <div  class='col-sm-12 col-lg-6'>
+                  <StackedChart chartData={fieldsCount} />
+                </div>
+              </div>                       
             
             
       </div>

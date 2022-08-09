@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from "react";
-import { PieChart, Pie, Sector,Cell, Label } from "recharts";
+import { PieChart, Pie, Sector,Cell, ResponsiveContainer } from "recharts";
 import { fieldsData } from "../data/FormData";
 
 
@@ -62,7 +62,7 @@ const renderActiveShape = (props) => {
         y={ey}
         textAnchor={textAnchor}
         fill="#333"
-      >{`PV ${value}`}</text>
+      >{`Count ${value}`}</text>
       <text
         x={ex + (cos >= 0 ? 1 : -1) * 12}
         y={ey}
@@ -83,6 +83,7 @@ export default function PieChartDashboard({chartData}) {
        obj['value'] = singleData.count
         
       userFieldData.push(obj)
+      return userFieldData
     })
 
   const [activeIndex, setActiveIndex] = useState(0);
@@ -95,23 +96,26 @@ export default function PieChartDashboard({chartData}) {
   //const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
 
   return (
-    <PieChart width={800} height={400}>
-      <Pie
-        activeIndex={activeIndex}
-        activeShape={renderActiveShape}
-        data={userFieldData}
-        cx={200}
-        cy={200}
-        innerRadius={90}
-        outerRadius={110}
-        dataKey="value"
-        onMouseEnter={onPieEnter}
-      >
-        {userFieldData.map((entry, index) => (
-            <Cell key={index} fill={fieldsData[index]['color']} />
-          ))}
-
-      </Pie>
-    </PieChart>
+    
+      <ResponsiveContainer width="100%" height={400}>
+        <PieChart >
+          <Pie
+            activeIndex={activeIndex}
+            activeShape={renderActiveShape}
+            data={userFieldData}
+            cx={200}
+            cy={200}
+            innerRadius={90}
+            outerRadius={110}
+            dataKey="value"
+            onMouseEnter={onPieEnter}
+          >
+            {userFieldData.map((entry, index) => (
+                <Cell key={index} fill={fieldsData[index]['color']} />
+              ))}
+          </Pie>
+        </PieChart>
+      </ResponsiveContainer>
+    
   );
 }
