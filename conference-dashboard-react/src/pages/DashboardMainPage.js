@@ -6,6 +6,7 @@ import axios from 'axios'
 import { fieldsData } from "../data/FormData";
 import PieChartDashboard from "./PieChartDashboard";
 import Cards from "./Cards";
+import SimplePieChart from "./SimplePieChart";
 
 const config = {
   headers: {
@@ -41,6 +42,7 @@ const DashboradMainPage = props => {
     //redirect if the user is not authenticated
 
     const [papersData, setPapersData] = useState()
+    const [myPapersData, setMyPapersData] = useState()
     const[ allUsers,setAllUsers] =useState()
     useEffect(() =>{  
       const result = axios.post(
@@ -58,9 +60,18 @@ const DashboradMainPage = props => {
       .then((response) => {
         setAllUsers(response.data)
       })
+      const myPapers = axios.post(
+        'http://127.0.0.1:8000/viewPapers',
+        {'username': user.username}
+        , config
+      ).then((response) => response)
+      .then((response) => {
+        setMyPapersData(response.data)
+        localStorage.setItem("papers", JSON.stringify(papersData))
+      })
     },[])
 
-    //number of fields and subfields of paper
+    //====== number of fields and subfields of paper =======
     var fieldsCount = papersData && fieldsData.map((singleField) => {
       let properties = {
         'value': singleField.value,
@@ -81,7 +92,7 @@ const DashboradMainPage = props => {
       return properties;
     })
 
-    //number of fields and subfields of user
+    //======== number of fields and subfields of user =======
     var userFieldsCount = allUsers && fieldsData.map((singleField) => {
       let properties = {
         'value': singleField.value,
@@ -93,6 +104,33 @@ const DashboradMainPage = props => {
       properties['count'] =allUsers.filter(item => item.field.includes(singleField.value)).length;      
       return properties;
     })
+
+    //======= number of my papers ==========
+    var pendingPapers = []
+    var revisedPapers = []
+    var approvedPapers = []  
+    var rejectedPapers = []
+    if(myPapersData) {
+      for(let i=0 ; i<myPapersData.length ; i++) {
+        if(myPapersData[i].dabirConference && myPapersData[i].dabirConference.includes('approve')) {
+          approvedPapers.push(myPapersData[i])
+        } else if(myPapersData[i].dabirConference && myPapersData[i].dabirConference.includes('reject')) {
+          rejectedPapers.push(myPapersData[i])
+        } else if(myPapersData[i].dabirKhane && myPapersData[i].dabirKhane.includes('reject')) {
+          rejectedPapers.push(myPapersData[i])
+        } else if(myPapersData[i].dabirKhane && myPapersData[i].dabirKhane.includes('revise')) {
+          revisedPapers.push(myPapersData[i])
+        } else {
+          pendingPapers.push(myPapersData[i])
+        } 
+      }
+    }
+    var simplePieData = [
+      { name: "Pending Papers", value: pendingPapers.length },
+      { name: "Revised Papers", value: revisedPapers.length },
+      { name: "Approved Papers", value: approvedPapers.length },
+      { name: "Rejected Papers", value: rejectedPapers.length },
+    ];
   return ((!user)? <Navigate to="/signup"/> :
     <div className={DashboardMainPage}>
       <div id='main-page' class="container">
@@ -113,14 +151,20 @@ const DashboradMainPage = props => {
               <Cards cardsData={DashboadMainPageData_subset} />
               
               <br />          
-              <div class='row charts'>
-                <div class='col-sm-12 col-lg-6'>
-                  <PieChartDashboard chartData={userFieldsCount}/>
+              <div className='charts'>
+                <div class='row'>
+                  <div class='col-sm-12 col-lg-6'>
+                    <PieChartDashboard chartData={userFieldsCount}/>
+                  </div>
+                  <div  class='col-sm-12 col-lg-6'>
+                    <SimplePieChart  chartData={simplePieData} />
+                  </div>
                 </div>
-                <div  class='col-sm-12 col-lg-6'>
+                <div class='row'>
                   <StackedChart chartData={fieldsCount} />
                 </div>
-              </div>                       
+              </div>
+                                    
             
             
       </div>

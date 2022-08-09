@@ -48,9 +48,9 @@ function MyPapers(props) {
     var rejectedPapers = []
     if(papersData) {
       for(let i=0 ; i<papersData.length ; i++) {
-        if(papersData[i].dabirConference && papersData[i].dabirConference==='approve') {
+        if(papersData[i].dabirConference && papersData[i].dabirConference.includes('approved')) {
           approvedPapers.push(papersData[i])
-        } else if(papersData[i].dabirConference && papersData[i].dabirConference==='reject') {
+        } else if(papersData[i].dabirConference && papersData[i].dabirConference.includes('reject')) {
           rejectedPapers.push(papersData[i])
         } else if(papersData[i].dabirKhane && papersData[i].dabirKhane.includes('reject')) {
           rejectedPapers.push(papersData[i])
