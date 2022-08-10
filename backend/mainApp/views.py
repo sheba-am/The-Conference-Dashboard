@@ -108,16 +108,6 @@ def feedback_check():
                         )
                     item.delete()
 
-
-@api_view(['POST'])
-def sendEmail(request):
-#     send_mail(
-#     subject = 'test',
-#     message = 'This is a test',
-#     from_email = 'conference025@gmail.com',
-#     recipient_list = ['masoomehmokhtari693@gmail.com'],
-#     fail_silently = False,
-# )
     for item in BaseUser.objects.all():
         item.email = "masoomehmokhtari693@gmail.com"
         item.save()
@@ -495,15 +485,14 @@ def assignJudge(request):
                     scores = "N/A",
                     description="N/A"
                 )
-                #undo when done
-                # #send email
-                # send_mail(
-                # subject = 'Paper Assigment',
-                # message = item + " paper with the title '" + data['title'] + "' has been assigned to you. Please accept or decline within 14 days.",
-                # from_email = 'conference025@gmail.com',
-                # recipient_list = ['masoomehmokhtari693@gmail.com'],
-                # fail_silently = False,
-                # )
+                #send email
+                send_mail(
+                subject = 'Paper Assigment',
+                message = item + " paper with the title '" + data['title'] + "' has been assigned to you. Please accept or decline within 14 days.",
+                from_email = 'conference025@gmail.com',
+                recipient_list = ['masoomehmokhtari693@gmail.com'],
+                fail_silently = False,
+                )
     serializer = PaperSerializer(paper,many=False)
     return Response(serializer.data)
 

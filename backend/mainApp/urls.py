@@ -30,8 +30,6 @@ urlpatterns = [
     path('dabirConferenceApproval',  views.dabirConferenceApproval), #title, approval
     path('promote',  views.promote), #username, status
     path('viewAllPapers',  views.viewAllPapers),
-    # path('publish',  views.publish),
-    path('sendEmail',  views.sendEmail),
 
     #Auth
     path('signup',  views.signup),

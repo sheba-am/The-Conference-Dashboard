@@ -4,9 +4,6 @@ from django.contrib.auth.models import AbstractUser
 
 class Paper(models.Model):
     authors = models.CharField(max_length=64)
-    # judges = models.CharField(max_length=64, blank=True)
-    # status = models.CharField(max_length=128, blank=True)
-    # scores = models.CharField(max_length=2048, blank=True)
     language = models.CharField(max_length=64)
     #number of pages
     NOM = models.CharField(max_length=64)
@@ -54,17 +51,6 @@ class FeedBack(models.Model):
     judge = models.ForeignKey(BaseUser, blank=True, on_delete=models.DO_NOTHING, related_name='judge')
     accepted = models.BooleanField(default=None, null=True)
     scores = models.CharField(max_length=512, null=True, blank=True)
-    # status = models.CharField(max_length=20, null=True, blank=True)
-    # q1 = models.IntegerField(null=True, blank=True)
-    # q2 = models.IntegerField(null=True, blank=True)
-    # q3 = models.IntegerField(null=True, blank=True)
-    # q4 = models.IntegerField(null=True, blank=True)
-    # q5 = models.IntegerField(null=True, blank=True)
-    # q6 = models.IntegerField(null=True, blank=True)
-    # q7 = models.IntegerField(null=True, blank=True)
-    # q8 = models.IntegerField(null=True, blank=True)
-    # q9 = models.IntegerField(null=True, blank=True)
-    # q10 = models.IntegerField(null=True, blank=True)
     description = models.CharField(blank=True, max_length=2048)
     dateAssigned = models.DateTimeField(null=True, blank=True, auto_now_add=True, editable=True)
     dateAccepted = models.DateTimeField(null=True, blank=True, auto_now=False, auto_now_add=False)
