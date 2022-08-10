@@ -1,15 +1,17 @@
 import React,{useState} from 'react'
 import {DabirKhaneApproval} from '../data/FormData'
 import axios from 'axios'
+import { Alert } from 'react-bootstrap'
 function DabirKhane_Approval({paper}) {
     //const [thepaper, setPaper] = useState(JSON.parse(localStorage.getItem("selectedPaper"))); //retrieve the object
     const dabirKhaneArr =paper.dabirKhane? paper.dabirKhane.split(':'):[' ','']
     const [approval, setApproval] = useState(dabirKhaneArr[0]);
     const [approvalMsg, setApprovalMsg] = useState(dabirKhaneArr[1]);
+    const [error, setError] = useState("")
 
     // ========== Submit ===========
     const handleSubmit = (evt) => {
-        //evt.preventDefault()
+        evt.preventDefault()
         var approvalForServer=approval+':'+approvalMsg
         // var approvalForServer=approval==='revise'?approval+':'+approvalMsg:approval+':'
         const config = {
@@ -26,7 +28,9 @@ function DabirKhane_Approval({paper}) {
             .then((response) => {
                 //put the new data into local storage 
                 localStorage.setItem("selectedPaper", JSON.stringify(response.data))
-                
+                if(response.status==200){
+                    setError("Saved")
+                }
         })
 
         
@@ -74,6 +78,10 @@ function DabirKhane_Approval({paper}) {
             </div>
             <br />
             <button id="button-addon2" class="btn btn-primary" type="submit">Save Changes</button>
+            {error==="Saved" &&
+                <Alert variant='success'>{error}</Alert>
+            } 
+        <br />
         </form>        
         <br/>
     </div>

@@ -1,9 +1,8 @@
 import React, {useContext, useEffect, useState} from 'react'
 
 import { Link, Navigate } from "react-router-dom";
-import { PaperContext } from '../contexts/PaperContext';
 import axios from 'axios'
-import { Container, Form, Button, Alert } from 'react-bootstrap'
+import { Alert } from 'react-bootstrap'
 import { MdArrowBackIosNew } from "react-icons/md";
 import PaperInfo from './PaperInfo';
 import { FeedbackQuestions } from '../data/FormData';
